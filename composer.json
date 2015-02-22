@@ -1,0 +1,25 @@
+{
+	"name": "bigfish/paymentgateway",
+	"description": "BIG FISH Payment Gateway - PHP SDK",
+	"type": "library",
+	"keywords": ["payment", "ecommerce", "webshop"],
+	"homepage": "https://www.paymentgateway.hu/",
+	"authors": [
+		{
+			"name": "BIG FISH",
+			"email": "cafe@bigfish.hu"
+		}
+	],
+	"support": {
+		"email": "paymentgateway@bigfish.hu"
+	},
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"BigFish\\": "src/BigFish"
+		}
+	},
+	"minimum-stability": "dev"
+}
