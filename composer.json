@@ -4,6 +4,7 @@
 	"type": "library",
 	"keywords": ["payment", "ecommerce", "webshop"],
 	"homepage": "https://www.paymentgateway.hu/",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "BIG FISH",
