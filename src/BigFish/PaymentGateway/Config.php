@@ -104,7 +104,11 @@ class Config
 	public function __set($name, $value)
 	{
 		if (property_exists($this, $name)) {
-			$this->{$name} = (string)$value;
+			if ($name == 'testMode') {
+				$this->{$name} = (boolean)$value;
+			} else {
+				$this->{$name} = (string)$value;
+			}
 		}
 	}
 
