@@ -18,6 +18,7 @@ use BigFish\PaymentGateway\Request\Close as CloseRequest;
 use BigFish\PaymentGateway\Request\Refund as RefundRequest;
 use BigFish\PaymentGateway\Request\InitRP as InitRPRequest;
 use BigFish\PaymentGateway\Request\StartRP as StartRPRequest;
+use BigFish\PaymentGateway\Request\Finalize as FinalizeRequest;
 use BigFish\PaymentGateway\Request\Details as DetailsRequest;
 use BigFish\PaymentGateway\Request\Log as LogRequest;
 use BigFish\PaymentGateway\Response;
@@ -64,6 +65,8 @@ class PaymentGateway
 	const REQUEST_INIT_RP = 'InitRP';
 
 	const REQUEST_START_RP = 'StartRP';
+	
+	const REQUEST_FINALIZE = 'Finalize';
 
 	/**
 	 * Default store name
@@ -255,6 +258,33 @@ XIm63iVw6gjP2qDnNwIDAQAB
 		return self::sendRequest(self::REQUEST_START_RP, $request);
 	}
 
+	/**
+	 * Finalize a transaction
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\Finalize $request Finalize request object
+	 * @return void
+	 * @access public
+	 * @static
+	 */
+	public static function finalize(FinalizeRequest $request)
+	{
+		header('Location: ' . self::getFinalizeUrl($request));
+		exit();
+	}
+	
+	/**
+	 * Get payment finalize URL
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\Finalize $request Finalize request object
+	 * @return string
+	 * @access public
+	 * @static
+	 */
+	public static function getFinalizeUrl(FinalizeRequest $request)
+	{
+		return self::getUrl() . '/Finalize?' . $request->getParams();
+	}
+	
 	/**
 	 * Query transaction details from Payment Gateway
 	 * 
