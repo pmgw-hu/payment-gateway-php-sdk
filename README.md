@@ -25,3 +25,4 @@ BIG FISH Payment Gateway is available at packagist.org, so you can use composer 
 ## Source code
 
 https://github.com/bigfish-hu/payment-gateway-php-sdk
+
