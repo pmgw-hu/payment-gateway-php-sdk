@@ -1,6 +1,6 @@
 # BIG FISH Payment Gateway - PHP SDK
 
-[![build status](http://ci.bigfish.hu/projects/60/status.png?ref=master)](http://ci.bigfish.hu/projects/60/status.png?ref=master)
+[![build status](http://ci.bigfish.hu/projects/62/status.png?ref=master)](http://ci.bigfish.hu/projects/62/status.png?ref=master)
 
 ## Version
 
