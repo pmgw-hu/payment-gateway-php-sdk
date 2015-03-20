@@ -424,7 +424,7 @@ class Init extends RequestAbstract
 	 * @return \BigFish\PaymentGateway\Request\Init 
 	 * @access public
 	 */
-	public function setMkbSzapCardNumber($mkbSzepCardNumber)
+	public function setMkbSzepCardNumber($mkbSzepCardNumber)
 	{
 		$this->mkbSzepCardNumber = $mkbSzepCardNumber;
 		return $this;
