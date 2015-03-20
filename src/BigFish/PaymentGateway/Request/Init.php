@@ -139,7 +139,31 @@ class Init extends RequestAbstract
 	 * @access public
 	 */
 	public $otpConsumerRegistrationId;
+	
+	/**
+	 * Cafeteria ID (MKBSZEP)
+	 * 
+	 * @var integer
+	 * @access public
+	 */
+	public $mkbSzepCafeteriaId;
+	
+	/**
+	 * Card number (MKBSZEP)
+	 * 
+	 * @var string
+	 * @access public
+	 */
+	public $mkbSzepCardNumber;
 
+	/**
+	 * Card CVV (MKBSZEP)
+	 * 
+	 * @var string
+	 * @access public 
+	 */
+	public $mkbSzepCvv;
+	
 	/**
 	 * One-click payment state (Escalion)
 	 * 
@@ -377,7 +401,49 @@ class Init extends RequestAbstract
 		$this->otpConsumerRegistrationId = $otpConsumerRegistrationId;
 		return $this;
 	}
-
+	
+	/**
+	 * Set cafeteria id
+	 * Works with MKBSZEP provider
+	 * 
+	 * @param integer $mkbSzepCafeteriaId
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setMkbSzepCafeteriaId($mkbSzepCafeteriaId)
+	{
+		$this->mkbSzepCafeteriaId = (int)$mkbSzepCafeteriaId;
+		return $this;
+	}
+	
+	/**
+	 * Set the card number of the user
+	 * Works with MKBSZEP provider
+	 * 
+	 * @param string $mkbSzepCardNumber Card number (e.g. 1111222233334444 or 1111 2222 3333 4444)
+	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @access public
+	 */
+	public function setMkbSzepCardNumber($mkbSzepCardNumber)
+	{
+		$this->mkbSzepCardNumber = $mkbSzepCardNumber;
+		return $this;
+	}
+	
+	/**
+	 * Set the card verification value
+	 * Works with MKBSZEP provider
+	 * 
+	 * @param string $mkbSzepCvv Verification code (e.g. 123)
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setMkbSzepCvv($mkbSzepCvv)
+	{
+		$this->mkbSzepCvv = $mkbSzepCvv;
+		return $this;
+	}
+	
 	/**
 	 * Enable or disable One Click Payment of the user
 	 * Works with Escalion provider
@@ -434,6 +500,16 @@ class Init extends RequestAbstract
 					'otpCvc' => $this->otpCvc
 				));
 			}
+		} else if ($this->providerName == "MKBSZEP") {
+			if (
+				!empty($this->mkbSzepCardNumber) &&
+				!empty($this->mkbSzepCvv)
+			) {
+				$this->encryptExtra(array(
+					'mkbSzepCardNumber' => $this->mkbSzepCardNumber,
+					'mkbSzepCvv' => $this->mkbSzepCvv
+				));
+			}
 		} else if (!empty($extra)) {
 			$this->extra = $this->urlSafeEncode(json_encode($extra));
 		}
@@ -445,11 +521,13 @@ class Init extends RequestAbstract
 		if (!(in_array($this->providerName, self::$oneClickProviders) && $this->oneClickPayment)) {
 			unset($this->oneClickPayment);
 		}
-
+		
 		unset($this->otpCardNumber);
 		unset($this->otpExpiration);
 		unset($this->otpCvc);
 		unset($this->otpConsumerRegistrationId);
+		unset($this->mkbSzepCardNumber);
+		unset($this->mkbSzepCvv);
 
 		return $this;
 	}
@@ -476,7 +554,7 @@ class Init extends RequestAbstract
 
 		$this->extra = $this->urlSafeEncode($encrypted);
 	}
-
+	
 	/**
 	 * Get object parameters
 	 * 
