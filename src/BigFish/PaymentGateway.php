@@ -21,6 +21,7 @@ use BigFish\PaymentGateway\Request\StartRP as StartRPRequest;
 use BigFish\PaymentGateway\Request\Finalize as FinalizeRequest;
 use BigFish\PaymentGateway\Request\Details as DetailsRequest;
 use BigFish\PaymentGateway\Request\Log as LogRequest;
+use BigFish\PaymentGateway\Request\OneClickOptions as OneClickOptionsRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
@@ -67,7 +68,75 @@ class PaymentGateway
 	const REQUEST_START_RP = 'StartRP';
 	
 	const REQUEST_FINALIZE = 'Finalize';
+	
+	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
+	
+	/**
+	 * Result code constants
+	 * 
+	 */
+	const RESULT_CODE_SUCCESS = 'SUCCESSFUL';
+	
+	const RESULT_CODE_ERROR = 'ERROR';
+	
+	const RESULT_CODE_PENDING = 'PENDING';
+	
+	const RESULT_CODE_USER_CANCEL = 'CANCELED';
+	
+	const RESULT_CODE_TIMEOUT = 'TIMEOUT';
+	
+	const RESULT_CODE_OPEN = 'OPEN';	
+	
+	/**
+	 * Provider name constants
+	 * 
+	 */
+	const PROVIDER_ABAQOOS = ' ABAQOOS';
+	
+	const PROVIDER_BARION = 'Barion';
 
+	const PROVIDER_BORGUN = 'Borgun';
+
+	const PROVIDER_CIB = 'CIB';
+
+	const PROVIDER_ESCALION = 'Escalion';
+
+	const PROVIDER_FHB = 'FHB';
+	
+	const PROVIDER_KHB = 'KHB';
+
+	const PROVIDER_KHB_SZEP = 'KHBSZEP';
+	
+	const PROVIDER_MKB_SZEP = 'MKBSZEP';
+
+	const PROVIDER_MASTERCARD_MOBILE = 'MPP2';
+	
+	const PROVIDER_OTP = 'OTP';
+	
+	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
+
+	const PROVIDER_OTP_MULTIPONT = 'OTPMultipont';
+		
+	const PROVIDER_OTPAY = 'OTPay';
+	
+	const PROVIDER_OTPAY_MASTERPASS = 'OTPayMP';
+	
+	const PROVIDER_PAYPAL = 'PayPal';
+
+	const PROVIDER_PAYU = 'PayU';
+	
+	const PROVIDER_PAYU_CASH = 'PayUCash';
+	
+	const PROVIDER_PAYU_WIRE = 'PayUWire';
+	
+	const PROVIDER_SMS = 'SMS';
+	
+	const PROVIDER_SOFORT = 'Sofort';
+	
+	const PROVIDER_UNICREDIT = 'UniCredit';
+	
+	const PROVIDER_WIRECARD_QPAY = 'QPAY';
+		
 	/**
 	 * Default store name
 	 * 
@@ -283,6 +352,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public static function getFinalizeUrl(FinalizeRequest $request)
 	{
 		return self::getUrl() . '/Finalize?' . $request->getParams();
+	}
+	
+	/**
+	 * Get one click payment options
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\OneClickOptions $request
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function oneClickOptions(OneClickOptionsRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_ONE_CLICK_OPTIONS, $request);
 	}
 	
 	/**

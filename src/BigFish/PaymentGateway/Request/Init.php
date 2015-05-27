@@ -418,11 +418,11 @@ class Init extends RequestAbstract
 	 */
 	public function setExtra(array $extra = array())
 	{
-		if (in_array($this->providerName, array("OTP", "OTP2")) && !empty($this->otpConsumerRegistrationId)) {
+		if (in_array($this->providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) && !empty($this->otpConsumerRegistrationId)) {
 			$this->encryptExtra(array(
 				'otpConsumerRegistrationId' => $this->otpConsumerRegistrationId
 			));
-		} elseif ($this->providerName == "OTP2") {
+		} elseif ($this->providerName == PaymentGateway::PROVIDER_OTP_TWO_PARTY) {
 			if (
 				!empty($this->otpCardNumber) &&
 				!empty($this->otpExpiration) &&
@@ -434,11 +434,21 @@ class Init extends RequestAbstract
 					'otpCvc' => $this->otpCvc
 				));
 			}
+		} else if ($this->providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
+			if (
+				!empty($this->mkbSzepCardNumber) &&
+				!empty($this->mkbSzepCvv)
+			) {
+				$this->encryptExtra(array(
+					'mkbSzepCardNumber' => $this->mkbSzepCardNumber,
+					'mkbSzepCvv' => $this->mkbSzepCvv
+				));
+			}
 		} else if (!empty($extra)) {
 			$this->extra = $this->urlSafeEncode(json_encode($extra));
 		}
 
-		if (!($this->providerName == "OTP" && !empty($this->otpCardPocketId))) {
+		if (!($this->providerName == PaymentGateway::PROVIDER_OTP && !empty($this->otpCardPocketId))) {
 			unset($this->otpCardPocketId);
 		}
 
