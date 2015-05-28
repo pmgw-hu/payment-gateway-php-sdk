@@ -173,6 +173,14 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
+	 * One Click Payment Reference Id (PayU, Escalion)
+	 * 
+	 * @var string
+	 * @access public
+	 */
+	public $oneClickReferenceId;	
+	
+	/**
 	 * Auto commit state
 	 * 
 	 * @var boolean
@@ -459,6 +467,20 @@ class Init extends RequestAbstract
 	}
 
 	/**
+	 * Set One Click Payment Reference Id
+	 * Works with PayU, Escalion providers
+	 *
+	 * @param string $oneClickReferenceId
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setOneClickReferenceId($oneClickReferenceId)
+	{
+		$this->oneClickReferenceId = $oneClickReferenceId;
+		return $this;
+	}	
+	
+	/**
 	 * If true verifies the availability of funds and captures funds in one step.
 	 * If false verifies the availability of funds and reserves them for later capture.
 	 * 
@@ -520,6 +542,10 @@ class Init extends RequestAbstract
 
 		if (!(in_array($this->providerName, self::$oneClickProviders) && $this->oneClickPayment)) {
 			unset($this->oneClickPayment);
+		}
+		
+		if (!(in_array($this->providerName, self::$oneClickProviders) && strlen($this->oneClickReferenceId))) {
+			unset($this->oneClickReferenceId);
 		}
 		
 		unset($this->otpCardNumber);
