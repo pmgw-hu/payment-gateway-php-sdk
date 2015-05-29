@@ -173,6 +173,14 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
+	 * One Click Payment Reference Id (PayU, Escalion)
+	 * 
+	 * @var string
+	 * @access public
+	 */
+	public $oneClickReferenceId;	
+	
+	/**
 	 * Auto commit state
 	 * 
 	 * @var boolean
@@ -459,6 +467,20 @@ class Init extends RequestAbstract
 	}
 
 	/**
+	 * Set One Click Payment Reference Id
+	 * Works with PayU, Escalion providers
+	 *
+	 * @param string $oneClickReferenceId
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setOneClickReferenceId($oneClickReferenceId)
+	{
+		$this->oneClickReferenceId = $oneClickReferenceId;
+		return $this;
+	}	
+	
+	/**
 	 * If true verifies the availability of funds and captures funds in one step.
 	 * If false verifies the availability of funds and reserves them for later capture.
 	 * 
@@ -484,11 +506,11 @@ class Init extends RequestAbstract
 	 */
 	public function setExtra(array $extra = array())
 	{
-		if (in_array($this->providerName, array("OTP", "OTP2")) && !empty($this->otpConsumerRegistrationId)) {
+		if (in_array($this->providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) && !empty($this->otpConsumerRegistrationId)) {
 			$this->encryptExtra(array(
 				'otpConsumerRegistrationId' => $this->otpConsumerRegistrationId
 			));
-		} elseif ($this->providerName == "OTP2") {
+		} elseif ($this->providerName == PaymentGateway::PROVIDER_OTP_TWO_PARTY) {
 			if (
 				!empty($this->otpCardNumber) &&
 				!empty($this->otpExpiration) &&
@@ -500,7 +522,7 @@ class Init extends RequestAbstract
 					'otpCvc' => $this->otpCvc
 				));
 			}
-		} else if ($this->providerName == "MKBSZEP") {
+		} else if ($this->providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
 			if (
 				!empty($this->mkbSzepCardNumber) &&
 				!empty($this->mkbSzepCvv)
@@ -514,12 +536,16 @@ class Init extends RequestAbstract
 			$this->extra = $this->urlSafeEncode(json_encode($extra));
 		}
 
-		if (!($this->providerName == "OTP" && !empty($this->otpCardPocketId))) {
+		if (!($this->providerName == PaymentGateway::PROVIDER_OTP && !empty($this->otpCardPocketId))) {
 			unset($this->otpCardPocketId);
 		}
 
 		if (!(in_array($this->providerName, self::$oneClickProviders) && $this->oneClickPayment)) {
 			unset($this->oneClickPayment);
+		}
+		
+		if (!(in_array($this->providerName, self::$oneClickProviders) && strlen($this->oneClickReferenceId))) {
+			unset($this->oneClickReferenceId);
 		}
 		
 		unset($this->otpCardNumber);
