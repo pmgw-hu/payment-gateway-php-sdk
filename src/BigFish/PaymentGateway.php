@@ -85,13 +85,13 @@ class PaymentGateway
 	
 	const RESULT_CODE_TIMEOUT = 'TIMEOUT';
 	
-	const RESULT_CODE_OPEN = 'OPEN';	
+	const RESULT_CODE_OPEN = 'OPEN';
 	
 	/**
 	 * Provider name constants
 	 * 
 	 */
-	const PROVIDER_ABAQOOS = ' ABAQOOS';
+	const PROVIDER_ABAQOOS = 'ABAQOOS';
 	
 	const PROVIDER_BARION = 'Barion';
 
