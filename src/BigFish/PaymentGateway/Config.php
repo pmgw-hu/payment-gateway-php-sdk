@@ -27,25 +27,25 @@ class Config
 	 * Merchant's unique identifier used in Payment Gateway.
 	 * 
 	 * @var string
-	 * @access private
+	 * @access protected
 	 */
-	private $storeName = PaymentGateway::SDK_TEST_STORE_NAME;
+	protected $storeName = PaymentGateway::SDK_TEST_STORE_NAME;
 
 	/**
 	 * Private API key
 	 * 
 	 * @var string
-	 * @access private
+	 * @access protected
 	 */
-	private $apiKey = PaymentGateway::SDK_TEST_API_KEY;
+	protected $apiKey = PaymentGateway::SDK_TEST_API_KEY;
 
 	/**
 	 * Please change this to false in your production environment.
 	 * 
 	 * @var boolean
-	 * @access private
+	 * @access protected
 	 */
-	private $testMode = true;
+	protected $testMode = true;
 
 	/**
 	 * Payment Gateway sends all messages in UTF-8 character encoding.
@@ -53,9 +53,9 @@ class Config
 	 * (e.g. ISO-8859-2)
 	 * 
 	 * @var string
-	 * @access private
+	 * @access protected
 	 */
-	private $outCharset = 'UTF-8';
+	protected $outCharset = 'UTF-8';
 
 	/**
 	 * Possible values:
@@ -63,19 +63,19 @@ class Config
 	 * - "REST": HTTP REST API
 	 * 
 	 * @var string
-	 * @access private
+	 * @access protected
 	 * @see PaymentGateway
 	 */
-	private $useApi = PaymentGateway::API_REST;
+	protected $useApi = PaymentGateway::API_REST;
 
 	/**
 	 * It is used to encrypt sensitive data.
 	 * Each merchant has unique private and public keys.
 	 * 
 	 * @var string
-	 * @access private
+	 * @access protected
 	 */
-	private $encryptPublicKey = PaymentGateway::SDK_TEST_ENCRYPT_PUBLIC_KEY;
+	protected $encryptPublicKey = PaymentGateway::SDK_TEST_ENCRYPT_PUBLIC_KEY;
 
 	/**
 	 * Contructor
