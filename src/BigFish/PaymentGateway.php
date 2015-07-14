@@ -22,6 +22,7 @@ use BigFish\PaymentGateway\Request\Finalize as FinalizeRequest;
 use BigFish\PaymentGateway\Request\Details as DetailsRequest;
 use BigFish\PaymentGateway\Request\Log as LogRequest;
 use BigFish\PaymentGateway\Request\OneClickOptions as OneClickOptionsRequest;
+use BigFish\PaymentGateway\Request\Invoice as InvoiceRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
@@ -35,7 +36,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.0.0';
+	const VERSION = '2.3.0';
 
 	/**
 	 * API type constants
@@ -70,7 +71,8 @@ class PaymentGateway
 	const REQUEST_FINALIZE = 'Finalize';
 	
 	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
-	
+
+	const REQUEST_INVOICE = 'Invoice';
 	/**
 	 * Result code constants
 	 * 
@@ -367,6 +369,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 		return self::sendRequest(self::REQUEST_ONE_CLICK_OPTIONS, $request);
 	}
 	
+	/**
+	 * Get invoice
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\Invoice $request
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function invoice(InvoiceRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_INVOICE, $request);
+	}
+
 	/**
 	 * Query transaction details from Payment Gateway
 	 * 
