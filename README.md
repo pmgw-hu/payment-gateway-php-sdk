@@ -1,10 +1,11 @@
 # BIG FISH Payment Gateway - PHP SDK
 
 [![build status](http://ci.bigfish.hu/projects/62/status.png?ref=master)](http://ci.bigfish.hu/projects/62/status.png?ref=master)
+[![build status](http://ci.bigfish.hu/projects/62/status.png?ref=testing)](http://ci.bigfish.hu/projects/62/status.png?ref=testing)
 
 ## Version
 
-2.0
+2.3.0
 
 ## Requirements
 
@@ -25,4 +26,3 @@ BIG FISH Payment Gateway is available at packagist.org, so you can use composer 
 ## Source code
 
 https://github.com/bigfish-hu/payment-gateway-php-sdk
-
