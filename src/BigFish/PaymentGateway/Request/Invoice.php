@@ -42,7 +42,7 @@ class Invoice extends RequestAbstract
 	 * @return void
 	 * @access public
 	 */
-	public function __construct($transactionId, $invoiceData)
+	public function __construct($transactionId, array $invoiceData)
 	{
 		$this->transactionId = $transactionId;
 		$this->invoiceData = (array)$invoiceData;
