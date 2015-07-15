@@ -23,6 +23,7 @@ use BigFish\PaymentGateway\Request\Details as DetailsRequest;
 use BigFish\PaymentGateway\Request\Log as LogRequest;
 use BigFish\PaymentGateway\Request\OneClickOptions as OneClickOptionsRequest;
 use BigFish\PaymentGateway\Request\Invoice as InvoiceRequest;
+use BigFish\PaymentGateway\Request\Providers as ProvidersRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
@@ -73,6 +74,8 @@ class PaymentGateway
 	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
 
 	const REQUEST_INVOICE = 'Invoice';
+	
+	const REQUEST_PROVIDERS = 'Providers';
 	/**
 	 * Result code constants
 	 * 
@@ -380,6 +383,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public static function invoice(InvoiceRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_INVOICE, $request);
+	}
+	
+	/**
+	 * Get providers
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\Providers $request
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function providers(ProvidersRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PROVIDERS, $request);
 	}
 
 	/**
