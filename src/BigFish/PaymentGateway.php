@@ -129,7 +129,9 @@ class PaymentGateway
 	const PROVIDER_PAYPAL = 'PayPal';
 
 	const PROVIDER_PAYU = 'PayU';
-	
+
+	const PROVIDER_PAYU2 = 'PayU2';
+
 	const PROVIDER_PAYU_CASH = 'PayUCash';
 	
 	const PROVIDER_PAYU_WIRE = 'PayUWire';
