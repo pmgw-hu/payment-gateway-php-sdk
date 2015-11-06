@@ -3,22 +3,16 @@ before_script:
 
 Syntax check php7:
   script: find . -name \*.php -exec php7 -l "{}" \;
-  tags:
-    - php7
 
 Copy paste detection:
   script:
     - wget https://phar.phpunit.de/phpcpd.phar
-    - php phpcpd.phar .
+    - php7 phpcpd.phar .
 
 PhpUnit php7:
   script:
     - pwd
-    - which php
-    - php -v
-    - curl -sS https://getcomposer.org/installer | php
+    - php7 -v
+    - curl -sS https://getcomposer.org/installer | php7
     - php7 composer.phar install
-    - cd test &&  php7 ../vendor/phpunit/phpunit/phpunit
-  tags:
-    - php7
-
+    - cd tests && php7 ../vendor/phpunit/phpunit/phpunit
