@@ -15,8 +15,8 @@
         beStrictAboutTestSize="true"
         verbose="true">
     <testsuites>
-        <testsuite name="Unit test">
-            <directory>./Unit/</directory>
+        <testsuite name="Payment gateway">
+            <directory>./BigFish/PaymentGateway</directory>
         </testsuite>
 
         <testsuite name="Acceptance tests">
