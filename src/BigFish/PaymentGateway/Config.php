@@ -1,130 +1,159 @@
 <?php
-/**
- * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
- * PHP SDK
- * 
- * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
- * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
- */
+
 namespace BigFish\PaymentGateway;
 
-use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 /**
- * BIG FISH Payment Gateway Configuration
- * 
- * @property string $storeName Store name
- * @property string $apiKey API key
- * @property boolean $testMode Use testing environment (default: true)
- * @property string $outCharset Output character set
- * @property string $useApi API type (SOAP or REST)
- * @property string $encryptPublicKey Public key used for encryption
- * @package PaymentGateway
+ * Class Config
+ * @package BigFish
+ *
+ * @property string $storeName
+ * @property string $apiKey
+ * @property string $encryptPublicKey
+ * @property bool $testMode
+ * @property bool $useApi
  */
 class Config
 {
 	/**
-	 * Merchant's unique identifier used in Payment Gateway.
-	 * 
+	 * Default store name
+	 *
+	 */
+	const SDK_TEST_STORE_NAME = 'sdk_test';
+
+	/**
+	 * Default API key
+	 *
+	 */
+	const SDK_TEST_API_KEY = '86af3-80e4f-f8228-9498f-910ad';
+
+	/**
+	 * Production service URL
+	 */
+	const API_URL_PRODUCTION = 'https://www.paymentgateway.hu';
+
+	/**
+	 * Test service URL
+	 */
+	const API_URL_TESTING = 'https://test.paymentgateway.hu';
+
+	/**
+	 * Default public key used for encryption
+	 */
+	const SDK_TEST_ENCRYPT_PUBLIC_KEY = '-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCpRN6hb8pQaDen9Qjt18P2FqSc
+F2uhjKfd0DZ1t0HWtvYMmJGfM6+wgjQGDHHc4LAcLIHF1TQVLCYdbyLzsOTRUhi4
+UFsW18IBznoEAx2wxiTCyzxtONpIkr5HD2E273UbXvVKA2hig2BgpOA2Poil9xtO
+XIm63iVw6gjP2qDnNwIDAQAB
+-----END PUBLIC KEY-----';
+
+	/**
+	 * Charsets
+	 */
+	const CHARSET_UTF8 = 'UTF-8';
+	const CHARSET_LATIN1 = 'iso-8859-1';
+	const CHARSET_LATIN2 = 'iso-8859-2';
+
+	/**
+	 * @var bool
+	 */
+	protected $testMode = false;
+
+	/**
 	 * @var string
-	 * @access protected
 	 */
-	protected $storeName = PaymentGateway::SDK_TEST_STORE_NAME;
+	protected $storeName = self::SDK_TEST_STORE_NAME;
 
 	/**
-	 * Private API key
-	 * 
 	 * @var string
-	 * @access protected
 	 */
-	protected $apiKey = PaymentGateway::SDK_TEST_API_KEY;
+	protected $apiKey = self::SDK_TEST_API_KEY;
 
 	/**
-	 * Please change this to false in your production environment.
-	 * 
-	 * @var boolean
-	 * @access protected
+	 * @var bool
 	 */
-	protected $testMode = true;
+	protected $useApi = true;
 
 	/**
-	 * Payment Gateway sends all messages in UTF-8 character encoding.
-	 * If your system uses a different character encoding, this parameter should be changed.
-	 * (e.g. ISO-8859-2)
-	 * 
 	 * @var string
-	 * @access protected
 	 */
-	protected $outCharset = 'UTF-8';
+	protected $outCharset = self::CHARSET_UTF8;
+	/**
+	 * @var
+	 */
+	protected $encryptPublicKey = self::SDK_TEST_ENCRYPT_PUBLIC_KEY;
 
 	/**
-	 * Possible values:
-	 * - "SOAP": RPC SOAP API
-	 * - "REST": HTTP REST API
-	 * 
-	 * @var string
-	 * @access protected
-	 * @see PaymentGateway
+	 * @return bool
 	 */
-	protected $useApi = PaymentGateway::API_REST;
-
-	/**
-	 * It is used to encrypt sensitive data.
-	 * Each merchant has unique private and public keys.
-	 * 
-	 * @var string
-	 * @access protected
-	 */
-	protected $encryptPublicKey = PaymentGateway::SDK_TEST_ENCRYPT_PUBLIC_KEY;
-
-	/**
-	 * Contructor
-	 * 
-	 * @param array $config
-	 * @return void
-	 * @access public
-	 */
-	public function __construct(array $config = array())
+	public function isTestMode(): \bool
 	{
-		if (!empty($config)) {
-			foreach ($config as $key => $value) {
-				$this->__set($key, $value);
-			}
-		}
+		return (bool) $this->testMode;
 	}
 
 	/**
-	 * Set magic method
-	 * 
+	 * @return string
+	 */
+	public function getApiKey(): \string
+	{
+		return (string) $this->apiKey;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getStoreName(): \string
+	{
+		return (string) $this->storeName;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function useApi(): \bool
+	{
+		return (bool) $this->useApi;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getOutCharset(): \string
+	{
+		return (string) $this->outCharset;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEncryptPublicKey(): \string
+	{
+		return (string) $this->encryptPublicKey;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl(): \string
+	{
+		if ($this->isTestMode()) {
+			return static::API_URL_TESTING;
+		}
+
+		return static::API_URL_PRODUCTION;
+	}
+
+	/**
 	 * @param string $name
-	 * @param string $value
-	 * @return void
-	 * @access public
+	 * @param mixed $value
+	 * @throws PaymentGatewayException
 	 */
-	public function __set($name, $value)
+	public function __set(\string $name, $value)
 	{
-		if (property_exists($this, $name)) {
-			if ($name == 'testMode') {
-				$this->{$name} = (boolean)$value;
-			} else {
-				$this->{$name} = (string)$value;
-			}
+		if (!property_exists($this, $name)) {
+			throw new PaymentGatewayException(sprintf('%s property is unknown', $name));
 		}
+		$this->$name = $value;
 	}
-
-	/**
-	 * Get magic method
-	 * 
-	 * @param string $name
-	 * @return string | null
-	 * @access public
-	 */
-	public function __get($name)
-	{
-		if (property_exists($this, $name)) {
-			return $this->{$name};
-		}
-		return null;
-	}
-
 }
