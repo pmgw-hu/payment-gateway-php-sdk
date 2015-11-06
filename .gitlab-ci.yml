@@ -13,6 +13,6 @@ PhpUnit php7:
   script:
     - pwd
     - php7 -v
-    - curl -sS https://getcomposer.org/installer | php7
+    - curl -sS https://getcomposer.org/installer | php
     - php7 composer.phar install
     - cd tests && php7 ../vendor/phpunit/phpunit/phpunit
