@@ -31,13 +31,18 @@ class PaymentGateway
 	 */
 	public function send(RequestInterface $request): ResponseInterface
 	{
-		if ($this->config->useApi()) {
-			$transport = new RestTransport($this->config);
-		} else {
-			$transport = new SoapTransport($this->config);
-		}
+		return $this->getTransport()->sendRequest($request);
+	}
 
-		return $transport->sendRequest($request);
+	/**
+	 * @return RestTransport|SoapTransport
+	 */
+	protected function getTransport()
+	{
+		if ($this->config->useApi()) {
+			return new RestTransport($this->config);
+		}
+		return new SoapTransport($this->config);
 	}
 
 }

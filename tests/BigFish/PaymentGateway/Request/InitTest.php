@@ -23,6 +23,7 @@ class InitTest extends \PHPUnit_Framework_TestCase
 		// test chain
 		$this->assertInstanceOf(get_class($init), $result);
 		$this->assertArrayHasKey($variableName, $init->getData());
+		$this->assertEquals($testData, $init->getData()[$variableName]);
 	}
 
 	public function dataProviderFor_parameterTest()
@@ -49,6 +50,20 @@ class InitTest extends \PHPUnit_Framework_TestCase
 			array('7612312312', 'setOneClickReferenceId'),
 			array(true, 'setAutoCommit'),
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function disableAutoCommit()
+	{
+		$init = $this->getRequest();
+		$result = $init->disableAutoCommit();
+
+		// test chain
+		$this->assertInstanceOf(get_class($init), $result);
+		$this->assertArrayHasKey('autoCommit', $init->getData());
+		$this->assertFalse($init->getData()['autoCommit']);
 	}
 
 	/**

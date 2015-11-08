@@ -325,12 +325,11 @@ class Init implements RequestInterface
 	}
 
 	/**
-	 * @param bool|false $oneClickPayment
 	 * @return $this
 	 */
-	public function setOneClickPayment(\bool $oneClickPayment = false)
+	public function setOneClickPayment()
 	{
-		$this->data['oneClickPayment'] = $oneClickPayment;
+		$this->data['oneClickPayment'] = true;
 		return $this;
 	}
 
@@ -345,12 +344,21 @@ class Init implements RequestInterface
 	}
 
 	/**
-	 * @param bool|true $autoCommit
+	 * @deprecated Use disableAutoCommit instead. Auto commit is enabled by default
 	 * @return $this
 	 */
-	public function setAutoCommit(\bool $autoCommit = true)
+	public function setAutoCommit()
 	{
-		$this->data['autoCommit'] = $autoCommit;
+		$this->data['autoCommit'] = true;
+		return $this;
+	}
+
+	/**t
+	 * @return $this
+	 */
+	public function disableAutoCommit()
+	{
+		$this->data['autoCommit'] = false;
 		return $this;
 	}
 
