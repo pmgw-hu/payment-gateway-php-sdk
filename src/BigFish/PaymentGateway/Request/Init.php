@@ -5,7 +5,7 @@ namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-class Init implements RequestInterface
+class Init extends InitPR
 {
 	/**
 	 * Extra data
@@ -29,6 +29,11 @@ class Init implements RequestInterface
 	 * @var string
 	 */
 	protected $providerName;
+
+	/**
+	 * @var string
+	 */
+	protected $storeName;
 
 	/**
 	 * @var string
@@ -128,37 +133,17 @@ class Init implements RequestInterface
 	/**
 	 * @var array
 	 */
-	protected $data = array();
+	protected $data = array(
+		'autoCommit' => true // for soap need to set by default
+	);
 
 	/**
-	 * @return array
-	 */
-	public function getData(): array
-	{
-		return $this->data;
-	}
-
-	/**
-	 * @param string $providerName
+	 * @param string $storeName
 	 * @return $this
 	 */
-	public function setProviderName(\string $providerName)
+	public function setStoreName(\string $storeName)
 	{
-		$this->checkLengthAndSaveData($providerName, 'providerName', 20);
-		return $this;
-	}
-
-	/**
-	 * @param string $responseUrl
-	 * @return $this
-	 * @throws PaymentGatewayException
-	 */
-	public function setResponseUrl(\string $responseUrl)
-	{
-		if (filter_var($responseUrl, FILTER_VALIDATE_URL) === false) {
-			throw new PaymentGatewayException('Invalid response url');
-		}
-		$this->data['responseUrl'] = $responseUrl;
+		$this->checkLengthAndSaveData($storeName, 'storeName', 20);
 		return $this;
 	}
 
@@ -174,53 +159,6 @@ class Init implements RequestInterface
 		}
 
 		$this->checkLengthAndSaveData($notificationUrl, 'notificationUrl', 255);
-		return $this;
-	}
-
-	/**
-	 * @param float $amount
-	 * @return $this
-	 * @throws PaymentGatewayException
-	 */
-	public function setAmount(\float $amount)
-	{
-		if ($amount <= 0) {
-			throw new PaymentGatewayException('Only positive numbers allowed.');
-		}
-		$this->data['amount'] = $amount;
-		return $this;
-	}
-
-	/**
-	 * @param string $orderId
-	 * @return $this
-	 */
-	public function setOrderId(\string $orderId)
-	{
-		$this->checkLengthAndSaveData($orderId, 'orderId', 255);
-		return $this;
-	}
-
-	/**
-	 * @param string $userId
-	 * @return $this
-	 */
-	public function setUserId(\string $userId)
-	{
-		$this->checkLengthAndSaveData($userId, 'userId', 255);
-		return $this;
-	}
-
-	/**
-	 * @param string $currency
-	 * @return $this
-	 */
-	public function setCurrency(\string $currency = '')
-	{
-		if (!$currency) {
-			$currency = 'HUF';
-		}
-		$this->checkLengthAndSaveData($currency, 'currency', 3);
 		return $this;
 	}
 
@@ -247,6 +185,10 @@ class Init implements RequestInterface
 		return $this;
 	}
 
+	/**
+	 * @param string $otpCardNumber
+	 * @return $this
+	 */
 	public function setOtpCardNumber(\string $otpCardNumber)
 	{
 		$this->data['otpCardNumber'] = $otpCardNumber;
@@ -363,33 +305,10 @@ class Init implements RequestInterface
 	}
 
 	/**
-	 * @param int $maxLength
-	 * @param string $fieldName
-	 * @param string $value
-	 * @throws PaymentGatewayException
+	 * @return string
 	 */
-	protected function checkFieldSize(\int $maxLength, \string $fieldName, \string $value)
+	public function getMethod(): \string
 	{
-		if (strlen($value) > $maxLength) {
-			throw new PaymentGatewayException(
-				sprintf(
-					'%s is longer than permitted. Max value is: %i',
-					$fieldName,
-					$maxLength
-				)
-			);
-		}
-	}
-
-	/**
-	 * @param string $value
-	 * @param string $fieldName
-	 * @param int $maxLength
-	 * @throws PaymentGatewayException
-	 */
-	protected function checkLengthAndSaveData(\string $value, \string $fieldName, \int $maxLength)
-	{
-		$this->checkFieldSize($maxLength, $fieldName, $value);
-		$this->data[$fieldName] = $value;
+		return RequestAbstract::REQUEST_INIT;
 	}
 }

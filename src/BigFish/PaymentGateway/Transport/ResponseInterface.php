@@ -11,20 +11,20 @@ interface ResponseInterface
 	public function getData(): array;
 
 	/**
-	 * @param $data
-	 * @return static
-	 */
-	public static function create($data);
-
-	/**
 	 * @param string $json
 	 * @return static
 	 */
 	public static function createFromJson(\string $json);
 
 	/**
-	 * @param object $object
+	 * @param \stdClass $object $object
 	 * @return static
 	 */
-	public static function createFromObject(\object $object);
+	public static function createFromObject(\stdClass $object);
+
+	/**
+	 * @param array $data
+	 * @return void
+	 */
+	public function setData(array $data);
 }

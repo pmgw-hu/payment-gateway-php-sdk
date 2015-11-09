@@ -4,28 +4,13 @@ namespace BigFish\Tests\Request;
 
 
 use BigFish\PaymentGateway\Request\Init;
+use BigFish\Tests\PaymentGateway\Request\InitPRTest;
 
-class InitTest extends \PHPUnit_Framework_TestCase
+class InitTest extends InitPRTest
 {
 	/**
-	 * @test
-	 * @dataProvider dataProviderFor_parameterTest
-	 * @param $testData
-	 * @param $method
+	 * @return array
 	 */
-	public function parameterSetTest($testData, $method)
-	{
-		$init = $this->getRequest();
-		$result = $init->$method($testData);
-
-		$variableName = lcfirst(substr($method, 3));
-
-		// test chain
-		$this->assertInstanceOf(get_class($init), $result);
-		$this->assertArrayHasKey($variableName, $init->getData());
-		$this->assertEquals($testData, $init->getData()[$variableName]);
-	}
-
 	public function dataProviderFor_parameterTest()
 	{
 		return array(
@@ -49,6 +34,7 @@ class InitTest extends \PHPUnit_Framework_TestCase
 			array(true, 'setOneClickPayment'),
 			array('7612312312', 'setOneClickReferenceId'),
 			array(true, 'setAutoCommit'),
+			array('something', 'setStoreName')
 		);
 	}
 
@@ -69,18 +55,6 @@ class InitTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @test
 	 */
-	public function setCurrency_defaultHUF()
-	{
-		$init = $this->getRequest();
-		$init->setCurrency();
-		$data = $init->getData();
-		$this->assertEquals('HUF', $data['currency']);
-	}
-
-	/**
-	 * @test
-	 * @depends setCurrency_defaultHUF
-	 */
 	public function setMultipleParameterTest()
 	{
 		$init = $this->getRequest();
@@ -92,21 +66,11 @@ class InitTest extends \PHPUnit_Framework_TestCase
 			array(
 				'amount' => 10,
                 'currency' => 'EUR',
-                'providerName' => 'test'
+                'providerName' => 'test',
+				'autoCommit' => true
 			),
 			$init->getData()
 		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setLanguage_defaultHU()
-	{
-		$init = $this->getRequest();
-		$init->setLanguage();
-		$data = $init->getData();
-		$this->assertEquals('HU', $data['language']);
 	}
 
 	/**
@@ -123,59 +87,10 @@ class InitTest extends \PHPUnit_Framework_TestCase
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function amount_positiveNumberCheck()
+	public function storeName_maxSizeCheck()
 	{
-		$this->getRequest()->setAmount(-1);
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function orderId_maxSizeCheck()
-	{
-		// max: 255
-		$this->getRequest()->setOrderId(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function userId_maxSizeCheck()
-	{
-		// max: 255
-		$this->getRequest()->setUserId(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function currency_maxSizeCheck()
-	{
-		// max: 4
-		$this->getRequest()->setCurrency(str_repeat('A', 4));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function language_maxSizeCheck()
-	{
-		// 2
-		$this->getRequest()->setLanguage(str_repeat('A', 3));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setResponseUrl_invalidUrl()
-	{
-		$request = $this->getRequest();
-		$request->setResponseUrl('invalidUrl');
+		// max: 20
+		$this->getRequest()->setStoreName(str_repeat('A', 21));
 	}
 
 	/**
@@ -246,19 +161,30 @@ class InitTest extends \PHPUnit_Framework_TestCase
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function setMkbSzepCvv_sizeCheck()
+	public function language_maxSizeCheck()
 	{
-		$this->getRequest()->setMkbSzepCvv(str_repeat('A', 4));
+		// 2
+		$this->getRequest()->setLanguage(str_repeat('A', 3));
+	}
+
+	/**
+	 * @test
+	 */
+	public function setLanguage_defaultHU()
+	{
+		$init = $this->getRequest();
+		$init->setLanguage();
+		$data = $init->getData();
+		$this->assertEquals('HU', $data['language']);
 	}
 
 	/**
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function setAmount_isZero()
+	public function setMkbSzepCvv_sizeCheck()
 	{
-		$request = $this->getRequest();
-		$request->setAmount(0);
+		$this->getRequest()->setMkbSzepCvv(str_repeat('A', 4));
 	}
 
 	/**

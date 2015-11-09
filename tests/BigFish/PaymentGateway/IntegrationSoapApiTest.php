@@ -4,7 +4,7 @@ namespace BigFish\Tests\PaymentGateway;
 
 use BigFish\PaymentGateway;
 
-class AcceptanceSoapApiTest extends AcceptanceRestApiTest
+class IntegrationSoapApiTest extends IntegrationRestApiTest
 {
 	/**
 	 * @return PaymentGateway\Config
@@ -13,7 +13,7 @@ class AcceptanceSoapApiTest extends AcceptanceRestApiTest
 	{
 		$config = new PaymentGateway\Config();
 		$config->testMode = true;
-		$config->useApi = true;
+		$config->useApi = false;
 		return $config;
 	}
 }
