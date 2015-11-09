@@ -5,6 +5,7 @@ namespace BigFish\PaymentGateway\Transport;
 
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Config;
+use BigFish\PaymentGateway\Request\RequestInterface;
 
 abstract class TransportAbstract implements TransportInterface
 {
@@ -50,5 +51,19 @@ abstract class TransportAbstract implements TransportInterface
 	protected function getHttpHost(): \string
 	{
 		return $_SERVER['HTTP_HOST'];
+	}
+
+	/**
+	 * @param RequestInterface $requestInterface
+	 */
+	protected function setStoreName(RequestInterface $requestInterface)
+	{
+		if (
+			$requestInterface instanceof PaymentGateway\Request\Init ||
+			$requestInterface instanceof PaymentGateway\Request\OneClickOptions ||
+			$requestInterface instanceof PaymentGateway\Request\Providers
+		) {
+			$requestInterface->setStoreName($this->config->getStoreName());
+		}
 	}
 }

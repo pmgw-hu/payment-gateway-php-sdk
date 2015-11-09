@@ -3,9 +3,6 @@
 namespace BigFish\PaymentGateway\Transport;
 
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
-use BigFish\PaymentGateway\Request\Init;
-use BigFish\PaymentGateway\Request\OneClickOptions;
-use BigFish\PaymentGateway\Request\Providers;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
 class SoapTransport extends TransportAbstract
@@ -21,23 +18,27 @@ class SoapTransport extends TransportAbstract
 			throw new PaymentGatewayException('SOAP PHP module is not loaded');
 		}
 
-		if ($requestInterface instanceof Init || $requestInterface instanceof OneClickOptions || $requestInterface instanceof Providers) {
-			$requestInterface->setStoreName($this->config->getStoreName());
-		}
-
+		$this->setStoreName($requestInterface);
 
 		$wsdl = $this->config->getUrl() . '/api/soap/?wsdl';
 		$client = new \SoapClient($wsdl, array(
 				'soap_version' => SOAP_1_2,
 				'cache_wsdl' => WSDL_CACHE_BOTH,
-				'exceptions' => true,
-				'trace' => true,
+				'exceptions' => 1,
+				'trace' => 1,
 				'login' => $this->config->getStoreName(),
 				'password' => $this->config->getApiKey(),
 				'user_agent' => $this->getUserAgent(),
 		));
 
-		$soapResult = $client->__call($requestInterface->getMethod(), array(array('request' => $requestInterface->getData())));
+		$soapResult = $client->__call(
+			$requestInterface->getMethod(),
+			array(
+				array(
+					'request' => $requestInterface->getData()
+				)
+			)
+		);
 
 		$soapResponse = $soapResult->{$requestInterface->getMethod() . 'Result'};
 		$this->ucFirstResponse($soapResponse);

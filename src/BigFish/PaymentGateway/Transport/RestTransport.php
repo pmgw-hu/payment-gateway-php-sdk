@@ -2,11 +2,7 @@
 
 namespace BigFish\PaymentGateway\Transport;
 
-
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
-use BigFish\PaymentGateway\Request\Init;
-use BigFish\PaymentGateway\Request\OneClickOptions;
-use BigFish\PaymentGateway\Request\Providers;
 use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
@@ -33,9 +29,7 @@ class RestTransport extends TransportAbstract
 
 		$url = $this->config->getUrl() . '/api/rest/';
 
-		if ($requestInterface instanceof Init || $requestInterface instanceof OneClickOptions || $requestInterface instanceof Providers) {
-			$requestInterface->setStoreName($this->config->getStoreName());
-		}
+		$this->setStoreName($requestInterface);
 
 		$curl = curl_init();
 		if (!$curl) {

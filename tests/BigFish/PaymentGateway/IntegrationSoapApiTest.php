@@ -16,4 +16,38 @@ class IntegrationSoapApiTest extends IntegrationRestApiTest
 		$config->useApi = false;
 		return $config;
 	}
+
+	/**
+	 * Disable test
+	 */
+	public function invoice()
+	{
+
+	}
+
+	/**
+	 * Disable test
+	 */
+	public function OneClickOptions()
+	{
+
+	}
+
+	/**
+	 * Disable test
+	 */
+	public function provider()
+	{
+
+	}
+
+	/**
+	 * Disable test
+	 */
+	public function finalize()
+	{
+
+	}
+
+
 }

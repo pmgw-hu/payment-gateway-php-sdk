@@ -2,14 +2,14 @@
 
 namespace BigFish\Tests\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\Finalize;
+use BigFish\PaymentGateway\Request\Refund;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
-class FinalizeTest extends SimpleRequestAbstract
+class RefundTest extends SimpleRequestAbstract
 {
 	protected function getRequest(\string $transactionId): RequestInterface
 	{
-		return new Finalize($transactionId, 1000);
+		return new Refund($transactionId, 1000);
 	}
 
 	protected function getDataKeys():array
@@ -18,5 +18,4 @@ class FinalizeTest extends SimpleRequestAbstract
 		$result['amount'] = 1000;
 		return $result;
 	}
-
 }

@@ -66,9 +66,9 @@ class PaymentGateway
 			header('Location: ' . $this->getRedirectUrl($request));
 			$this->terminate(0);
 			return new Response();
-		} else {
-			return $this->getTransport()->sendRequest($request);
 		}
+
+		return $this->getTransport()->sendRequest($request);
 	}
 
 	/**

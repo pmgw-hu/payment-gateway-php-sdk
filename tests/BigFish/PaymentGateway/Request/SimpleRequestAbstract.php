@@ -8,17 +8,34 @@ use BigFish\PaymentGateway\Request\RequestInterface;
 abstract class SimpleRequestAbstract extends \PHPUnit_Framework_TestCase
 {
 
+	const TRANSACTION_ID = 'transactionId';
+
+	/**
+	 * @param string $transactionId
+	 * @return RequestInterface
+	 */
 	abstract protected function getRequest(\string $transactionId): RequestInterface;
+
+	/**
+	 * @return array
+	 */
+	protected function getDataKeys():array
+	{
+		return array(
+			self::TRANSACTION_ID => substr(md5(rand(100, 10000)), 0, 20)
+		);
+	}
 
 	/**
 	 * @test
 	 */
 	public function getData()
 	{
-		$testTransactionId = substr(md5(rand(100, 10000)), 0, 20);
-		$req = $this->getRequest($testTransactionId);
-		$this->assertNotEmpty($req->getData());
-		$this->assertEquals($req->getData()['transactionId'], $testTransactionId);
+		$this->getDataWithRequestFunction(
+			function ($dataKey, $value, RequestInterface $request) {
+				$this->assertEquals($request->getData()[$dataKey], $value);
+			}
+		);
 	}
 
 	/**
@@ -26,9 +43,24 @@ abstract class SimpleRequestAbstract extends \PHPUnit_Framework_TestCase
 	 */
 	public function getUcFirstData()
 	{
-		$testTransactionId = substr(md5(rand(100, 10000)), 0, 20);
-		$req = $this->getRequest($testTransactionId);
-		$this->assertNotEmpty($req->getUcFirstData());
-		$this->assertEquals($req->getUcFirstData()['TransactionId'], $testTransactionId);
+		$this->getDataWithRequestFunction(
+			function ($dataKey, $value, RequestInterface $request) {
+				$this->assertEquals($request->getUcFirstData()[ucfirst($dataKey)], $value);
+			}
+		);
+	}
+
+	/**
+	 * @param \Closure $function
+	 */
+	protected function getDataWithRequestFunction(\Closure $function)
+	{
+		$dataKeys = $this->getDataKeys();
+		$transactionId = isset($dataKeys[self::TRANSACTION_ID]) ? $dataKeys[self::TRANSACTION_ID] : 0;
+		$req = $this->getRequest($transactionId);
+		$this->assertNotEmpty($req->getData());
+		foreach ($dataKeys as $dataKey => $value) {
+			$function($dataKey, $value, $req);
+		}
 	}
 }

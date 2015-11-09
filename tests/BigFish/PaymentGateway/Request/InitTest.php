@@ -67,7 +67,6 @@ class InitTest extends InitPRTest
 				'amount' => 10,
                 'currency' => 'EUR',
                 'providerName' => 'test',
-				'autoCommit' => true
 			),
 			$init->getData()
 		);

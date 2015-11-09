@@ -4,7 +4,6 @@ namespace BigFish\PaymentGateway\Request;
 
 class Providers extends RequestAbstract
 {
-
 	/**
 	 * @param string $storeName
 	 */

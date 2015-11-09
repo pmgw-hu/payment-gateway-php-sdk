@@ -131,13 +131,6 @@ class Init extends InitPR
 	protected $mkbSzepCafeteriaId;
 
 	/**
-	 * @var array
-	 */
-	protected $data = array(
-		'autoCommit' => true // for soap need to set by default
-	);
-
-	/**
 	 * @param string $storeName
 	 * @return $this
 	 */
@@ -286,7 +279,6 @@ class Init extends InitPR
 	}
 
 	/**
-	 * @deprecated Use disableAutoCommit instead. Auto commit is enabled by default
 	 * @return $this
 	 */
 	public function setAutoCommit()
