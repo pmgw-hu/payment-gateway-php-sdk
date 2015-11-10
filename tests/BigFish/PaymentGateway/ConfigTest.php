@@ -50,9 +50,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @test
 	 */
-	public function isTestMode_defaultIsFalse()
+	public function isTestMode_defaultIsTrue()
 	{
-		$this->assertFalse($this->getConfig()->isTestMode());
+		$this->assertTrue($this->getConfig()->isTestMode());
 	}
 
 	/**

@@ -8,6 +8,11 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 class Init extends InitPR
 {
 	/**
+	 * Languages
+	 */
+	const LANG_HU = 'HU';
+
+	/**
 	 * Extra data
 	 * 
 	 * @var string
@@ -62,7 +67,7 @@ class Init extends InitPR
 	public function setLanguage(\string $language = '')
 	{
 		if (!$language) {
-			$language = 'HU';
+			$language = static::LANG_HU;
 		}
 		$this->checkLengthAndSaveData($language, 'language', 2);
 		return $this;

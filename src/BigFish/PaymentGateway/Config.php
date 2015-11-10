@@ -58,7 +58,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @var bool
 	 */
-	protected $testMode = false;
+	protected $testMode = true;
 
 	/**
 	 * @var string
