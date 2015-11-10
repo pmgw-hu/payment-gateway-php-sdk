@@ -12,13 +12,13 @@ class OneClickOptionsTest extends SimpleRequestAbstract
 
 	protected function getRequest(\string $transactionId): RequestInterface
 	{
-		return new OneClickOptions(PaymentGateway::PROVIDER_OTPay, '12345');
+		return new OneClickOptions(PaymentGateway::PROVIDER_OTPAY, '12345');
 	}
 
 	protected function getDataKeys():array
 	{
 		return array(
-			'providerName' => PaymentGateway::PROVIDER_OTPay,
+			'providerName' => PaymentGateway::PROVIDER_OTPAY,
 			'userId' => '12345'
 		);
 	}

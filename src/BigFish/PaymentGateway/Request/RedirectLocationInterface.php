@@ -3,5 +3,8 @@ namespace BigFish\PaymentGateway\Request;
 
 interface RedirectLocationInterface
 {
-	public function getRedirectUrl();
+	/**
+	 * @return string
+	 */
+	public function getRedirectUrl(): \string;
 }

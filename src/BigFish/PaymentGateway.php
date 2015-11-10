@@ -19,28 +19,46 @@ class PaymentGateway
 	 * Providers
 	 */
 	const PROVIDER_ABAQOOS = 'ABAQOOS';
-	const PROVIDER_Barion = 'Barion';
-	const PROVIDER_Borgun = 'Borgun';
+	const PROVIDER_BARION = 'Barion';
+	const PROVIDER_BORGUN = 'Borgun';
 	const PROVIDER_CIB = 'CIB';
-	const PROVIDER_Escalion = 'Escalion';
+	const PROVIDER_ESCALION = 'Escalion';
 	const PROVIDER_FHB = 'FHB';
 	const PROVIDER_KHB = 'KHB';
-	const PROVIDER_KHBSZEP = 'KHBSZEP';
-	const PROVIDER_MKBSZEP = 'MKBSZEP';
-	const PROVIDER_MPP2 = 'MPP2';
+	const PROVIDER_KHB_SZEP = 'KHBSZEP';
+	const PROVIDER_MKB_SZEP = 'MKBSZEP';
+	const PROVIDER_MASTERCARD_MOBILE = 'MPP2';
 	const PROVIDER_OTP = 'OTP';
-	const PROVIDER_OTP2 = 'OTP2';
-	const PROVIDER_OTPay = 'OTPay';
-	const PROVIDER_OTPayMP  = 'OTPayMP';
-	const PROVIDER_OTPMultipont = 'OTPMultipont';
-	const PROVIDER_PayPal = 'PayPal';
-	const PROVIDER_PayU = 'PayU';
-	const PROVIDER_PayUCash = 'PayUCash';
-	const PROVIDER_PayUWire = 'PayUWire';
-	const PROVIDER_QPAY = 'QPAY';
+	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
+	const PROVIDER_OTP_MULTIPONT = 'OTPMultipont';
+	const PROVIDER_OTPAY = 'OTPay';
+	const PROVIDER_OTPAY_MASTERPASS = 'OTPayMP';
+	const PROVIDER_PAYPAL = 'PayPal';
+	const PROVIDER_PAYU = 'PayU';
+	const PROVIDER_PAYU2 = 'PayU2';
+	const PROVIDER_PAYU_CASH = 'PayUCash';
+	const PROVIDER_PAYU_WIRE = 'PayUWire';
 	const PROVIDER_SMS = 'SMS';
-	const PROVIDER_Sofort = 'Sofort';
-	const PROVIDER_UniCredit = 'UniCredit';
+	const PROVIDER_SOFORT = 'Sofort';
+	const PROVIDER_UNICREDIT = 'UniCredit';
+	const PROVIDER_WIRECARD_QPAY = 'QPAY';
+
+	/**
+	 * API request type constants
+	 */
+	const REQUEST_INIT = 'Init';
+	const REQUEST_START = 'Start';
+	const REQUEST_RESULT = 'Result';
+	const REQUEST_CLOSE = 'Close';
+	const REQUEST_DETAILS = 'Details';
+	const REQUEST_LOG = 'Log';
+	const REQUEST_REFUND = 'Refund';
+	const REQUEST_INIT_RP = 'InitRP';
+	const REQUEST_START_RP = 'StartRP';
+	const REQUEST_FINALIZE = 'Finalize';
+	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
+	const REQUEST_INVOICE = 'Invoice';
+	const REQUEST_PROVIDERS = 'Providers';
 
 	/**
 	 * @var Config

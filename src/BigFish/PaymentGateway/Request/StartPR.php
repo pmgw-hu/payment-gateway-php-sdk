@@ -2,6 +2,8 @@
 
 namespace BigFish\PaymentGateway\Request;
 
+use BigFish\PaymentGateway;
+
 class StartPR extends RequestAbstract
 {
 	/**
@@ -17,6 +19,6 @@ class StartPR extends RequestAbstract
 	 */
 	public function getMethod(): \string
 	{
-		return RequestAbstract::REQUEST_START_RP;
+		return PaymentGateway::REQUEST_START_RP;
 	}
 }

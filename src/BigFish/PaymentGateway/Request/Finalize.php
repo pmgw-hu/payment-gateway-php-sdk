@@ -2,6 +2,8 @@
 
 namespace BigFish\PaymentGateway\Request;
 
+use BigFish\PaymentGateway;
+
 class Finalize extends RequestAbstract implements RedirectLocationInterface
 {
 	/**
@@ -19,13 +21,13 @@ class Finalize extends RequestAbstract implements RedirectLocationInterface
 	 */
 	public function getMethod(): \string
 	{
-		return RequestAbstract::REQUEST_FINALIZE;
+		return PaymentGateway::REQUEST_FINALIZE;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getRedirectUrl()
+	public function getRedirectUrl(): \string
 	{
 		return '/Finalize?' . http_build_query($this->getUcFirstData());
 	}

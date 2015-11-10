@@ -19,7 +19,7 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 		$init = new PaymentGateway\Request\Init();
 		$init->setAmount(10)
 			->setCurrency()
-			->setProviderName(PaymentGateway::PROVIDER_OTPay)
+			->setProviderName(PaymentGateway::PROVIDER_OTPAY)
 			->setResponseUrl('http://integration.test.bigfish.hu')
 			->setAutoCommit();
 
@@ -57,7 +57,7 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 	{
 		$init = new PaymentGateway\Request\Init();
 		$init->setAmount(50)
-				->setProviderName(PaymentGateway::PROVIDER_OTPayMP)
+				->setProviderName(PaymentGateway::PROVIDER_OTPAY)
 				->setResponseUrl('http://integration.test.bigfish.hu');
 
 		$paymentGateWay = $this->getPaymentGateway();
@@ -74,8 +74,6 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 
 		$data = file_get_contents($paymentGateWay->getRedirectUrl($request));
 		$this->assertNotEmpty($data);
-		// @todo:
-		//$this->assertNotContains('alert alert-error', $data);
 	}
 
 	/**
@@ -110,7 +108,7 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 	public function close_notApproved()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\Details($this->init())
+			new PaymentGateway\Request\Details($this->init(), false)
 		);
 	}
 
@@ -148,7 +146,7 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 	public function OneClickOptions()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\OneClickOptions(PaymentGateway::PROVIDER_OTPay, '12345')
+			new PaymentGateway\Request\OneClickOptions(PaymentGateway::PROVIDER_OTPAY, '12345')
 		);
 	}
 

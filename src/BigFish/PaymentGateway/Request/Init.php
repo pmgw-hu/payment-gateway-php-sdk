@@ -3,6 +3,7 @@
 namespace BigFish\PaymentGateway\Request;
 
 
+use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class Init extends InitPR
@@ -21,114 +22,14 @@ class Init extends InitPR
 	 * @var array
 	 */
 	protected static $oneClickProviders = array(
-		'Escalion',
-		'PayU',
+		PaymentGateway::PROVIDER_ESCALION,
+		PaymentGateway::PROVIDER_PAYU
 	);
 
 	/**
 	 * @var string
 	 */
-	protected $providerName;
-
-	/**
-	 * @var string
-	 */
-	protected $storeName;
-
-	/**
-	 * @var string
-	 */
-	protected $responseUrl;
-
-	/**
-	 * @var string
-	 */
-	protected $notificationUrl;
-
-	/**
-	 * @var float
-	 */
-	protected $amount;
-
-	/**
-	 * @var string
-	 */
-	protected $orderId;
-
-	/**
-	 * @var string
-	 */
-	protected $userId;
-
-	/**
-	 * @var string
-	 */
-	protected $currency;
-
-	/**
-	 * @var string
-	 */
-	protected $language;
-
-	/**
-	 * @var string
-	 */
-	protected $mppPhoneNumber;
-
-	/**
-	 * @var string
-	 */
-	protected $otpCardNumber;
-
-	/**
-	 * @var bool;
-	 */
-	protected $autoCommit;
-
-	/**
-	 * @var string
-	 */
-	protected $oneClickReferenceId;
-
-	/**
-	 * @var bool
-	 */
-	protected $oneClickPayment;
-
-	/**
-	 * @var string
-	 */
-	protected $mkbSzepCvv;
-
-	/**
-	 * @var string
-	 */
-	protected $mkbSzepCardNumber;
-
-	/**
-	 * @var string
-	 */
-	protected $otpCardPocketId;
-
-	/**
-	 * @var string
-	 */
-	protected $otpCvc;
-
-	/**
-	 * @var string
-	 */
-	protected $otpExpiration;
-
-	/**
-	 * @var string
-	 */
-	protected $otpConsumerRegistrationId;
-
-	/**
-	 * @var int
-	 */
-	protected $mkbSzepCafeteriaId;
+	protected $encryptPublicKey;
 
 	/**
 	 * @param string $storeName
@@ -301,6 +202,116 @@ class Init extends InitPR
 	 */
 	public function getMethod(): \string
 	{
-		return RequestAbstract::REQUEST_INIT;
+		return PaymentGateway::REQUEST_INIT;
 	}
+
+	/**
+	 * @param array $extra
+	 * @return $this
+	 * @throws PaymentGatewayException
+	 */
+	public function setExtra(array $extra = array())
+	{
+
+		$providerName = $this->data['providerName'];
+
+		if (
+				in_array($providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) &&
+				!empty($this->data['otpConsumerRegistrationId'])
+		) {
+			$this->encryptExtra(array(
+					'otpConsumerRegistrationId' => $this->data['otpConsumerRegistrationId']
+			));
+		} elseif ($providerName == PaymentGateway::PROVIDER_OTP_TWO_PARTY) {
+			if (
+					!empty($this->data['otpCardNumber']) &&
+					!empty($this->data['otpExpiration']) &&
+					!empty($this->data['otpCvc'])
+			) {
+				$this->encryptExtra(array(
+						'otpCardNumber' => $this->data['otpCardNumber'],
+						'otpExpiration' => $this->data['otpExpiration'],
+						'otpCvc' => $this->data['otpCvc']
+				));
+			}
+		} else if ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
+			if (
+					!empty($this->data['mkbSzepCardNumber']) &&
+					!empty($this->data['mkbSzepCvv'])
+			) {
+				$this->encryptExtra(array(
+						'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
+						'mkbSzepCvv' => $this->data['mkbSzepCvv']
+				));
+			}
+		} else if (!empty($extra)) {
+			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));
+		}
+
+		$this->removeSensitiveInformation($providerName);
+
+		return $this;
+	}
+
+	/**
+	 * @param array $data
+	 * @throws PaymentGatewayException
+	 */
+	protected function encryptExtra(array $data = array())
+	{
+		if (!function_exists('openssl_public_encrypt')) {
+			throw new PaymentGatewayException('OpenSSL PHP module is not loaded');
+		}
+
+		$encrypted = null;
+
+		$extra = serialize($data);
+		openssl_public_encrypt($extra, $encrypted, $this->encryptPublicKey);
+		$this->data['extra'] = $this->urlSafeEncode($encrypted);
+	}
+
+	/**
+	 * @param string $encryptPublicKey
+	 */
+	public function setEncryptKey(\string $encryptPublicKey)
+	{
+		$this->encryptPublicKey = $encryptPublicKey;
+	}
+
+	/**
+	 * URL safe encode (base64)
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	protected function urlSafeEncode(\string $string): \string
+	{
+		return str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
+	}
+
+	/**
+	 * @param $providerName
+	 */
+	protected function removeSensitiveInformation($providerName)
+	{
+		if (!($providerName == PaymentGateway::PROVIDER_OTP && !empty($this->data['otpCardPocketId']))) {
+			unset($this->data['otpCardPocketId']);
+		}
+
+		if (!(in_array($providerName, self::$oneClickProviders) && isset($this->data['oneClickPayment']))) {
+			unset($this->data['oneClickPayment']);
+		}
+
+		if (!(in_array($providerName, self::$oneClickProviders) && isset($this->data['oneClickReferenceId']))) {
+			unset($this->data['oneClickReferenceId']);
+		}
+
+		unset($this->data['otpCardNumber']);
+		unset($this->data['otpExpiration']);
+		unset($this->data['otpCvc']);
+		unset($this->data['otpConsumerRegistrationId']);
+		unset($this->data['mkbSzepCardNumber']);
+		unset($this->data['mkbSzepCvv']);
+	}
+
 }

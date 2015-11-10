@@ -9,10 +9,12 @@ Copy paste detection:
     - wget https://phar.phpunit.de/phpcpd.phar
     - php7 phpcpd.phar ./src/
 
-PHP mess detection:
-  script:
-    - wget -c http://static.phpmd.org/php/latest/phpmd.phar
-    - php7 phpmd.phar ./src/ text cleancode codesize
+# disables due to phpmd issues
+
+#PHP mess detection:
+#  script:
+#    - wget -c http://static.phpmd.org/php/latest/phpmd.phar
+#    - php7 phpmd.phar ./src/ text cleancode codesize
 
 PhpUnit php7:
   script:

@@ -2,6 +2,7 @@
 
 namespace BigFish\PaymentGateway\Request;
 
+use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class InitPR extends RequestAbstract
@@ -105,6 +106,6 @@ class InitPR extends RequestAbstract
 	 */
 	public function getMethod(): \string
 	{
-		return RequestAbstract::REQUEST_INIT_RP;
+		return PaymentGateway::REQUEST_INIT_RP;
 	}
 }

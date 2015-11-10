@@ -2,6 +2,8 @@
 
 namespace BigFish\PaymentGateway\Request;
 
+use BigFish\PaymentGateway;
+
 class Result extends RequestAbstract
 {
 	/**
@@ -17,6 +19,6 @@ class Result extends RequestAbstract
 	 */
 	public function getMethod(): \string
 	{
-		return RequestAbstract::REQUEST_RESULT;
+		return PaymentGateway::REQUEST_RESULT;
 	}
 }

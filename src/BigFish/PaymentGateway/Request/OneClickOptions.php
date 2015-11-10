@@ -2,6 +2,8 @@
 
 namespace BigFish\PaymentGateway\Request;
 
+use BigFish\PaymentGateway;
+
 class OneClickOptions extends RequestAbstract
 {
 	/**
@@ -28,6 +30,6 @@ class OneClickOptions extends RequestAbstract
 	 */
 	public function getMethod(): \string
 	{
-		return RequestAbstract::REQUEST_ONE_CLICK_OPTIONS;
+		return PaymentGateway::REQUEST_ONE_CLICK_OPTIONS;
 	}
 }

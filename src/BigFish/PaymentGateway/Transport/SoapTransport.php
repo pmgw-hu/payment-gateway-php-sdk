@@ -18,7 +18,7 @@ class SoapTransport extends TransportAbstract
 			throw new PaymentGatewayException('SOAP PHP module is not loaded');
 		}
 
-		$this->setStoreName($requestInterface);
+		$this->initRequest($requestInterface);
 
 		$wsdl = $this->config->getUrl() . '/api/soap/?wsdl';
 		$client = new \SoapClient($wsdl, array(

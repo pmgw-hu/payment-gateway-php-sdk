@@ -2,6 +2,8 @@
 
 namespace BigFish\PaymentGateway\Request;
 
+use BigFish\PaymentGateway;
+
 class Close extends RequestAbstract
 {
 	/**
@@ -19,6 +21,6 @@ class Close extends RequestAbstract
 	 */
 	public function getMethod(): \string
 	{
-		return RequestAbstract::REQUEST_CLOSE;
+		return PaymentGateway::REQUEST_CLOSE;
 	}
 }

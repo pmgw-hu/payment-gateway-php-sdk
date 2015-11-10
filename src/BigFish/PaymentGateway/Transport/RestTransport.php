@@ -2,8 +2,8 @@
 
 namespace BigFish\PaymentGateway\Transport;
 
+use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
-use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
 class RestTransport extends TransportAbstract
@@ -29,7 +29,7 @@ class RestTransport extends TransportAbstract
 
 		$url = $this->config->getUrl() . '/api/rest/';
 
-		$this->setStoreName($requestInterface);
+		$this->initRequest($requestInterface);
 
 		$curl = curl_init();
 		if (!$curl) {
@@ -91,8 +91,8 @@ class RestTransport extends TransportAbstract
 	protected function setTimeout(RequestInterface $requestInterface, $curl)
 	{
 		if (
-			$requestInterface->getMethod() == RequestAbstract::REQUEST_CLOSE ||
-			$requestInterface->getMethod() == RequestAbstract::REQUEST_REFUND
+			$requestInterface->getMethod() == PaymentGateway::REQUEST_CLOSE ||
+			$requestInterface->getMethod() == PaymentGateway::REQUEST_REFUND
 		) {
 			// OTPay close and refund (extra timeout)
 			curl_setopt($curl, CURLOPT_TIMEOUT, 600);

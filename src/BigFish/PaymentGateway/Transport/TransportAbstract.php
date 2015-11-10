@@ -56,7 +56,7 @@ abstract class TransportAbstract implements TransportInterface
 	/**
 	 * @param RequestInterface $requestInterface
 	 */
-	protected function setStoreName(RequestInterface $requestInterface)
+	protected function initRequest(RequestInterface $requestInterface)
 	{
 		if (
 			$requestInterface instanceof PaymentGateway\Request\Init ||
@@ -64,6 +64,11 @@ abstract class TransportAbstract implements TransportInterface
 			$requestInterface instanceof PaymentGateway\Request\Providers
 		) {
 			$requestInterface->setStoreName($this->config->getStoreName());
+		}
+
+		if ($requestInterface instanceof PaymentGateway\Request\Init) {
+			$requestInterface->setEncryptKey($this->config->getEncryptPublicKey());
+			$requestInterface->setExtra();
 		}
 	}
 }
