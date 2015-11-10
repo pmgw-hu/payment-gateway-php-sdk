@@ -2,7 +2,6 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
@@ -212,12 +211,11 @@ class Init extends InitPR
 	 */
 	public function setExtra(array $extra = array())
 	{
-
 		$providerName = $this->data['providerName'];
 
 		if (
-				in_array($providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) &&
-				!empty($this->data['otpConsumerRegistrationId'])
+			in_array($providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) &&
+			!empty($this->data['otpConsumerRegistrationId'])
 		) {
 			$this->encryptExtra(array(
 					'otpConsumerRegistrationId' => $this->data['otpConsumerRegistrationId']
@@ -292,7 +290,7 @@ class Init extends InitPR
 	/**
 	 * @param $providerName
 	 */
-	protected function removeSensitiveInformation($providerName)
+	protected function removeSensitiveInformation(\string $providerName)
 	{
 		if (!($providerName == PaymentGateway::PROVIDER_OTP && !empty($this->data['otpCardPocketId']))) {
 			unset($this->data['otpCardPocketId']);

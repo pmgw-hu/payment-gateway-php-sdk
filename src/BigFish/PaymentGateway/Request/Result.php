@@ -4,16 +4,8 @@ namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
 
-class Result extends RequestAbstract
+class Result extends SimpleRequestAbstract
 {
-	/**
-	 * @param string $transactionId
-	 */
-	public function __construct(\string $transactionId)
-	{
-		$this->data['transactionId'] = $transactionId;
-	}
-
 	/**
 	 * @return string
 	 */

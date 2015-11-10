@@ -8,7 +8,6 @@ use BigFish\PaymentGateway\Request\RequestInterface;
 
 interface TransportInterface
 {
-
 	/**
 	 * TransportInterface constructor.
 	 * @param Config $config
