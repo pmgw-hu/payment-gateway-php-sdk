@@ -5,9 +5,9 @@ namespace BigFish\Tests\Request;
 
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\Init;
-use BigFish\Tests\PaymentGateway\Request\InitPRTest;
+use BigFish\Tests\PaymentGateway\Request\InitRPTest;
 
-class InitTest extends InitPRTest
+class InitTest extends InitRPTest
 {
 	/**
 	 * @return array
