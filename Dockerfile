@@ -14,11 +14,7 @@ RUN echo "<FilesMatch \\.php$>\r\nSetHandler application/x-httpd-php\r\n</FilesM
 RUN a2dismod mpm_event && a2enmod mpm_prefork && a2enmod php7
 
 RUN rm -rf /var/www/html/index.html
-RUN git clone http://gitlab.bfsdemo.hu/peter.tihanyi/php7-sdk-demo.git /var/www/html/
-
-RUN cd /var/www/html/ && php composer.phar install
 
 EXPOSE 80
 
-#CMD ["-D", "FOREGROUND"]
-#ENTRYPOINT ["/usr/sbin/apachectl"]
+CMD /usr/sbin/apache2ctl -D FOREGROUND
