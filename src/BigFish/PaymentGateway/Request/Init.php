@@ -5,12 +5,12 @@ namespace BigFish\PaymentGateway\Request;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-class Init extends InitPR
+class Init extends InitRP
 {
 	/**
 	 * Languages
 	 */
-	const LANG_HU = 'HU';
+	const DEFAULT_LANG = 'HU';
 
 	/**
 	 * Extra data
@@ -37,7 +37,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $storeName
-	 * @return $this
+	 * @return Init
 	 */
 	public function setStoreName(\string $storeName)
 	{
@@ -47,7 +47,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $notificationUrl
-	 * @return $this
+	 * @return Init
 	 * @throws PaymentGatewayException
 	 */
 	public function setNotificationUrl(\string $notificationUrl)
@@ -62,12 +62,12 @@ class Init extends InitPR
 
 	/**
 	 * @param string $language
-	 * @return $this
+	 * @return Init
 	 */
 	public function setLanguage(\string $language = '')
 	{
 		if (!$language) {
-			$language = static::LANG_HU;
+			$language = static::DEFAULT_LANG;
 		}
 		$this->checkLengthAndSaveData($language, 'language', 2);
 		return $this;
@@ -75,7 +75,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $mppPhoneNumber
-	 * @return $this
+	 * @return Init
 	 */
 	public function setMppPhoneNumber(\string $mppPhoneNumber)
 	{
@@ -85,7 +85,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $otpCardNumber
-	 * @return $this
+	 * @return Init
 	 */
 	public function setOtpCardNumber(\string $otpCardNumber)
 	{
@@ -96,7 +96,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $otpExpiration
-	 * @return $this
+	 * @return Init
 	 */
 	public function setOtpExpiration(\string $otpExpiration)
 	{
@@ -106,7 +106,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $otpCvc
-	 * @return $this
+	 * @return Init
 	 */
 	public function setOtpCvc(\string $otpCvc)
 	{
@@ -116,7 +116,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $otpCardPocketId
-	 * @return $this
+	 * @return Init
 	 */
 	public function setOtpCardPocketId(\string $otpCardPocketId)
 	{
@@ -126,7 +126,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $otpConsumerRegistrationId
-	 * @return $this
+	 * @return Init
 	 */
 	public function setOtpConsumerRegistrationId(\string $otpConsumerRegistrationId)
 	{
@@ -136,7 +136,7 @@ class Init extends InitPR
 
 	/**
 	 * @param int $mkbSzepCafeteriaId
-	 * @return $this
+	 * @return Init
 	 */
 	public function setMkbSzepCafeteriaId(\int $mkbSzepCafeteriaId)
 	{
@@ -146,7 +146,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $mkbSzepCardNumber
-	 * @return $this
+	 * @return Init
 	 */
 	public function setMkbSzepCardNumber(\string $mkbSzepCardNumber)
 	{
@@ -156,7 +156,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $mkbSzepCvv
-	 * @return $this
+	 * @return Init
 	 */
 	public function setMkbSzepCvv(\string $mkbSzepCvv)
 	{
@@ -165,7 +165,7 @@ class Init extends InitPR
 	}
 
 	/**
-	 * @return $this
+	 * @return Init
 	 */
 	public function setOneClickPayment()
 	{
@@ -175,7 +175,7 @@ class Init extends InitPR
 
 	/**
 	 * @param string $oneClickReferenceId
-	 * @return $this
+	 * @return Init
 	 */
 	public function setOneClickReferenceId(\string $oneClickReferenceId)
 	{
@@ -184,7 +184,7 @@ class Init extends InitPR
 	}
 
 	/**
-	 * @return $this
+	 * @return Init
 	 */
 	public function setAutoCommit()
 	{
@@ -192,8 +192,8 @@ class Init extends InitPR
 		return $this;
 	}
 
-	/**t
-	 * @return $this
+	/**
+	 * @return Init
 	 */
 	public function disableAutoCommit()
 	{
@@ -211,7 +211,7 @@ class Init extends InitPR
 
 	/**
 	 * @param array $extra
-	 * @return $this
+	 * @return Init
 	 * @throws PaymentGatewayException
 	 */
 	public function setExtra(array $extra = array())
@@ -237,7 +237,7 @@ class Init extends InitPR
 						'otpCvc' => $this->data['otpCvc']
 				));
 			}
-		} else if ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
+		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
 			if (
 					!empty($this->data['mkbSzepCardNumber']) &&
 					!empty($this->data['mkbSzepCvv'])
@@ -247,7 +247,7 @@ class Init extends InitPR
 						'mkbSzepCvv' => $this->data['mkbSzepCvv']
 				));
 			}
-		} else if (!empty($extra)) {
+		} elseif (!empty($extra)) {
 			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));
 		}
 
@@ -275,10 +275,12 @@ class Init extends InitPR
 
 	/**
 	 * @param string $encryptPublicKey
+	 * @return Init
 	 */
 	public function setEncryptKey(\string $encryptPublicKey)
 	{
 		$this->encryptPublicKey = $encryptPublicKey;
+		return $this;
 	}
 
 	/**

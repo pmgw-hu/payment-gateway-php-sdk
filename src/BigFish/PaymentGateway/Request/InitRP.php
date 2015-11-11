@@ -5,13 +5,15 @@ namespace BigFish\PaymentGateway\Request;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-class InitPR extends RequestAbstract
+class InitRP extends RequestAbstract
 {
+	const DEFAULT_CURRENCY = 'HUF';
+
 	/**
 	 * Set the reference Payment Gateway transaction ID
 	 *
 	 * @param string $referenceTransactionId Identifier of the reference transaction ID
-	 * @return $this
+	 * @return InitRP
 	 */
 	public function setReferenceTransactionId(\string $referenceTransactionId)
 	{
@@ -24,7 +26,7 @@ class InitPR extends RequestAbstract
 	 *
 	 * @param string $responseUrl Response URL
 	 * (e.g. http://www.yourdomain.com/response.php, http://www.yourdomain.com/response.php?someparam=somevalue etc.)
-	 * @return $this
+	 * @return InitRP
 	 * @throws PaymentGatewayException
 	 */
 	public function setResponseUrl(\string $responseUrl)
@@ -40,7 +42,7 @@ class InitPR extends RequestAbstract
 	 * Set payment transaction amount
 	 *
 	 * @param float $amount Transaction amount
-	 * @return $this
+	 * @return InitRP
 	 * @throws PaymentGatewayException
 	 */
 	public function setAmount(\float $amount)
@@ -56,7 +58,7 @@ class InitPR extends RequestAbstract
 	 * Set the identifier of the order in your system
 	 *
 	 * @param mixed $orderId Order identifier
-	 * @return $this
+	 * @return InitRP
 	 */
 	public function setOrderId(\string $orderId)
 	{
@@ -68,7 +70,7 @@ class InitPR extends RequestAbstract
 	 * Set the identifier of the user in your system
 	 *
 	 * @param mixed $userId User identifier
-	 * @return $this
+	 * @return InitRP
 	 */
 	public function setUserId(\string $userId)
 	{
@@ -80,12 +82,12 @@ class InitPR extends RequestAbstract
 	 * Set payment transaction currency
 	 *
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return $this
+	 * @return InitRP
 	 */
 	public function setCurrency(\string $currency = '')
 	{
 		if (!$currency) {
-			$currency = 'HUF';
+			$currency = self::DEFAULT_CURRENCY;
 		}
 		$this->checkLengthAndSaveData($currency, 'currency', 3);
 		return $this;
@@ -93,7 +95,7 @@ class InitPR extends RequestAbstract
 
 	/**
 	 * @param string $providerName
-	 * @return $this
+	 * @return InitRP
 	 */
 	public function setProviderName(\string $providerName)
 	{

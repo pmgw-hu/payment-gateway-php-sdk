@@ -4,7 +4,7 @@ namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
 
-class StartPR extends SimpleRequestAbstract
+class StartRP extends SimpleRequestAbstract
 {
 	/**
 	 * @return string

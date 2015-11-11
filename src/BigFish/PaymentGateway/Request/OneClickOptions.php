@@ -19,10 +19,12 @@ class OneClickOptions extends RequestAbstract
 
 	/**
 	 * @param string $storeName
+	 * @return OneClickOptions
 	 */
 	public function setStoreName(\string $storeName)
 	{
 		$this->data['storeName'] = $storeName;
+		return $this;
 	}
 
 	/**

@@ -4,7 +4,7 @@ namespace BigFish\Tests\PaymentGateway\Request;
 
 
 use BigFish\PaymentGateway\Request\Init;
-use BigFish\PaymentGateway\Request\InitPR;
+use BigFish\PaymentGateway\Request\InitRP;
 
 class InitPRTest extends \PHPUnit_Framework_TestCase
 {
@@ -119,7 +119,7 @@ class InitPRTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function getRequest()
 	{
-		return new InitPR();
+		return new InitRP();
 	}
 
 }

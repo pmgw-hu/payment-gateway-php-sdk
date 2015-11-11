@@ -8,10 +8,12 @@ class Providers extends RequestAbstract
 {
 	/**
 	 * @param string $storeName
+	 * @return Providers
 	 */
 	public function setStoreName(\string $storeName)
 	{
 		$this->data['storeName'] = $storeName;
+		return $this;
 	}
 
 	/**

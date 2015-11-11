@@ -170,12 +170,23 @@ class InitTest extends InitPRTest
 	/**
 	 * @test
 	 */
-	public function setLanguage_defaultHU()
+	public function setLanguage_defaultLANG()
 	{
 		$init = $this->getRequest();
 		$init->setLanguage();
 		$data = $init->getData();
-		$this->assertEquals('HU', $data['language']);
+		$this->assertEquals(Init::DEFAULT_LANG, $data['language']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setLanguage_defaultCurrency()
+	{
+		$init = $this->getRequest();
+		$init->setCurrency();
+		$data = $init->getData();
+		$this->assertEquals(Init::DEFAULT_CURRENCY, $data['currency']);
 	}
 
 	/**
