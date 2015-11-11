@@ -58,7 +58,7 @@ class Response implements ResponseInterface
 	 * @param string $name
 	 * @return string
 	 */
-	public function __get(\string $name): \string
+	public function __get(\string $name)
 	{
 		if (!isset($this->data[$name])) {
 			return '';
