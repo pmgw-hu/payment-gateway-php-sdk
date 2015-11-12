@@ -13,12 +13,12 @@ Copy paste detection:
   allow_failure: true
 
 # disables due to phpmd issues
-PHP mess detection:
-  script:
-    - wget -c http://static.phpmd.org/php/latest/phpmd.phar
-    - php7 phpmd.phar ./src/ text cleancode codesize
-  stage: build
-  allow_failure: true
+#PHP mess detection:
+#  script:
+#    - wget -c http://static.phpmd.org/php/latest/phpmd.phar
+#    - php7 phpmd.phar ./src/ text cleancode codesize
+#  stage: build
+#  allow_failure: true
 
 PhpUnit php7:
   script:
@@ -28,7 +28,7 @@ PhpUnit php7:
     - cd tests && php7 ../vendor/phpunit/phpunit/phpunit
   stage: build
 
-UI test:
-  script:
-    - docker build -t php7 .
-    - docker run -d -it -p 8080:80 php7
+#UI test:
+#  script:
+#    - docker build -t php7 .
+#    - docker run -d -it -p 8080:80 php7
