@@ -135,10 +135,10 @@ class Init extends InitRP
 	}
 
 	/**
-	 * @param int $mkbSzepCafeteriaId
+	 * @param string $mkbSzepCafeteriaId
 	 * @return Init
 	 */
-	public function setMkbSzepCafeteriaId(\int $mkbSzepCafeteriaId)
+	public function setMkbSzepCafeteriaId(\string $mkbSzepCafeteriaId)
 	{
 		$this->data['mkbSzepCafeteriaId'] = $mkbSzepCafeteriaId;
 		return $this;
