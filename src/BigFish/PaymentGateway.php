@@ -2,7 +2,6 @@
 
 namespace BigFish;
 
-
 use BigFish\PaymentGateway\Config;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 use BigFish\PaymentGateway\Request\RedirectLocationInterface;
