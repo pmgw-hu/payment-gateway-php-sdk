@@ -1,6 +1,6 @@
 <?php
 
-namespace BigFish\PaymentGateway\Transport;
+namespace BigFish\PaymentGateway\Transport\Response;
 
 
 interface ResponseInterface
@@ -27,4 +27,9 @@ interface ResponseInterface
 	 * @return void
 	 */
 	public function setData(array $data);
+
+	/**
+	 * @param string $charset
+	 */
+	public function convert(\string $charset);
 }

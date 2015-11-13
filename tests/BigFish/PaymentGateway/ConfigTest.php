@@ -42,7 +42,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 					true, 'testMode', 'isTestMode'
 			),
 			array(
-					true, 'useApi', 'useApi'
+					Config::TRANSPORT_TYPE_REST_API, 'apiType', 'getApiType'
 			)
 		);
 	}
@@ -110,44 +110,36 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @test
 	 */
-	public function useApi_defaultIsTrue()
+	public function useApi_REST()
 	{
-		$this->assertTrue($this->getConfig()->useApi());
+		$this->assertEquals(Config::TRANSPORT_TYPE_REST_API, $this->getConfig()->getApiType());
 	}
 
 	/**
-	 * @param bool $excepted
+	 * @param string $excepted
 	 * @param mixed $value
 	 */
-	protected function assertUseApi(\bool $excepted, $value)
+	protected function assertUseApi(\string $excepted, $value)
 	{
 		$config = $this->getConfig();
-		$config->useApi = $value;
-		$this->assertEquals($excepted, $config->useApi());
+		$config->apiType = $value;
+		$this->assertEquals($excepted, $config->getApiType());
 	}
 
 	/**
 	 * @test
 	 */
-	public function useApi_setNonBooleanValue_string()
+	public function useApi_type_rest()
 	{
-		$this->assertUseApi(true, 'yes');
+		$this->assertUseApi(Config::TRANSPORT_TYPE_REST_API, Config::TRANSPORT_TYPE_REST_API);
 	}
 
 	/**
 	 * @test
 	 */
-	public function useApi_setNonBooleanValue_int()
+	public function useApi_type_soap()
 	{
-		$this->assertUseApi(true, 1);
-	}
-
-	/**
-	 * @test
-	 */
-	public function useApi_setNonBooleanValue_zero()
-	{
-		$this->assertUseApi(false, 0);
+		$this->assertUseApi(Config::TRANSPORT_TYPE_SOAP_API, Config::TRANSPORT_TYPE_SOAP_API);
 	}
 
 	/**

@@ -12,7 +12,7 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
  * @property string $apiKey
  * @property string $encryptPublicKey
  * @property bool $testMode
- * @property bool $useApi
+ * @property string $apiType
  */
 class Config
 {
@@ -56,6 +56,23 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	const CHARSET_LATIN2 = 'iso-8859-2';
 
 	/**
+	 * Transport type
+	 */
+	const TRANSPORT_TYPE_REST_API = 'rest';
+	const TRANSPORT_TYPE_SOAP_API = 'soap';
+
+	/**
+	 * Default lang
+	 */
+	const DEFAULT_LANG = 'hu';
+
+	/**
+	 * Default currency
+	 */
+
+	const DEFAULT_CURRENCY = 'HUF';
+
+	/**
 	 * @var bool
 	 */
 	protected $testMode = true;
@@ -71,14 +88,15 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	protected $apiKey = self::SDK_TEST_API_KEY;
 
 	/**
-	 * @var bool
+	 * @var string
 	 */
-	protected $useApi = true;
+	protected $apiType = self::TRANSPORT_TYPE_REST_API;
 
 	/**
 	 * @var string
 	 */
-	protected $outCharset = self::CHARSET_UTF8;
+	public $outCharset = self::CHARSET_UTF8;
+
 	/**
 	 * @var
 	 */
@@ -109,11 +127,11 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
-	 * @return bool
+	 * @return string
 	 */
-	public function useApi(): \bool
+	public function getApiType(): \string
 	{
-		return (bool) $this->useApi;
+		return (string)$this->apiType;
 	}
 
 	/**

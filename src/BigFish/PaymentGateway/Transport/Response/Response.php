@@ -1,8 +1,9 @@
 <?php
 
-namespace BigFish\PaymentGateway\Transport;
+namespace BigFish\PaymentGateway\Transport\Response;
 
 
+use BigFish\PaymentGateway\Config;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class Response implements ResponseInterface
@@ -42,8 +43,31 @@ class Response implements ResponseInterface
 	public static function createFromObject(\stdClass $object)
 	{
 		$static = new static();
-		$static->setData(get_object_vars($object));
+		$result = array();
+		static::getObjectVars($result, $object);
+		$static->setData($result);
 		return $static;
+	}
+
+	/**
+	 * @param array $result
+	 * @param \stdClass $object
+	 */
+	protected static function getObjectVars(&$result = array(), \stdClass $object)
+	{
+		foreach (get_object_vars($object) as $name => $value) {
+			if (!is_object($value)) {
+				if (is_string($value) && is_array(json_decode($value, true))) {
+					$result[$name] = json_decode($value, true);
+				} else {
+					$result[$name] = $value;
+				}
+				continue;
+			}
+
+			$result[$name] = array();
+			static::getObjectVars($result[$name], $value);
+		}
 	}
 
 	/**
@@ -56,14 +80,24 @@ class Response implements ResponseInterface
 
 	/**
 	 * @param string $name
-	 * @return string
+	 * @return string|null
 	 */
 	public function __get(\string $name)
 	{
 		if (!isset($this->data[$name])) {
-			return '';
+			return null;
 		}
 
 		return $this->data[$name];
+	}
+
+	/**
+	 * @param string $charset
+	 */
+	public function convert(\string $charset)
+	{
+		array_walk_recursive($this->data, function (&$item) use ($charset) {
+			$item = iconv("UTF-8", $charset, $item);
+		});
 	}
 }

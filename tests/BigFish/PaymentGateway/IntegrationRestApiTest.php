@@ -190,7 +190,7 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 	{
 		$config = new PaymentGateway\Config();
 		$config->testMode = true;
-		$config->useApi = true;
+		$config->apiType = PaymentGateway\Config::TRANSPORT_TYPE_REST_API;
 		return $config;
 	}
 
@@ -202,5 +202,51 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 		$config = $this->getConfig();
 		$paymentGateWay = $this->getMock('\BigFish\PaymentGateway', array('terminate'), array($config));
 		return $paymentGateWay;
+	}
+
+	/**
+	 * @test
+	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
+	 */
+	public function unknownTransport()
+	{
+		$config = $this->getConfig();
+		$config->apiType = 'non exist transport type';
+
+		$paymentGateWay = new PaymentGateway($config);
+		$init = new PaymentGateway\Request\Init();
+		$init->setAmount(50)
+				->setProviderName(PaymentGateway::PROVIDER_OTPAY)
+				->setResponseUrl('http://integration.test.bigfish.hu');
+		$paymentGateWay->send($init);
+	}
+
+	/**
+	 * @test
+	 */
+	public function convertOutPut()
+	{
+		$config = $this->getConfig();
+		$config->outCharset = PaymentGateway\Config::CHARSET_LATIN1;
+		$paymentGateWay = new PaymentGateway($config);
+		$init = $this->getConvertOutPutInitRequest();
+		$response = $paymentGateWay->send($init);
+		$testString = 'Ismeretlen szolgáltató (invalid_Rovider)';
+		$this->assertNotEquals($testString, $response->ResultMessage);
+
+		$this->assertEquals(iconv("UTF-8", PaymentGateway\Config::CHARSET_LATIN1, $testString), $response->ResultMessage);
+	}
+
+	/**
+	 * @return PaymentGateway\Request\Init
+	 * @throws PaymentGateway\Exception\PaymentGatewayException
+	 */
+	protected function getConvertOutPutInitRequest()
+	{
+		$init = new PaymentGateway\Request\Init();
+		$init->setAmount(150)
+				->setProviderName('invalid_Rovider')
+				->setResponseUrl('http://integration.test.bigfish.hu');
+		return $init;
 	}
 }

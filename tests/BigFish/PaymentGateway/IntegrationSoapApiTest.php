@@ -13,7 +13,7 @@ class IntegrationSoapApiTest extends IntegrationRestApiTest
 	{
 		$config = new PaymentGateway\Config();
 		$config->testMode = true;
-		$config->useApi = false;
+		$config->apiType = PaymentGateway\Config::TRANSPORT_TYPE_SOAP_API;
 		return $config;
 	}
 
@@ -47,6 +47,16 @@ class IntegrationSoapApiTest extends IntegrationRestApiTest
 	public function finalize()
 	{
 
+	}
+
+	/**
+	 * @return PaymentGateway\Request\Init
+	 */
+	protected function getConvertOutPutInitRequest()
+	{
+		$result = parent::getConvertOutPutInitRequest();
+		$result->setAutoCommit();
+		return $result;
 	}
 
 

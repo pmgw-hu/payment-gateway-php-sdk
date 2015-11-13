@@ -35,12 +35,13 @@ abstract class RequestAbstract implements RequestInterface
 	/**
 	 * @param string $value
 	 * @param string $fieldName
-	 * @param int $maxLength
 	 * @throws PaymentGatewayException
 	 */
-	protected function checkLengthAndSaveData(\string $value, \string $fieldName, \int $maxLength)
+	protected function saveData(\string $value, \string $fieldName)
 	{
-		$this->checkFieldSize($maxLength, $fieldName, $value);
+		if ($maxSize = $this->getFieldMaxSize($fieldName)) {
+			$this->checkFieldSize($maxSize, $fieldName, $value);
+		}
 		$this->data[$fieldName] = $value;
 	}
 
@@ -52,7 +53,7 @@ abstract class RequestAbstract implements RequestInterface
 	 */
 	protected function checkFieldSize(\int $maxLength, \string $fieldName, \string $value)
 	{
-		if (strlen($value) > $maxLength) {
+		if (mb_strlen($value) > $maxLength) {
 			throw new PaymentGatewayException(
 				sprintf(
 					'%s is longer than permitted. Max value is: %i',
@@ -61,5 +62,14 @@ abstract class RequestAbstract implements RequestInterface
 				)
 			);
 		}
+	}
+
+	/**
+	 * @param string $fieldName
+	 * @return null|int
+	 */
+	protected function getFieldMaxSize(\string $fieldName)
+	{
+		return null;
 	}
 }

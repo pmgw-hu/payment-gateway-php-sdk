@@ -5,13 +5,8 @@ namespace BigFish\PaymentGateway\Request;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-class Init extends InitRP
+class Init extends InitAbstract
 {
-	/**
-	 * Languages
-	 */
-	const DEFAULT_LANG = 'HU';
-
 	/**
 	 * Extra data
 	 * 
@@ -19,6 +14,25 @@ class Init extends InitRP
 	 * @access public
 	 */
 	public $extra;
+
+	/**
+	 * @var array
+	 */
+	protected $maxSize = array(
+		'orderId' => 255,
+		'userId' => 255,
+		'currency' => 3,
+		'providerName' => 20,
+		'storeName' => 20,
+		'notificationUrl' => 255,
+		'language' => 2,
+		'mppPhoneNumber' => 32,
+		'otpCardNumber' => 16,
+		'otpExpiration' => 4,
+		'otpCardPocketId' => 2,
+		'otpCvc' => 3,
+		'mkbSzepCvv' => 3
+	);
 
 	/**
 	 * Valid OneClickPayment providers
@@ -41,7 +55,7 @@ class Init extends InitRP
 	 */
 	public function setStoreName(\string $storeName)
 	{
-		$this->checkLengthAndSaveData($storeName, 'storeName', 20);
+		$this->saveData($storeName, 'storeName');
 		return $this;
 	}
 
@@ -56,7 +70,7 @@ class Init extends InitRP
 			throw new PaymentGatewayException('Invalid notification url');
 		}
 
-		$this->checkLengthAndSaveData($notificationUrl, 'notificationUrl', 255);
+		$this->saveData($notificationUrl, 'notificationUrl');
 		return $this;
 	}
 
@@ -67,9 +81,9 @@ class Init extends InitRP
 	public function setLanguage(\string $language = '')
 	{
 		if (!$language) {
-			$language = static::DEFAULT_LANG;
+			$language = PaymentGateway\Config::DEFAULT_LANG;
 		}
-		$this->checkLengthAndSaveData($language, 'language', 2);
+		$this->saveData($language, 'language');
 		return $this;
 	}
 
@@ -79,7 +93,7 @@ class Init extends InitRP
 	 */
 	public function setMppPhoneNumber(\string $mppPhoneNumber)
 	{
-		$this->checkLengthAndSaveData($mppPhoneNumber, 'mppPhoneNumber', 32);
+		$this->saveData($mppPhoneNumber, 'mppPhoneNumber');
 		return $this;
 	}
 
@@ -90,7 +104,7 @@ class Init extends InitRP
 	public function setOtpCardNumber(\string $otpCardNumber)
 	{
 		$this->data['otpCardNumber'] = $otpCardNumber;
-		$this->checkLengthAndSaveData($otpCardNumber, 'otpCardNumber', 16);
+		$this->saveData($otpCardNumber, 'otpCardNumber');
 		return $this;
 	}
 
@@ -100,7 +114,7 @@ class Init extends InitRP
 	 */
 	public function setOtpExpiration(\string $otpExpiration)
 	{
-		$this->checkLengthAndSaveData($otpExpiration, 'otpExpiration', 4);
+		$this->saveData($otpExpiration, 'otpExpiration');
 		return $this;
 	}
 
@@ -110,7 +124,7 @@ class Init extends InitRP
 	 */
 	public function setOtpCvc(\string $otpCvc)
 	{
-		$this->checkLengthAndSaveData($otpCvc, 'otpCvc', 3);
+		$this->saveData($otpCvc, 'otpCvc');
 		return $this;
 	}
 
@@ -120,7 +134,7 @@ class Init extends InitRP
 	 */
 	public function setOtpCardPocketId(\string $otpCardPocketId)
 	{
-		$this->checkLengthAndSaveData($otpCardPocketId, 'otpCardPocketId', 2);
+		$this->saveData($otpCardPocketId, 'otpCardPocketId');
 		return $this;
 	}
 
@@ -160,7 +174,7 @@ class Init extends InitRP
 	 */
 	public function setMkbSzepCvv(\string $mkbSzepCvv)
 	{
-		$this->checkLengthAndSaveData($mkbSzepCvv, 'mkbSzepCvv', 3);
+		$this->saveData($mkbSzepCvv, 'mkbSzepCvv');
 		return $this;
 	}
 
@@ -184,20 +198,12 @@ class Init extends InitRP
 	}
 
 	/**
+	 * @param bool $value
 	 * @return Init
 	 */
-	public function setAutoCommit()
+	public function setAutoCommit(\bool $value = true)
 	{
-		$this->data['autoCommit'] = true;
-		return $this;
-	}
-
-	/**
-	 * @return Init
-	 */
-	public function disableAutoCommit()
-	{
-		$this->data['autoCommit'] = false;
+		$this->data['autoCommit'] = $value;
 		return $this;
 	}
 
@@ -217,38 +223,43 @@ class Init extends InitRP
 	public function setExtra(array $extra = array())
 	{
 		$providerName = $this->data['providerName'];
+		$encryptData = array();
 
 		if (
 			in_array($providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) &&
 			!empty($this->data['otpConsumerRegistrationId'])
 		) {
-			$this->encryptExtra(array(
-					'otpConsumerRegistrationId' => $this->data['otpConsumerRegistrationId']
-			));
+			$encryptData['otpConsumerRegistrationId'] = $this->data['otpConsumerRegistrationId'];
 		} elseif ($providerName == PaymentGateway::PROVIDER_OTP_TWO_PARTY) {
 			if (
 					!empty($this->data['otpCardNumber']) &&
 					!empty($this->data['otpExpiration']) &&
 					!empty($this->data['otpCvc'])
 			) {
-				$this->encryptExtra(array(
+				$encryptData = array(
 						'otpCardNumber' => $this->data['otpCardNumber'],
 						'otpExpiration' => $this->data['otpExpiration'],
 						'otpCvc' => $this->data['otpCvc']
-				));
+				);
 			}
 		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
 			if (
 					!empty($this->data['mkbSzepCardNumber']) &&
 					!empty($this->data['mkbSzepCvv'])
 			) {
-				$this->encryptExtra(array(
+				$encryptData = array(
 						'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
 						'mkbSzepCvv' => $this->data['mkbSzepCvv']
-				));
+				);
 			}
 		} elseif (!empty($extra)) {
 			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));
+		}
+
+		if (!empty($encryptData)) {
+			if (!$this->encryptExtra($encryptData)) {
+				throw new PaymentGatewayException('Error occurred when encrypting data.');
+			}
 		}
 
 		$this->removeSensitiveInformation($providerName);
@@ -258,9 +269,10 @@ class Init extends InitRP
 
 	/**
 	 * @param array $data
+	 * @return bool
 	 * @throws PaymentGatewayException
 	 */
-	protected function encryptExtra(array $data = array())
+	protected function encryptExtra(array $data = array()): \bool
 	{
 		if (!function_exists('openssl_public_encrypt')) {
 			throw new PaymentGatewayException('OpenSSL PHP module is not loaded');
@@ -269,8 +281,9 @@ class Init extends InitRP
 		$encrypted = null;
 
 		$extra = serialize($data);
-		openssl_public_encrypt($extra, $encrypted, $this->encryptPublicKey);
+		$result = openssl_public_encrypt($extra, $encrypted, $this->encryptPublicKey);
 		$this->data['extra'] = $this->urlSafeEncode($encrypted);
+		return $result;
 	}
 
 	/**
@@ -318,5 +331,4 @@ class Init extends InitRP
 		unset($this->data['mkbSzepCardNumber']);
 		unset($this->data['mkbSzepCvv']);
 	}
-
 }

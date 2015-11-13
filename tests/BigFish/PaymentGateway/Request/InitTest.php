@@ -42,10 +42,10 @@ class InitTest extends InitRPTest
 	/**
 	 * @test
 	 */
-	public function disableAutoCommit()
+	public function setAutocommit_false()
 	{
 		$init = $this->getRequest();
-		$result = $init->disableAutoCommit();
+		$result = $init->setAutoCommit(false);
 
 		// test chain
 		$this->assertInstanceOf(get_class($init), $result);
@@ -175,7 +175,7 @@ class InitTest extends InitRPTest
 		$init = $this->getRequest();
 		$init->setLanguage();
 		$data = $init->getData();
-		$this->assertEquals(Init::DEFAULT_LANG, $data['language']);
+		$this->assertEquals(PaymentGateway\Config::DEFAULT_LANG, $data['language']);
 	}
 
 	/**
@@ -186,7 +186,7 @@ class InitTest extends InitRPTest
 		$init = $this->getRequest();
 		$init->setCurrency();
 		$data = $init->getData();
-		$this->assertEquals(Init::DEFAULT_CURRENCY, $data['currency']);
+		$this->assertEquals(PaymentGateway\Config::DEFAULT_CURRENCY, $data['currency']);
 	}
 
 	/**
@@ -340,6 +340,18 @@ class InitTest extends InitRPTest
 	protected function getRequest()
 	{
 		return new Init();
+	}
+
+	/**
+	 * @test
+	 * @depends providerName_maxSizeCheck
+	 *
+	 * should not throw an exception
+	 */
+	public function lengthCheck_mbCheck_shouldNotThrowException()
+	{
+		// max: 20
+		$this->getRequest()->setProviderName(str_repeat('¥', 11));
 	}
 
 }

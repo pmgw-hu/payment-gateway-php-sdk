@@ -5,6 +5,7 @@ namespace BigFish\PaymentGateway\Transport;
 
 use BigFish\PaymentGateway\Config;
 use BigFish\PaymentGateway\Request\RequestInterface;
+use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 
 interface TransportInterface
 {
@@ -15,9 +16,9 @@ interface TransportInterface
 	public function __construct(Config $config);
 
 	/**
-	 * @param RequestInterface $requestInterface
+	 * @param RequestInterface $request
 	 * @return ResponseInterface
 	 */
-	public function sendRequest(RequestInterface $requestInterface): ResponseInterface;
+	public function sendRequest(RequestInterface $request): ResponseInterface;
 
 }

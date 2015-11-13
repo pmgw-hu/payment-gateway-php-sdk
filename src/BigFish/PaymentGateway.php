@@ -4,10 +4,11 @@ namespace BigFish;
 
 
 use BigFish\PaymentGateway\Config;
+use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 use BigFish\PaymentGateway\Request\RedirectLocationInterface;
 use BigFish\PaymentGateway\Request\RequestInterface;
-use BigFish\PaymentGateway\Transport\Response;
-use BigFish\PaymentGateway\Transport\ResponseInterface;
+use BigFish\PaymentGateway\Transport\Response\Response;
+use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 use BigFish\PaymentGateway\Transport\RestTransport;
 use BigFish\PaymentGateway\Transport\SoapTransport;
 
@@ -91,13 +92,20 @@ class PaymentGateway
 
 	/**
 	 * @return RestTransport|SoapTransport
+	 * @throws PaymentGatewayException
 	 */
 	protected function getTransport()
 	{
-		if ($this->config->useApi()) {
-			return new RestTransport($this->config);
+		switch ($this->config->getApiType()) {
+			case Config::TRANSPORT_TYPE_REST_API:
+				return new RestTransport($this->config);
+				break;
+			case Config::TRANSPORT_TYPE_SOAP_API:
+				return new SoapTransport($this->config);
+				break;
+			default:
+				throw new PaymentGatewayException('Unknown transport type');
 		}
-		return new SoapTransport($this->config);
 	}
 
 	/**

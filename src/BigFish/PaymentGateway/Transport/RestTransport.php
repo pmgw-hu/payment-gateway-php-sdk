@@ -5,6 +5,8 @@ namespace BigFish\PaymentGateway\Transport;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 use BigFish\PaymentGateway\Request\RequestInterface;
+use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
+use BigFish\PaymentGateway\Transport\Response\Response;
 
 class RestTransport extends TransportAbstract
 {
@@ -17,11 +19,11 @@ class RestTransport extends TransportAbstract
 	}
 
 	/**
-	 * @param RequestInterface $requestInterface
+	 * @param RequestInterface $request
 	 * @return ResponseInterface
 	 * @throws PaymentGatewayException
 	 */
-	public function sendRequest(RequestInterface $requestInterface): ResponseInterface
+	public function sendRequest(RequestInterface $request): ResponseInterface
 	{
 		if (!function_exists('curl_init')) {
 			throw new PaymentGatewayException('cURL PHP module is not loaded');
@@ -29,7 +31,7 @@ class RestTransport extends TransportAbstract
 
 		$url = $this->config->getUrl() . '/api/rest/';
 
-		$this->initRequest($requestInterface);
+		$this->prepareRequest($request);
 
 		$curl = curl_init();
 		if (!$curl) {
@@ -42,12 +44,12 @@ class RestTransport extends TransportAbstract
 		curl_setopt($curl, CURLOPT_MAXREDIRS, 4);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-		$this->setTimeout($requestInterface, $curl);
+		$this->setTimeout($request, $curl);
 		$this->setSslVerify($curl);
 
 		$postData = array(
-			'method' => $requestInterface->getMethod(),
-			'json' => $this->prepareData($requestInterface),
+			'method' => $request->getMethod(),
+			'json' => $this->prepareData($request),
 		);
 
 		curl_setopt($curl, CURLOPT_POST, true);
@@ -64,7 +66,9 @@ class RestTransport extends TransportAbstract
 
 		curl_close($curl);
 
-		return Response::createFromJson($httpResponse);
+		$response = Response::createFromJson($httpResponse);
+		$this->convertOutResponse($response);
+		return $response;
 	}
 
 	/**

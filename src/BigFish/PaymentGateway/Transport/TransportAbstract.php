@@ -6,6 +6,7 @@ namespace BigFish\PaymentGateway\Transport;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Config;
 use BigFish\PaymentGateway\Request\RequestInterface;
+use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 
 abstract class TransportAbstract implements TransportInterface
 {
@@ -54,21 +55,32 @@ abstract class TransportAbstract implements TransportInterface
 	}
 
 	/**
-	 * @param RequestInterface $requestInterface
+	 * @param RequestInterface $request
 	 */
-	protected function initRequest(RequestInterface $requestInterface)
+	protected function prepareRequest(RequestInterface $request)
 	{
 		if (
-			$requestInterface instanceof PaymentGateway\Request\Init ||
-			$requestInterface instanceof PaymentGateway\Request\OneClickOptions ||
-			$requestInterface instanceof PaymentGateway\Request\Providers
+			$request instanceof PaymentGateway\Request\Init ||
+			$request instanceof PaymentGateway\Request\OneClickOptions ||
+			$request instanceof PaymentGateway\Request\Providers
 		) {
-			$requestInterface->setStoreName($this->config->getStoreName());
+			$request->setStoreName($this->config->getStoreName());
 		}
 
-		if ($requestInterface instanceof PaymentGateway\Request\Init) {
-			$requestInterface->setEncryptKey($this->config->getEncryptPublicKey());
-			$requestInterface->setExtra();
+		if ($request instanceof PaymentGateway\Request\Init) {
+			$request->setEncryptKey($this->config->getEncryptPublicKey());
+			$request->setExtra();
+		}
+	}
+
+	/**
+	 * @param ResponseInterface $response
+	 */
+	protected function convertOutResponse(ResponseInterface $response)
+	{
+		$charset = $this->config->getOutCharset();
+		if ($charset != Config::CHARSET_UTF8) {
+			$response->convert($charset);
 		}
 	}
 }
