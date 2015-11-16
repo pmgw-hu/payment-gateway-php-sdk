@@ -1,4 +1,11 @@
 <?php
+/**
+ * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
+ * PHP SDK
+ *
+ * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
+ * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
+ */
 
 namespace BigFish;
 
@@ -11,8 +18,15 @@ use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 use BigFish\PaymentGateway\Transport\RestTransport;
 use BigFish\PaymentGateway\Transport\SoapTransport;
 
+/**
+ * Class PaymentGateway
+ * @package BigFish
+ */
 class PaymentGateway
 {
+	/**
+	 * Version
+	 */
 	const VERSION = '2.3.0';
 
 	/**
@@ -66,7 +80,8 @@ class PaymentGateway
 	private $config;
 
 	/**
-	 * PaymentGateway constructor.
+	 * PaymentGateway constructor
+	 *
 	 * @param Config $config
 	 */
 	public function __construct(Config $config)
@@ -75,6 +90,8 @@ class PaymentGateway
 	}
 
 	/**
+	 * Send request to payment gateway
+	 *
 	 * @param RequestInterface $request
 	 * @return ResponseInterface
 	 */
@@ -116,12 +133,14 @@ class PaymentGateway
 	}
 
 	/**
-	 * @param RedirectLocationInterface $redirectLocationInterface
+	 * Get request redirect url
+	 *
+	 * @param RedirectLocationInterface $redirectLocation
 	 * @return string
 	 */
-	public function getRedirectUrl(RedirectLocationInterface $redirectLocationInterface)
+	public function getRedirectUrl(RedirectLocationInterface $redirectLocation)
 	{
-		return $this->config->getUrl() . $redirectLocationInterface->getRedirectUrl();
+		return $this->config->getUrl() . $redirectLocation->getRedirectUrl();
 	}
 
 }

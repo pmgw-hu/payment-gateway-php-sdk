@@ -51,7 +51,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * Charsets
 	 */
-	const CHARSET_UTF8 = 'UTF-8';
+		const CHARSET_UTF8 = 'UTF-8';
 	const CHARSET_LATIN1 = 'iso-8859-1';
 	const CHARSET_LATIN2 = 'iso-8859-2';
 

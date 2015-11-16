@@ -22,7 +22,7 @@ abstract class InitAbstract extends RequestAbstract
 	 *
 	 * @param string $responseUrl Response URL
 	 * (e.g. http://www.yourdomain.com/response.php, http://www.yourdomain.com/response.php?someparam=somevalue etc.)
-	 * @return InitRP
+	 * @return static
 	 * @throws PaymentGatewayException
 	 */
 	public function setResponseUrl(\string $responseUrl)
@@ -38,7 +38,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * Set payment transaction amount
 	 *
 	 * @param float $amount Transaction amount
-	 * @return InitRP
+	 * @return static
 	 * @throws PaymentGatewayException
 	 */
 	public function setAmount(\float $amount)
@@ -54,7 +54,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * Set the identifier of the order in your system
 	 *
 	 * @param mixed $orderId Order identifier
-	 * @return InitRP
+	 * @return static
 	 */
 	public function setOrderId(\string $orderId)
 	{
@@ -66,7 +66,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * Set the identifier of the user in your system
 	 *
 	 * @param mixed $userId User identifier
-	 * @return InitRP
+	 * @return static
 	 */
 	public function setUserId(\string $userId)
 	{
@@ -78,7 +78,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * Set payment transaction currency
 	 *
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return InitRP
+	 * @return static
 	 */
 	public function setCurrency(\string $currency = '')
 	{
@@ -91,7 +91,7 @@ abstract class InitAbstract extends RequestAbstract
 
 	/**
 	 * @param string $providerName
-	 * @return InitRP
+	 * @return static
 	 */
 	public function setProviderName(\string $providerName)
 	{
