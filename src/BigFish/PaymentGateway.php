@@ -121,7 +121,11 @@ class PaymentGateway
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
 
 	const PROVIDER_OTP_MULTIPONT = 'OTPMultipont';
-		
+
+	const PROVIDER_OTP_SIMPLE = 'OTPSimple';
+	
+	const PROVIDER_OTP_SIMPLE_WIRE = 'OTPSimpleWire';
+
 	const PROVIDER_OTPAY = 'OTPay';
 	
 	const PROVIDER_OTPAY_MASTERPASS = 'OTPayMP';
