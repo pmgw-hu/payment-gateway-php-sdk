@@ -1,77 +1,75 @@
 <?php
-/**
- * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
- * PHP SDK
- * 
- * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
- * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
- */
+
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-/**
- * Base class for all request classes
- * 
- * @package PaymentGateway
- * @subpackage Request
- * @abstract
- */
-abstract class RequestAbstract
+abstract class RequestAbstract implements RequestInterface
 {
 	/**
-	 * Construct query string from object properties
-	 * 
-	 * @return string Constructed query string
-	 * @access public
+	 * @var array
 	 */
-	public function getParams()
-	{
-		foreach ($this as $name => $value) {
-			$value = trim($value);
+	protected $data = array();
 
-			if (!empty($value) && is_scalar($value)) {
-				$params[] = ucfirst($name) . "=" . $this->encodeValue($value);
-			}
-		}
-		return implode("&", $params);
+	/**
+	 * @return array
+	 */
+	public function getData(): array
+	{
+		return $this->data;
 	}
 
 	/**
-	 * Encode value
-	 * 
+	 * @return array
+	 */
+	public function getUcFirstData(): array
+	{
+		$data = array();
+		foreach ($this->getData() as $key => $item) {
+			$data[ucfirst($key)] = $item;
+		}
+		return $data;
+	}
+
+	/**
 	 * @param string $value
-	 * @return string
-	 * @access protected
+	 * @param string $fieldName
+	 * @throws PaymentGatewayException
 	 */
-	protected function encodeValue($value)
+	protected function saveData(\string $value, \string $fieldName)
 	{
-		if (
-			PaymentGateway::getConfig()->useApi != PaymentGateway::API_SOAP &&
-			PaymentGateway::getConfig()->useApi != PaymentGateway::API_REST
-		) {
-			if (preg_match("/\s+/", $value)) {
-				$value = urlencode($value);
-			}
+		if ($maxSize = $this->getFieldMaxSize($fieldName)) {
+			$this->checkFieldSize($maxSize, $fieldName, $value);
 		}
-		return $value;
+		$this->data[$fieldName] = $value;
 	}
 
 	/**
-	 * Encode object parameter values
-	 * 
-	 * @return void
-	 * @access public
+	 * @param int $maxLength
+	 * @param string $fieldName
+	 * @param string $value
+	 * @throws PaymentGatewayException
 	 */
-	public function encodeValues()
+	protected function checkFieldSize(\int $maxLength, \string $fieldName, \string $value)
 	{
-		foreach (get_object_vars($this) as $key => $value) {
-			$value = trim($value);
-
-			if (is_scalar($value)) {
-				$this->{$key} = $this->encodeValue($value);
-			}
+		if (mb_strlen($value) > $maxLength) {
+			throw new PaymentGatewayException(
+				sprintf(
+					'%s is longer than permitted. Max value is: %i',
+					$fieldName,
+					$maxLength
+				)
+			);
 		}
 	}
 
+	/**
+	 * @param string $fieldName
+	 * @return null|int
+	 */
+	protected function getFieldMaxSize(\string $fieldName)
+	{
+		return null;
+	}
 }

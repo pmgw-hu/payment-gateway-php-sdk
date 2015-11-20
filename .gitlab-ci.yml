@@ -1,0 +1,34 @@
+before_script:
+  - pwd
+
+Syntax check php7:
+  script: find . -name \*.php -exec php7 -l "{}" \;
+  stage: build
+
+Copy paste detection:
+  script:
+    - wget https://phar.phpunit.de/phpcpd.phar
+    - php7 phpcpd.phar ./src/
+  stage: build
+  allow_failure: true
+
+# disables due to phpmd issues
+#PHP mess detection:
+#  script:
+#    - wget -c http://static.phpmd.org/php/latest/phpmd.phar
+#    - php7 phpmd.phar ./src/ text cleancode codesize
+#  stage: build
+#  allow_failure: true
+
+PhpUnit php7:
+  script:
+    - php7 -v
+    - curl -sS https://getcomposer.org/installer | php
+    - php7 composer.phar install
+    - cd tests && php7 ../vendor/phpunit/phpunit/phpunit
+  stage: build
+
+#UI test:
+#  script:
+#    - docker build -t php7 .
+#    - docker run -d -it -p 8080:80 php7

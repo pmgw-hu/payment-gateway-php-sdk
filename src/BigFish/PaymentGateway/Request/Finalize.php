@@ -1,63 +1,34 @@
 <?php
-/**
- * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
- * PHP SDK
- * 
- * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
- * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
- */
+
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
+use BigFish\PaymentGateway;
 
-/**
- * Finalize request class
- * 
- * @package PaymentGateway
- * @subpackage Request
- */
-class Finalize extends RequestAbstract
+class Finalize extends RequestAbstract implements RedirectLocationInterface
 {
 	/**
-	 * Payment Gateway transaction ID
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $transactionId;
-
-	/**
-	 * Finalize amount
-	 * 
-	 * @var float
-	 * @access public
-	 */
-	public $amount;
-
-	/**
-	 * Construct new Finalize request instance
-	 * 
 	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param float $amount Amount to finalize
-	 * @return void
-	 * @access public
+	 * @param float $amount
 	 */
-	public function __construct($transactionId, $amount)
+	public function __construct(\string $transactionId, \float $amount)
 	{
-		$this->transactionId = $transactionId;
-		$this->amount = (float)$amount;
-	}
-	
-	/**
-	 * Get object parameters
-	 * 
-	 * @return string
-	 * @access public
-	 */
-	public function getParams()
-	{
-		unset($this->responseMode);
-		return parent::getParams();
+		$this->data['transactionId'] = $transactionId;
+		$this->data['amount'] = $amount;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getMethod(): \string
+	{
+		return PaymentGateway::REQUEST_FINALIZE;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getRedirectUrl(): \string
+	{
+		return '/Finalize?' . http_build_query($this->getUcFirstData());
+	}
 }

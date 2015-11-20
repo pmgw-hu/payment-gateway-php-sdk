@@ -1,6 +1,6 @@
 {
 	"name": "bigfish/paymentgateway",
-	"description": "BIG FISH Payment Gateway - PHP SDK",
+	"description": "BIG FISH Payment Gateway - PHP7 SDK",
 	"type": "library",
 	"keywords": ["payment", "ecommerce", "webshop"],
 	"homepage": "https://www.paymentgateway.hu/",
@@ -15,11 +15,15 @@
 		"email": "paymentgateway@bigfish.hu"
 	},
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=7"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~5"
 	},
 	"autoload": {
 		"psr-4": {
-			"BigFish\\": "src/BigFish"
+			"BigFish\\": "src/BigFish",
+			"BigFish\\Tests\\": "tests/BigFish"
 		}
 	},
 	"minimum-stability": "dev"

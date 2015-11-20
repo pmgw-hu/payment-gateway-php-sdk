@@ -1,193 +1,12 @@
 <?php
-/**
- * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
- * PHP SDK
- * 
- * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
- * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
- */
+
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Exception;
+use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-/**
- * Initialization request class
- * 
- * @package PaymentGateway
- * @subpackage Request
- */
-class Init extends RequestAbstract
+class Init extends InitAbstract
 {
-	/**
-	 * Store name
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $storeName;
-
-	/**
-	 * Provider name
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $providerName;
-
-	/**
-	 * Response URL
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $responseUrl;
-
-	/**
-	 * Notification URL
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $notificationUrl;
-
-	/**
-	 * Amount
-	 * 
-	 * @var float
-	 * @access public
-	 */
-	public $amount;
-
-	/**
-	 * Order ID
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $orderId;
-
-	/**
-	 * User ID
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $userId;
-
-	/**
-	 * Currency code
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $currency;
-
-	/**
-	 * Language code
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $language;
-
-	/**
-	 * Phone number (MPP, OTPay)
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $mppPhoneNumber;
-
-	/**
-	 * Credit card number (OTP)
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $otpCardNumber;
-
-	/**
-	 * Credit card expiration date (OTP)
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $otpExpiration;
-
-	/**
-	 * Credit card CVC code (OTP)
-	 * 
-	 * @var string
-	 * @access public 
-	 */
-	public $otpCvc;
-
-	/**
-	 * Pocket ID (OTP)
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $otpCardPocketId;
-
-	/**
-	 * Consumer Registration Id (OTP)
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $otpConsumerRegistrationId;
-	
-	/**
-	 * Cafeteria ID (MKBSZEP)
-	 * 
-	 * @var integer
-	 * @access public
-	 */
-	public $mkbSzepCafeteriaId;
-	
-	/**
-	 * Card number (MKBSZEP)
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $mkbSzepCardNumber;
-
-	/**
-	 * Card CVV (MKBSZEP)
-	 * 
-	 * @var string
-	 * @access public 
-	 */
-	public $mkbSzepCvv;
-	
-	/**
-	 * One-click payment state (Escalion)
-	 * 
-	 * @var boolean
-	 * @access public
-	 */
-	public $oneClickPayment = false;
-
-	/**
-	 * One Click Payment Reference Id (PayU, Escalion)
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $oneClickReferenceId;	
-	
-	/**
-	 * Auto commit state
-	 * 
-	 * @var boolean
-	 * @access public
-	 */
-	public $autoCommit = true;
-
 	/**
 	 * Extra data
 	 * 
@@ -197,414 +16,319 @@ class Init extends RequestAbstract
 	public $extra;
 
 	/**
-	 * Valid OneClickPayment providers
-	 * 
-	 * @var array 
-	 * @access protected
-	 * @static
+	 * @var array
 	 */
-	protected static $oneClickProviders = array(
-		'Escalion',
-		'PayU',
+	protected $maxSize = array(
+		'orderId' => 255,
+		'userId' => 255,
+		'currency' => 3,
+		'providerName' => 20,
+		'storeName' => 20,
+		'notificationUrl' => 255,
+		'language' => 2,
+		'mppPhoneNumber' => 32,
+		'otpCardNumber' => 16,
+		'otpExpiration' => 4,
+		'otpCardPocketId' => 2,
+		'otpCvc' => 3,
+		'mkbSzepCvv' => 3
 	);
 
 	/**
-	 * Construct new Init request instance
+	 * Valid OneClickPayment providers
 	 * 
-	 * @return void
-	 * @access public
+	 * @var array
 	 */
-	public function __construct()
-	{
-		$this->storeName = PaymentGateway::getConfig()->storeName;
-	}
+	protected static $oneClickProviders = array(
+		PaymentGateway::PROVIDER_ESCALION,
+		PaymentGateway::PROVIDER_PAYU
+	);
 
 	/**
-	 * Set the identifier of the selected payment provider
-	 * 
-	 * @param string $providerName Identifier of the selected payment provider
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @var string
 	 */
-	public function setProviderName($providerName)
+	protected $encryptPublicKey;
+
+	/**
+	 * @param string $storeName
+	 * @return Init
+	 */
+	public function setStoreName(\string $storeName)
 	{
-		$this->providerName = $providerName;
+		$this->saveData($storeName, 'storeName');
 		return $this;
 	}
 
 	/**
-	 * Set the URL where Users will be sent back after payment
-	 * 
-	 * @param string $responseUrl Response URL
-	 * (e.g. http://www.yourdomain.com/response.php, http://www.yourdomain.com/response.php?someparam=somevalue etc.)
-	 * @return \BigFish\PaymentGateway\Request\Init 
-	 * @access public
-	 */
-	public function setResponseUrl($responseUrl)
-	{
-		$this->responseUrl = $responseUrl;
-		return $this;
-	}
-
-	/**
-	 * Set Notification URL
-	 * 
 	 * @param string $notificationUrl
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @return Init
+	 * @throws PaymentGatewayException
 	 */
-	public function setNotificationUrl($notificationUrl)
+	public function setNotificationUrl(\string $notificationUrl)
 	{
-		$this->notificationUrl = trim($notificationUrl);
+		if (filter_var($notificationUrl, FILTER_VALIDATE_URL) === false) {
+			throw new PaymentGatewayException('Invalid notification url');
+		}
+
+		$this->saveData($notificationUrl, 'notificationUrl');
 		return $this;
 	}
 
 	/**
-	 * Set payment transaction amount
-	 * 
-	 * @param float $amount Transaction amount
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @param string $language
+	 * @return Init
 	 */
-	public function setAmount($amount)
+	public function setLanguage(\string $language = '')
 	{
-		$this->amount = $amount;
+		if (!$language) {
+			$language = PaymentGateway\Config::DEFAULT_LANG;
+		}
+		$this->saveData($language, 'language');
 		return $this;
 	}
 
 	/**
-	 * Set the identifier of the order in your system
-	 * 
-	 * @param mixed $orderId Order identifier
-	 * @return \BigFish\PaymentGateway\Request\Init 
-	 * @access public
+	 * @param string $mppPhoneNumber
+	 * @return Init
 	 */
-	public function setOrderId($orderId)
+	public function setMppPhoneNumber(\string $mppPhoneNumber)
 	{
-		$this->orderId = $orderId;
+		$this->saveData($mppPhoneNumber, 'mppPhoneNumber');
 		return $this;
 	}
 
 	/**
-	 * Set the identifier of the user in your system
-	 * 
-	 * @param mixed $userId User identifier
-	 * @return \BigFish\PaymentGateway\Request\Init 
-	 * @access public
+	 * @param string $otpCardNumber
+	 * @return Init
 	 */
-	public function setUserId($userId)
+	public function setOtpCardNumber(\string $otpCardNumber)
 	{
-		$this->userId = $userId;
+		$this->data['otpCardNumber'] = $otpCardNumber;
+		$this->saveData($otpCardNumber, 'otpCardNumber');
 		return $this;
 	}
 
 	/**
-	 * Set payment transaction currency
-	 * 
-	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return \BigFish\PaymentGateway\Request\Init 
-	 * @access public
+	 * @param string $otpExpiration
+	 * @return Init
 	 */
-	public function setCurrency($currency)
+	public function setOtpExpiration(\string $otpExpiration)
 	{
-		$this->currency = (($currency) ? $currency : 'HUF');
+		$this->saveData($otpExpiration, 'otpExpiration');
 		return $this;
 	}
 
 	/**
-	 * Set the language
-	 * 
-	 * @param string $language Language (e.g. HU, EN, DE etc.)
-	 * @return \BigFish\PaymentGateway\Request\Init 
-	 * @access public
+	 * @param string $otpCvc
+	 * @return Init
 	 */
-	public function setLanguage($language)
+	public function setOtpCvc(\string $otpCvc)
 	{
-		$this->language = (($language) ? $language : 'HU');
+		$this->saveData($otpCvc, 'otpCvc');
 		return $this;
 	}
 
 	/**
-	 * Set the Mobile Payment or MasterCard Mobile identifier
-	 * Works with MPP, MPP2 and OTPay providers
-	 * 
-	 * @param string $mppPhoneNumber Mobile Payment identifier (e.g. 123456789) or phone number of the user (e.g. 36301234567)
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @param string $otpCardPocketId
+	 * @return Init
 	 */
-	public function setMppPhoneNumber($mppPhoneNumber)
+	public function setOtpCardPocketId(\string $otpCardPocketId)
 	{
-		$this->mppPhoneNumber = $mppPhoneNumber;
+		$this->saveData($otpCardPocketId, 'otpCardPocketId');
 		return $this;
 	}
 
 	/**
-	 * Set the card number of the user
-	 * Works with OTP2 provider
-	 * 
-	 * @param string $otpCardNumber Card number (e.g. 1111222233334444 or 1111 2222 3333 4444)
-	 * @return \BigFish\PaymentGateway\Request\Init 
-	 * @access public
+	 * @param string $otpConsumerRegistrationId
+	 * @return Init
 	 */
-	public function setOtpCardNumber($otpCardNumber)
+	public function setOtpConsumerRegistrationId(\string $otpConsumerRegistrationId)
 	{
-		$this->otpCardNumber = $otpCardNumber;
+		$this->data['otpConsumerRegistrationId'] = $otpConsumerRegistrationId;
 		return $this;
 	}
 
 	/**
-	 * Set the card expiration date
-	 * Works with OTP2 provider
-	 * 
-	 * @param string $otpExpiration Expiration date - mm/yy (e.g. 0512 or 05/12)
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @param string $mkbSzepCafeteriaId
+	 * @return Init
 	 */
-	public function setOtpExpiration($otpExpiration)
+	public function setMkbSzepCafeteriaId(\string $mkbSzepCafeteriaId)
 	{
-		$this->otpExpiration = $otpExpiration;
+		$this->data['mkbSzepCafeteriaId'] = $mkbSzepCafeteriaId;
 		return $this;
 	}
 
 	/**
-	 * Set the card verification code
-	 * Works with OTP2 provider
-	 * 
-	 * @param string $otpCvc Verification code (e.g. 123)
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @param string $mkbSzepCardNumber
+	 * @return Init
 	 */
-	public function setOtpCvc($otpCvc)
+	public function setMkbSzepCardNumber(\string $mkbSzepCardNumber)
 	{
-		$this->otpCvc = $otpCvc;
+		$this->data['mkbSzepCardNumber'] = $mkbSzepCardNumber;
 		return $this;
 	}
 
 	/**
-	 * Set the Pocket Id of the user
-	 * Works with OTP provider
-	 *
-	 * @param string $otpCardPocketId Pocket Id
-	 * (e.g. 03)
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @param string $mkbSzepCvv
+	 * @return Init
 	 */
-	public function setOtpCardPocketId($otpCardPocketId)
+	public function setMkbSzepCvv(\string $mkbSzepCvv)
 	{
-		$this->otpCardPocketId = $otpCardPocketId;
+		$this->saveData($mkbSzepCvv, 'mkbSzepCvv');
 		return $this;
 	}
 
 	/**
-	 * Set Consumer Registration Id
-	 * Works with OTP provider
-	 *
-	 * @param string $otpConsumerRegistrationId Consumer Registration Id
-	 * (e.g. 03)
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @return Init
 	 */
-	public function setOtpConsumerRegistrationId($otpConsumerRegistrationId)
+	public function setOneClickPayment()
 	{
-		$this->otpConsumerRegistrationId = $otpConsumerRegistrationId;
-		return $this;
-	}
-	
-	/**
-	 * Set cafeteria id
-	 * Works with MKBSZEP provider
-	 * 
-	 * @param integer $mkbSzepCafeteriaId
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
-	 */
-	public function setMkbSzepCafeteriaId($mkbSzepCafeteriaId)
-	{
-		$this->mkbSzepCafeteriaId = (int)$mkbSzepCafeteriaId;
-		return $this;
-	}
-	
-	/**
-	 * Set the card number of the user
-	 * Works with MKBSZEP provider
-	 * 
-	 * @param string $mkbSzepCardNumber Card number (e.g. 1111222233334444 or 1111 2222 3333 4444)
-	 * @return \BigFish\PaymentGateway\Request\Init 
-	 * @access public
-	 */
-	public function setMkbSzepCardNumber($mkbSzepCardNumber)
-	{
-		$this->mkbSzepCardNumber = $mkbSzepCardNumber;
-		return $this;
-	}
-	
-	/**
-	 * Set the card verification value
-	 * Works with MKBSZEP provider
-	 * 
-	 * @param string $mkbSzepCvv Verification code (e.g. 123)
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
-	 */
-	public function setMkbSzepCvv($mkbSzepCvv)
-	{
-		$this->mkbSzepCvv = $mkbSzepCvv;
-		return $this;
-	}
-	
-	/**
-	 * Enable or disable One Click Payment of the user
-	 * Works with Escalion provider
-	 *
-	 * @param boolean $oneClickPayment true or false
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
-	 */
-	public function setOneClickPayment($oneClickPayment = false)
-	{
-		$this->oneClickPayment = (($oneClickPayment === true || $oneClickPayment == "true") ? true : false);
+		$this->data['oneClickPayment'] = true;
 		return $this;
 	}
 
 	/**
-	 * Set One Click Payment Reference Id
-	 * Works with PayU, Escalion providers
-	 *
 	 * @param string $oneClickReferenceId
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
+	 * @return Init
 	 */
-	public function setOneClickReferenceId($oneClickReferenceId)
+	public function setOneClickReferenceId(\string $oneClickReferenceId)
 	{
-		$this->oneClickReferenceId = $oneClickReferenceId;
-		return $this;
-	}	
-	
-	/**
-	 * If true verifies the availability of funds and captures funds in one step.
-	 * If false verifies the availability of funds and reserves them for later capture.
-	 * 
-	 * Works with OTP and OTP2 providers
-	 * 
-	 * @param boolean $autoCommit true or false
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
-	 */
-	public function setAutoCommit($autoCommit = true)
-	{
-		$this->autoCommit = (($autoCommit === true || $autoCommit == "true") ? "true" : "false");
+		$this->data['oneClickReferenceId']= $oneClickReferenceId;
 		return $this;
 	}
 
 	/**
-	 * Set extra data
-	 * 
-	 * @param array $extra Extra information (Except OTP2 provider)
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @access public
-	 * @throws PaymentGateway_Exception
+	 * @param bool $value
+	 * @return Init
+	 */
+	public function setAutoCommit(\bool $value = true)
+	{
+		$this->data['autoCommit'] = $value;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMethod(): \string
+	{
+		return PaymentGateway::REQUEST_INIT;
+	}
+
+	/**
+	 * @param array $extra
+	 * @return Init
+	 * @throws PaymentGatewayException
 	 */
 	public function setExtra(array $extra = array())
 	{
-		if (in_array($this->providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) && !empty($this->otpConsumerRegistrationId)) {
-			$this->encryptExtra(array(
-				'otpConsumerRegistrationId' => $this->otpConsumerRegistrationId
-			));
-		} elseif ($this->providerName == PaymentGateway::PROVIDER_OTP_TWO_PARTY) {
+		$providerName = $this->data['providerName'];
+		$encryptData = array();
+
+		if (
+			in_array($providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) &&
+			!empty($this->data['otpConsumerRegistrationId'])
+		) {
+			$encryptData['otpConsumerRegistrationId'] = $this->data['otpConsumerRegistrationId'];
+		} elseif ($providerName == PaymentGateway::PROVIDER_OTP_TWO_PARTY) {
 			if (
-				!empty($this->otpCardNumber) &&
-				!empty($this->otpExpiration) &&
-				!empty($this->otpCvc)
+					!empty($this->data['otpCardNumber']) &&
+					!empty($this->data['otpExpiration']) &&
+					!empty($this->data['otpCvc'])
 			) {
-				$this->encryptExtra(array(
-					'otpCardNumber' => $this->otpCardNumber,
-					'otpExpiration' => $this->otpExpiration,
-					'otpCvc' => $this->otpCvc
-				));
+				$encryptData = array(
+						'otpCardNumber' => $this->data['otpCardNumber'],
+						'otpExpiration' => $this->data['otpExpiration'],
+						'otpCvc' => $this->data['otpCvc']
+				);
 			}
-		} else if ($this->providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
+		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
 			if (
-				!empty($this->mkbSzepCardNumber) &&
-				!empty($this->mkbSzepCvv)
+					!empty($this->data['mkbSzepCardNumber']) &&
+					!empty($this->data['mkbSzepCvv'])
 			) {
-				$this->encryptExtra(array(
-					'mkbSzepCardNumber' => $this->mkbSzepCardNumber,
-					'mkbSzepCvv' => $this->mkbSzepCvv
-				));
+				$encryptData = array(
+						'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
+						'mkbSzepCvv' => $this->data['mkbSzepCvv']
+				);
 			}
-		} else if (!empty($extra)) {
-			$this->extra = $this->urlSafeEncode(json_encode($extra));
+		} elseif (!empty($extra)) {
+			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));
 		}
 
-		if (!($this->providerName == PaymentGateway::PROVIDER_OTP && !empty($this->otpCardPocketId))) {
-			unset($this->otpCardPocketId);
+		if (!empty($encryptData)) {
+			if (!$this->encryptExtra($encryptData)) {
+				throw new PaymentGatewayException('Error occurred when encrypting data.');
+			}
 		}
 
-		if (!(in_array($this->providerName, self::$oneClickProviders) && $this->oneClickPayment)) {
-			unset($this->oneClickPayment);
-		}
-		
-		if (!(in_array($this->providerName, self::$oneClickProviders) && strlen($this->oneClickReferenceId))) {
-			unset($this->oneClickReferenceId);
-		}
-		
-		unset($this->otpCardNumber);
-		unset($this->otpExpiration);
-		unset($this->otpCvc);
-		unset($this->otpConsumerRegistrationId);
-		unset($this->mkbSzepCardNumber);
-		unset($this->mkbSzepCvv);
+		$this->removeSensitiveInformation($providerName);
 
 		return $this;
 	}
 
 	/**
-	 * Encrypt extra data
-	 * 
 	 * @param array $data
-	 * @return void
-	 * @access public
-	 * @throws PaymentGateway_Exception
+	 * @return bool
+	 * @throws PaymentGatewayException
 	 */
-	public function encryptExtra(array $data = array())
+	protected function encryptExtra(array $data = array()): \bool
 	{
 		if (!function_exists('openssl_public_encrypt')) {
-			throw new Exception('OpenSSL PHP module is not loaded');
+			throw new PaymentGatewayException('OpenSSL PHP module is not loaded');
 		}
 
 		$encrypted = null;
 
 		$extra = serialize($data);
-
-		openssl_public_encrypt($extra, $encrypted, PaymentGateway::getConfig()->encryptPublicKey);
-
-		$this->extra = $this->urlSafeEncode($encrypted);
+		$result = openssl_public_encrypt($extra, $encrypted, $this->encryptPublicKey);
+		$this->data['extra'] = $this->urlSafeEncode($encrypted);
+		return $result;
 	}
-	
+
 	/**
-	 * Get object parameters
-	 * 
-	 * @return string
-	 * @access public
+	 * @param string $encryptPublicKey
+	 * @return Init
 	 */
-	public function getParams()
+	public function setEncryptKey(\string $encryptPublicKey)
 	{
-		$this->setExtra();
-		
-		return parent::getParams();
+		$this->encryptPublicKey = $encryptPublicKey;
+		return $this;
 	}
 
 	/**
 	 * URL safe encode (base64)
-	 * 
+	 *
 	 * @param string $string
 	 * @return string
-	 * @access private
 	 */
-	private function urlSafeEncode($string)
+	protected function urlSafeEncode(\string $string): \string
 	{
-		$data = str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
-		return $data;
+		return str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
 	}
 
+	/**
+	 * @param $providerName
+	 */
+	protected function removeSensitiveInformation(\string $providerName)
+	{
+		if (!($providerName == PaymentGateway::PROVIDER_OTP && !empty($this->data['otpCardPocketId']))) {
+			unset($this->data['otpCardPocketId']);
+		}
+
+		if (!(in_array($providerName, self::$oneClickProviders) && isset($this->data['oneClickPayment']))) {
+			unset($this->data['oneClickPayment']);
+		}
+
+		if (!(in_array($providerName, self::$oneClickProviders) && isset($this->data['oneClickReferenceId']))) {
+			unset($this->data['oneClickReferenceId']);
+		}
+
+		unset($this->data['otpCardNumber']);
+		unset($this->data['otpExpiration']);
+		unset($this->data['otpCvc']);
+		unset($this->data['otpConsumerRegistrationId']);
+		unset($this->data['mkbSzepCardNumber']);
+		unset($this->data['mkbSzepCvv']);
+	}
 }

@@ -1,51 +1,26 @@
 <?php
-/**
- * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
- * PHP SDK
- * 
- * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
- * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
- */
+
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
+use BigFish\PaymentGateway;
 
-/**
- * Refund request class
- * 
- * @package PaymentGateway
- * @subpackage Request
- */
 class Refund extends RequestAbstract
 {
 	/**
-	 * Payment Gateway transaction ID
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $transactionId;
-
-	/**
-	 * Refund amount
-	 * 
-	 * @var float
-	 * @access public
-	 */
-	public $amount;
-
-	/**
-	 * Construct new Refund request instance
-	 * 
 	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param float $amount Amount to refund
-	 * @return void
-	 * @access public
+	 * @param float $amount
 	 */
-	public function __construct($transactionId, $amount)
+	public function __construct(\string $transactionId, \float $amount)
 	{
-		$this->transactionId = $transactionId;
-		$this->amount = (float)$amount;
+		$this->data['transactionId'] = $transactionId;
+		$this->data['amount'] = $amount;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getMethod(): \string
+	{
+		return PaymentGateway::REQUEST_REFUND;
+	}
 }

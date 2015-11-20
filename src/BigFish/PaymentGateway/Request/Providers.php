@@ -1,40 +1,26 @@
 <?php
-/**
- * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
- * PHP SDK
- * 
- * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
- * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
- */
+
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway;
 
-/**
- * Providers request class
- * 
- * @package PaymentGateway
- * @subpackage Request
- */
 class Providers extends RequestAbstract
 {
 	/**
-	 * Store name
-	 * 
-	 * @var string
-	 * @access public
+	 * @param string $storeName
+	 * @return Providers
 	 */
-	public $storeName;
+	public function setStoreName(\string $storeName)
+	{
+		$this->data['storeName'] = $storeName;
+		return $this;
+	}
 
 	/**
-	 * Construct new Providers request instance
-	 * 
-	 * @return void
-	 * @access public
+	 * @return string
 	 */
-	public function __construct()
+	public function getMethod(): \string
 	{
-		$this->storeName = PaymentGateway::getConfig()->storeName;
+		return PaymentGateway::REQUEST_PROVIDERS;
 	}
 }

@@ -1,51 +1,26 @@
 <?php
-/**
- * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
- * PHP SDK
- * 
- * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
- * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
- */
+
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
+use BigFish\PaymentGateway;
 
-/**
- * Close request class
- * 
- * @package PaymentGateway
- * @subpackage Request
- */
 class Close extends RequestAbstract
 {
 	/**
-	 * Transaction ID
-	 * 
-	 * @var string
-	 * @access public
-	 */
-	public $transactionId;
-
-	/**
-	 * Approved
-	 * 
-	 * @var boolean
-	 * @access public 
-	 */
-	public $approved;
-
-	/**
-	 * Construct new Close request instance
-	 * 
 	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param boolean $approved Approve or decline transaction (true/false)
-	 * @return void
-	 * @access public
+	 * @param bool $approve
 	 */
-	public function __construct($transactionId, $approved = true)
+	public function __construct(\string $transactionId, \bool $approve = true)
 	{
-		$this->transactionId = $transactionId;
-		$this->approved = (($approved === true || $approved == "true") ? "true" : "false");
+		$this->data['transactionId'] = $transactionId;
+		$this->data['approved'] = $approve;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getMethod(): \string
+	{
+		return PaymentGateway::REQUEST_CLOSE;
+	}
 }
