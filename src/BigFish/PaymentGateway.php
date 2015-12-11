@@ -660,7 +660,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function getHttpHost()
 	{
-		return filter_input(INPUT_SERVER, 'HTTP_HOST');
+		return $_SERVER['HTTP_HOST'];
 	}
 
 }
