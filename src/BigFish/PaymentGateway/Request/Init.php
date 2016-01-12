@@ -207,6 +207,14 @@ class Init extends RequestAbstract
 		'Escalion',
 		'PayU',
 	);
+	
+	/**
+	 * BIG FISH Payment Gateway payment page (MKBSZEP)
+	 * 
+	 * @var boolean
+	 * @access public
+	 */
+	public $gatewayPaymentPage = false;
 
 	/**
 	 * Construct new Init request instance
@@ -496,6 +504,20 @@ class Init extends RequestAbstract
 		return $this;
 	}
 
+	/**
+	 * Card data handling on BIG FISH Payment Gateway payment page or Merchant website
+	 * Works with MKBSZEP provider
+	 *
+	 * @param boolean $gatewayPaymentPage true or false
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setGatewayPaymentPage($gatewayPaymentPage = false)
+	{
+		$this->gatewayPaymentPage = (($gatewayPaymentPage === true || $gatewayPaymentPage == "true") ? true : false);
+		return $this;
+	}
+	
 	/**
 	 * Set extra data
 	 * 
