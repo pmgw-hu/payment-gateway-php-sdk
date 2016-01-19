@@ -37,7 +37,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.3.0';
+	const VERSION = '2.4.0';
 
 	/**
 	 * API type constants
@@ -131,6 +131,8 @@ class PaymentGateway
 	const PROVIDER_OTPAY_MASTERPASS = 'OTPayMP';
 	
 	const PROVIDER_PAYPAL = 'PayPal';
+	
+	const PROVIDER_PAYSAFECARD = 'PSC';
 
 	const PROVIDER_PAYU = 'PayU';
 
@@ -662,7 +664,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function getHttpHost()
 	{
-		return filter_input(INPUT_SERVER, 'HTTP_HOST');
+		return $_SERVER['HTTP_HOST'];
 	}
 
 }
