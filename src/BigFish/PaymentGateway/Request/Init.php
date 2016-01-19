@@ -173,7 +173,7 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
-	 * One Click Payment Reference Id (PayU, Escalion)
+	 * One Click Payment Reference Id (PayU, Escalion, OTP Simple)
 	 * 
 	 * @var string
 	 * @access public
@@ -206,6 +206,7 @@ class Init extends RequestAbstract
 	protected static $oneClickProviders = array(
 		'Escalion',
 		'PayU',
+		'OTPSimple',
 	);
 
 	/**
@@ -468,7 +469,7 @@ class Init extends RequestAbstract
 
 	/**
 	 * Set One Click Payment Reference Id
-	 * Works with PayU, Escalion providers
+	 * Works with PayU, Escalion, OTP Simple providers
 	 *
 	 * @param string $oneClickReferenceId
 	 * @return \BigFish\PaymentGateway\Request\Init
