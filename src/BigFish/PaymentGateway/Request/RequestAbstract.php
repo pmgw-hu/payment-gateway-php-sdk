@@ -66,9 +66,8 @@ abstract class RequestAbstract
 	public function encodeValues()
 	{
 		foreach (get_object_vars($this) as $key => $value) {
-			$value = trim($value);
-
 			if (is_scalar($value)) {
+				$value = trim($value);
 				$this->{$key} = $this->encodeValue($value);
 			}
 		}
