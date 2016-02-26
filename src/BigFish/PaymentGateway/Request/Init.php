@@ -8,7 +8,6 @@
  */
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception;
 
@@ -218,19 +217,62 @@ class Init extends RequestAbstract
 	public $gatewayPaymentPage = false;
 
 	/**
+	 * Module name
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $moduleName;
+
+	/**
+	 * Module version
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $moduleVersion;
+
+	/**
 	 * Construct new Init request instance
 	 * 
-	 * @return void
 	 * @access public
 	 */
 	public function __construct()
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;
+		$this->moduleName = PaymentGateway::getConfig()->moduleName;
+		$this->moduleVersion = PaymentGateway::getConfig()->moduleVersion;
+	}
+
+	/**
+	 * Set module name
+	 *
+	 * @param $moduleName
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setModuleName($moduleName)
+	{
+		$this->moduleName = $moduleName;
+		return $this;
+	}
+
+	/**
+	 * Set module version
+	 *
+	 * @param $moduleVersion
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setModuleVersion($moduleVersion)
+	{
+		$this->moduleVersion = $moduleVersion;
+		return $this;
 	}
 
 	/**
 	 * Set the identifier of the selected payment provider
-	 * 
+	 *
 	 * @param string $providerName Identifier of the selected payment provider
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
@@ -525,7 +567,7 @@ class Init extends RequestAbstract
 	 * @param array $extra Extra information (Except OTP2 provider)
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
-	 * @throws PaymentGateway_Exception
+	 * @throws Exception
 	 */
 	public function setExtra(array $extra = array())
 	{
@@ -583,11 +625,11 @@ class Init extends RequestAbstract
 
 	/**
 	 * Encrypt extra data
-	 * 
+	 *
 	 * @param array $data
 	 * @return void
 	 * @access public
-	 * @throws PaymentGateway_Exception
+	 * @throws Exception
 	 */
 	public function encryptExtra(array $data = array())
 	{

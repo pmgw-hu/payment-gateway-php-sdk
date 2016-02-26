@@ -34,10 +34,16 @@ use BigFish\PaymentGateway\Response;
 class PaymentGateway
 {
 	/**
+	 * SDK Name
+	 *
+	 */
+	const NAME = 'PHP-SDK';
+
+	/**
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.5.1';
+	const VERSION = '2.6.1';
 
 	/**
 	 * API type constants
@@ -194,7 +200,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * Configuration
 	 * 
-	 * @var BigFish\PaymentGateway\Config
+	 * @var \BigFish\PaymentGateway\Config
 	 * @access protected
 	 * @static
 	 */
@@ -613,11 +619,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 		$request->encodeValues();
 
 		if ($method == self::REQUEST_INIT) {
+			/** @var \BigFish\PaymentGateway\Request\Init $request */
 			$request->setExtra();
 		}
 
 		if (self::getConfig()->useApi == self::API_REST) {
-			$request = self::ucfirstProps($request);
+			self::ucfirstProps($request);
 		}
 	}
 
