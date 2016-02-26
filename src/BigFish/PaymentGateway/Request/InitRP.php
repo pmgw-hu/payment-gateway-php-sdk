@@ -98,7 +98,7 @@ class InitRP extends RequestAbstract
 	 * Set module name
 	 *
 	 * @param $moduleName
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return \BigFish\PaymentGateway\Request\InitRP
 	 * @access public
 	 */
 	public function setModuleName($moduleName)
@@ -111,7 +111,7 @@ class InitRP extends RequestAbstract
 	 * Set module version
 	 *
 	 * @param $moduleVersion
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return \BigFish\PaymentGateway\Request\InitRP
 	 * @access public
 	 */
 	public function setModuleVersion($moduleVersion)
