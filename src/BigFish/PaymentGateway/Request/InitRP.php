@@ -8,7 +8,6 @@
  */
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway;
 
 /**
@@ -68,14 +67,57 @@ class InitRP extends RequestAbstract
 	public $currency;
 
 	/**
+	 * Module name
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $moduleName;
+
+	/**
+	 * Module version
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $moduleVersion;
+
+	/**
 	 * Construct new recurring payment Init request instance
 	 * 
-	 * @return void
 	 * @access public
 	 */
 	public function __construct()
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;
+		$this->moduleName = PaymentGateway::getConfig()->moduleName;
+		$this->moduleVersion = PaymentGateway::getConfig()->moduleVersion;
+	}
+
+	/**
+	 * Set module name
+	 *
+	 * @param $moduleName
+	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @access public
+	 */
+	public function setModuleName($moduleName)
+	{
+		$this->moduleName = $moduleName;
+		return $this;
+	}
+
+	/**
+	 * Set module version
+	 *
+	 * @param $moduleVersion
+	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @access public
+	 */
+	public function setModuleVersion($moduleVersion)
+	{
+		$this->moduleVersion = $moduleVersion;
+		return $this;
 	}
 
 	/**

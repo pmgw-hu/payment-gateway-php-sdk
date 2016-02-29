@@ -19,6 +19,8 @@ use BigFish\PaymentGateway;
  * @property string $outCharset Output character set
  * @property string $useApi API type (SOAP or REST)
  * @property string $encryptPublicKey Public key used for encryption
+ * @property string $moduleName Module name
+ * @property string $moduleVersion Module version
  * @package PaymentGateway
  */
 class Config
@@ -78,10 +80,25 @@ class Config
 	protected $encryptPublicKey = PaymentGateway::SDK_TEST_ENCRYPT_PUBLIC_KEY;
 
 	/**
+	 * Module name
+	 *
+	 * @var string
+	 * @access protected
+	 */
+	protected $moduleName = PaymentGateway::NAME;
+
+	/**
+	 * Module version
+	 *
+	 * @var string
+	 * @access protected
+	 */
+	protected $moduleVersion = PaymentGateway::VERSION;
+
+	/**
 	 * Contructor
 	 * 
 	 * @param array $config
-	 * @return void
 	 * @access public
 	 */
 	public function __construct(array $config = array())
