@@ -97,13 +97,13 @@ class PaymentGateway
 	const RESULT_CODE_TIMEOUT = 'TIMEOUT';
 	
 	const RESULT_CODE_OPEN = 'OPEN';
-	
+
 	/**
 	 * Provider name constants
-	 * 
+	 *
 	 */
 	const PROVIDER_ABAQOOS = 'ABAQOOS';
-	
+
 	const PROVIDER_BARION = 'Barion';
 
 	const PROVIDER_BORGUN = 'Borgun';
@@ -113,41 +113,47 @@ class PaymentGateway
 	const PROVIDER_ESCALION = 'Escalion';
 
 	const PROVIDER_FHB = 'FHB';
-	
+
 	const PROVIDER_KHB = 'KHB';
 
 	const PROVIDER_KHB_SZEP = 'KHBSZEP';
-	
+
 	const PROVIDER_MKB_SZEP = 'MKBSZEP';
-	
+
+	const PROVIDER_MASTERCARD_MOBILE = 'MPP2';
+
 	const PROVIDER_OTP = 'OTP';
-	
+
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
 
 	const PROVIDER_OTP_MULTIPONT = 'OTPMultipont';
 
 	const PROVIDER_OTP_SIMPLE = 'OTPSimple';
-	
+
 	const PROVIDER_OTP_SIMPLE_WIRE = 'OTPSimpleWire';
 
 	const PROVIDER_OTPAY = 'OTPay';
-	
+
 	const PROVIDER_OTPAY_MASTERPASS = 'OTPayMP';
-	
+
 	const PROVIDER_PAYPAL = 'PayPal';
-	
+
 	const PROVIDER_PAYSAFECARD = 'PSC';
+
+	const PROVIDER_PAYU = 'PayU';
 
 	const PROVIDER_PAYU2 = 'PayU2';
 
-	const PROVIDER_SAFERPAY = 'Saferpay';
+	const PROVIDER_PAYU_CASH = 'PayUCash';
+
+	const PROVIDER_PAYU_WIRE = 'PayUWire';
 
 	const PROVIDER_SMS = 'SMS';
-	
+
 	const PROVIDER_SOFORT = 'Sofort';
-	
+
 	const PROVIDER_UNICREDIT = 'UniCredit';
-	
+
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 		
 	/**
