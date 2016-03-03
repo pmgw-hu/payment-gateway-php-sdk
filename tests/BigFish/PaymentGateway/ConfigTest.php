@@ -13,7 +13,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	 * @param string $propertyName
 	 * @param string $method
 	 */
-	public function setDataViaMagicAndValidate_storeName($testData, \string $propertyName, \string $method)
+	public function setDataViaMagicAndValidate_storeName($testData, string $propertyName, string $method)
 	{
 		$config = $this->getConfig();
 		$config->$propertyName = $testData;
@@ -99,7 +99,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	 * @param bool $excepted
 	 * @param mixed $value
 	 */
-	protected function assertIsTestMode(\bool $excepted, $value)
+	protected function assertIsTestMode(bool $excepted, $value)
 	{
 		$config = $this->getConfig();
 		$config->testMode = $value;
@@ -119,7 +119,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	 * @param string $excepted
 	 * @param mixed $value
 	 */
-	protected function assertUseApi(\string $excepted, $value)
+	protected function assertUseApi(string $excepted, $value)
 	{
 		$config = $this->getConfig();
 		$config->apiType = $value;
@@ -211,7 +211,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	 * @param bool $testMode
 	 * @param string $url
 	 */
-	protected function getUrlTest(\bool $testMode, \string $url)
+	protected function getUrlTest(bool $testMode, string $url)
 	{
 		$config = $this->getConfig();
 		$config->testMode = $testMode;

@@ -18,6 +18,17 @@ abstract class InitAbstract extends RequestAbstract
 	);
 
 	/**
+	 * Set the default values from the constants.
+	 *
+	 * InitAbstract constructor.
+     */
+	public function __construct()
+	{
+		$this->setModuleName(PaymentGateway::NAME);
+		$this->setModuleVersion(PaymentGateway::VERSION);
+	}
+
+	/**
 	 * Set the URL where Users will be sent back after payment
 	 *
 	 * @param string $responseUrl Response URL
@@ -25,7 +36,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * @return static
 	 * @throws PaymentGatewayException
 	 */
-	public function setResponseUrl(\string $responseUrl)
+	public function setResponseUrl(string $responseUrl)
 	{
 		if (filter_var($responseUrl, FILTER_VALIDATE_URL) === false) {
 			throw new PaymentGatewayException('Invalid response url');
@@ -41,7 +52,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * @return static
 	 * @throws PaymentGatewayException
 	 */
-	public function setAmount(\float $amount)
+	public function setAmount(float $amount)
 	{
 		if ($amount <= 0) {
 			throw new PaymentGatewayException('Only positive numbers allowed.');
@@ -56,7 +67,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * @param mixed $orderId Order identifier
 	 * @return static
 	 */
-	public function setOrderId(\string $orderId)
+	public function setOrderId(string $orderId)
 	{
 		$this->saveData($orderId, 'orderId');
 		return $this;
@@ -68,7 +79,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * @param mixed $userId User identifier
 	 * @return static
 	 */
-	public function setUserId(\string $userId)
+	public function setUserId(string $userId)
 	{
 		$this->saveData($userId, 'userId');
 		return $this;
@@ -80,7 +91,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
 	 * @return static
 	 */
-	public function setCurrency(\string $currency = '')
+	public function setCurrency(string $currency = '')
 	{
 		if (!$currency) {
 			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;
@@ -93,7 +104,7 @@ abstract class InitAbstract extends RequestAbstract
 	 * @param string $providerName
 	 * @return static
 	 */
-	public function setProviderName(\string $providerName)
+	public function setProviderName(string $providerName)
 	{
 		$this->saveData($providerName, 'providerName');
 		return $this;
@@ -103,11 +114,38 @@ abstract class InitAbstract extends RequestAbstract
 	 * @param string $fieldName
 	 * @return null|int
 	 */
-	protected function getFieldMaxSize(\string $fieldName)
+	protected function getFieldMaxSize(string $fieldName)
 	{
 		if (isset($this->maxSize[$fieldName])) {
 			return $this->maxSize[$fieldName];
 		}
 		return parent::getFieldMaxSize($fieldName);
 	}
+
+	/**
+	 * Save module name under the 'moduleName' key of the $data array.
+	 *
+	 * @param string $moduleName
+	 * @return RequestInterface
+	 * @access public
+	 */
+	public function setModuleName(string $moduleName): RequestInterface
+	{
+		$this->saveData($moduleName, 'moduleName');
+		return $this;
+	}
+
+	/**
+	 * Save module version under the 'moduleVersion' key of the $data array.
+	 *
+	 * @param string $moduleVersion
+	 * @return RequestInterface
+	 * @access public
+	 */
+	public function setModuleVersion(string $moduleVersion): RequestInterface
+	{
+		$this->saveData($moduleVersion, 'moduleVersion');
+		return $this;
+	}
+
 }

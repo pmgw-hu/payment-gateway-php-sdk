@@ -9,7 +9,7 @@ abstract class SimpleRequestAbstract extends RequestAbstract
 	/**
 	 * @param string $transactionId Transaction ID received from Payment Gateway
 	 */
-	public function __construct(\string $transactionId)
+	public function __construct(string $transactionId)
 	{
 		$this->data['transactionId'] = $transactionId;
 	}

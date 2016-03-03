@@ -11,7 +11,7 @@ class OneClickOptions extends RequestAbstract
 	 * @param string $userID
 
 	 */
-	public function __construct(\string $providerName, \string $userID)
+	public function __construct(string $providerName, string $userID)
 	{
 		$this->data['providerName'] = $providerName;
 		$this->data['userId'] = $userID;
@@ -21,7 +21,7 @@ class OneClickOptions extends RequestAbstract
 	 * @param string $storeName
 	 * @return OneClickOptions
 	 */
-	public function setStoreName(\string $storeName)
+	public function setStoreName(string $storeName)
 	{
 		$this->data['storeName'] = $storeName;
 		return $this;
@@ -30,7 +30,7 @@ class OneClickOptions extends RequestAbstract
 	/**
 	 * @return string
 	 */
-	public function getMethod(): \string
+	public function getMethod(): string
 	{
 		return PaymentGateway::REQUEST_ONE_CLICK_OPTIONS;
 	}

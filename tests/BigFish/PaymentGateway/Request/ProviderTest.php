@@ -9,7 +9,7 @@ use BigFish\PaymentGateway\Request\RequestInterface;
 
 class ProviderTest extends SimpleRequestAbstract
 {
-	protected function getRequest(\string $transactionId): RequestInterface
+	protected function getRequest(string $transactionId): RequestInterface
 	{
 		$provider = new Providers();
 		$provider->setStoreName(PaymentGateway::PROVIDER_OTPAY);

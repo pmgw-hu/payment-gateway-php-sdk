@@ -10,7 +10,7 @@ class Invoice extends RequestAbstract
 	 * @param string $transactionId Transaction ID received from Payment Gateway
 	 * @param array $invoiceData
 	 */
-	public function __construct(\string $transactionId, array $invoiceData)
+	public function __construct(string $transactionId, array $invoiceData)
 	{
 		$this->data['transactionId'] = $transactionId;
 		$this->data['invoiceData'] = $invoiceData;
@@ -19,7 +19,7 @@ class Invoice extends RequestAbstract
 	/**
 	 * @return string
 	 */
-	public function getMethod(): \string
+	public function getMethod(): string
 	{
 		return PaymentGateway::REQUEST_INVOICE;
 	}

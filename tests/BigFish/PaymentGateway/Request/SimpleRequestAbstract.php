@@ -14,7 +14,7 @@ abstract class SimpleRequestAbstract extends \PHPUnit_Framework_TestCase
 	 * @param string $transactionId
 	 * @return RequestInterface
 	 */
-	abstract protected function getRequest(\string $transactionId): RequestInterface;
+	abstract protected function getRequest(string $transactionId): RequestInterface;
 
 	/**
 	 * @return array

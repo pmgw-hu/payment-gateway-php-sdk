@@ -3,6 +3,7 @@
 namespace BigFish\PaymentGateway;
 
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
+use BigFish\PaymentGateway;
 
 /**
  * Class Config
@@ -16,6 +17,22 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
  */
 class Config
 {
+	/**
+	 * Module name
+	 *
+	 * @var string
+	 * @access protected
+	 */
+	protected $moduleName = PaymentGateway::NAME;
+
+	/**
+	 * Module version
+	 *
+	 * @var string
+	 * @access protected
+	 */
+	protected $moduleVersion = PaymentGateway::VERSION;
+
 	/**
 	 * Default store name
 	 *
@@ -51,7 +68,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * Charsets
 	 */
-		const CHARSET_UTF8 = 'UTF-8';
+	const CHARSET_UTF8 = 'UTF-8';
 	const CHARSET_LATIN1 = 'iso-8859-1';
 	const CHARSET_LATIN2 = 'iso-8859-2';
 
@@ -105,7 +122,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @return bool
 	 */
-	public function isTestMode(): \bool
+	public function isTestMode(): bool
 	{
 		return (bool) $this->testMode;
 	}
@@ -113,7 +130,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @return string
 	 */
-	public function getApiKey(): \string
+	public function getApiKey(): string
 	{
 		return (string) $this->apiKey;
 	}
@@ -121,7 +138,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @return string
 	 */
-	public function getStoreName(): \string
+	public function getStoreName(): string
 	{
 		return (string) $this->storeName;
 	}
@@ -129,7 +146,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @return string
 	 */
-	public function getApiType(): \string
+	public function getApiType(): string
 	{
 		return (string)$this->apiType;
 	}
@@ -137,7 +154,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @return string
 	 */
-	public function getOutCharset(): \string
+	public function getOutCharset(): string
 	{
 		return (string) $this->outCharset;
 	}
@@ -145,7 +162,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @return string
 	 */
-	public function getEncryptPublicKey(): \string
+	public function getEncryptPublicKey(): string
 	{
 		return (string) $this->encryptPublicKey;
 	}
@@ -153,7 +170,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * @return string
 	 */
-	public function getUrl(): \string
+	public function getUrl(): string
 	{
 		if ($this->isTestMode()) {
 			return static::API_URL_TESTING;
@@ -167,7 +184,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * @param mixed $value
 	 * @throws PaymentGatewayException
 	 */
-	public function __set(\string $name, $value)
+	public function __set(string $name, $value)
 	{
 		if (!property_exists($this, $name)) {
 			throw new PaymentGatewayException(sprintf('%s property is unknown', $name));

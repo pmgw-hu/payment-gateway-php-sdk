@@ -30,10 +30,14 @@ class PaymentGateway
 	const VERSION = '2.3.0';
 
 	/**
+	 * SDK Name
+	 */
+	const NAME = 'PHP-SDK';
+
+	/**
 	 * Providers
 	 */
 	const PROVIDER_ABAQOOS = 'ABAQOOS';
-	const PROVIDER_BARION = 'Barion';
 	const PROVIDER_BORGUN = 'Borgun';
 	const PROVIDER_CIB = 'CIB';
 	const PROVIDER_ESCALION = 'Escalion';
@@ -41,7 +45,6 @@ class PaymentGateway
 	const PROVIDER_KHB = 'KHB';
 	const PROVIDER_KHB_SZEP = 'KHBSZEP';
 	const PROVIDER_MKB_SZEP = 'MKBSZEP';
-	const PROVIDER_MASTERCARD_MOBILE = 'MPP2';
 	const PROVIDER_OTP = 'OTP';
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
 	const PROVIDER_OTP_MULTIPONT = 'OTPMultipont';

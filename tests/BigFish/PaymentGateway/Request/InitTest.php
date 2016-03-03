@@ -63,14 +63,15 @@ class InitTest extends InitRPTest
 		$init->setCurrency('EUR');
 		$init->setProviderName('test');
 
-		$this->assertEquals(
+		$this->assertArraySubset(
 			array(
 				'amount' => 10,
-                'currency' => 'EUR',
-                'providerName' => 'test',
+				'currency' => 'EUR',
+				'providerName' => 'test',
 			),
 			$init->getData()
 		);
+
 	}
 
 	/**
@@ -259,7 +260,7 @@ class InitTest extends InitRPTest
 	public function setExtra_extra()
 	{
 		$init = $this->getRequest();
-		$init->setProviderName(PaymentGateway::PROVIDER_BARION);
+		$init->setProviderName(PaymentGateway::PROVIDER_ABAQOOS);
 		$config = new PaymentGateway\Config();
 		$init->setEncryptKey($config->getEncryptPublicKey());
 		$init->setExtra(array('test' => 'foo'));
@@ -354,4 +355,28 @@ class InitTest extends InitRPTest
 		$this->getRequest()->setProviderName(str_repeat('¥', 11));
 	}
 
+	public function testInitDefaultData()
+	{
+		$init = new Init();
+		$this->assertEquals(PaymentGateway::NAME, $init->getData()['moduleName']);
+		$this->assertEquals(PaymentGateway::VERSION, $init->getData()['moduleVersion']);
+	}
+
+	public function testInitSetModuleName()
+	{
+		$init = new Init();
+		$init->setModuleName('test');
+
+		$this->assertArrayHasKey('moduleName', $init->getData());
+		$this->assertEquals('test', $init->getData()['moduleName']);
+	}
+
+	public function testInitSetModuleVersion()
+	{
+		$init = new Init();
+		$init->setModuleVersion('42');
+
+		$this->assertArrayHasKey('moduleVersion', $init->getData());
+		$this->assertEquals('42', $init->getData()['moduleVersion']);
+	}
 }
