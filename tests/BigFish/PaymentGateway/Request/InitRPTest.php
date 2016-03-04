@@ -3,6 +3,7 @@
 namespace BigFish\Tests\PaymentGateway\Request;
 
 
+use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\Init;
 use BigFish\PaymentGateway\Request\InitRP;
 
@@ -120,6 +121,31 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	protected function getRequest()
 	{
 		return new InitRP();
+	}
+
+	public function testInitRPDefaultData()
+	{
+		$initRp = new InitRP();
+		$this->assertEquals(PaymentGateway::NAME, $initRp->getData()['moduleName']);
+		$this->assertEquals(PaymentGateway::VERSION, $initRp->getData()['moduleVersion']);
+	}
+
+	public function testInitRPSetModuleName()
+	{
+		$initRp = new InitRP();
+		$initRp->setModuleName('test');
+
+		$this->assertArrayHasKey('moduleName', $initRp->getData());
+		$this->assertEquals('test', $initRp->getData()['moduleName']);
+	}
+
+	public function testInitRPSetModuleVersion()
+	{
+		$initRp = new InitRP();
+		$initRp->setModuleVersion('42');
+
+		$this->assertArrayHasKey('moduleVersion', $initRp->getData());
+		$this->assertEquals('42', $initRp->getData()['moduleVersion']);
 	}
 
 }

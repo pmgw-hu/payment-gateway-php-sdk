@@ -44,12 +44,12 @@ abstract class TransportAbstract implements TransportInterface
 	/**
 	 * @return string
 	 */
-	abstract function getClientType(): \string;
+	abstract function getClientType(): string;
 
 	/**
 	 * @return string
 	 */
-	protected function getHttpHost(): \string
+	protected function getHttpHost(): string
 	{
 		return $_SERVER['HTTP_HOST'];
 	}

@@ -8,7 +8,7 @@ use BigFish\PaymentGateway\Request\Result;
 
 class ResultTest extends SimpleRequestAbstract
 {
-	protected function getRequest(\string $transactionId): RequestInterface
+	protected function getRequest(string $transactionId): RequestInterface
 	{
 		return new Result($transactionId);
 	}

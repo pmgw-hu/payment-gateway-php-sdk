@@ -8,7 +8,7 @@ use BigFish\PaymentGateway\Request\StartRP;
 
 class StartRPTest extends SimpleRequestAbstract
 {
-	protected function getRequest(\string $transactionId): RequestInterface
+	protected function getRequest(string $transactionId): RequestInterface
 	{
 		return new StartRP($transactionId);
 	}

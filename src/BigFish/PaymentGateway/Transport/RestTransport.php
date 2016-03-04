@@ -13,7 +13,7 @@ class RestTransport extends TransportAbstract
 	/**
 	 * @return string
 	 */
-	function getClientType(): \string
+	function getClientType(): string
 	{
 		return 'Rest';
 	}

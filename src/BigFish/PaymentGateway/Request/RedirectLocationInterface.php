@@ -6,5 +6,5 @@ interface RedirectLocationInterface
 	/**
 	 * @return string
 	 */
-	public function getRedirectUrl(): \string;
+	public function getRedirectUrl(): string;
 }

@@ -9,7 +9,7 @@ class Log extends SimpleRequestAbstract
 	/**
 	 * @return string
 	 */
-	public function getMethod(): \string
+	public function getMethod(): string
 	{
 		return PaymentGateway::REQUEST_LOG;
 	}

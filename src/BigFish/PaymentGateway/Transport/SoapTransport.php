@@ -57,7 +57,7 @@ class SoapTransport extends TransportAbstract
 	/**
 	 * @return string
 	 */
-	function getClientType(): \string
+	function getClientType(): string
 	{
 		return 'SOAP';
 	}

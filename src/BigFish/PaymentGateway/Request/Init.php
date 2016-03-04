@@ -41,19 +41,27 @@ class Init extends InitAbstract
 	 */
 	protected static $oneClickProviders = array(
 		PaymentGateway::PROVIDER_ESCALION,
-		PaymentGateway::PROVIDER_PAYU
 	);
+
+	/**
+	 * BIG FISH Payment Gateway payment page (MKBSZEP)
+	 *
+	 * @var boolean
+	 * @access public
+	 */
+	public $gatewayPaymentPage = false;
 
 	/**
 	 * @var string
 	 */
 	protected $encryptPublicKey;
 
+
 	/**
 	 * @param string $storeName
 	 * @return Init
 	 */
-	public function setStoreName(\string $storeName)
+	public function setStoreName(string $storeName)
 	{
 		$this->saveData($storeName, 'storeName');
 		return $this;
@@ -64,7 +72,7 @@ class Init extends InitAbstract
 	 * @return Init
 	 * @throws PaymentGatewayException
 	 */
-	public function setNotificationUrl(\string $notificationUrl)
+	public function setNotificationUrl(string $notificationUrl)
 	{
 		if (filter_var($notificationUrl, FILTER_VALIDATE_URL) === false) {
 			throw new PaymentGatewayException('Invalid notification url');
@@ -78,7 +86,7 @@ class Init extends InitAbstract
 	 * @param string $language
 	 * @return Init
 	 */
-	public function setLanguage(\string $language = '')
+	public function setLanguage(string $language = '')
 	{
 		if (!$language) {
 			$language = PaymentGateway\Config::DEFAULT_LANG;
@@ -91,7 +99,7 @@ class Init extends InitAbstract
 	 * @param string $mppPhoneNumber
 	 * @return Init
 	 */
-	public function setMppPhoneNumber(\string $mppPhoneNumber)
+	public function setMppPhoneNumber(string $mppPhoneNumber)
 	{
 		$this->saveData($mppPhoneNumber, 'mppPhoneNumber');
 		return $this;
@@ -101,7 +109,7 @@ class Init extends InitAbstract
 	 * @param string $otpCardNumber
 	 * @return Init
 	 */
-	public function setOtpCardNumber(\string $otpCardNumber)
+	public function setOtpCardNumber(string $otpCardNumber)
 	{
 		$this->data['otpCardNumber'] = $otpCardNumber;
 		$this->saveData($otpCardNumber, 'otpCardNumber');
@@ -112,7 +120,7 @@ class Init extends InitAbstract
 	 * @param string $otpExpiration
 	 * @return Init
 	 */
-	public function setOtpExpiration(\string $otpExpiration)
+	public function setOtpExpiration(string $otpExpiration)
 	{
 		$this->saveData($otpExpiration, 'otpExpiration');
 		return $this;
@@ -122,7 +130,7 @@ class Init extends InitAbstract
 	 * @param string $otpCvc
 	 * @return Init
 	 */
-	public function setOtpCvc(\string $otpCvc)
+	public function setOtpCvc(string $otpCvc)
 	{
 		$this->saveData($otpCvc, 'otpCvc');
 		return $this;
@@ -132,7 +140,7 @@ class Init extends InitAbstract
 	 * @param string $otpCardPocketId
 	 * @return Init
 	 */
-	public function setOtpCardPocketId(\string $otpCardPocketId)
+	public function setOtpCardPocketId(string $otpCardPocketId)
 	{
 		$this->saveData($otpCardPocketId, 'otpCardPocketId');
 		return $this;
@@ -142,7 +150,7 @@ class Init extends InitAbstract
 	 * @param string $otpConsumerRegistrationId
 	 * @return Init
 	 */
-	public function setOtpConsumerRegistrationId(\string $otpConsumerRegistrationId)
+	public function setOtpConsumerRegistrationId(string $otpConsumerRegistrationId)
 	{
 		$this->data['otpConsumerRegistrationId'] = $otpConsumerRegistrationId;
 		return $this;
@@ -152,7 +160,7 @@ class Init extends InitAbstract
 	 * @param string $mkbSzepCafeteriaId
 	 * @return Init
 	 */
-	public function setMkbSzepCafeteriaId(\string $mkbSzepCafeteriaId)
+	public function setMkbSzepCafeteriaId(string $mkbSzepCafeteriaId)
 	{
 		$this->data['mkbSzepCafeteriaId'] = $mkbSzepCafeteriaId;
 		return $this;
@@ -162,7 +170,7 @@ class Init extends InitAbstract
 	 * @param string $mkbSzepCardNumber
 	 * @return Init
 	 */
-	public function setMkbSzepCardNumber(\string $mkbSzepCardNumber)
+	public function setMkbSzepCardNumber(string $mkbSzepCardNumber)
 	{
 		$this->data['mkbSzepCardNumber'] = $mkbSzepCardNumber;
 		return $this;
@@ -172,7 +180,7 @@ class Init extends InitAbstract
 	 * @param string $mkbSzepCvv
 	 * @return Init
 	 */
-	public function setMkbSzepCvv(\string $mkbSzepCvv)
+	public function setMkbSzepCvv(string $mkbSzepCvv)
 	{
 		$this->saveData($mkbSzepCvv, 'mkbSzepCvv');
 		return $this;
@@ -191,7 +199,7 @@ class Init extends InitAbstract
 	 * @param string $oneClickReferenceId
 	 * @return Init
 	 */
-	public function setOneClickReferenceId(\string $oneClickReferenceId)
+	public function setOneClickReferenceId(string $oneClickReferenceId)
 	{
 		$this->data['oneClickReferenceId']= $oneClickReferenceId;
 		return $this;
@@ -201,16 +209,30 @@ class Init extends InitAbstract
 	 * @param bool $value
 	 * @return Init
 	 */
-	public function setAutoCommit(\bool $value = true)
+	public function setAutoCommit(bool $value = true)
 	{
 		$this->data['autoCommit'] = $value;
 		return $this;
 	}
 
 	/**
+	 * Card data handling on BIG FISH Payment Gateway payment page or Merchant website
+	 * Works with MKBSZEP provider
+	 *
+	 * @param boolean $gatewayPaymentPage true or false
+	 * @return Init
+	 * @access public
+	 */
+	public function setGatewayPaymentPage(bool $gatewayPaymentPage = false)
+	{
+		$this->gatewayPaymentPage = $gatewayPaymentPage;
+		return $this;
+	}
+
+	/**
 	 * @return string
 	 */
-	public function getMethod(): \string
+	public function getMethod(): string
 	{
 		return PaymentGateway::REQUEST_INIT;
 	}
@@ -244,12 +266,13 @@ class Init extends InitAbstract
 			}
 		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
 			if (
-					!empty($this->data['mkbSzepCardNumber']) &&
-					!empty($this->data['mkbSzepCvv'])
+				!$this->gatewayPaymentPage &&
+				!empty($this->data['mkbSzepCardNumber']) &&
+				!empty($this->data['mkbSzepCvv'])
 			) {
 				$encryptData = array(
-						'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
-						'mkbSzepCvv' => $this->data['mkbSzepCvv']
+					'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
+					'mkbSzepCvv' => $this->data['mkbSzepCvv']
 				);
 			}
 		} elseif (!empty($extra)) {
@@ -272,7 +295,7 @@ class Init extends InitAbstract
 	 * @return bool
 	 * @throws PaymentGatewayException
 	 */
-	protected function encryptExtra(array $data = array()): \bool
+	protected function encryptExtra(array $data = array()): bool
 	{
 		if (!function_exists('openssl_public_encrypt')) {
 			throw new PaymentGatewayException('OpenSSL PHP module is not loaded');
@@ -290,7 +313,7 @@ class Init extends InitAbstract
 	 * @param string $encryptPublicKey
 	 * @return Init
 	 */
-	public function setEncryptKey(\string $encryptPublicKey)
+	public function setEncryptKey(string $encryptPublicKey)
 	{
 		$this->encryptPublicKey = $encryptPublicKey;
 		return $this;
@@ -302,7 +325,7 @@ class Init extends InitAbstract
 	 * @param string $string
 	 * @return string
 	 */
-	protected function urlSafeEncode(\string $string): \string
+	protected function urlSafeEncode(string $string): string
 	{
 		return str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
 	}
@@ -310,7 +333,7 @@ class Init extends InitAbstract
 	/**
 	 * @param $providerName
 	 */
-	protected function removeSensitiveInformation(\string $providerName)
+	protected function removeSensitiveInformation(string $providerName)
 	{
 		if (!($providerName == PaymentGateway::PROVIDER_OTP && !empty($this->data['otpCardPocketId']))) {
 			unset($this->data['otpCardPocketId']);

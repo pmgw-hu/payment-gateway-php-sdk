@@ -14,7 +14,7 @@ interface ResponseInterface
 	 * @param string $json
 	 * @return static
 	 */
-	public static function createFromJson(\string $json);
+	public static function createFromJson(string $json);
 
 	/**
 	 * @param \stdClass $object $object
@@ -31,5 +31,5 @@ interface ResponseInterface
 	/**
 	 * @param string $charset
 	 */
-	public function convert(\string $charset);
+	public function convert(string $charset);
 }

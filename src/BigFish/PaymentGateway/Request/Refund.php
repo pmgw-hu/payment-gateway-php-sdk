@@ -10,7 +10,7 @@ class Refund extends RequestAbstract
 	 * @param string $transactionId Transaction ID received from Payment Gateway
 	 * @param float $amount
 	 */
-	public function __construct(\string $transactionId, \float $amount)
+	public function __construct(string $transactionId, float $amount)
 	{
 		$this->data['transactionId'] = $transactionId;
 		$this->data['amount'] = $amount;
@@ -19,7 +19,7 @@ class Refund extends RequestAbstract
 	/**
 	 * @return string
 	 */
-	public function getMethod(): \string
+	public function getMethod(): string
 	{
 		return PaymentGateway::REQUEST_REFUND;
 	}
