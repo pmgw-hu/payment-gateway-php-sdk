@@ -41,7 +41,6 @@ class Init extends InitAbstract
 	 */
 	protected static $oneClickProviders = array(
 		PaymentGateway::PROVIDER_ESCALION,
-		PaymentGateway::PROVIDER_PAYU
 	);
 
 	/**
