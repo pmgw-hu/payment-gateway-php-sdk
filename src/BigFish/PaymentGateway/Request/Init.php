@@ -265,16 +265,15 @@ class Init extends InitAbstract
 				);
 			}
 		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
-			if (!$this->gatewayPaymentPage) {
-				if (
-					!empty($this->data['mkbSzepCardNumber']) &&
-					!empty($this->data['mkbSzepCvv'])
-				) {
-					$encryptData = array(
-						'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
-						'mkbSzepCvv' => $this->data['mkbSzepCvv']
-					);
-				}
+			if (
+				!$this->gatewayPaymentPage &&
+				!empty($this->data['mkbSzepCardNumber']) &&
+				!empty($this->data['mkbSzepCvv'])
+			) {
+				$encryptData = array(
+					'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
+					'mkbSzepCvv' => $this->data['mkbSzepCvv']
+				);
 			}
 		} elseif (!empty($extra)) {
 			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));
