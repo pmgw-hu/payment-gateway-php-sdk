@@ -18,22 +18,6 @@ use BigFish\PaymentGateway;
 class Config
 {
 	/**
-	 * Module name
-	 *
-	 * @var string
-	 * @access protected
-	 */
-	protected $moduleName = PaymentGateway::NAME;
-
-	/**
-	 * Module version
-	 *
-	 * @var string
-	 * @access protected
-	 */
-	protected $moduleVersion = PaymentGateway::VERSION;
-
-	/**
 	 * Default store name
 	 *
 	 */
@@ -118,6 +102,22 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * @var
 	 */
 	protected $encryptPublicKey = self::SDK_TEST_ENCRYPT_PUBLIC_KEY;
+
+	/**
+	 * Module name
+	 *
+	 * @var string
+	 * @access protected
+	 */
+	protected $moduleName = PaymentGateway::NAME;
+
+	/**
+	 * Module version
+	 *
+	 * @var string
+	 * @access protected
+	 */
+	protected $moduleVersion = PaymentGateway::VERSION;
 
 	/**
 	 * @return bool
