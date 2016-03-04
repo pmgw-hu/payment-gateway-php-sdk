@@ -44,6 +44,14 @@ class Init extends InitAbstract
 	);
 
 	/**
+	 * BIG FISH Payment Gateway payment page (MKBSZEP)
+	 *
+	 * @var boolean
+	 * @access public
+	 */
+	public $gatewayPaymentPage = false;
+
+	/**
 	 * @var string
 	 */
 	protected $encryptPublicKey;
@@ -208,6 +216,20 @@ class Init extends InitAbstract
 	}
 
 	/**
+	 * Card data handling on BIG FISH Payment Gateway payment page or Merchant website
+	 * Works with MKBSZEP provider
+	 *
+	 * @param boolean $gatewayPaymentPage true or false
+	 * @return Init
+	 * @access public
+	 */
+	public function setGatewayPaymentPage(bool $gatewayPaymentPage = false): Init
+	{
+		$this->gatewayPaymentPage = (($gatewayPaymentPage === true || $gatewayPaymentPage == "true") ? true : false);
+		return $this;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getMethod(): string
@@ -243,14 +265,16 @@ class Init extends InitAbstract
 				);
 			}
 		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
-			if (
+			if (!$this->gatewayPaymentPage) {
+				if (
 					!empty($this->data['mkbSzepCardNumber']) &&
 					!empty($this->data['mkbSzepCvv'])
-			) {
-				$encryptData = array(
+				) {
+					$encryptData = array(
 						'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
 						'mkbSzepCvv' => $this->data['mkbSzepCvv']
-				);
+					);
+				}
 			}
 		} elseif (!empty($extra)) {
 			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));
