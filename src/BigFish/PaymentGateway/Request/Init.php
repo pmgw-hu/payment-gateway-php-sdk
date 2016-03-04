@@ -223,9 +223,9 @@ class Init extends InitAbstract
 	 * @return Init
 	 * @access public
 	 */
-	public function setGatewayPaymentPage(bool $gatewayPaymentPage = false): Init
+	public function setGatewayPaymentPage(bool $gatewayPaymentPage = false)
 	{
-		$this->gatewayPaymentPage = (($gatewayPaymentPage === true || $gatewayPaymentPage == "true") ? true : false);
+		$this->gatewayPaymentPage = $gatewayPaymentPage;
 		return $this;
 	}
 
