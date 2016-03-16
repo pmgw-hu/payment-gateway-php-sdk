@@ -206,6 +206,7 @@ class Init extends RequestAbstract
 		'Escalion',
 		'PayU',
 		'OTPSimple',
+		'PayPal',
 	);
 	
 	/**
