@@ -164,7 +164,7 @@ class Init extends RequestAbstract
 	public $mkbSzepCvv;
 	
 	/**
-	 * One-click payment state (Escalion, OTP Simple, Saferpay)
+	 * One-click payment state (Escalion, OTP Simple, Saferpay, PayPal)
 	 * 
 	 * @var boolean
 	 * @access public
@@ -206,6 +206,7 @@ class Init extends RequestAbstract
 		'Escalion',
 		'OTPSimple',
 		'Saferpay',
+		'PayPal',
 	);
 	
 	/**
@@ -505,7 +506,7 @@ class Init extends RequestAbstract
 	
 	/**
 	 * Enable or disable One Click Payment of the user
-	 * Works with Escalion, OTP Simple, Saferpay provider
+	 * Works with Escalion, OTP Simple, Saferpay, PayPal provider
 	 *
 	 * @param boolean $oneClickPayment true or false
 	 * @return \BigFish\PaymentGateway\Request\Init
