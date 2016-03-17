@@ -43,7 +43,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.5.2';
+	const VERSION = '2.6.0';
 
 	/**
 	 * API type constants
@@ -119,9 +119,7 @@ class PaymentGateway
 	const PROVIDER_KHB_SZEP = 'KHBSZEP';
 
 	const PROVIDER_MKB_SZEP = 'MKBSZEP';
-
-	const PROVIDER_MASTERCARD_MOBILE = 'MPP2';
-
+	
 	const PROVIDER_OTP = 'OTP';
 
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
@@ -140,13 +138,9 @@ class PaymentGateway
 
 	const PROVIDER_PAYSAFECARD = 'PSC';
 
-	const PROVIDER_PAYU = 'PayU';
-
 	const PROVIDER_PAYU2 = 'PayU2';
 
-	const PROVIDER_PAYU_CASH = 'PayUCash';
-
-	const PROVIDER_PAYU_WIRE = 'PayUWire';
+	const PROVIDER_SAFERPAY = 'Saferpay';
 
 	const PROVIDER_SMS = 'SMS';
 
