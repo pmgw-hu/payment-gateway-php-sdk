@@ -43,7 +43,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.6.2';
+	const VERSION = '2.6.0';
 
 	/**
 	 * API type constants
@@ -119,7 +119,7 @@ class PaymentGateway
 	const PROVIDER_KHB_SZEP = 'KHBSZEP';
 
 	const PROVIDER_MKB_SZEP = 'MKBSZEP';
-
+	
 	const PROVIDER_OTP = 'OTP';
 
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
