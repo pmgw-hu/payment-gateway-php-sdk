@@ -22,6 +22,7 @@ use BigFish\PaymentGateway\Request\Finalize as FinalizeRequest;
 use BigFish\PaymentGateway\Request\Details as DetailsRequest;
 use BigFish\PaymentGateway\Request\Log as LogRequest;
 use BigFish\PaymentGateway\Request\OneClickOptions as OneClickOptionsRequest;
+use BigFish\PaymentGateway\Request\OneClickTokenCancel as OneClickTokenCancelRequest;
 use BigFish\PaymentGateway\Request\Invoice as InvoiceRequest;
 use BigFish\PaymentGateway\Request\Providers as ProvidersRequest;
 use BigFish\PaymentGateway\Response;
@@ -43,7 +44,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.6.1';
+	const VERSION = '2.6.2';
 
 	/**
 	 * API type constants
@@ -78,6 +79,8 @@ class PaymentGateway
 	const REQUEST_FINALIZE = 'Finalize';
 	
 	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
+
+	const REQUEST_ONE_CLICK_TOKEN_CANCEL = 'OneClickTokenCancel';
 
 	const REQUEST_INVOICE = 'Invoice';
 	
@@ -379,7 +382,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	{
 		return self::sendRequest(self::REQUEST_ONE_CLICK_OPTIONS, $request);
 	}
-	
+
+	/**
+	 * One Click Token Cancel
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\OneClickTokenCancel $request OneClickTokenCancel request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function oneClickTokenCancel(OneClickTokenCancelRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_ONE_CLICK_TOKEN_CANCEL, $request);
+	}
+
 	/**
 	 * Get invoice
 	 * 
