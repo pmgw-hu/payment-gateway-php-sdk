@@ -1,0 +1,9 @@
+PHP 5.3 Syntax Check:
+  script:
+    - find . -name \*.php -exec php -l "{}" \;
+  type: test
+
+PHP 5.6 Syntax Check:
+  script:
+    - find . -name \*.php -exec /usr/local/bin/php56 -l "{}" \;
+  type: test
