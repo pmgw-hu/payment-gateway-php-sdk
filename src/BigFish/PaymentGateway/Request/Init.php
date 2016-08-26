@@ -610,7 +610,7 @@ class Init extends RequestAbstract
 			unset($this->oneClickPayment);
 		}
 		
-		if (!(in_array($this->providerName, self::$oneClickProviders) && strlen($this->oneClickReferenceId))) {
+		if (!(in_array($this->providerName, self::$oneClickProviders) && $this->oneClickReferenceId)) {
 			unset($this->oneClickReferenceId);
 		}
 		

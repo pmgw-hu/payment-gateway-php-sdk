@@ -44,7 +44,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.6.2';
+	const VERSION = '2.6.3';
 
 	/**
 	 * API type constants
