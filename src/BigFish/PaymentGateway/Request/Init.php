@@ -606,7 +606,7 @@ class Init extends RequestAbstract
 			unset($this->otpCardPocketId);
 		}
 
-		if (!(in_array($this->providerName, self::$oneClickProviders) && $this->oneClickPayment)) {
+		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->oneClickPayment) && $this->oneClickPayment)) {
 			unset($this->oneClickPayment);
 		}
 		
