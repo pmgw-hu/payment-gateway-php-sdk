@@ -44,7 +44,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.6.3';
+	const VERSION = '2.6.4';
 
 	/**
 	 * API type constants
@@ -116,6 +116,8 @@ class PaymentGateway
 	const PROVIDER_ESCALION = 'Escalion';
 
 	const PROVIDER_FHB = 'FHB';
+
+	const PROVIDER_IPG = 'IPG';
 
 	const PROVIDER_KHB = 'KHB';
 
