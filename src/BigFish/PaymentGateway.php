@@ -44,7 +44,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.6.4';
+	const VERSION = '2.6.5';
 
 	/**
 	 * API type constants
@@ -108,6 +108,8 @@ class PaymentGateway
 	const PROVIDER_ABAQOOS = 'ABAQOOS';
 
 	const PROVIDER_BARION = 'Barion';
+
+	const PROVIDER_BARION2 = 'Barion2';
 
 	const PROVIDER_BORGUN = 'Borgun';
 
