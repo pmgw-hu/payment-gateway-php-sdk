@@ -1,14 +1,7 @@
-PHP 5.3 Syntax Check:
+Syntax Check PHP 5.6:
+  image: docker.big.hu/test/php:5.6
   script:
-    - find . -type f \( -name "*.php" \) -print0 | xargs -0L1 /usr/local/php-5.3/bin/php -l
-  type: test
-
-PHP 5.4 Syntax Check:
-  script:
-    - find . -type f \( -name "*.php" \) -print0 | xargs -0L1 /usr/local/bin/php -l
-  type: test
-
-PHP 5.6 Syntax Check:
-  script:
-    - find . -type f \( -name "*.php" \) -print0 | xargs -0L1 /usr/local/php-5.6/bin/php -l
-  type: test
+    - find . -type f -name "*.php" -print0 | xargs -0L1 /usr/bin/php -l
+  stage: test
+  tags:
+    - docker
