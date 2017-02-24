@@ -5,3 +5,11 @@ Syntax Check PHP 5.6:
   stage: test
   tags:
     - docker
+
+Syntax Check PHP 7.0:
+  image: docker.big.hu/test/php:7.0
+  script:
+    - find . -type f -name "*.php" -print0 | xargs -0L1 /usr/bin/php -l
+  stage: test
+  tags:
+    - docker
