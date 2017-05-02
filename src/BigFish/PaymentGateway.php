@@ -109,6 +109,8 @@ class PaymentGateway
 
 	const PROVIDER_BARION = 'Barion';
 
+	const PROVIDER_BARION2 = 'Barion2';
+
 	const PROVIDER_BORGUN = 'Borgun';
 
 	const PROVIDER_BORGUN2 = 'Borgun2';
