@@ -44,7 +44,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.6.5';
+	const VERSION = '2.7.0';
 
 	/**
 	 * API type constants
@@ -112,6 +112,8 @@ class PaymentGateway
 	const PROVIDER_BARION2 = 'Barion2';
 
 	const PROVIDER_BORGUN = 'Borgun';
+
+	const PROVIDER_BORGUN2 = 'Borgun2';
 
 	const PROVIDER_CIB = 'CIB';
 
