@@ -27,15 +27,25 @@ class Details extends RequestAbstract
 	public $transactionId;
 
 	/**
+	 * Get related transactions
+	 * 
+	 * @var boolean
+	 * @access public 
+	 */
+	public $getRelatedTransactions;
+
+	/**
 	 * Construct new Details request instance
 	 * 
 	 * @param string $transactionId Transaction ID received from Payment Gateway
+	 * @param boolean $getRelatedTransactions Get related transactions (true/false)
 	 * @return void
 	 * @access public
 	 */
-	public function __construct($transactionId)
+	public function __construct($transactionId, $getRelatedTransactions = true)
 	{
 		$this->transactionId = $transactionId;
+		$this->getRelatedTransactions = (($getRelatedTransactions === true || $getRelatedTransactions == "true") ? true : false);
 	}
 
 }
