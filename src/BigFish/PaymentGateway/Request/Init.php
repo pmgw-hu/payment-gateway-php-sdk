@@ -538,8 +538,6 @@ class Init extends RequestAbstract
 	 * If true verifies the availability of funds and captures funds in one step.
 	 * If false verifies the availability of funds and reserves them for later capture.
 	 * 
-	 * Works with OTP and OTP2 providers
-	 * 
 	 * @param boolean $autoCommit true or false
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
