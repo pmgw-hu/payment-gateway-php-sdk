@@ -23,8 +23,12 @@ use BigFish\PaymentGateway\Request\Details as DetailsRequest;
 use BigFish\PaymentGateway\Request\Log as LogRequest;
 use BigFish\PaymentGateway\Request\OneClickOptions as OneClickOptionsRequest;
 use BigFish\PaymentGateway\Request\OneClickTokenCancel as OneClickTokenCancelRequest;
+use BigFish\PaymentGateway\Request\OneClickTokenCancelAll as OneClickTokenCancelAllRequest;
 use BigFish\PaymentGateway\Request\Invoice as InvoiceRequest;
 use BigFish\PaymentGateway\Request\Providers as ProvidersRequest;
+use BigFish\PaymentGateway\Request\PaymentLinkCreate as PaymentLinkCreateRequest;
+use BigFish\PaymentGateway\Request\PaymentLinkCancel as PaymentLinkCancelRequest;
+use BigFish\PaymentGateway\Request\PaymentLinkDetails as PaymentLinkDetailsRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
@@ -44,7 +48,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.7.0';
+	const VERSION = '2.9.0';
 
 	/**
 	 * API type constants
@@ -82,9 +86,17 @@ class PaymentGateway
 
 	const REQUEST_ONE_CLICK_TOKEN_CANCEL = 'OneClickTokenCancel';
 
+	const REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL = 'OneClickTokenCancelAll';
+
 	const REQUEST_INVOICE = 'Invoice';
 	
 	const REQUEST_PROVIDERS = 'Providers';
+
+	const REQUEST_PAYMENT_LINK_CREATE = 'PaymentLinkCreate';
+
+	const REQUEST_PAYMENT_LINK_CANCEL = 'PaymentLinkCancel';
+
+	const REQUEST_PAYMENT_LINK_DETAILS = 'PaymentLinkDetails';
 	/**
 	 * Result code constants
 	 * 
@@ -403,6 +415,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
+	 * One Click Token Cancel All
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\OneClickTokenCancelAll $request OneClickTokenCancelAll request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function oneClickTokenCancelAll(OneClickTokenCancelAllRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL, $request);
+	}
+
+	/**
 	 * Get invoice
 	 * 
 	 * @param \BigFish\PaymentGateway\Request\Invoice $request
@@ -440,7 +465,46 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	{
 		return self::sendRequest(self::REQUEST_DETAILS, $request);
 	}
-	
+
+	/**
+	 * Payment link create
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\PaymentLinkCreate $request Payment link create request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function paymentLinkCreate(PaymentLinkCreateRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PAYMENT_LINK_CREATE, $request);
+	}
+
+	/**
+	 * Payment link cancel
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\PaymentLinkCancel $request Payment link cancel request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function paymentLinkCancel(PaymentLinkCancelRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PAYMENT_LINK_CANCEL, $request);
+	}
+
+	/**
+	 * Payment link details
+	 * 
+	 * @param \BigFish\PaymentGateway\Request\PaymentLinkDetails $request Payment link details request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 */
+	public static function paymentLinkDetails(PaymentLinkDetailsRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PAYMENT_LINK_DETAILS, $request);
+	}
+
 	/**
 	 * Query transaction log from Payment Gateway
 	 * 
@@ -601,7 +665,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			'method' => $method,
 			'json' => json_encode(get_object_vars($request)),
 		);
-		
+
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 		curl_setopt($ch, CURLOPT_USERAGENT, self::getUserAgent($method));
