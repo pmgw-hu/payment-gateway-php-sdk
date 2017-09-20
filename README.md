@@ -5,7 +5,7 @@
 
 ## Version
 
-2.9.0
+2.10.0
 
 ## Requirements
 
