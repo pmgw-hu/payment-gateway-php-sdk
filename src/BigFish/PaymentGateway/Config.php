@@ -21,6 +21,7 @@ use BigFish\PaymentGateway;
  * @property string $encryptPublicKey Public key used for encryption
  * @property string $moduleName Module name
  * @property string $moduleVersion Module version
+ * @property string $gatewayUrlTest Test service URL
  * @package PaymentGateway
  */
 class Config
@@ -94,6 +95,14 @@ class Config
 	 * @access protected
 	 */
 	protected $moduleVersion = PaymentGateway::VERSION;
+
+	/**
+	 * Test service URL
+	 * 
+	 * @var string
+	 * @access protected
+	 */
+	protected $gatewayUrlTest = PaymentGateway::GATEWAY_URL_TEST;
 
 	/**
 	 * Contructor

@@ -48,7 +48,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.9.0';
+	const VERSION = '2.10.0';
 
 	/**
 	 * API type constants
@@ -133,6 +133,8 @@ class PaymentGateway
 
 	const PROVIDER_FHB = 'FHB';
 
+	const PROVIDER_GP = 'GP';
+
 	const PROVIDER_IPG = 'IPG';
 
 	const PROVIDER_KHB = 'KHB';
@@ -197,20 +199,14 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * Production service URL
 	 * 
-	 * @var string 
-	 * @access protected
-	 * @static
 	 */
-	protected static $gatewayUrlProduction = 'https://www.paymentgateway.hu';
+	const GATEWAY_URL_PRODUCTION = 'https://www.paymentgateway.hu';
 
 	/**
 	 * Test service URL
 	 * 
-	 * @var string 
-	 * @access protected
-	 * @static
 	 */
-	protected static $gatewayUrlTest = 'https://test.paymentgateway.hu';
+	const GATEWAY_URL_TEST = 'https://test.paymentgateway.hu';
 
 	/**
 	 * Configuration
@@ -528,9 +524,9 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	protected static function getUrl()
 	{
 		if (self::getConfig()->testMode === true) {
-			return self::$gatewayUrlTest;
+			return self::getConfig()->gatewayUrlTest;
 		} else {
-			return self::$gatewayUrlProduction;
+			return self::GATEWAY_URL_PRODUCTION;
 		}
 	}
 
