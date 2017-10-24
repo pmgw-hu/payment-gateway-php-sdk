@@ -752,7 +752,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function getHttpHost()
 	{
-		return (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : "";
+		return (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : null;
 	}
 
 }
