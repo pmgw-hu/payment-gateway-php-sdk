@@ -48,7 +48,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.11.0';
+	const VERSION = '2.11.1';
 
 	/**
 	 * API type constants
@@ -658,8 +658,10 @@ XIm63iVw6gjP2qDnNwIDAQAB
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-		if (!empty(self::getHttpHost())) {
-			curl_setopt($ch, CURLOPT_REFERER, self::getHttpHost());
+		$httpHost = self::getHttpHost();
+
+		if (!empty($httpHost)) {
+			curl_setopt($ch, CURLOPT_REFERER, $httpHost);
 		}
 
 		$postData = array(
