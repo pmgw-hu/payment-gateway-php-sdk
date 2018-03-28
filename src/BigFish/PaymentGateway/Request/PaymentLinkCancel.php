@@ -8,8 +8,6 @@
  */
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
-
 /**
  * Payment link cancel request class
  * 

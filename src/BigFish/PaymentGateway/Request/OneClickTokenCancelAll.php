@@ -9,7 +9,6 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Request\RequestAbstract;
 
 /**
  * One Click Token Cancel All request class
