@@ -26,12 +26,13 @@ class Providers extends RequestAbstract
 	 */
 	public $storeName;
 
-	/**
-	 * Construct new Providers request instance
-	 * 
-	 * @return void
-	 * @access public
-	 */
+    /**
+     * Construct new Providers request instance
+     *
+     * @throws \BigFish\PaymentGateway\Exception
+     * @return void
+     * @access public
+     */
 	public function __construct()
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;

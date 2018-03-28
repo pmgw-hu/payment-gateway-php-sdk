@@ -647,13 +647,14 @@ class Init extends RequestAbstract
 
 		$this->extra = $this->urlSafeEncode($encrypted);
 	}
-	
-	/**
-	 * Get object parameters
-	 * 
-	 * @return string
-	 * @access public
-	 */
+
+    /**
+     * Get object parameters
+     *
+     * @return string
+     * @access public
+     * @throws Exception
+     */
 	public function getParams()
 	{
 		$this->setExtra();

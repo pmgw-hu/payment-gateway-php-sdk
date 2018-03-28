@@ -42,14 +42,15 @@ class OneClickOptions extends RequestAbstract
 	 */
 	public $userId;
 
-	/**
-	 * Construct new One Click Options request instance
-	 * 
-	 * @param string $providerName Provider name
-	 * @param string $userId User identifier
-	 * @return void
-	 * @access public
-	 */
+    /**
+     * Construct new One Click Options request instance
+     *
+     * @param string $providerName Provider name
+     * @param string $userId User identifier
+     * @throws \BigFish\PaymentGateway\Exception
+     * @return void
+     * @access public
+     */
 	public function __construct($providerName, $userId)
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;
