@@ -300,7 +300,6 @@ class PaymentLinkCreate extends RequestAbstract
 	 * @param array $extra Extra information
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
-	 * @throws Exception
 	 */
 	public function setExtra(array $extra = array())
 	{
