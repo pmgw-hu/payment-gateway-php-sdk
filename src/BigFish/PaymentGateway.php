@@ -764,6 +764,8 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			case self::API_REST:
 				$clientType = 'Rest';
 				break;
+            default:
+                throw new Exception('No API type defined!');
 		}
 
 		return sprintf('BIG FISH Payment Gateway %s Client v%s (%s - %s)', $clientType, self::VERSION, $method, self::getHttpHost());
