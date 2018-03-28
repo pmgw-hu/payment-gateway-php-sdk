@@ -12,7 +12,7 @@ use BigFish\PaymentGateway;
 
 /**
  * Recurring payment initialization request class
- * 
+ *
  * @package PaymentGateway
  * @subpackage Request
  */
@@ -66,13 +66,21 @@ class InitRP extends RequestAbstract
 	 */
 	public $currency;
 
-	/**
-	 * Module name
-	 *
-	 * @var string
-	 * @access public
-	 */
-	public $moduleName;
+    /**
+     * Store name
+     *
+     * @var string
+     * @access public
+     */
+    public $storeName;
+
+    /**
+     * Module name
+     *
+     * @var string
+     * @access public
+     */
+    public $moduleName;
 
 	/**
 	 * Module version
