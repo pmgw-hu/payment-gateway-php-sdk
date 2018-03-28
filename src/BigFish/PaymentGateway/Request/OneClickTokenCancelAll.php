@@ -42,14 +42,15 @@ class OneClickTokenCancelAll extends RequestAbstract
 	 */
 	public $userId;
 
-	/**
-	 * Construct new One Click Token Cancel All request instance
-	 * 
-	 * @param $string $providerName
-	 * @param $string $userId
-	 * @return void
-	 * @access public
-	 */
+    /**
+     * Construct new One Click Token Cancel All request instance
+     *
+     * @param string $providerName
+     * @param string $userId
+     * @throws \BigFish\PaymentGateway\Exception
+     * @return void
+     * @access public
+     */
 	public function __construct($providerName, $userId)
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;
