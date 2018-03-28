@@ -28,6 +28,7 @@ abstract class RequestAbstract
      */
 	public function getParams()
 	{
+        $params = array();
 		foreach ($this as $name => $value) {
 			$value = trim($value);
 
