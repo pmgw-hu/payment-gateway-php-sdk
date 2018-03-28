@@ -240,6 +240,7 @@ class Init extends RequestAbstract
 	 * Construct new Init request instance
 	 * 
 	 * @access public
+     * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function __construct()
 	{

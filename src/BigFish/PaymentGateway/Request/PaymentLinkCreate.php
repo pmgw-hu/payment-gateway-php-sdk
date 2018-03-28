@@ -138,11 +138,12 @@ class PaymentLinkCreate extends RequestAbstract
 	 */
 	public $moduleVersion;
 
-	/**
-	 * Construct payment link create request instance
-	 * 
-	 * @access public
-	 */
+    /**
+     * Construct payment link create request instance
+     *
+     * @access public
+     * @throws \BigFish\PaymentGateway\Exception
+     */
 	public function __construct()
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;

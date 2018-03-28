@@ -90,11 +90,12 @@ class InitRP extends RequestAbstract
 	 */
 	public $moduleVersion;
 
-	/**
-	 * Construct new recurring payment Init request instance
-	 * 
-	 * @access public
-	 */
+    /**
+     * Construct new recurring payment Init request instance
+     *
+     * @access public
+     * @throws \BigFish\PaymentGateway\Exception
+     */
 	public function __construct()
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;
