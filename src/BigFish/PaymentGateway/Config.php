@@ -105,7 +105,7 @@ class Config
 	protected $gatewayUrlTest = PaymentGateway::GATEWAY_URL_TEST;
 
 	/**
-	 * Contructor
+	 * Constructor
 	 * 
 	 * @param array $config
 	 * @access public
