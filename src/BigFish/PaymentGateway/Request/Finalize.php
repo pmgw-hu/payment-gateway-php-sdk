@@ -46,13 +46,13 @@ class Finalize extends RequestAbstract
 		$this->amount = (float)$amount;
 	}
 
-    /**
-     * Get object parameters
-     *
-     * @return string
-     * @access public
-     * @throws \BigFish\PaymentGateway\Exception
-     */
+	/**
+	 * Get object parameters
+	 * 
+	 * @return string
+	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
 	public function getParams()
 	{
 		unset($this->responseMode);

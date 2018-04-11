@@ -240,7 +240,7 @@ class Init extends RequestAbstract
 	 * Construct new Init request instance
 	 * 
 	 * @access public
-     * @throws \BigFish\PaymentGateway\Exception
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function __construct()
 	{
@@ -649,13 +649,13 @@ class Init extends RequestAbstract
 		$this->extra = $this->urlSafeEncode($encrypted);
 	}
 
-    /**
-     * Get object parameters
-     *
-     * @return string
-     * @access public
-     * @throws Exception
-     */
+	/**
+	 * Get object parameters
+	 * 
+	 * @return string
+	 * @access public
+	 * @throws Exception
+	 */
 	public function getParams()
 	{
 		$this->setExtra();

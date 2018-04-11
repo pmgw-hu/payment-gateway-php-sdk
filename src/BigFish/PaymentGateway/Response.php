@@ -17,14 +17,14 @@ use BigFish\PaymentGateway;
  */
 class Response
 {
-    /**
-     * Construct new response object from JSON encoded object
-     *
-     * @param string $json JSON encoded object
-     * @throws \BigFish\PaymentGateway\Exception
-     * @return void
-     * @access public
-     */
+	/**
+	 * Construct new response object from JSON encoded object
+	 *
+	 * @param string $json JSON encoded object
+	 * @throws \BigFish\PaymentGateway\Exception
+	 * @return void
+	 * @access public
+	 */
 	public function __construct($json)
 	{
 		if (is_object($json)) {
@@ -38,14 +38,14 @@ class Response
 		}
 	}
 
-    /**
-     * Set object
-     *
-     * @param object $object
-     * @return void
-     * @access protected
-     * @throws \BigFish\PaymentGateway\Exception
-     */
+	/**
+	 * Set object
+	 *
+	 * @param object $object
+	 * @return void
+	 * @access protected
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
 	protected function setObject($object)
 	{
 		foreach (get_object_vars($object) as $name => $value) {
@@ -61,15 +61,15 @@ class Response
 		}
 	}
 
-    /**
-     * Set value
-     *
-     * @param string $name
-     * @param string $value
-     * @return void
-     * @access protected
-     * @throws \BigFish\PaymentGateway\Exception
-     */
+	/**
+	 * Set value
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return void
+	 * @access protected
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
 	protected function setValue($name, $value)
 	{
 		if (is_string($value) && PaymentGateway::getConfig()->outCharset != "UTF-8") {

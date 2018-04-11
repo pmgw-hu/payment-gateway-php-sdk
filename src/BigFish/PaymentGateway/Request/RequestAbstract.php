@@ -19,16 +19,16 @@ use BigFish\PaymentGateway;
  */
 abstract class RequestAbstract
 {
-    /**
-     * Construct query string from object properties
-     *
-     * @return string Constructed query string
-     * @access public
-     * @throws \BigFish\PaymentGateway\Exception
-     */
+	/**
+	 * Construct query string from object properties
+	 *
+	 * @return string Constructed query string
+	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
 	public function getParams()
 	{
-        $params = array();
+		$params = array();
 		foreach ($this as $name => $value) {
 			$value = trim($value);
 
@@ -39,14 +39,14 @@ abstract class RequestAbstract
 		return implode("&", $params);
 	}
 
-    /**
-     * Encode value
-     *
-     * @param string $value
-     * @return string
-     * @access protected
-     * @throws \BigFish\PaymentGateway\Exception
-     */
+	/**
+	 * Encode value
+	 *
+	 * @param string $value
+	 * @return string
+	 * @access protected
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
 	protected function encodeValue($value)
 	{
 		if (
@@ -60,13 +60,13 @@ abstract class RequestAbstract
 		return $value;
 	}
 
-    /**
-     * Encode object parameter values
-     *
-     * @return void
-     * @access public
-     * @throws \BigFish\PaymentGateway\Exception
-     */
+	/**
+	 * Encode object parameter values
+	 *
+	 * @return void
+	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
 	public function encodeValues()
 	{
 		foreach (get_object_vars($this) as $key => $value) {

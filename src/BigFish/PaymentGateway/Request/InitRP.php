@@ -12,7 +12,7 @@ use BigFish\PaymentGateway;
 
 /**
  * Recurring payment initialization request class
- *
+ * 
  * @package PaymentGateway
  * @subpackage Request
  */
@@ -66,21 +66,21 @@ class InitRP extends RequestAbstract
 	 */
 	public $currency;
 
-    /**
-     * Store name
-     *
-     * @var string
-     * @access public
-     */
-    public $storeName;
+	/**
+	 * Store name
+	 * 
+	 * @var string
+	 * @access public
+	 */
+	public $storeName;
 
-    /**
-     * Module name
-     *
-     * @var string
-     * @access public
-     */
-    public $moduleName;
+	/**
+	 * Module name
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $moduleName;
 
 	/**
 	 * Module version
@@ -90,12 +90,12 @@ class InitRP extends RequestAbstract
 	 */
 	public $moduleVersion;
 
-    /**
-     * Construct new recurring payment Init request instance
-     *
-     * @access public
-     * @throws \BigFish\PaymentGateway\Exception
-     */
+	/**
+	 * Construct new recurring payment Init request instance
+	 *
+	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
 	public function __construct()
 	{
 		$this->storeName = PaymentGateway::getConfig()->storeName;
