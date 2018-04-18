@@ -48,7 +48,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.11.1';
+	const VERSION = '2.12.0';
 
 	/**
 	 * API type constants
@@ -173,8 +173,10 @@ class PaymentGateway
 
 	const PROVIDER_UNICREDIT = 'UniCredit';
 
+	const PROVIDER_VIRPAY = 'Virpay';
+
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
-		
+
 	/**
 	 * Default store name
 	 * 
