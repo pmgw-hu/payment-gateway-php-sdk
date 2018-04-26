@@ -21,6 +21,5 @@
 		"psr-4": {
 			"BigFish\\": "src/BigFish"
 		}
-	},
-	"minimum-stability": "dev"
+	}
 }
