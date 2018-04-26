@@ -5,7 +5,7 @@
 
 ## Version
 
-2.12.0
+2.12.1
 
 ## Requirements
 
