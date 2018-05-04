@@ -48,7 +48,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.12.0';
+	const VERSION = '2.12.2';
 
 	/**
 	 * API type constants
@@ -255,14 +255,15 @@ XIm63iVw6gjP2qDnNwIDAQAB
 		}
 		throw new Exception('Payment Gateway configuration has not been set');
 	}
-	
+
 	/**
 	 * Transaction initialization
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Init $request Init request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function init(InitRequest $request)
 	{
@@ -271,38 +272,41 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Start payment process, redirects the user to Payment Gateway
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Start $request Start request object
 	 * @return void
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function start(StartRequest $request)
 	{
 		header('Location: ' . self::getStartUrl($request));
 		exit();
 	}
-	
+
 	/**
 	 * Get payment start URL
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Start $request Start request object
 	 * @return string
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function getStartUrl(StartRequest $request)
 	{
 		return self::getUrl() . '/Start?' . $request->getParams();
 	}
-	
+
 	/**
 	 * Query transaction results from Payment Gateway
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Result $request Result request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function result(ResultRequest $request)
 	{
@@ -311,11 +315,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Close a previously started transaction
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Close $request Close request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function close(CloseRequest $request)
 	{
@@ -324,37 +329,40 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Refund a transaction
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Refund $request Refund request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function refund(RefundRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_REFUND, $request);
-	}	
+	}
 
 	/**
 	 * Recurring payment transaction initialization
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\InitRP $request Recurring payment init request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function initRP(InitRPRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_INIT_RP, $request);
 	}
-	
+
 	/**
 	 * Start recurring payment transaction
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\StartRP $request Recurring payment start request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function startRP(StartRPRequest $request)
 	{
@@ -363,38 +371,41 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Finalize a transaction
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Finalize $request Finalize request object
 	 * @return void
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function finalize(FinalizeRequest $request)
 	{
 		header('Location: ' . self::getFinalizeUrl($request));
 		exit();
 	}
-	
+
 	/**
 	 * Get payment finalize URL
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Finalize $request Finalize request object
 	 * @return string
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function getFinalizeUrl(FinalizeRequest $request)
 	{
 		return self::getUrl() . '/Finalize?' . $request->getParams();
 	}
-	
+
 	/**
 	 * Get one click payment options
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\OneClickOptions $request
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function oneClickOptions(OneClickOptionsRequest $request)
 	{
@@ -403,11 +414,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * One Click Token Cancel
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\OneClickTokenCancel $request OneClickTokenCancel request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function oneClickTokenCancel(OneClickTokenCancelRequest $request)
 	{
@@ -416,11 +428,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * One Click Token Cancel All
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\OneClickTokenCancelAll $request OneClickTokenCancelAll request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function oneClickTokenCancelAll(OneClickTokenCancelAllRequest $request)
 	{
@@ -429,24 +442,26 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Get invoice
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Invoice $request
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function invoice(InvoiceRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_INVOICE, $request);
 	}
-	
+
 	/**
 	 * Get providers
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Providers $request
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function providers(ProvidersRequest $request)
 	{
@@ -455,11 +470,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Query transaction details from Payment Gateway
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Details $request Details request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function details(DetailsRequest $request)
 	{
@@ -468,11 +484,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Payment link create
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\PaymentLinkCreate $request Payment link create request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function paymentLinkCreate(PaymentLinkCreateRequest $request)
 	{
@@ -481,11 +498,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Payment link cancel
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\PaymentLinkCancel $request Payment link cancel request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function paymentLinkCancel(PaymentLinkCancelRequest $request)
 	{
@@ -494,11 +512,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Payment link details
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\PaymentLinkDetails $request Payment link details request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function paymentLinkDetails(PaymentLinkDetailsRequest $request)
 	{
@@ -507,23 +526,25 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Query transaction log from Payment Gateway
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Request\Log $request Log request object
 	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public static function log(LogRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_LOG, $request);
 	}
-	
+
 	/**
 	 * Get service URL
-	 * 
+	 *
 	 * @return string
 	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	protected static function getUrl()
 	{
@@ -692,12 +713,13 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Prepare request
-	 * 
+	 *
 	 * @param string $method
 	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
 	 * @return void
 	 * @access private
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	private static function prepareRequest($method, Request $request)
 	{
@@ -715,10 +737,11 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Get authorization header
-	 * 
+	 *
 	 * @return string
 	 * @access private
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	private static function getAuthorizationHeader()
 	{
@@ -727,11 +750,12 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Get user agent string
-	 * 
+	 *
 	 * @param string $method
 	 * @return string
 	 * @access private
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	private static function getUserAgent($method)
 	{
@@ -742,6 +766,8 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			case self::API_REST:
 				$clientType = 'Rest';
 				break;
+			default:
+				throw new Exception('No API type defined!');
 		}
 
 		return sprintf('BIG FISH Payment Gateway %s Client v%s (%s - %s)', $clientType, self::VERSION, $method, self::getHttpHost());

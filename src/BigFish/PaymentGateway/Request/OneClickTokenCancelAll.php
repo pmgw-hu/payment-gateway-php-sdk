@@ -9,7 +9,6 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Request\RequestAbstract;
 
 /**
  * One Click Token Cancel All request class
@@ -45,9 +44,10 @@ class OneClickTokenCancelAll extends RequestAbstract
 
 	/**
 	 * Construct new One Click Token Cancel All request instance
-	 * 
-	 * @param $string $providerName
-	 * @param $string $userId
+	 *
+	 * @param string $providerName
+	 * @param string $userId
+	 * @throws \BigFish\PaymentGateway\Exception
 	 * @return void
 	 * @access public
 	 */

@@ -15,12 +15,11 @@
 		"email": "paymentgateway@bigfish.hu"
 	},
 	"require": {
-		"php": ">=5.3.3"
+		"php": "~5.3|~7.0"
 	},
 	"autoload": {
 		"psr-4": {
 			"BigFish\\": "src/BigFish"
 		}
-	},
-	"minimum-stability": "dev"
+	}
 }

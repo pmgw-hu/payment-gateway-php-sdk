@@ -19,8 +19,9 @@ class Response
 {
 	/**
 	 * Construct new response object from JSON encoded object
-	 * 
+	 *
 	 * @param string $json JSON encoded object
+	 * @throws \BigFish\PaymentGateway\Exception
 	 * @return void
 	 * @access public
 	 */
@@ -39,10 +40,11 @@ class Response
 
 	/**
 	 * Set object
-	 * 
+	 *
 	 * @param object $object
 	 * @return void
 	 * @access protected
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	protected function setObject($object)
 	{
@@ -61,11 +63,12 @@ class Response
 
 	/**
 	 * Set value
-	 * 
+	 *
 	 * @param string $name
 	 * @param string $value
 	 * @return void
 	 * @access protected
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	protected function setValue($name, $value)
 	{
