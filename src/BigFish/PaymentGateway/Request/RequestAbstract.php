@@ -21,12 +21,14 @@ abstract class RequestAbstract
 {
 	/**
 	 * Construct query string from object properties
-	 * 
+	 *
 	 * @return string Constructed query string
 	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function getParams()
 	{
+		$params = array();
 		foreach ($this as $name => $value) {
 			$value = trim($value);
 
@@ -39,10 +41,11 @@ abstract class RequestAbstract
 
 	/**
 	 * Encode value
-	 * 
+	 *
 	 * @param string $value
 	 * @return string
 	 * @access protected
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	protected function encodeValue($value)
 	{
@@ -59,9 +62,10 @@ abstract class RequestAbstract
 
 	/**
 	 * Encode object parameter values
-	 * 
+	 *
 	 * @return void
 	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function encodeValues()
 	{

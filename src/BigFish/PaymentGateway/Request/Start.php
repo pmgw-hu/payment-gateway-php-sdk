@@ -8,8 +8,6 @@
  */
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
-
 /**
  * Start request class
  * 
@@ -40,9 +38,10 @@ class Start extends RequestAbstract
 
 	/**
 	 * Get object parameters
-	 * 
+	 *
 	 * @return string
 	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function getParams()
 	{

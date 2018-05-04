@@ -18,7 +18,7 @@ class Autoload
 	/**
 	 * Autoloader instance
 	 * 
-	 * @var BigFish\PaymentGateway\Autoload
+	 * @var \BigFish\PaymentGateway\Autoload
 	 * @access private
 	 * @static
 	 */
@@ -66,7 +66,7 @@ class Autoload
 	/**
 	 * Get autoloader instance
 	 * 
-	 * @return BigFish\PaymentGateway\Autoload
+	 * @return \BigFish\PaymentGateway\Autoload
 	 * @access private
 	 * @static
 	 */

@@ -8,7 +8,6 @@
  */
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway;
 
 /**
@@ -29,7 +28,8 @@ class Providers extends RequestAbstract
 
 	/**
 	 * Construct new Providers request instance
-	 * 
+	 *
+	 * @throws \BigFish\PaymentGateway\Exception
 	 * @return void
 	 * @access public
 	 */

@@ -8,7 +8,6 @@
  */
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
 use BigFish\PaymentGateway;
 
 /**
@@ -45,9 +44,10 @@ class OneClickOptions extends RequestAbstract
 
 	/**
 	 * Construct new One Click Options request instance
-	 * 
+	 *
 	 * @param string $providerName Provider name
 	 * @param string $userId User identifier
+	 * @throws \BigFish\PaymentGateway\Exception
 	 * @return void
 	 * @access public
 	 */

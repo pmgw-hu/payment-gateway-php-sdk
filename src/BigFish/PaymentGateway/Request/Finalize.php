@@ -8,8 +8,6 @@
  */
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Request\RequestAbstract;
-
 /**
  * Finalize request class
  * 
@@ -47,12 +45,13 @@ class Finalize extends RequestAbstract
 		$this->transactionId = $transactionId;
 		$this->amount = (float)$amount;
 	}
-	
+
 	/**
 	 * Get object parameters
 	 * 
 	 * @return string
 	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function getParams()
 	{

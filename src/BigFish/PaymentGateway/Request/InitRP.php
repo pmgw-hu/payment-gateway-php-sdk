@@ -67,6 +67,14 @@ class InitRP extends RequestAbstract
 	public $currency;
 
 	/**
+	 * Store name
+	 * 
+	 * @var string
+	 * @access public
+	 */
+	public $storeName;
+
+	/**
 	 * Module name
 	 *
 	 * @var string
@@ -84,8 +92,9 @@ class InitRP extends RequestAbstract
 
 	/**
 	 * Construct new recurring payment Init request instance
-	 * 
+	 *
 	 * @access public
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function __construct()
 	{
