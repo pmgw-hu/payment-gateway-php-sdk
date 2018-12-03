@@ -29,6 +29,7 @@ use BigFish\PaymentGateway\Request\Providers as ProvidersRequest;
 use BigFish\PaymentGateway\Request\PaymentLinkCreate as PaymentLinkCreateRequest;
 use BigFish\PaymentGateway\Request\PaymentLinkCancel as PaymentLinkCancelRequest;
 use BigFish\PaymentGateway\Request\PaymentLinkDetails as PaymentLinkDetailsRequest;
+use BigFish\PaymentGateway\Request\Settlement as SettlementRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
@@ -48,7 +49,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.12.2';
+	const VERSION = '2.13.0';
 
 	/**
 	 * API type constants
@@ -97,6 +98,9 @@ class PaymentGateway
 	const REQUEST_PAYMENT_LINK_CANCEL = 'PaymentLinkCancel';
 
 	const REQUEST_PAYMENT_LINK_DETAILS = 'PaymentLinkDetails';
+
+	const REQUEST_SETTLEMENT = 'Settlement';
+
 	/**
 	 * Result code constants
 	 * 
@@ -522,6 +526,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public static function paymentLinkDetails(PaymentLinkDetailsRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_PAYMENT_LINK_DETAILS, $request);
+	}
+
+	/**
+	 * Get Settlement data
+	 *
+	 * @param \BigFish\PaymentGateway\Request\Settlement $request Settlement request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function settlement(SettlementRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_SETTLEMENT, $request);
 	}
 
 	/**
