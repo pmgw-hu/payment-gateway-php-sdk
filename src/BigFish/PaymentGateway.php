@@ -49,7 +49,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.13.0';
+	const VERSION = '2.14.0';
 
 	/**
 	 * API type constants
@@ -126,6 +126,8 @@ class PaymentGateway
 	const PROVIDER_BARION = 'Barion';
 
 	const PROVIDER_BARION2 = 'Barion2';
+
+	const PROVIDER_BBARUHITEL = 'BBAruhitel';
 
 	const PROVIDER_BORGUN = 'Borgun';
 
