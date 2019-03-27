@@ -172,6 +172,14 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
+	 * Normal One-click payment (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay)
+	 *
+	 * @var boolean
+	 * @access public
+	 */
+	public $normalPayment = false;
+
+	/**
 	 * One Click Payment Reference Id (Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay)
 	 * 
 	 * @var string
@@ -524,6 +532,20 @@ class Init extends RequestAbstract
 	}
 
 	/**
+	 * Enable or disable Normal One Click Payment of the user
+	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay provider
+	 *
+	 * @param boolean $oneClickNormalPayment true or false
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setOneClickNormalPayment($oneClickNormalPayment = false)
+	{
+		$this->normalPayment = (($oneClickNormalPayment === true || $oneClickNormalPayment == "true") ? true : false);
+		return $this;
+	}
+
+	/**
 	 * Set One Click Payment Reference Id
 	 * Works with Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay providers
 	 *
@@ -575,6 +597,10 @@ class Init extends RequestAbstract
 	 */
 	public function setExtra(array $extra = array())
 	{
+		if ((in_array($this->providerName, self::$oneClickProviders) && isset($this->normalPayment) && $this->normalPayment)) {
+			$extra['OneClickNormalPayment'] = true;
+		}
+
 		if (in_array($this->providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) && !empty($this->otpConsumerRegistrationId)) {
 			$this->encryptExtra(array(
 				'otpConsumerRegistrationId' => $this->otpConsumerRegistrationId
@@ -623,6 +649,7 @@ class Init extends RequestAbstract
 		unset($this->otpConsumerRegistrationId);
 		unset($this->mkbSzepCardNumber);
 		unset($this->mkbSzepCvv);
+		unset($this->normalPayment);
 
 		return $this;
 	}
