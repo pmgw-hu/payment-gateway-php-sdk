@@ -172,12 +172,12 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
-	 * Normal One-click payment (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay)
+	 * One Click Payment with forced registration (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay)
 	 *
 	 * @var boolean
 	 * @access public
 	 */
-	public $normalPayment = false;
+	public $oneClickForcedRegistration = false;
 
 	/**
 	 * One Click Payment Reference Id (Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay)
@@ -532,16 +532,16 @@ class Init extends RequestAbstract
 	}
 
 	/**
-	 * Enable or disable Normal One Click Payment of the user
+	 * Enable or disable One Click Payment with forced registration
 	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay provider
 	 *
-	 * @param boolean $oneClickNormalPayment true or false
+	 * @param boolean $oneClickForcedRegistration true or false
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
 	 */
-	public function setOneClickNormalPayment($oneClickNormalPayment = false)
+	public function setOneClickForcedRegistration($oneClickForcedRegistration = false)
 	{
-		$this->normalPayment = (($oneClickNormalPayment === true || $oneClickNormalPayment == "true") ? true : false);
+		$this->oneClickForcedRegistration = (($oneClickForcedRegistration === true || $oneClickForcedRegistration == "true") ? true : false);
 		return $this;
 	}
 
@@ -597,8 +597,8 @@ class Init extends RequestAbstract
 	 */
 	public function setExtra(array $extra = array())
 	{
-		if ((in_array($this->providerName, self::$oneClickProviders) && isset($this->normalPayment) && $this->normalPayment)) {
-			$extra['OneClickNormalPayment'] = true;
+		if ((in_array($this->providerName, self::$oneClickProviders) && isset($this->oneClickForcedRegistration) && $this->oneClickForcedRegistration)) {
+			$extra['oneClickForcedRegistration'] = true;
 		}
 
 		if (in_array($this->providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) && !empty($this->otpConsumerRegistrationId)) {
@@ -649,7 +649,7 @@ class Init extends RequestAbstract
 		unset($this->otpConsumerRegistrationId);
 		unset($this->mkbSzepCardNumber);
 		unset($this->mkbSzepCvv);
-		unset($this->normalPayment);
+		unset($this->oneClickForcedRegistration);
 
 		return $this;
 	}
