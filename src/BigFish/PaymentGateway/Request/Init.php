@@ -211,14 +211,14 @@ class Init extends RequestAbstract
 	 * @static
 	 */
 	protected static $oneClickProviders = array(
-		'Escalion',
-		'OTPSimple',
-		'Saferpay',
-		'PayPal',
-		'Barion2',
-		'Borgun2',
-		'GP',
-		'Virpay',
+		PaymentGateway::PROVIDER_ESCALION,
+		PaymentGateway::PROVIDER_OTP_SIMPLE,
+		PaymentGateway::PROVIDER_SAFERPAY,
+		PaymentGateway::PROVIDER_PAYPAL,
+		PaymentGateway::PROVIDER_BARION2,
+		PaymentGateway::PROVIDER_BORGUN2,
+		PaymentGateway::PROVIDER_GP,
+		PaymentGateway::PROVIDER_VIRPAY,
 	);
 	
 	/**
