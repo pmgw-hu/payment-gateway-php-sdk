@@ -164,7 +164,7 @@ class Init extends RequestAbstract
 	public $mkbSzepCvv;
 	
 	/**
-	 * One-click payment state (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay)
+	 * One-click payment state (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST)
 	 * 
 	 * @var boolean
 	 * @access public
@@ -172,7 +172,7 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
-	 * One Click Payment Reference Id (Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay)
+	 * One Click Payment Reference Id (Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST)
 	 * 
 	 * @var string
 	 * @access public
@@ -211,6 +211,7 @@ class Init extends RequestAbstract
 		'Borgun2',
 		'GP',
 		'Virpay',
+		PaymentGateway::PROVIDER_PAYUREST,
 	);
 	
 	/**
@@ -511,7 +512,7 @@ class Init extends RequestAbstract
 	
 	/**
 	 * Enable or disable One Click Payment of the user
-	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay provider
+	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST provider
 	 *
 	 * @param boolean $oneClickPayment true or false
 	 * @return \BigFish\PaymentGateway\Request\Init
@@ -525,7 +526,7 @@ class Init extends RequestAbstract
 
 	/**
 	 * Set One Click Payment Reference Id
-	 * Works with Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay providers
+	 * Works with Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST providers
 	 *
 	 * @param string $oneClickReferenceId
 	 * @return \BigFish\PaymentGateway\Request\Init
