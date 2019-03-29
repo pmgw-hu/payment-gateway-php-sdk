@@ -49,7 +49,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.13.0';
+	const VERSION = '2.14.0';
 
 	/**
 	 * API type constants
@@ -168,6 +168,8 @@ class PaymentGateway
 	const PROVIDER_PAYSAFECASH = 'Paysafecash';
 
 	const PROVIDER_PAYU2 = 'PayU2';
+
+	const PROVIDER_PAYUREST = 'PayURest';
 
 	const PROVIDER_SAFERPAY = 'Saferpay';
 
