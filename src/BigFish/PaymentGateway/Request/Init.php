@@ -172,6 +172,14 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
+	 * One Click Payment with forced registration (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST)
+	 *
+	 * @var boolean
+	 * @access public
+	 */
+	public $oneClickForcedRegistration = false;
+
+	/**
 	 * One Click Payment Reference Id (Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST)
 	 * 
 	 * @var string
@@ -203,14 +211,14 @@ class Init extends RequestAbstract
 	 * @static
 	 */
 	protected static $oneClickProviders = array(
-		'Escalion',
-		'OTPSimple',
-		'Saferpay',
-		'PayPal',
-		'Barion2',
-		'Borgun2',
-		'GP',
-		'Virpay',
+		PaymentGateway::PROVIDER_ESCALION,
+		PaymentGateway::PROVIDER_OTP_SIMPLE,
+		PaymentGateway::PROVIDER_SAFERPAY,
+		PaymentGateway::PROVIDER_PAYPAL,
+		PaymentGateway::PROVIDER_BARION2,
+		PaymentGateway::PROVIDER_BORGUN2,
+		PaymentGateway::PROVIDER_GP,
+		PaymentGateway::PROVIDER_VIRPAY,
 		PaymentGateway::PROVIDER_PAYUREST,
 	);
 	
@@ -525,6 +533,20 @@ class Init extends RequestAbstract
 	}
 
 	/**
+	 * Enable or disable One Click Payment with forced registration
+	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST provider
+	 *
+	 * @param boolean $oneClickForcedRegistration true or false
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setOneClickForcedRegistration($oneClickForcedRegistration = false)
+	{
+		$this->oneClickForcedRegistration = (($oneClickForcedRegistration === true || $oneClickForcedRegistration == "true") ? true : false);
+		return $this;
+	}
+
+	/**
 	 * Set One Click Payment Reference Id
 	 * Works with Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST providers
 	 *
@@ -576,6 +598,10 @@ class Init extends RequestAbstract
 	 */
 	public function setExtra(array $extra = array())
 	{
+		if ((in_array($this->providerName, self::$oneClickProviders) && isset($this->oneClickForcedRegistration) && $this->oneClickForcedRegistration)) {
+			$extra['oneClickForcedRegistration'] = true;
+		}
+
 		if (in_array($this->providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) && !empty($this->otpConsumerRegistrationId)) {
 			$this->encryptExtra(array(
 				'otpConsumerRegistrationId' => $this->otpConsumerRegistrationId
@@ -624,6 +650,7 @@ class Init extends RequestAbstract
 		unset($this->otpConsumerRegistrationId);
 		unset($this->mkbSzepCardNumber);
 		unset($this->mkbSzepCvv);
+		unset($this->oneClickForcedRegistration);
 
 		return $this;
 	}
