@@ -18,11 +18,11 @@ BIG FISH Payment Gateway is available at packagist.org, so you can use composer 
 ```
 {
     "require": {
-        "bigfish/paymentgateway": "dev-master"
+        "bigfish/paymentgateway": "dev-testing"
     }
 }
 ```
 
 ## Source code
 
-https://github.com/bigfish-hu/payment-gateway-php-sdk
+https://github.com/bigfish-hu/payment-gateway-php-sdk/tree/testing
