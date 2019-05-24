@@ -679,20 +679,6 @@ class Init extends RequestAbstract
 	}
 
 	/**
-	 * Get object parameters
-	 * 
-	 * @return string
-	 * @access public
-	 * @throws Exception
-	 */
-	public function getParams()
-	{
-		$this->setExtra();
-		
-		return parent::getParams();
-	}
-
-	/**
 	 * URL safe encode (base64)
 	 * 
 	 * @param string $string

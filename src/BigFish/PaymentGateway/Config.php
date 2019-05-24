@@ -17,11 +17,11 @@ use BigFish\PaymentGateway;
  * @property string $apiKey API key
  * @property boolean $testMode Use testing environment (default: true)
  * @property string $outCharset Output character set
- * @property string $useApi API type (SOAP or REST)
  * @property string $encryptPublicKey Public key used for encryption
  * @property string $moduleName Module name
  * @property string $moduleVersion Module version
- * @property string $gatewayUrlTest Test service URL
+ * @property string $apiUrlTest Test API URL
+ * @property string $redirectUrlTest Test redirect URL
  * @package PaymentGateway
  */
 class Config
@@ -61,17 +61,6 @@ class Config
 	protected $outCharset = 'UTF-8';
 
 	/**
-	 * Possible values:
-	 * - "SOAP": RPC SOAP API
-	 * - "REST": HTTP REST API
-	 * 
-	 * @var string
-	 * @access protected
-	 * @see PaymentGateway
-	 */
-	protected $useApi = PaymentGateway::API_REST;
-
-	/**
 	 * It is used to encrypt sensitive data.
 	 * Each merchant has unique private and public keys.
 	 * 
@@ -97,12 +86,20 @@ class Config
 	protected $moduleVersion = PaymentGateway::VERSION;
 
 	/**
-	 * Test service URL
+	 * Test API URL
 	 * 
 	 * @var string
 	 * @access protected
 	 */
-	protected $gatewayUrlTest = PaymentGateway::GATEWAY_URL_TEST;
+	protected $apiUrlTest = PaymentGateway::API_URL_TEST;
+
+	/**
+	 * Test redirect URL
+	 * 
+	 * @var string
+	 * @access protected
+	 */
+	protected $redirectUrlTest = PaymentGateway::REDIRECT_URL_TEST;
 
 	/**
 	 * Constructor

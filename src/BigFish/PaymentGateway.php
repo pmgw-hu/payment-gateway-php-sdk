@@ -49,15 +49,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.14.0';
-
-	/**
-	 * API type constants
-	 * 
-	 */
-	const API_SOAP = 'SOAP';
-
-	const API_REST = 'REST';
+	const VERSION = '3.0.0';
 
 	/**
 	 * API request type constants
@@ -209,16 +201,28 @@ XIm63iVw6gjP2qDnNwIDAQAB
 -----END PUBLIC KEY-----';
 
 	/**
-	 * Production service URL
+	 * Production API URL
 	 * 
 	 */
-	const GATEWAY_URL_PRODUCTION = 'https://www.paymentgateway.hu';
+	const API_URL_PRODUCTION = 'https://api-system.paymentgateway.hu';
 
 	/**
-	 * Test service URL
+	 * Test API URL
 	 * 
 	 */
-	const GATEWAY_URL_TEST = 'https://test.paymentgateway.hu';
+	const API_URL_TEST = 'https://api-system-test.paymentgateway.hu';
+
+	/**
+	 * Production redirect URL
+	 * 
+	 */
+	const REDIRECT_URL_PRODUCTION = 'https://system.paymentgateway.hu';
+
+	/**
+	 * Test redirect URL
+	 * 
+	 */
+	const REDIRECT_URL_TEST = 'https://system-test.paymentgateway.hu';
 
 	/**
 	 * Configuration
@@ -304,7 +308,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	public static function getStartUrl(StartRequest $request)
 	{
-		return self::getUrl() . '/Start?' . $request->getParams();
+		return self::getRedirectUrl() . '/Start?' . $request->getParams();
 	}
 
 	/**
@@ -403,7 +407,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	public static function getFinalizeUrl(FinalizeRequest $request)
 	{
-		return self::getUrl() . '/Finalize?' . $request->getParams();
+		return self::getRedirectUrl() . '/Finalize?' . $request->getParams();
 	}
 
 	/**
@@ -561,36 +565,36 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
-	 * Get service URL
+	 * Get API URL
 	 *
 	 * @return string
 	 * @access public
 	 * @static
 	 * @throws \BigFish\PaymentGateway\Exception
 	 */
-	protected static function getUrl()
+	protected static function getApiUrl()
 	{
 		if (self::getConfig()->testMode === true) {
-			return self::getConfig()->gatewayUrlTest;
+			return self::getConfig()->apiUrlTest;
 		} else {
-			return self::GATEWAY_URL_PRODUCTION;
+			return self::API_URL_PRODUCTION;
 		}
 	}
 
 	/**
-	 * Uppercase object properties
-	 * 
-	 * @param object $object
-	 * @return void 
-	 * @access protected
+	 * Get redirect URL
+	 *
+	 * @return string
+	 * @access public
 	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
 	 */
-	public static function ucfirstProps($object)
+	protected static function getRedirectUrl()
 	{
-		foreach (get_object_vars($object) as $key => $value) {
-			unset($object->{$key});
-
-			$object->{ucfirst($key)} = $value;
+		if (self::getConfig()->testMode === true) {
+			return self::getConfig()->redirectUrlTest;
+		} else {
+			return self::REDIRECT_URL_PRODUCTION;
 		}
 	}
 
@@ -606,78 +610,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function sendRequest($method, Request $request)
 	{
-		switch (self::getConfig()->useApi) {
-			case self::API_SOAP:
-				return self::sendSoapRequest($method, $request);
-			case self::API_REST:
-				return self::sendRestRequest($method, $request);
-			default:
-				throw new Exception(sprintf('Invalid API type (%s)', self::getConfig()->useApi));
-		}
-	}
-
-	/**
-	 * Send SOAP request
-	 * 
-	 * @param string $method
-	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
-	 * @return \BigFish\PaymentGateway\Response
-	 * @access private
-	 * @static
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	private static function sendSoapRequest($method, Request $request)
-	{
-		if (!class_exists('SoapClient')) {
-			throw new Exception('SOAP PHP module is not loaded');
-		}
-
-		$wsdl = self::getUrl() . '/api/soap/?wsdl';
-
-		try {
-			$client = new \SoapClient($wsdl, array(
-				'soap_version' => SOAP_1_2,
-				'cache_wsdl' => WSDL_CACHE_BOTH,
-				'exceptions' => true,
-				'trace' => true,
-				'login' => self::getConfig()->storeName,
-				'password' => self::getConfig()->apiKey,
-				'user_agent' => self::getUserAgent($method),
-			));
-
-			self::prepareRequest($method, $request);
-
-			$soapResult = $client->__call($method, array(array('request' => $request)));
-			
-			$soapResponse = $soapResult->{$method . 'Result'};
-			
-			self::ucfirstProps($soapResponse);
-			
-			return new Response($soapResponse);
-		} catch (\SoapFault $e) {
-			throw new Exception($e->getMessage());
-		}
-	}
-
-	/**
-	 * Send REST request
-	 * 
-	 * @param string $method
-	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
-	 * @return \BigFish\PaymentGateway\Response
-	 * @access private
-	 * @static
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	private static function sendRestRequest($method, Request $request)
-	{
 		if (!function_exists('curl_init')) {
 			throw new Exception('cURL PHP module is not loaded');
 		}
 
-		$url = self::getUrl() . '/api/rest/';
+		$url = self::getApiUrl();
 
-		self::prepareRequest($method, $request);
+		$request->encodeValues();
+
+		if ($method == self::REQUEST_INIT) {
+			$request->setExtra();
+		}
+
+		$request->ucfirstProps();
 
 		$ch = curl_init();
 
@@ -734,30 +679,6 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
-	 * Prepare request
-	 *
-	 * @param string $method
-	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
-	 * @return void
-	 * @access private
-	 * @static
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	private static function prepareRequest($method, Request $request)
-	{
-		$request->encodeValues();
-
-		if ($method == self::REQUEST_INIT) {
-			/** @var \BigFish\PaymentGateway\Request\Init $request */
-			$request->setExtra();
-		}
-
-		if (self::getConfig()->useApi == self::API_REST) {
-			self::ucfirstProps($request);
-		}
-	}
-
-	/**
 	 * Get authorization header
 	 *
 	 * @return string
@@ -781,18 +702,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function getUserAgent($method)
 	{
-		switch (self::getConfig()->useApi) {
-			case self::API_SOAP:
-				$clientType = 'SOAP';
-				break;
-			case self::API_REST:
-				$clientType = 'Rest';
-				break;
-			default:
-				throw new Exception('No API type defined!');
-		}
-
-		return sprintf('BIG FISH Payment Gateway %s Client v%s (%s - %s)', $clientType, self::VERSION, $method, self::getHttpHost());
+		return sprintf('%s | %s | %s | %s', $method, self::getHttpHost(), self::NAME, self::VERSION);
 	}
 
 	/**
