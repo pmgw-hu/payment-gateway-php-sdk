@@ -568,7 +568,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * Get API URL
 	 *
 	 * @return string
-	 * @access public
+	 * @access protected
 	 * @static
 	 * @throws \BigFish\PaymentGateway\Exception
 	 */
@@ -585,7 +585,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * Get redirect URL
 	 *
 	 * @return string
-	 * @access public
+	 * @access protected
 	 * @static
 	 * @throws \BigFish\PaymentGateway\Exception
 	 */
