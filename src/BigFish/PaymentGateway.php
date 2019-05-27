@@ -16,7 +16,6 @@ use BigFish\PaymentGateway\Request\RequestInterface;
 use BigFish\PaymentGateway\Transport\Response\Response;
 use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 use BigFish\PaymentGateway\Transport\RestTransport;
-use BigFish\PaymentGateway\Transport\SoapTransport;
 
 /**
  * Class PaymentGateway
@@ -38,10 +37,14 @@ class PaymentGateway
 	 * Providers
 	 */
 	const PROVIDER_ABAQOOS = 'ABAQOOS';
+	const PROVIDER_BARION2 = 'Barion2';
 	const PROVIDER_BORGUN = 'Borgun';
+	const PROVIDER_BORGUN2 = 'Borgun2';
 	const PROVIDER_CIB = 'CIB';
 	const PROVIDER_ESCALION = 'Escalion';
 	const PROVIDER_FHB = 'FHB';
+	const PROVIDER_GP = 'GP';
+	const PROVIDER_IPG = 'IPG';
 	const PROVIDER_KHB = 'KHB';
 	const PROVIDER_KHB_SZEP = 'KHBSZEP';
 	const PROVIDER_MKB_SZEP = 'MKBSZEP';
@@ -54,11 +57,13 @@ class PaymentGateway
 	const PROVIDER_OTPAY_MASTERPASS = 'OTPayMP';
 	const PROVIDER_PAYPAL = 'PayPal';
 	const PROVIDER_PAYSAFECARD = 'PSC';
+	const PROVIDER_PAYSAFECASH = 'Paysafecash';
 	const PROVIDER_PAYU2 = 'PayU2';
 	const PROVIDER_SAFERPAY = 'Saferpay';
 	const PROVIDER_SMS = 'SMS';
 	const PROVIDER_SOFORT = 'Sofort';
 	const PROVIDER_UNICREDIT = 'UniCredit';
+	const PROVIDER_VIRPAY = 'Virpay';
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 
 	/**
@@ -75,8 +80,14 @@ class PaymentGateway
 	const REQUEST_START_RP = 'StartRP';
 	const REQUEST_FINALIZE = 'Finalize';
 	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
+	const REQUEST_ONE_CLICK_TOKEN_CANCEL = 'OneClickTokenCancel';
+	const REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL = 'OneClickTokenCancelAll';
 	const REQUEST_INVOICE = 'Invoice';
 	const REQUEST_PROVIDERS = 'Providers';
+	const REQUEST_PAYMENT_LINK_CREATE = 'PaymentLinkCreate';
+	const REQUEST_PAYMENT_LINK_CANCEL = 'PaymentLinkCancel';
+	const REQUEST_PAYMENT_LINK_DETAILS = 'PaymentLinkDetails';
+	const REQUEST_SETTLEMENT = 'Settlement';
 
 	/**
 	 * @var Config
@@ -111,7 +122,7 @@ class PaymentGateway
 	}
 
 	/**
-	 * @return RestTransport|SoapTransport
+	 * @return RestTransport
 	 * @throws PaymentGatewayException
 	 */
 	protected function getTransport()
@@ -119,9 +130,6 @@ class PaymentGateway
 		switch ($this->config->getApiType()) {
 			case Config::TRANSPORT_TYPE_REST_API:
 				return new RestTransport($this->config);
-				break;
-			case Config::TRANSPORT_TYPE_SOAP_API:
-				return new SoapTransport($this->config);
 				break;
 			default:
 				throw new PaymentGatewayException('Unknown transport type');

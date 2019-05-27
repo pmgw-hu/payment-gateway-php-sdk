@@ -4,7 +4,7 @@ namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
 
-class OneClickOptions extends InitBasicAbstract
+class OneClickTokenCancelAll extends InitBasicAbstract
 {
 	/**
 	 * @param string $providerName
@@ -14,7 +14,6 @@ class OneClickOptions extends InitBasicAbstract
 	{
 		$this->setProviderName($providerName);
 		$this->data['userId'] = $userID;
-		parent::__construct();
 	}
 
 	/**
@@ -22,6 +21,6 @@ class OneClickOptions extends InitBasicAbstract
 	 */
 	public function getMethod(): string
 	{
-		return PaymentGateway::REQUEST_ONE_CLICK_OPTIONS;
+		return PaymentGateway::REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL;
 	}
 }

@@ -137,14 +137,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @test
 	 */
-	public function useApi_type_soap()
-	{
-		$this->assertUseApi(Config::TRANSPORT_TYPE_SOAP_API, Config::TRANSPORT_TYPE_SOAP_API);
-	}
-
-	/**
-	 * @test
-	 */
 	public function useApi_setNonBooleanValue_null()
 	{
 		$this->assertUseApi(false, null);

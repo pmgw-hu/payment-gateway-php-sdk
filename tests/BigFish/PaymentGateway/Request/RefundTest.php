@@ -5,14 +5,14 @@ namespace BigFish\Tests\PaymentGateway\Request;
 use BigFish\PaymentGateway\Request\Refund;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
-class RefundTest extends SimpleRequestAbstract
+class RefundTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
 		return new Refund($transactionId, 1000);
 	}
 
-	protected function getDataKeys():array
+	protected function getDataKeys(): array
 	{
 		$result = parent::getDataKeys();
 		$result['amount'] = 1000;

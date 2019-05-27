@@ -4,10 +4,9 @@ namespace BigFish\Tests\PaymentGateway\Request;
 
 
 use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Request\Init;
-use BigFish\PaymentGateway\Request\InitRP;
+use BigFish\PaymentGateway\Request\PaymentLinkCreate;
 
-class InitRPTest extends \PHPUnit_Framework_TestCase
+class PaymentLinkCreateTest extends \PHPUnit_Framework_TestCase
 {
 
 	/**
@@ -47,9 +46,12 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	{
 		return array(
 			array('TestProvider', 'setProviderName'),
+			array('TestProvider', 'setProviderName'),
 			array('http://test.hu', 'setResponseUrl'),
 			array(100, 'setAmount'),
-			array('23234', 'setReferenceTransactionId'),
+			array(true, 'setEmailNotificationOnlySuccess'),
+			array('test@test.com', 'setNotificationEmail'),
+			array('2020-01-01 01:01:01', 'setExpirationTime'),
 			array(12345, 'setOrderId'),
 			array(54321, 'setUserId'),
 			array('EUR', 'setCurrency'),
@@ -115,33 +117,43 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 		$request->setAmount(0);
 	}
 
+    /**
+     * @test
+     * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
+     */
+    public function setNotificationEmail_invalidEmail()
+    {
+        $request = $this->getRequest();
+        $request->setNotificationEmail('test');
+    }
+
 	/**
-	 * @return InitRP
+	 * @return PaymentLinkCreate
 	 */
 	protected function getRequest()
 	{
-		return new InitRP();
+		return new PaymentLinkCreate();
 	}
 
-	public function testInitRPDefaultData()
+	public function testCreatePaylinkDefaultData()
 	{
-		$initRp = new InitRP();
+		$initRp = new PaymentLinkCreate();
 		$this->assertEquals(PaymentGateway::NAME, $initRp->getData()['moduleName']);
 		$this->assertEquals(PaymentGateway::VERSION, $initRp->getData()['moduleVersion']);
 	}
 
-	public function testInitRPSetModuleName()
+	public function testCreatePaylinkSetModuleName()
 	{
-		$initRp = new InitRP();
+		$initRp = new PaymentLinkCreate();
 		$initRp->setModuleName('test');
 
 		$this->assertArrayHasKey('moduleName', $initRp->getData());
 		$this->assertEquals('test', $initRp->getData()['moduleName']);
 	}
 
-	public function testInitRPSetModuleVersion()
+	public function testCreatePaylinkSetModuleVersion()
 	{
-		$initRp = new InitRP();
+		$initRp = new PaymentLinkCreate();
 		$initRp->setModuleVersion('42');
 
 		$this->assertArrayHasKey('moduleVersion', $initRp->getData());

@@ -2,7 +2,6 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 abstract class RequestAbstract implements RequestInterface
@@ -42,6 +41,7 @@ abstract class RequestAbstract implements RequestInterface
 		if ($maxSize = $this->getFieldMaxSize($fieldName)) {
 			$this->checkFieldSize($maxSize, $fieldName, $value);
 		}
+
 		$this->data[$fieldName] = $value;
 	}
 

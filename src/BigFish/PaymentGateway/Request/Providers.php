@@ -7,6 +7,13 @@ use BigFish\PaymentGateway;
 class Providers extends RequestAbstract
 {
 	/**
+	 * @var array
+	 */
+	protected $maxSize = array(
+		'storeName' => 20
+	);
+
+	/**
 	 * @param string $storeName
 	 * @return Providers
 	 */

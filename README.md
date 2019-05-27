@@ -10,7 +10,6 @@
 
  * PHP 7
  * for REST API you need PHP cURL extension
- * for SOAP API you need PHP SOAP extension
 
 ## Installation
 
@@ -56,7 +55,7 @@ $init->setProviderName(\BigFish\PaymentGateway::PROVIDER_CIB) // the chosen paym
 $response = $paymentGateway->send($init);
 ```
 
-### Start request
+#### Start request
 
 ```php
 if (!$response->ResultCode == "SUCCESSFUL" || !$response->TransactionId) {
@@ -68,7 +67,7 @@ $paymentGateway->send(
     );
 ```
 
-### Result request
+#### Result request
 
 ```php
 $result = $paymentGateway->send(
@@ -76,7 +75,7 @@ $result = $paymentGateway->send(
     );
 ```
 
-### Close request
+#### Close request
 
 ```php
 $response = $paymentGateway->send(
@@ -85,10 +84,57 @@ $response = $paymentGateway->send(
 ```
 
 
-### Refund request
+#### Refund request
 
 ```php
 $response = $paymentGateway->send(
         new \BigFish\PaymentGateway\Request\Refund($transActionId, 100)
+    );
+```
+
+
+#### One click token cancel request
+
+```php
+$response = $paymentGateway->send(
+        new \BigFish\PaymentGateway\Request\OneClickTokenCancel($transActionId)
+    );
+```
+
+#### All one click token cancel request
+
+```php
+$response = $paymentGateway->send(
+        new \BigFish\PaymentGateway\Request\OneClickTokenCancelAll($transActionId)
+    );
+```
+
+### Create Payment Link
+
+```php
+$paymentLink = new \BigFish\PaymentGateway\Request\PaymentLinkCreate();
+$paymentLink->setProviderName(\BigFish\PaymentGateway::PROVIDER_CIB) // the chosen payment method
+	->setAmount(1234)
+	->setCurrency('HUF')
+	->setOrderId('ORD-1234') // your custom order id
+	->setUserId('USR-1234') // your customer id
+	->setLanguage('HU');
+
+$response = $paymentGateway->send($paymentLink);
+```
+
+#### Cancel request
+
+```php
+$response = $paymentGateway->send(
+        new \BigFish\PaymentGateway\Request\PaymentLinkCancel($paymentLinkName)
+    );
+```
+
+#### Details request
+
+```php
+$response = $paymentGateway->send(
+        new \BigFish\PaymentGateway\Request\PaymentLinkDetails($paymentLinkName)
     );
 ```

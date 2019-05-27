@@ -5,7 +5,7 @@ namespace BigFish\Tests\PaymentGateway\Request;
 use BigFish\PaymentGateway\Request\Finalize;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
-class FinalizeTest extends SimpleRequestAbstract
+class FinalizeTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{

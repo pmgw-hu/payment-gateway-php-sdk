@@ -30,6 +30,61 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @test
+	 * @return
+	 * @throws PaymentGateway\Exception\PaymentGatewayException
+	 */
+	public function initBorgun()
+	{
+		$paymentGateWay = $this->getPaymentGateway();
+		$init = new PaymentGateway\Request\Init();
+		$init->setAmount(99)
+			->setUserId(123)
+			->setOrderId(123)
+			->setCurrency()
+			->setOneClickPayment()
+			->setOneClickForcedRegistration()
+			->setProviderName(PaymentGateway::PROVIDER_BORGUN2)
+			->setResponseUrl('http://integration.test.bigfish.hu')
+			->setAutoCommit()
+			->setExtra();
+
+		$result = $paymentGateWay->send($init);
+		$this->assertNotEmpty($result->TransactionId, 'No transaction id. Error: ' . $result->ResultMessage);
+		return $result->TransactionId;
+	}
+
+	public function getMock($originalClassName, $methods = [], array $arguments = [], $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $cloneArguments = false, $callOriginalMethods = false, $proxyTarget = null)
+	{
+		$builder = $this->getMockBuilder($originalClassName);
+
+		if (is_array($methods)) {
+			$builder->setMethods($methods);
+		}
+
+		if (is_array($arguments)) {
+			$builder->setConstructorArgs($arguments);
+		}
+
+		$callOriginalConstructor ? $builder->enableOriginalConstructor() : $builder->disableOriginalConstructor();
+		$callOriginalClone ? $builder->enableOriginalClone() : $builder->disableOriginalClone();
+		$callAutoload ? $builder->enableAutoload() : $builder->disableAutoload();
+		$cloneArguments ? $builder->enableOriginalClone() : $builder->disableOriginalClone();
+		$callOriginalMethods ? $builder->enableProxyingToOriginalMethods() : $builder->disableProxyingToOriginalMethods();
+
+		if ($mockClassName) {
+			$builder->setMockClassName($mockClassName);
+		}
+
+		if ($proxyTarget) {
+			$builder->setProxyTarget($proxyTarget);
+		}
+
+		$mockObject = $builder->getMock();
+		return $mockObject;
+	}
+
+	/**
+	 * @test
 	 * @depends init
 	 * @runInSeparateProcess
 	 */
@@ -146,7 +201,7 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 	public function OneClickOptions()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\OneClickOptions(PaymentGateway::PROVIDER_OTPAY, '12345')
+			new PaymentGateway\Request\OneClickOptions(PaymentGateway::PROVIDER_OTP_SIMPLE, 'BF-TEST-USER-REG')
 		);
 	}
 
@@ -171,6 +226,101 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 		$this->assertApiResponse(
 			new PaymentGateway\Request\Refund($this->init(), 1000)
 		);
+	}
+
+	/**
+	 * @test
+	 * @depends init
+	 * @runInSeparateProcess
+	 */
+	public function oneClickTokenCancelAll()
+	{
+		$this->assertApiResponse(
+			new PaymentGateway\Request\OneClickTokenCancelAll(PaymentGateway::PROVIDER_BORGUN2, 'sdk_test')
+		);
+	}
+
+	/**
+	 * @test
+	 * @return PaymentGateway\Transport\Response\ResponseInterface
+	 */
+	public function initPaylink()
+	{
+		$paymentGateWay = $this->getPaymentGateway();
+		$createPaylink = new PaymentGateway\Request\PaymentLinkCreate();
+		$createPaylink->setAmount(99)
+			->setCurrency()
+			->setProviderName(PaymentGateway::PROVIDER_OTPAY)
+			->setNotificationUrl('http://integration.test.bigfish.hu')
+			->setNotificationEmail('test@test.com')
+			->setAutoCommit();
+
+		$result = $paymentGateWay->send($createPaylink);
+
+		$this->assertNotEmpty($result->PaymentLinkName, 'No transaction id. Error: ' . $result->ResultMessage);
+		return $result;
+	}
+
+	/**
+	 * @test
+	 * @depends initPaylink
+	 * @runInSeparateProcess
+	 */
+	public function startPaylink()
+	{
+		$paylinkResult = $this->initPaylink();
+		$data = file_get_contents($paylinkResult->PaymentLinkUrl);
+
+		$this->assertNotContains('alert alert-error', $data);
+	}
+
+	/**
+	 * @test
+	 * @depends initPaylink
+	 * @runInSeparateProcess
+	 */
+	public function cancelPaylink()
+	{
+		$paylinkResult = $this->initPaylink();
+		$paymentGateWay = $this->getPaymentGateway();
+		$createPaylink = new PaymentGateway\Request\PaymentLinkCancel($paylinkResult->PaymentLinkName);
+		$result = $paymentGateWay->send($createPaylink);
+
+		$this->assertNotEmpty($result->PaymentLinkName, sprintf('Error: %s %s', $result->ResultCode, $result->ResultMessage));
+	}
+
+	/**
+	 * @test
+	 * @depends initPaylink
+	 * @runInSeparateProcess
+	 */
+	public function detailsPaymentLink()
+	{
+		$paymentlink = $this->initPaylink()->PaymentLinkName;
+		$this->assertApiResponse(
+			new PaymentGateway\Request\PaymentLinkDetails($paymentlink)
+		);
+	}
+
+	/**
+	 * @test
+	 * @return PaymentGateway\Transport\Response\ResponseInterface
+	 */
+	public function settlement()
+	{
+		$paymentGateWay = $this->getPaymentGateway();
+		$settlement = new PaymentGateway\Request\Settlement();
+		$settlement->setStoreName('sdk_test')
+			->setProviderName(PaymentGateway::PROVIDER_OTP_SIMPLE)
+			->setTerminalId('P000401')
+			->setSettlementDate('2019-03-15')
+			->setTransactionCurrency('HUF')
+			->setLimit(100);
+
+		$result = $paymentGateWay->send($settlement);
+
+		$this->assertNotEmpty($result->Data, sprintf('Error: %s - %s', $result->ResultCode, $result->ResultMessage));
+		return $result;
 	}
 
 	/**

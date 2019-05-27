@@ -41,6 +41,13 @@ class Init extends InitAbstract
 	 */
 	protected static $oneClickProviders = array(
 		PaymentGateway::PROVIDER_ESCALION,
+		PaymentGateway::PROVIDER_OTP_SIMPLE,
+		PaymentGateway::PROVIDER_SAFERPAY,
+		PaymentGateway::PROVIDER_PAYPAL,
+		PaymentGateway::PROVIDER_BARION2,
+		PaymentGateway::PROVIDER_BORGUN2,
+		PaymentGateway::PROVIDER_GP,
+		PaymentGateway::PROVIDER_VIRPAY,
 	);
 
 	/**
@@ -55,17 +62,6 @@ class Init extends InitAbstract
 	 * @var string
 	 */
 	protected $encryptPublicKey;
-
-
-	/**
-	 * @param string $storeName
-	 * @return Init
-	 */
-	public function setStoreName(string $storeName)
-	{
-		$this->saveData($storeName, 'storeName');
-		return $this;
-	}
 
 	/**
 	 * @param string $notificationUrl
@@ -196,6 +192,15 @@ class Init extends InitAbstract
 	}
 
 	/**
+	 * @return Init
+	 */
+	public function setOneClickForcedRegistration()
+	{
+		$this->data['oneClickForcedRegistration'] = true;
+		return $this;
+	}
+
+	/**
 	 * @param string $oneClickReferenceId
 	 * @return Init
 	 */
@@ -246,6 +251,10 @@ class Init extends InitAbstract
 	{
 		$providerName = $this->data['providerName'];
 		$encryptData = array();
+
+		if (in_array($providerName, self::$oneClickProviders) && isset($this->data['oneClickForcedRegistration'])) {
+			$extra['oneClickForcedRegistration'] = true;
+		}
 
 		if (
 			in_array($providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) &&
@@ -345,6 +354,10 @@ class Init extends InitAbstract
 
 		if (!(in_array($providerName, self::$oneClickProviders) && isset($this->data['oneClickReferenceId']))) {
 			unset($this->data['oneClickReferenceId']);
+		}
+
+		if (isset($this->data['oneClickForcedRegistration'])) {
+			unset($this->data['oneClickForcedRegistration']);
 		}
 
 		unset($this->data['otpCardNumber']);

@@ -60,9 +60,10 @@ abstract class TransportAbstract implements TransportInterface
 	protected function prepareRequest(RequestInterface $request)
 	{
 		if (
-			$request instanceof PaymentGateway\Request\Init ||
+			$request instanceof PaymentGateway\Request\InitAbstract ||
+			$request instanceof PaymentGateway\Request\Providers ||
 			$request instanceof PaymentGateway\Request\OneClickOptions ||
-			$request instanceof PaymentGateway\Request\Providers
+			$request instanceof PaymentGateway\Request\OneClickTokenCancelAll
 		) {
 			$request->setStoreName($this->config->getStoreName());
 		}

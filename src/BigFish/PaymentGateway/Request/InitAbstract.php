@@ -5,12 +5,13 @@ namespace BigFish\PaymentGateway\Request;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-abstract class InitAbstract extends RequestAbstract
+abstract class InitAbstract extends InitBasicAbstract
 {
 	/**
 	 * @var array
 	 */
 	protected $maxSize = array(
+		'storeName' => 20,
 		'orderId' => 255,
 		'userId' => 255,
 		'currency' => 3,
@@ -21,11 +22,10 @@ abstract class InitAbstract extends RequestAbstract
 	 * Set the default values from the constants.
 	 *
 	 * InitAbstract constructor.
-     */
+	 */
 	public function __construct()
 	{
-		$this->setModuleName(PaymentGateway::NAME);
-		$this->setModuleVersion(PaymentGateway::VERSION);
+		parent::__construct();
 	}
 
 	/**
@@ -99,53 +99,4 @@ abstract class InitAbstract extends RequestAbstract
 		$this->saveData($currency, 'currency');
 		return $this;
 	}
-
-	/**
-	 * @param string $providerName
-	 * @return static
-	 */
-	public function setProviderName(string $providerName)
-	{
-		$this->saveData($providerName, 'providerName');
-		return $this;
-	}
-
-	/**
-	 * @param string $fieldName
-	 * @return null|int
-	 */
-	protected function getFieldMaxSize(string $fieldName)
-	{
-		if (isset($this->maxSize[$fieldName])) {
-			return $this->maxSize[$fieldName];
-		}
-		return parent::getFieldMaxSize($fieldName);
-	}
-
-	/**
-	 * Save module name under the 'moduleName' key of the $data array.
-	 *
-	 * @param string $moduleName
-	 * @return RequestInterface
-	 * @access public
-	 */
-	public function setModuleName(string $moduleName): RequestInterface
-	{
-		$this->saveData($moduleName, 'moduleName');
-		return $this;
-	}
-
-	/**
-	 * Save module version under the 'moduleVersion' key of the $data array.
-	 *
-	 * @param string $moduleVersion
-	 * @return RequestInterface
-	 * @access public
-	 */
-	public function setModuleVersion(string $moduleVersion): RequestInterface
-	{
-		$this->saveData($moduleVersion, 'moduleVersion');
-		return $this;
-	}
-
 }

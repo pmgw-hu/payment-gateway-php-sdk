@@ -60,7 +60,6 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * Transport type
 	 */
 	const TRANSPORT_TYPE_REST_API = 'rest';
-	const TRANSPORT_TYPE_SOAP_API = 'soap';
 
 	/**
 	 * Default lang

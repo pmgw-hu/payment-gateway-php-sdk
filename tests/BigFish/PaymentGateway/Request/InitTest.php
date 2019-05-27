@@ -33,6 +33,7 @@ class InitTest extends InitRPTest
 			array('1122-3344-5566-777', 'setMkbSzepCardNumber'),
 			array('823', 'setMkbSzepCvv'),
 			array(true, 'setOneClickPayment'),
+			array(true, 'setOneClickForcedRegistration'),
 			array('7612312312', 'setOneClickReferenceId'),
 			array(true, 'setAutoCommit'),
 			array('something', 'setStoreName')
@@ -273,7 +274,7 @@ class InitTest extends InitRPTest
 	/**
 	 * @test
 	 */
-	public function setExtra_OneClickProvider()
+	public function setExtra_noOneClickProvider()
 	{
 		$init = $this->getRequest();
 		$init->setProviderName(PaymentGateway::PROVIDER_FHB);
@@ -281,12 +282,32 @@ class InitTest extends InitRPTest
 		$init->setEncryptKey($config->getEncryptPublicKey());
 		$init->setOneClickPayment();
 		$init->setOneClickReferenceId('testData');
+        $init->setOneClickForcedRegistration();
 		$init->setExtra();
 
 		$data = $init->getData();
 		$this->assertArrayNotHasKey('oneClickPayment', $data);
 		$this->assertArrayNotHasKey('oneClickReferenceId', $data);
+		$this->assertArrayNotHasKey('oneClickForcedRegistration', $data);
 	}
+
+    /**
+     * @test
+     */
+    public function setExtra_OneClickProvider()
+    {
+        $init = $this->getRequest();
+        $init->setProviderName(PaymentGateway::PROVIDER_BORGUN2);
+        $init->setOneClickPayment();
+        $init->setOneClickReferenceId('testData');
+        $init->setOneClickForcedRegistration();
+        $init->setExtra();
+
+        $data = $init->getData();
+        $this->assertArrayHasKey('oneClickPayment', $data);
+        $this->assertArrayHasKey('oneClickReferenceId', $data);
+        $this->assertArrayNotHasKey('oneClickForcedRegistration', $data);
+    }
 
 	/**
 	 * @test

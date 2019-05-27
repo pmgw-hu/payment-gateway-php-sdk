@@ -8,7 +8,7 @@ class Close extends RequestAbstract
 {
 	/**
 	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param bool $approve
+	 * @param bool $approve Approve or decline transaction (true/false)
 	 */
 	public function __construct(string $transactionId, bool $approve = true)
 	{

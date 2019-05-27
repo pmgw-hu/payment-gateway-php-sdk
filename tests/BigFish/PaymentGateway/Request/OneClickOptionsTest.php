@@ -7,12 +7,12 @@ use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\OneClickOptions;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
-class OneClickOptionsTest extends SimpleRequestAbstract
+class OneClickOptionsTest extends SimpleTransactionRequestAbstract
 {
 
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new OneClickOptions(PaymentGateway::PROVIDER_OTPAY, '12345');
+        return new OneClickOptions(PaymentGateway::PROVIDER_OTPAY, '12345');
 	}
 
 	protected function getDataKeys():array
