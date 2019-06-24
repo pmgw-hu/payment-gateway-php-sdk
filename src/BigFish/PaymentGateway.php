@@ -201,28 +201,16 @@ XIm63iVw6gjP2qDnNwIDAQAB
 -----END PUBLIC KEY-----';
 
 	/**
-	 * Production API URL
+	 * Production service URL
 	 * 
 	 */
-	const API_URL_PRODUCTION = 'https://api-system.paymentgateway.hu';
+	const GATEWAY_URL_PRODUCTION = 'https://system.paymentgateway.hu';
 
 	/**
-	 * Test API URL
+	 * Test service URL
 	 * 
 	 */
-	const API_URL_TEST = 'https://api-system-test.paymentgateway.hu';
-
-	/**
-	 * Production redirect URL
-	 * 
-	 */
-	const REDIRECT_URL_PRODUCTION = 'https://system.paymentgateway.hu';
-
-	/**
-	 * Test redirect URL
-	 * 
-	 */
-	const REDIRECT_URL_TEST = 'https://system-test.paymentgateway.hu';
+	const GATEWAY_URL_TEST = 'https://system-test.paymentgateway.hu';
 
 	/**
 	 * Configuration
@@ -308,7 +296,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	public static function getStartUrl(StartRequest $request)
 	{
-		return self::getRedirectUrl() . '/Start?' . $request->getParams();
+		return self::getUrl() . '/Start?' . $request->getParams();
 	}
 
 	/**
@@ -407,7 +395,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	public static function getFinalizeUrl(FinalizeRequest $request)
 	{
-		return self::getRedirectUrl() . '/Finalize?' . $request->getParams();
+		return self::getUrl() . '/Finalize?' . $request->getParams();
 	}
 
 	/**
@@ -565,36 +553,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
-	 * Get API URL
+	 * Get service URL
 	 *
 	 * @return string
 	 * @access protected
 	 * @static
 	 * @throws \BigFish\PaymentGateway\Exception
 	 */
-	protected static function getApiUrl()
+	protected static function getUrl()
 	{
 		if (self::getConfig()->testMode === true) {
-			return self::getConfig()->apiUrlTest;
+			return self::getConfig()->gatewayUrlTest;
 		} else {
-			return self::API_URL_PRODUCTION;
-		}
-	}
-
-	/**
-	 * Get redirect URL
-	 *
-	 * @return string
-	 * @access protected
-	 * @static
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	protected static function getRedirectUrl()
-	{
-		if (self::getConfig()->testMode === true) {
-			return self::getConfig()->redirectUrlTest;
-		} else {
-			return self::REDIRECT_URL_PRODUCTION;
+			return self::GATEWAY_URL_PRODUCTION;
 		}
 	}
 
@@ -614,7 +585,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			throw new Exception('cURL PHP module is not loaded');
 		}
 
-		$url = self::getApiUrl();
+		$url = self::getUrl() . '/api/rest/';
 
 		$request->encodeValues();
 

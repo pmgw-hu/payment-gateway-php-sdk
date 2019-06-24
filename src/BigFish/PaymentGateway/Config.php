@@ -20,8 +20,7 @@ use BigFish\PaymentGateway;
  * @property string $encryptPublicKey Public key used for encryption
  * @property string $moduleName Module name
  * @property string $moduleVersion Module version
- * @property string $apiUrlTest Test API URL
- * @property string $redirectUrlTest Test redirect URL
+ * @property string $gatewayUrlTest Test service URL
  * @package PaymentGateway
  */
 class Config
@@ -86,20 +85,12 @@ class Config
 	protected $moduleVersion = PaymentGateway::VERSION;
 
 	/**
-	 * Test API URL
+	 * Test service URL
 	 * 
 	 * @var string
 	 * @access protected
 	 */
-	protected $apiUrlTest = PaymentGateway::API_URL_TEST;
-
-	/**
-	 * Test redirect URL
-	 * 
-	 * @var string
-	 * @access protected
-	 */
-	protected $redirectUrlTest = PaymentGateway::REDIRECT_URL_TEST;
+	protected $gatewayUrlTest = PaymentGateway::GATEWAY_URL_TEST;
 
 	/**
 	 * Constructor
