@@ -42,10 +42,9 @@ class Info extends InfoAbstract
 	{
 		$finalData = array();
 		foreach ($this->data as $key => $value) {
-
 			$pathArray = explode('/', $key);
-
 			$temp = &$finalData;
+
 			foreach($pathArray as $key) {
 				$temp = &$temp[$key];
 			}

@@ -32,10 +32,10 @@ abstract class InfoAbstract implements InfoInterface
 		return $this->data;
 	}
 
-    /**
-     * @return string
-     */
-    public function getStructurePath()
+	/**
+	 * @return string
+	 */
+	public function getStructurePath()
 	{
 		return null;
 	}
@@ -90,10 +90,10 @@ abstract class InfoAbstract implements InfoInterface
 	 */
 	protected function getFieldMaxSize($fieldName)
 	{
-        if (isset($this->maxSize[$fieldName])) {
-            return $this->maxSize[$fieldName];
-        }
+		if (isset($this->maxSize[$fieldName])) {
+			return $this->maxSize[$fieldName];
+		}
 
-        return null;
+		return null;
 	}
 }

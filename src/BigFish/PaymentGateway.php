@@ -186,7 +186,7 @@ class PaymentGateway
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 
 	/**
-	 * Info block strucres paths
+	 * Info block structures paths
 	 *
 	 */
 	const PATH_INFO = 'Info';
