@@ -10,6 +10,7 @@ namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception;
+use BigFish\PaymentGateway\Info\Info;
 
 /**
  * Initialization request class
@@ -202,6 +203,14 @@ class Init extends RequestAbstract
 	 * @access public
 	 */
 	public $extra;
+
+	/**
+	 * Info data
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $info;
 
 	/**
 	 * Valid OneClickPayment providers
@@ -587,7 +596,20 @@ class Init extends RequestAbstract
 		$this->gatewayPaymentPage = (($gatewayPaymentPage === true || $gatewayPaymentPage == "true") ? true : false);
 		return $this;
 	}
-	
+
+	/**
+	 * @param Info $infoObject
+	 * @return $this
+	 */
+	public function setInfo($infoObject)
+	{
+		if (!$infoObject instanceof Info) {
+			return $this;
+		}
+
+		$this->info = $this->urlSafeEncode(json_encode($infoObject->getData()));
+	}
+
 	/**
 	 * Set extra data
 	 * 

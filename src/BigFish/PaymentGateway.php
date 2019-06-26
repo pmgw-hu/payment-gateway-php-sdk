@@ -49,7 +49,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.14.0';
+	const VERSION = '2.15.0';
 
 	/**
 	 * API type constants
@@ -184,6 +184,20 @@ class PaymentGateway
 	const PROVIDER_VIRPAY = 'Virpay';
 
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
+
+	/**
+	 * Info block strucres paths
+	 *
+	 */
+	const PATH_INFO = 'Info';
+	const PATH_INFO_CUSTOMER_GENERAL = 'Info/Customer/General';
+	const PATH_INFO_CUSTOMER_STORE_SPECIFIC = 'Info/Customer/StoreSpecific';
+	const PATH_INFO_CUSTOMER_BROWSER = 'Info/Customer/Browser';
+	const PATH_INFO_ORDER_GENERAL = 'Info/Order/General';
+	const PATH_INFO_ORDER_SHIPPING_DATA = 'Info/Order/ShippingData';
+	const PATH_INFO_ORDER_BILLING_DATA = 'Info/Order/BillingData';
+	const PATH_INFO_ORDER_PRODUCT_ITEMS = 'Info/Order/ProductItems';
+	const PATH_INFO_ORDER_RECURRING_PAYMENT = 'Info/Order/RecurringPayment';
 
 	/**
 	 * Default store name
