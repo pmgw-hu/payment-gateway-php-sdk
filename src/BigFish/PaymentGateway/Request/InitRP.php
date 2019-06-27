@@ -9,6 +9,7 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Info\Info;
 
 /**
  * Recurring payment initialization request class
@@ -89,6 +90,14 @@ class InitRP extends RequestAbstract
 	 * @access public
 	 */
 	public $moduleVersion;
+
+	/**
+	 * Info data
+	 *
+	 * @var Info | null
+	 * @access public
+	 */
+	public $info;
 
 	/**
 	 * Construct new recurring payment Init request instance
@@ -206,6 +215,20 @@ class InitRP extends RequestAbstract
 	{
 		$this->currency = $currency;
 		return $this;
+	}
+
+	/**
+	 * @param Info $infoObject
+	 * @return $this
+	 * @throws Exception
+	 */
+	public function setInfo($infoObject)
+	{
+		if (!$infoObject instanceof Info) {
+			throw new Exception('Invalid parameter');
+		}
+
+		$this->info = $this->urlSafeEncode(json_encode($infoObject->getData()));
 	}
 
 }

@@ -207,7 +207,7 @@ class Init extends RequestAbstract
 	/**
 	 * Info data
 	 *
-	 * @var string
+	 * @var Info | null
 	 * @access public
 	 */
 	public $info;
@@ -600,11 +600,12 @@ class Init extends RequestAbstract
 	/**
 	 * @param Info $infoObject
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function setInfo($infoObject)
 	{
 		if (!$infoObject instanceof Info) {
-			return $this;
+			throw new Exception('Invalid parameter');
 		}
 
 		$this->info = $this->urlSafeEncode(json_encode($infoObject->getData()));

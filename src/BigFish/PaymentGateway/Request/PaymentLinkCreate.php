@@ -9,6 +9,8 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Exception;
+use BigFish\PaymentGateway\Info\Info;
 
 /**
  * Payment link create request class
@@ -121,6 +123,14 @@ class PaymentLinkCreate extends RequestAbstract
 	 * @access public
 	 */
 	public $extra;
+
+	/**
+	 * Info data
+	 *
+	 * @var Info | null
+	 * @access public
+	 */
+	public $info;
 
 	/**
 	 * Module name
@@ -309,6 +319,20 @@ class PaymentLinkCreate extends RequestAbstract
 		}
 
 		return $this;
+	}
+
+	/**
+	 * @param Info $infoObject
+	 * @return $this
+	 * @throws Exception
+	 */
+	public function setInfo($infoObject)
+	{
+		if (!$infoObject instanceof Info) {
+			throw new Exception('Invalid parameter');
+		}
+
+		$this->info = $this->urlSafeEncode(json_encode($infoObject->getData()));
 	}
 
 	/**
