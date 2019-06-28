@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;
@@ -42,121 +42,121 @@ class InfoOrderGeneral extends InfoAbstract
 
 	/**
 	 * @param string $deliveryEmail
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setDeliveryEmail($deliveryEmail)
 	{
-		$this->saveData($deliveryEmail, 'deliveryEmail');
+		$this->setData($deliveryEmail, 'deliveryEmail');
 		return $this;
 	}
 
 	/**
 	 * @param string $deliveryTimeFrame
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setDeliveryTimeFrame($deliveryTimeFrame)
 	{
-		$this->saveData($deliveryTimeFrame, 'deliveryTimeFrame');
+		$this->setData($deliveryTimeFrame, 'deliveryTimeFrame');
 		return $this;
 	}
 
 	/**
 	 * @param string $giftCardAmount
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setGiftCardAmount($giftCardAmount)
 	{
-		$this->saveData($giftCardAmount, 'giftCardAmount');
+		$this->setData($giftCardAmount, 'giftCardAmount');
 		return $this;
 	}
 
 	/**
 	 * @param string $giftCardCount
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setGiftCardCount($giftCardCount)
 	{
-		$this->saveData($giftCardCount, 'giftCardCount');
+		$this->setData($giftCardCount, 'giftCardCount');
 		return $this;
 	}
 
 	/**
 	 * @param string $giftCardCurrency
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setGiftCardCurrency($giftCardCurrency)
 	{
-		$this->saveData($giftCardCurrency, 'giftCardCurrency');
+		$this->setData($giftCardCurrency, 'giftCardCurrency');
 		return $this;
 	}
 
 	/**
 	 * @param string $preorderDate
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setPreorderDate($preorderDate)
 	{
-		$this->saveData($preorderDate, 'preorderDate');
+		$this->setData($preorderDate, 'preorderDate');
 		return $this;
 	}
 
 	/**
 	 * @param string $availability
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setAvailability($availability)
 	{
-		$this->saveData($availability, 'availability');
+		$this->setData($availability, 'availability');
 		return $this;
 	}
 
 	/**
 	 * @param string $reorderItems
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setReorderItems($reorderItems)
 	{
-		$this->saveData($reorderItems, 'reorderItems');
+		$this->setData($reorderItems, 'reorderItems');
 		return $this;
 	}
 
 	/**
 	 * @param string $shippingMethod
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setShippingMethod($shippingMethod)
 	{
-		$this->saveData($shippingMethod, 'shippingMethod');
+		$this->setData($shippingMethod, 'shippingMethod');
 		return $this;
 	}
 
 	/**
 	 * @param string $addressMatchIndicator
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setAddressMatchIndicator($addressMatchIndicator)
 	{
-		$this->saveData($addressMatchIndicator, 'addressMatchIndicator');
+		$this->setData($addressMatchIndicator, 'addressMatchIndicator');
 		return $this;
 	}
 
 	/**
 	 * @param string $differentShippingName
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setDifferentShippingName($differentShippingName)
 	{
-		$this->saveData($differentShippingName, 'differentShippingName');
+		$this->setData($differentShippingName, 'differentShippingName');
 		return $this;
 	}
 
 	/**
 	 * @param string $transactionType
-	 * @return InfoOrderGeneral
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
 	 */
 	public function setTransactionType($transactionType)
 	{
-		$this->saveData($transactionType, 'transactionType');
+		$this->setData($transactionType, 'transactionType');
 		return $this;
 	}
 }

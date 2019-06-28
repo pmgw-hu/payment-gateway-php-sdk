@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway\Exception;
@@ -57,10 +57,10 @@ abstract class InfoAbstract implements InfoInterface
 	 * @param string $fieldName
 	 * @throws Exception
 	 */
-	protected function saveData($value, $fieldName)
+	protected function setData($value, $fieldName)
 	{
 		if ($maxSize = $this->getFieldMaxSize($fieldName)) {
-			$this->checkFieldSize($maxSize, $fieldName, $value);
+			$this->checkFieldLength($maxSize, $fieldName, $value);
 		}
 		$this->data[$fieldName] = $value;
 	}
@@ -71,7 +71,7 @@ abstract class InfoAbstract implements InfoInterface
 	 * @param string $value
 	 * @throws Exception
 	 */
-	protected function checkFieldSize($maxLength, $fieldName, $value)
+	protected function checkFieldLength($maxLength, $fieldName, $value)
 	{
 		if (\mb_strlen($value) > $maxLength) {
 			throw new Exception(

@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;

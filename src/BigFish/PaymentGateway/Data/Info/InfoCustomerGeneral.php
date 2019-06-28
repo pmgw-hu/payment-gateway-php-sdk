@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;
@@ -40,91 +40,91 @@ class InfoCustomerGeneral extends InfoAbstract
 
 	/**
 	 * @param string $lastName
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setLastName($lastName)
 	{
-		$this->saveData($lastName, 'lastName');
+		$this->setData($lastName, 'lastName');
 		return $this;
 	}
 
 	/**
 	 * @param string $email
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setEmail($email)
 	{
-		$this->saveData($email, 'email');
+		$this->setData($email, 'email');
 		return $this;
 	}
 
 	/**
 	 * @param string $ip
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setIp($ip)
 	{
-		$this->saveData($ip, 'ip');
+		$this->setData($ip, 'ip');
 		return $this;
 	}
 
 	/**
 	 * @param string $homePhoneCc
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setHomePhoneCc($homePhoneCc)
 	{
-		$this->saveData($homePhoneCc, 'homePhoneCc');
+		$this->setData($homePhoneCc, 'homePhoneCc');
 		return $this;
 	}
 
 	/**
 	 * @param string $homePhone
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setHomePhone($homePhone)
 	{
-		$this->saveData($homePhone, 'homePhone');
+		$this->setData($homePhone, 'homePhone');
 		return $this;
 	}
 
 	/**
 	 * @param string $mobilePhoneCc
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setMobilePhoneCc($mobilePhoneCc)
 	{
-		$this->saveData($mobilePhoneCc, 'mobilePhoneCc');
+		$this->setData($mobilePhoneCc, 'mobilePhoneCc');
 		return $this;
 	}
 
 	/**
 	 * @param string $mobilePhone
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setMobilePhone($mobilePhone)
 	{
-		$this->saveData($mobilePhone, 'mobilePhone');
+		$this->setData($mobilePhone, 'mobilePhone');
 		return $this;
 	}
 
 	/**
 	 * @param string $workPhoneCc
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setWorkPhoneCc($workPhoneCc)
 	{
-		$this->saveData($workPhoneCc, 'workPhoneCc');
+		$this->setData($workPhoneCc, 'workPhoneCc');
 		return $this;
 	}
 
 	/**
 	 * @param string $workPhone
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
 	public function setWorkPhone($workPhone)
 	{
-		$this->saveData($workPhone, 'workPhone');
+		$this->setData($workPhone, 'workPhone');
 		return $this;
 	}
 }

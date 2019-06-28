@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;
@@ -37,71 +37,71 @@ class InfoOrderProductItem extends InfoAbstract
 
 	/**
 	 * @param mixed $sku
-	 * @return InfoOrderProductItem
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
 	 */
 	public function setSku($sku)
 	{
-		$this->saveData($sku, 'sku');
+		$this->setData($sku, 'sku');
 		return $this;
 	}
 
 	/**
 	 * @param mixed $name
-	 * @return InfoOrderProductItem
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
 	 */
 	public function setName($name)
 	{
-		$this->saveData($name, 'name');
+		$this->setData($name, 'name');
 		return $this;
 	}
 
 	/**
 	 * @param mixed $quantity
-	 * @return InfoOrderProductItem
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
 	 */
 	public function setQuantity($quantity)
 	{
-		$this->saveData($quantity, 'quantity');
+		$this->setData($quantity, 'quantity');
 		return $this;
 	}
 
 	/**
 	 * @param mixed $unitPrice
-	 * @return InfoOrderProductItem
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
 	 */
 	public function setUnitPrice($unitPrice)
 	{
-		$this->saveData($unitPrice, 'unitPrice');
+		$this->setData($unitPrice, 'unitPrice');
 		return $this;
 	}
 
 	/**
 	 * @param mixed $price
-	 * @return InfoOrderProductItem
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
 	 */
 	public function setPrice($price)
 	{
-		$this->saveData($price, 'price');
+		$this->setData($price, 'price');
 		return $this;
 	}
 
 	/**
 	 * @param mixed $imageUrl
-	 * @return InfoOrderProductItem
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
 	 */
 	public function setImageUrl($imageUrl)
 	{
-		$this->saveData($imageUrl, 'imageUrl');
+		$this->setData($imageUrl, 'imageUrl');
 		return $this;
 	}
 
 	/**
 	 * @param mixed $description
-	 * @return InfoOrderProductItem
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
 	 */
 	public function setDescription($description)
 	{
-		$this->saveData($description, 'description');
+		$this->setData($description, 'description');
 		return $this;
 	}
 }

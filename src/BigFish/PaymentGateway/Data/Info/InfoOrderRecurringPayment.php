@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;
@@ -32,21 +32,21 @@ class InfoOrderRecurringPayment extends InfoAbstract
 
 	/**
 	 * @param string $expireDate
-	 * @return InfoOrderRecurringPayment
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderRecurringPayment
 	 */
 	public function setExpireDate($expireDate)
 	{
-		$this->saveData($expireDate, 'expireDate');
+		$this->setData($expireDate, 'expireDate');
 		return $this;
 	}
 
 	/**
 	 * @param string $frequency
-	 * @return InfoOrderRecurringPayment
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderRecurringPayment
 	 */
 	public function setFrequency($frequency)
 	{
-		$this->saveData($frequency, 'frequency');
+		$this->setData($frequency, 'frequency');
 		return $this;
 	}
 }

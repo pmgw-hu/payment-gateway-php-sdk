@@ -9,7 +9,7 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Info\Info;
+use BigFish\PaymentGateway\Data\Info;
 
 /**
  * Recurring payment initialization request class
@@ -225,7 +225,7 @@ class InitRP extends RequestAbstract
 	public function setInfo($infoObject)
 	{
 		if (!$infoObject instanceof Info) {
-			throw new Exception('Invalid parameter');
+			throw new Exception('Invalid info parameter');
 		}
 
 		$this->info = $this->urlSafeEncode(json_encode($infoObject->getData()));

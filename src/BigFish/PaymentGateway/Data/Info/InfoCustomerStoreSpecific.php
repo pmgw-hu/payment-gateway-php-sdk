@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;
@@ -48,181 +48,181 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 
 	/**
 	 * @param string $updateDate
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setUpdateDate($updateDate)
 	{
-		$this->saveData($updateDate, 'updateDate');
+		$this->setData($updateDate, 'updateDate');
 		return $this;
 	}
 
 	/**
 	 * @param string $updateDateIndicator
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setUpdateDateIndicator($updateDateIndicator)
 	{
-		$this->saveData($updateDateIndicator, 'updateDateIndicator');
+		$this->setData($updateDateIndicator, 'updateDateIndicator');
 		return $this;
 	}
 
 	/**
 	 * @param string $creationDate
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setCreationDate($creationDate)
 	{
-		$this->saveData($creationDate, 'creationDate');
+		$this->setData($creationDate, 'creationDate');
 		return $this;
 	}
 
 	/**
 	 * @param string $creationDateIndicator
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setCreationDateIndicator($creationDateIndicator)
 	{
-		$this->saveData($creationDateIndicator, 'creationDateIndicator');
+		$this->setData($creationDateIndicator, 'creationDateIndicator');
 		return $this;
 	}
 
 	/**
 	 * @param string $passwordChangeDate
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setPasswordChangeDate($passwordChangeDate)
 	{
-		$this->saveData($passwordChangeDate, 'passwordChangeDate');
+		$this->setData($passwordChangeDate, 'passwordChangeDate');
 		return $this;
 	}
 
 	/**
 	 * @param string $passwordChangeDateIndicator
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setPasswordChangeDateIndicator($passwordChangeDateIndicator)
 	{
-		$this->saveData($passwordChangeDateIndicator, 'passwordChangeDateIndicator');
+		$this->setData($passwordChangeDateIndicator, 'passwordChangeDateIndicator');
 		return $this;
 	}
 
 	/**
 	 * @param string $authenticationTimestamp
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setAuthenticationTimestamp($authenticationTimestamp)
 	{
-		$this->saveData($authenticationTimestamp, 'authenticationTimestamp');
+		$this->setData($authenticationTimestamp, 'authenticationTimestamp');
 		return $this;
 	}
 
 	/**
 	 * @param string $authenticationMethod
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setAuthenticationMethod($authenticationMethod)
 	{
-		$this->saveData($authenticationMethod, 'authenticationMethod');
+		$this->setData($authenticationMethod, 'authenticationMethod');
 		return $this;
 	}
 
 	/**
 	 * @param string $challengeIndicator
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setChallengeIndicator($challengeIndicator)
 	{
-		$this->saveData($challengeIndicator, 'challengeIndicator');
+		$this->setData($challengeIndicator, 'challengeIndicator');
 		return $this;
 	}
 
 	/**
 	 * @param string $shippingAddressFirstUse
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setShippingAddressFirstUse($shippingAddressFirstUse)
 	{
-		$this->saveData($shippingAddressFirstUse, 'shippingAddressFirstUse');
+		$this->setData($shippingAddressFirstUse, 'shippingAddressFirstUse');
 		return $this;
 	}
 
 	/**
 	 * @param string $shippingAddressFirstUseIndicator
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setShippingAddressFirstUseIndicator($shippingAddressFirstUseIndicator)
 	{
-		$this->saveData($shippingAddressFirstUseIndicator, 'shippingAddressFirstUseIndicator');
+		$this->setData($shippingAddressFirstUseIndicator, 'shippingAddressFirstUseIndicator');
 		return $this;
 	}
 
 	/**
 	 * @param string $cardTransactionsLastDay
-	 * @return InfoCustomerStoreSpecific
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setCardTransactionsLastDay($cardTransactionsLastDay)
 	{
-		$this->saveData($cardTransactionsLastDay, 'cardTransactionsLastDay');
+		$this->setData($cardTransactionsLastDay, 'cardTransactionsLastDay');
 		return $this;
 	}
 
 	/**
 	 * @param string $cardCreationDate
-	 * @return InfoCustomerStoreSpecific
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setCardCreationDate($cardCreationDate)
 	{
-		$this->saveData($cardCreationDate, 'cardCreationDate');
+		$this->setData($cardCreationDate, 'cardCreationDate');
 		return $this;
 	}
 
 	/**
 	 * @param string $cardCreationDateIndicator
-	 * @return InfoCustomerStoreSpecific
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setCardCreationDateIndicator($cardCreationDateIndicator)
 	{
-		$this->saveData($cardCreationDateIndicator, 'cardCreationDateIndicator');
+		$this->setData($cardCreationDateIndicator, 'cardCreationDateIndicator');
 		return $this;
 	}
 
 	/**
 	 * @param string $transactionsLastDay
-	 * @return InfoCustomerStoreSpecific
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setTransactionsLastDay($transactionsLastDay)
 	{
-		$this->saveData($transactionsLastDay, 'transactionsLastDay');
+		$this->setData($transactionsLastDay, 'transactionsLastDay');
 		return $this;
 	}
 
 	/**
 	 * @param string $transactionsLastYear
-	 * @return InfoCustomerStoreSpecific
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setTransactionsLastYear($transactionsLastYear)
 	{
-		$this->saveData($transactionsLastYear, 'transactionsLastYear');
+		$this->setData($transactionsLastYear, 'transactionsLastYear');
 		return $this;
 	}
 
 	/**
 	 * @param string $purchasesLastSixMonths
-	 * @return InfoCustomerStoreSpecific
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setPurchasesLastSixMonths($purchasesLastSixMonths)
 	{
-		$this->saveData($purchasesLastSixMonths, 'purchasesLastSixMonths');
+		$this->setData($purchasesLastSixMonths, 'purchasesLastSixMonths');
 		return $this;
 	}
 
 	/**
 	 * @param string $suspiciousActivity
-	 * @return InfoCustomerStoreSpecific
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific
 	 */
 	public function setSuspiciousActivity($suspiciousActivity)
 	{
-		$this->saveData($suspiciousActivity, 'suspiciousActivity');
+		$this->setData($suspiciousActivity, 'suspiciousActivity');
 		return $this;
 	}
 }

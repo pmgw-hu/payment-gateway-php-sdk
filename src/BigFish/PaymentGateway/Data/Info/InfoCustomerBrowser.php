@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;
@@ -39,91 +39,91 @@ class InfoCustomerBrowser extends InfoAbstract
 
 	/**
 	 * @param string $acceptHeader
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setAcceptHeader($acceptHeader)
 	{
-		$this->saveData($acceptHeader, 'acceptHeader');
+		$this->setData($acceptHeader, 'acceptHeader');
 		return $this;
 	}
 
 	/**
 	 * @param string $javaEnabled
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setJavaEnabled($javaEnabled)
 	{
-		$this->saveData($javaEnabled, 'javaEnabled');
+		$this->setData($javaEnabled, 'javaEnabled');
 		return $this;
 	}
 
 	/**
 	 * @param string $language
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setLanguage($language)
 	{
-		$this->saveData($language, 'language');
+		$this->setData($language, 'language');
 		return $this;
 	}
 
 	/**
 	 * @param string $colorDepth
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setColorDepth($colorDepth)
 	{
-		$this->saveData($colorDepth, 'colorDepth');
+		$this->setData($colorDepth, 'colorDepth');
 		return $this;
 	}
 
 	/**
 	 * @param string $screenHeight
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setScreenHeight($screenHeight)
 	{
-		$this->saveData($screenHeight, 'screenHeight');
+		$this->setData($screenHeight, 'screenHeight');
 		return $this;
 	}
 
 	/**
 	 * @param string $screenWidth
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setScreenWidth($screenWidth)
 	{
-		$this->saveData($screenWidth, 'screenWidth');
+		$this->setData($screenWidth, 'screenWidth');
 		return $this;
 	}
 
 	/**
 	 * @param string $timeZone
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setTimeZone($timeZone)
 	{
-		$this->saveData($timeZone, 'timeZone');
+		$this->setData($timeZone, 'timeZone');
 		return $this;
 	}
 
 	/**
 	 * @param string $userAgent
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setUserAgent($userAgent)
 	{
-		$this->saveData($userAgent, 'userAgent');
+		$this->setData($userAgent, 'userAgent');
 		return $this;
 	}
 
 	/**
 	 * @param string $value
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser
 	 */
 	public function setWindowSize($value)
 	{
-		$this->saveData($value, 'windowSize');
+		$this->setData($value, 'windowSize');
 		return $this;
 	}
 }

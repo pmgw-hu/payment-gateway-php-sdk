@@ -7,10 +7,12 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data;
 
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoOrderProductItem;
 
 class Info extends InfoAbstract
 {
@@ -41,8 +43,8 @@ class Info extends InfoAbstract
 	public function getData()
 	{
 		$finalData = array();
-		foreach ($this->data as $key => $value) {
-			$pathArray = explode('/', $key);
+		foreach ($this->data as $pathString => $value) {
+			$pathArray = explode('/', $pathString);
 			$temp = &$finalData;
 
 			foreach($pathArray as $key) {

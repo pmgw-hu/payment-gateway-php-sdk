@@ -7,7 +7,7 @@
  * @copyright (c) 2019, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
 
-namespace BigFish\PaymentGateway\Info;
+namespace BigFish\PaymentGateway\Data\Info;
 
 
 use BigFish\PaymentGateway;
@@ -41,111 +41,111 @@ class InfoOrderShippingData extends InfoAbstract
 
 	/**
 	 * @param string $firstName
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setFirstName($firstName)
 	{
-		$this->saveData($firstName, 'firstName');
+		$this->setData($firstName, 'firstName');
 		return $this;
 	}
 
 	/**
 	 * @param string $lastName
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setLastName($lastName)
 	{
-		$this->saveData($lastName, 'lastName');
+		$this->setData($lastName, 'lastName');
 		return $this;
 	}
 
 	/**
 	 * @param string $phoneCc
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setPhoneCc($phoneCc)
 	{
-		$this->saveData($phoneCc, 'phoneCc');
+		$this->setData($phoneCc, 'phoneCc');
 		return $this;
 	}
 
 	/**
 	 * @param string $phone
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setPhone($phone)
 	{
-		$this->saveData($phone, 'phone');
+		$this->setData($phone, 'phone');
 		return $this;
 	}
 
 	/**
 	 * @param string $city
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setCity($city)
 	{
-		$this->saveData($city, 'city');
+		$this->setData($city, 'city');
 		return $this;
 	}
 
 	/**
 	 * @param string $country
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setCountry($country)
 	{
-		$this->saveData($country, 'country');
+		$this->setData($country, 'country');
 		return $this;
 	}
 
 	/**
 	 * @param string $line1
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setLine1($line1)
 	{
-		$this->saveData($line1, 'line1');
+		$this->setData($line1, 'line1');
 		return $this;
 	}
 
 	/**
 	 * @param string $line2
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setLine2($line2)
 	{
-		$this->saveData($line2, 'line2');
+		$this->setData($line2, 'line2');
 		return $this;
 	}
 
 	/**
 	 * @param string $line3
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setLine3($line3)
 	{
-		$this->saveData($line3, 'line3');
+		$this->setData($line3, 'line3');
 		return $this;
 	}
 
 	/**
 	 * @param string $postalCode
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setPostalCode($postalCode)
 	{
-		$this->saveData($postalCode, 'postalCode');
+		$this->setData($postalCode, 'postalCode');
 		return $this;
 	}
 
 	/**
 	 * @param string $state
-	 * @return InfoOrderShippingData
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
 	public function setState($state)
 	{
-		$this->saveData($state, 'state');
+		$this->setData($state, 'state');
 		return $this;
 	}
 }
