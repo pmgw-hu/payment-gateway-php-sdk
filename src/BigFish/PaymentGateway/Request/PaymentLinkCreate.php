@@ -50,7 +50,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * @var string
 	 * @access public
 	 */
-	public $currency;
+	public $currency = 'HUF';
 
 	/**
 	 * Language code
@@ -58,7 +58,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * @var string
 	 * @access public
 	 */
-	public $language;
+	public $language = 'HU';
 
 	/**
 	 * Order ID
