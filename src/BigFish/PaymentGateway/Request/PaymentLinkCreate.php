@@ -323,18 +323,29 @@ class PaymentLinkCreate extends RequestAbstract
 
 	/**
 	 * @param Info $infoObject
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @throws Exception
 	 */
-	public function setInfo($infoObject)
+	public function setInfoObject($infoObject)
 	{
 		if (!$infoObject instanceof Info) {
 			throw new Exception('Invalid info parameter');
 		}
 
-		$this->info = $this->urlSafeEncode(json_encode($infoObject->getData()));
+		$this->setInfo($infoObject->getData());
+		return $this;
 	}
 
+	/**
+	 * @param array $info
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @throws Exception
+	 */
+	public function setInfo(array $info = array())
+	{
+		$this->info = $this->urlSafeEncode(json_encode($info));
+		return $this;
+	}
 	/**
 	 * Set module name
 	 *

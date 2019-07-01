@@ -609,7 +609,7 @@ class Init extends RequestAbstract
 		}
 
 		$this->setInfo($infoObject->getData());
-        return $this;
+		return $this;
 	}
 
 	/**
@@ -620,7 +620,7 @@ class Init extends RequestAbstract
 	public function setInfo(array $info = array())
 	{
 		$this->info = $this->urlSafeEncode(json_encode($info));
-        return $this;
+		return $this;
 	}
 
 	/**
