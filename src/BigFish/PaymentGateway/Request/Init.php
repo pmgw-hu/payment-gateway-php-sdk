@@ -599,7 +599,7 @@ class Init extends RequestAbstract
 
 	/**
 	 * @param Info $infoObject
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @throws Exception
 	 */
 	public function setInfoObject($infoObject)
@@ -609,16 +609,18 @@ class Init extends RequestAbstract
 		}
 
 		$this->setInfo($infoObject->getData());
+        return $this;
 	}
 
 	/**
 	 * @param array $info
-	 * @return $this
+	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @throws Exception
 	 */
 	public function setInfo(array $info = array())
 	{
 		$this->info = $this->urlSafeEncode(json_encode($info));
+        return $this;
 	}
 
 	/**
