@@ -616,7 +616,7 @@ class Init extends RequestAbstract
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function setInfoJson(array $info = array())
+	public function setInfo(array $info = array())
 	{
 		$this->info = $this->urlSafeEncode(json_encode($info));
 	}
