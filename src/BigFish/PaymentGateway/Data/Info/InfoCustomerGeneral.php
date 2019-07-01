@@ -17,7 +17,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'firstName' => 45,
 		'lastName' => 45,
 		'email' => 254,

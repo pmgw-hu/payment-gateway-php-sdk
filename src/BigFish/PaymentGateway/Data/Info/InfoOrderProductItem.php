@@ -17,7 +17,7 @@ class InfoOrderProductItem extends InfoAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'sku' => 254,
 		'name' => 254,
 		'quantity' => 254,

@@ -17,7 +17,7 @@ class InfoOrderRecurringPayment extends InfoAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'expireDate' => 10,
 		'frequency' => 4,
 	);

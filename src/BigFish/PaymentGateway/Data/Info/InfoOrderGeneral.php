@@ -17,7 +17,7 @@ class InfoOrderGeneral extends InfoAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'deliveryEmail' => 254,
 		'deliveryTimeFrame' => 2,
 		'giftCardAmount' => 15,

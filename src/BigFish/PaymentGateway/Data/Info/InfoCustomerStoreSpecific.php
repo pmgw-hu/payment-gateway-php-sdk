@@ -17,7 +17,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'updateDate' => 10,
 		'updateDateIndicator' => 2,
 		'creationDate' => 10,

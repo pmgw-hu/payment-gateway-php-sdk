@@ -17,7 +17,7 @@ abstract class InfoAbstract implements InfoInterface
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array();
+	protected $maxLength = array();
 
 	/**
 	 * @var array
@@ -59,8 +59,8 @@ abstract class InfoAbstract implements InfoInterface
 	 */
 	protected function setData($value, $fieldName)
 	{
-		if ($maxSize = $this->getFieldMaxSize($fieldName)) {
-			$this->checkFieldLength($maxSize, $fieldName, $value);
+		if ($maxLength = $this->getFieldMaxLength($fieldName)) {
+			$this->checkFieldLength($maxLength, $fieldName, $value);
 		}
 		$this->data[$fieldName] = $value;
 	}
@@ -88,10 +88,10 @@ abstract class InfoAbstract implements InfoInterface
 	 * @param string $fieldName
 	 * @return null|int
 	 */
-	protected function getFieldMaxSize($fieldName)
+	protected function getFieldMaxLength($fieldName)
 	{
-		if (isset($this->maxSize[$fieldName])) {
-			return $this->maxSize[$fieldName];
+		if (isset($this->maxLength[$fieldName])) {
+			return $this->maxLength[$fieldName];
 		}
 
 		return null;

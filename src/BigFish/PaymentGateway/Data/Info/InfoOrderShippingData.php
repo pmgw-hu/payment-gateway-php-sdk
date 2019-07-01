@@ -17,7 +17,7 @@ class InfoOrderShippingData extends InfoAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'firstName' => 45,
 		'lastName' => 45,
 		'phoneCc' => 3,

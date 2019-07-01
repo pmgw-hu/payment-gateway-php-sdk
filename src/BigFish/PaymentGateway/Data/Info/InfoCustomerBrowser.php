@@ -17,7 +17,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'acceptHeader' => 2048,
 		'javaEnabled' => 1,
 		'language' => 8,
