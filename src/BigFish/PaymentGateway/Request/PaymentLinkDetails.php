@@ -25,14 +25,23 @@ class PaymentLinkDetails extends RequestAbstract
 	public $paymentLinkName;
 
 	/**
-	 * Construct payment link details request instance
-	 * 
-	 * @param string $paymentLinkName Payment Link Name received from Payment Gateway
-	 * @return void
+	 * Get related Info data
+	 *
+	 * @var boolean
 	 * @access public
 	 */
-	public function __construct($paymentLinkName)
+	public $getInfoData;
+
+	/**
+	 * Construct payment link details request instance
+	 *
+	 * @param string $paymentLinkName Payment Link Name received from Payment Gateway
+	 * @param bool $getInfoData Get related Info data (true/false)
+	 * @access public
+	 */
+	public function __construct($paymentLinkName, $getInfoData = false)
 	{
 		$this->paymentLinkName = $paymentLinkName;
+		$this->getInfoData = (($getInfoData === true || $getInfoData == "true") ? true : false);
 	}
 }
