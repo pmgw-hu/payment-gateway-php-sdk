@@ -602,13 +602,23 @@ class Init extends RequestAbstract
 	 * @return $this
 	 * @throws Exception
 	 */
-	public function setInfo($infoObject)
+	public function setInfoObject($infoObject)
 	{
 		if (!$infoObject instanceof Info) {
 			throw new Exception('Invalid info parameter');
 		}
 
-		$this->info = $this->urlSafeEncode(json_encode($infoObject->getData()));
+		$this->setInfoJson($infoObject->getData());
+	}
+
+	/**
+	 * @param array $info
+	 * @return $this
+	 * @throws Exception
+	 */
+	public function setInfoJson(array $info = array())
+	{
+		$this->info = $this->urlSafeEncode(json_encode($info));
 	}
 
 	/**
