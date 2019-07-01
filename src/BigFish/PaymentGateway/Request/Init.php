@@ -608,7 +608,7 @@ class Init extends RequestAbstract
 			throw new Exception('Invalid info parameter');
 		}
 
-		$this->setInfoJson($infoObject->getData());
+		$this->setInfo($infoObject->getData());
 	}
 
 	/**
