@@ -39,6 +39,16 @@ class InfoCustomerGeneral extends InfoAbstract
 	}
 
 	/**
+	 * @param string $firstName
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
+	 */
+	public function setFirstName($firstName)
+	{
+		$this->setData($firstName, 'firstName');
+		return $this;
+	}
+
+	/**
 	 * @param string $lastName
 	 * @return \BigFish\PaymentGateway\Data\Info\InfoCustomerGeneral
 	 */
