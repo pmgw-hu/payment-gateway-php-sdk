@@ -585,7 +585,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			throw new Exception('cURL PHP module is not loaded');
 		}
 
-		$url = self::getUrl() . '/api/rest/';
+		$url = self::getUrl() . '/api/payment/';
 
 		$request->encodeValues();
 
