@@ -21,6 +21,7 @@ class InfoOrderProductItem extends InfoAbstract
 		'sku' => 254,
 		'name' => 254,
 		'quantity' => 254,
+		'quantityUnit' => 16,
 		'unitPrice' => 254,
 		'price' => 254,
 		'imageUrl' => 254,
@@ -62,6 +63,16 @@ class InfoOrderProductItem extends InfoAbstract
 	public function setQuantity($quantity)
 	{
 		$this->setData($quantity, 'quantity');
+		return $this;
+	}
+
+	/**
+	 * @param mixed $quantityUnit
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
+	 */
+	public function setQuantityUnit($quantityUnit)
+	{
+		$this->setData($quantityUnit, 'quantityUnit');
 		return $this;
 	}
 

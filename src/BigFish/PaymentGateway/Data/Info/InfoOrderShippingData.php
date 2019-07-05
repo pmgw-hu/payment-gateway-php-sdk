@@ -23,7 +23,8 @@ class InfoOrderShippingData extends InfoAbstract
 		'phoneCc' => 3,
 		'phone' => 18,
 		'city' => 50,
-		'country' => 3,
+		'country' => 50,
+		'countryCode' => 3,
 		'line1' => 50,
 		'line2' => 50,
 		'line3' => 50,
@@ -96,6 +97,16 @@ class InfoOrderShippingData extends InfoAbstract
 	public function setCountry($country)
 	{
 		$this->setData($country, 'country');
+		return $this;
+	}
+
+	/**
+	 * @param string $countryCode
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
+	 */
+	public function setCountryCode($countryCode)
+	{
+		$this->setData($countryCode, 'countryCode');
 		return $this;
 	}
 

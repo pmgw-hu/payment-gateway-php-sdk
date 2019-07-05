@@ -45,7 +45,7 @@ class Details extends RequestAbstract
 	 *
 	 * @param string $transactionId Transaction ID received from Payment Gateway
 	 * @param boolean $getRelatedTransactions Get related transactions (true/false)
-	 * @param bool $getInfoData Get related Info data (true/false)
+	 * @param boolean $getInfoData Get related Info data (true/false)
 	 * @access public
 	 */
 	public function __construct($transactionId, $getRelatedTransactions = true, $getInfoData = false)
