@@ -726,18 +726,4 @@ class Init extends RequestAbstract
 		
 		return parent::getParams();
 	}
-
-	/**
-	 * URL safe encode (base64)
-	 * 
-	 * @param string $string
-	 * @return string
-	 * @access private
-	 */
-	private function urlSafeEncode($string)
-	{
-		$data = str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
-		return $data;
-	}
-
 }

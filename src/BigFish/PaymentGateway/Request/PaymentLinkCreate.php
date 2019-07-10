@@ -371,17 +371,4 @@ class PaymentLinkCreate extends RequestAbstract
 		$this->moduleVersion = $moduleVersion;
 		return $this;
 	}
-
-	/**
-	 * URL safe encode (base64)
-	 * 
-	 * @param string $string
-	 * @return string
-	 * @access private
-	 */
-	private function urlSafeEncode($string)
-	{
-		$data = str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
-		return $data;
-	}
 }

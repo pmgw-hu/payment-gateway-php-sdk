@@ -77,4 +77,16 @@ abstract class RequestAbstract
 		}
 	}
 
+	/**
+	 * URL safe encode (base64)
+	 * 
+	 * @param string $string
+	 * @return string
+	 * @access protected
+	 */
+	protected function urlSafeEncode($string)
+	{
+		$data = str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
+		return $data;
+	}
 }
