@@ -20,10 +20,9 @@ class InfoOrderProductItem extends InfoAbstract
 	protected $maxLength = array(
 		'sku' => 254,
 		'name' => 254,
-		'quantity' => 254,
+		'quantity' => 10,
 		'quantityUnit' => 16,
-		'unitPrice' => 254,
-		'price' => 254,
+		'unitPrice' => 16,
 		'imageUrl' => 254,
 		'description' => 254,
 	);
@@ -83,16 +82,6 @@ class InfoOrderProductItem extends InfoAbstract
 	public function setUnitPrice($unitPrice)
 	{
 		$this->setData($unitPrice, 'unitPrice');
-		return $this;
-	}
-
-	/**
-	 * @param mixed $price
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem
-	 */
-	public function setPrice($price)
-	{
-		$this->setData($price, 'price');
 		return $this;
 	}
 

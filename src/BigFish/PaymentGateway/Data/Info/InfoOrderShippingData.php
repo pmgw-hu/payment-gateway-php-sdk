@@ -20,16 +20,18 @@ class InfoOrderShippingData extends InfoAbstract
 	protected $maxLength = array(
 		'firstName' => 45,
 		'lastName' => 45,
+		'email' => 254,
 		'phoneCc' => 3,
 		'phone' => 18,
 		'city' => 50,
 		'country' => 50,
-		'countryCode' => 3,
+		'countryCode1' => 3,
+		'countryCode2' => 2,
+		'countryCode3' => 6,
 		'line1' => 50,
 		'line2' => 50,
 		'line3' => 50,
-		'postalCode' => 16,
-		'state' => 3
+		'postalCode' => 16
 	);
 
 	/**
@@ -57,6 +59,16 @@ class InfoOrderShippingData extends InfoAbstract
 	public function setLastName($lastName)
 	{
 		$this->setData($lastName, 'lastName');
+		return $this;
+	}
+
+	/**
+	 * @param string $email
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
+	 */
+	public function setEmail($email)
+	{
+		$this->setData($email, 'email');
 		return $this;
 	}
 
@@ -101,12 +113,32 @@ class InfoOrderShippingData extends InfoAbstract
 	}
 
 	/**
-	 * @param string $countryCode
+	 * @param string $countryCode1
 	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
 	 */
-	public function setCountryCode($countryCode)
+	public function setCountryCode1($countryCode1)
 	{
-		$this->setData($countryCode, 'countryCode');
+		$this->setData($countryCode1, 'countryCode1');
+		return $this;
+	}
+
+	/**
+	 * @param string $countryCode2
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
+	 */
+	public function setCountryCode2($countryCode2)
+	{
+		$this->setData($countryCode2, 'countryCode2');
+		return $this;
+	}
+
+	/**
+	 * @param string $countryCode3
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
+	 */
+	public function setCountryCode3($countryCode3)
+	{
+		$this->setData($countryCode3, 'countryCode3');
 		return $this;
 	}
 
@@ -147,16 +179,6 @@ class InfoOrderShippingData extends InfoAbstract
 	public function setPostalCode($postalCode)
 	{
 		$this->setData($postalCode, 'postalCode');
-		return $this;
-	}
-
-	/**
-	 * @param string $state
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData
-	 */
-	public function setState($state)
-	{
-		$this->setData($state, 'state');
 		return $this;
 	}
 }
