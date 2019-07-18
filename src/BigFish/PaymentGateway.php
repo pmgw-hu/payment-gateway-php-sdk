@@ -673,7 +673,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function getUserAgent($method)
 	{
-		return sprintf('%s | %s | %s | %s', $method, self::getHttpHost(), self::NAME, self::VERSION);
+		return sprintf('%s | %s | %s | %s', $method, self::getHttpHost(), 'PHP', phpversion());
 	}
 
 	/**
