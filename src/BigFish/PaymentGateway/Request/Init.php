@@ -10,6 +10,7 @@ namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception;
+use BigFish\PaymentGateway\Data\Info;
 
 /**
  * Initialization request class
@@ -81,7 +82,7 @@ class Init extends RequestAbstract
 	 * @var string
 	 * @access public
 	 */
-	public $currency;
+	public $currency = 'HUF';
 
 	/**
 	 * Language code
@@ -89,7 +90,7 @@ class Init extends RequestAbstract
 	 * @var string
 	 * @access public
 	 */
-	public $language;
+	public $language = 'HU';
 
 	/**
 	 * Phone number (MPP, OTPay)
@@ -202,6 +203,14 @@ class Init extends RequestAbstract
 	 * @access public
 	 */
 	public $extra;
+
+	/**
+	 * Info data
+	 *
+	 * @var Info | null
+	 * @access public
+	 */
+	public $info;
 
 	/**
 	 * Valid OneClickPayment providers
@@ -587,7 +596,33 @@ class Init extends RequestAbstract
 		$this->gatewayPaymentPage = (($gatewayPaymentPage === true || $gatewayPaymentPage == "true") ? true : false);
 		return $this;
 	}
-	
+
+	/**
+	 * @param Info $infoObject
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @throws Exception
+	 */
+	public function setInfoObject($infoObject)
+	{
+		if (!$infoObject instanceof Info) {
+			throw new Exception('Invalid info parameter');
+		}
+
+		$this->setInfo($infoObject->getData());
+		return $this;
+	}
+
+	/**
+	 * @param array $info
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @throws Exception
+	 */
+	public function setInfo(array $info = array())
+	{
+		$this->info = $this->urlSafeEncode(json_encode($info));
+		return $this;
+	}
+
 	/**
 	 * Set extra data
 	 * 
@@ -691,18 +726,4 @@ class Init extends RequestAbstract
 		
 		return parent::getParams();
 	}
-
-	/**
-	 * URL safe encode (base64)
-	 * 
-	 * @param string $string
-	 * @return string
-	 * @access private
-	 */
-	private function urlSafeEncode($string)
-	{
-		$data = str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
-		return $data;
-	}
-
 }

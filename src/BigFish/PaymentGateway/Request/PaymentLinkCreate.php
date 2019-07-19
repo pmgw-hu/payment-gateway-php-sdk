@@ -9,6 +9,8 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Exception;
+use BigFish\PaymentGateway\Data\Info;
 
 /**
  * Payment link create request class
@@ -48,7 +50,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * @var string
 	 * @access public
 	 */
-	public $currency;
+	public $currency = 'HUF';
 
 	/**
 	 * Language code
@@ -56,7 +58,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * @var string
 	 * @access public
 	 */
-	public $language;
+	public $language = 'HU';
 
 	/**
 	 * Order ID
@@ -121,6 +123,14 @@ class PaymentLinkCreate extends RequestAbstract
 	 * @access public
 	 */
 	public $extra;
+
+	/**
+	 * Info data
+	 *
+	 * @var Info | null
+	 * @access public
+	 */
+	public $info;
 
 	/**
 	 * Module name
@@ -312,6 +322,31 @@ class PaymentLinkCreate extends RequestAbstract
 	}
 
 	/**
+	 * @param Info $infoObject
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @throws Exception
+	 */
+	public function setInfoObject($infoObject)
+	{
+		if (!$infoObject instanceof Info) {
+			throw new Exception('Invalid info parameter');
+		}
+
+		$this->setInfo($infoObject->getData());
+		return $this;
+	}
+
+	/**
+	 * @param array $info
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @throws Exception
+	 */
+	public function setInfo(array $info = array())
+	{
+		$this->info = $this->urlSafeEncode(json_encode($info));
+		return $this;
+	}
+	/**
 	 * Set module name
 	 *
 	 * @param $moduleName
@@ -335,18 +370,5 @@ class PaymentLinkCreate extends RequestAbstract
 	{
 		$this->moduleVersion = $moduleVersion;
 		return $this;
-	}
-
-	/**
-	 * URL safe encode (base64)
-	 * 
-	 * @param string $string
-	 * @return string
-	 * @access private
-	 */
-	private function urlSafeEncode($string)
-	{
-		$data = str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
-		return $data;
 	}
 }
