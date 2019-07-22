@@ -49,15 +49,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '2.14.0';
-
-	/**
-	 * API type constants
-	 * 
-	 */
-	const API_SOAP = 'SOAP';
-
-	const API_REST = 'REST';
+	const VERSION = '3.0.0';
 
 	/**
 	 * API request type constants
@@ -186,6 +178,20 @@ class PaymentGateway
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 
 	/**
+	 * Info block structures paths
+	 *
+	 */
+	const PATH_INFO = 'Info';
+	const PATH_INFO_CUSTOMER_GENERAL = 'Info/Customer/General';
+	const PATH_INFO_CUSTOMER_STORE_SPECIFIC = 'Info/Customer/StoreSpecific';
+	const PATH_INFO_CUSTOMER_BROWSER = 'Info/Customer/Browser';
+	const PATH_INFO_ORDER_GENERAL = 'Info/Order/General';
+	const PATH_INFO_ORDER_SHIPPING_DATA = 'Info/Order/ShippingData';
+	const PATH_INFO_ORDER_BILLING_DATA = 'Info/Order/BillingData';
+	const PATH_INFO_ORDER_PRODUCT_ITEMS = 'Info/Order/ProductItems';
+	const PATH_INFO_ORDER_RECURRING_PAYMENT = 'Info/Order/RecurringPayment';
+
+	/**
 	 * Default store name
 	 * 
 	 */
@@ -212,13 +218,13 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * Production service URL
 	 * 
 	 */
-	const GATEWAY_URL_PRODUCTION = 'https://www.paymentgateway.hu';
+	const GATEWAY_URL_PRODUCTION = 'https://system.paymentgateway.hu';
 
 	/**
 	 * Test service URL
 	 * 
 	 */
-	const GATEWAY_URL_TEST = 'https://test.paymentgateway.hu';
+	const GATEWAY_URL_TEST = 'https://system-test.paymentgateway.hu';
 
 	/**
 	 * Configuration
@@ -564,7 +570,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * Get service URL
 	 *
 	 * @return string
-	 * @access public
+	 * @access protected
 	 * @static
 	 * @throws \BigFish\PaymentGateway\Exception
 	 */
@@ -574,23 +580,6 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			return self::getConfig()->gatewayUrlTest;
 		} else {
 			return self::GATEWAY_URL_PRODUCTION;
-		}
-	}
-
-	/**
-	 * Uppercase object properties
-	 * 
-	 * @param object $object
-	 * @return void 
-	 * @access protected
-	 * @static
-	 */
-	public static function ucfirstProps($object)
-	{
-		foreach (get_object_vars($object) as $key => $value) {
-			unset($object->{$key});
-
-			$object->{ucfirst($key)} = $value;
 		}
 	}
 
@@ -606,78 +595,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function sendRequest($method, Request $request)
 	{
-		switch (self::getConfig()->useApi) {
-			case self::API_SOAP:
-				return self::sendSoapRequest($method, $request);
-			case self::API_REST:
-				return self::sendRestRequest($method, $request);
-			default:
-				throw new Exception(sprintf('Invalid API type (%s)', self::getConfig()->useApi));
-		}
-	}
-
-	/**
-	 * Send SOAP request
-	 * 
-	 * @param string $method
-	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
-	 * @return \BigFish\PaymentGateway\Response
-	 * @access private
-	 * @static
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	private static function sendSoapRequest($method, Request $request)
-	{
-		if (!class_exists('SoapClient')) {
-			throw new Exception('SOAP PHP module is not loaded');
-		}
-
-		$wsdl = self::getUrl() . '/api/soap/?wsdl';
-
-		try {
-			$client = new \SoapClient($wsdl, array(
-				'soap_version' => SOAP_1_2,
-				'cache_wsdl' => WSDL_CACHE_BOTH,
-				'exceptions' => true,
-				'trace' => true,
-				'login' => self::getConfig()->storeName,
-				'password' => self::getConfig()->apiKey,
-				'user_agent' => self::getUserAgent($method),
-			));
-
-			self::prepareRequest($method, $request);
-
-			$soapResult = $client->__call($method, array(array('request' => $request)));
-			
-			$soapResponse = $soapResult->{$method . 'Result'};
-			
-			self::ucfirstProps($soapResponse);
-			
-			return new Response($soapResponse);
-		} catch (\SoapFault $e) {
-			throw new Exception($e->getMessage());
-		}
-	}
-
-	/**
-	 * Send REST request
-	 * 
-	 * @param string $method
-	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
-	 * @return \BigFish\PaymentGateway\Response
-	 * @access private
-	 * @static
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	private static function sendRestRequest($method, Request $request)
-	{
 		if (!function_exists('curl_init')) {
 			throw new Exception('cURL PHP module is not loaded');
 		}
 
-		$url = self::getUrl() . '/api/rest/';
+		$url = self::getUrl() . '/api/payment/';
 
-		self::prepareRequest($method, $request);
+		$request->encodeValues();
+
+		if ($method == self::REQUEST_INIT) {
+			$request->setExtra();
+		}
+
+		$request->ucfirstProps();
 
 		$ch = curl_init();
 
@@ -734,30 +664,6 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
-	 * Prepare request
-	 *
-	 * @param string $method
-	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
-	 * @return void
-	 * @access private
-	 * @static
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	private static function prepareRequest($method, Request $request)
-	{
-		$request->encodeValues();
-
-		if ($method == self::REQUEST_INIT) {
-			/** @var \BigFish\PaymentGateway\Request\Init $request */
-			$request->setExtra();
-		}
-
-		if (self::getConfig()->useApi == self::API_REST) {
-			self::ucfirstProps($request);
-		}
-	}
-
-	/**
 	 * Get authorization header
 	 *
 	 * @return string
@@ -781,18 +687,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function getUserAgent($method)
 	{
-		switch (self::getConfig()->useApi) {
-			case self::API_SOAP:
-				$clientType = 'SOAP';
-				break;
-			case self::API_REST:
-				$clientType = 'Rest';
-				break;
-			default:
-				throw new Exception('No API type defined!');
-		}
-
-		return sprintf('BIG FISH Payment Gateway %s Client v%s (%s - %s)', $clientType, self::VERSION, $method, self::getHttpHost());
+		return sprintf('%s | %s | %s | %s', $method, self::getHttpHost(), 'PHP', phpversion());
 	}
 
 	/**

@@ -33,31 +33,10 @@ abstract class RequestAbstract
 			$value = trim($value);
 
 			if (!empty($value) && is_scalar($value)) {
-				$params[] = ucfirst($name) . "=" . $this->encodeValue($value);
+				$params[] = ucfirst($name) . "=" . $value;
 			}
 		}
 		return implode("&", $params);
-	}
-
-	/**
-	 * Encode value
-	 *
-	 * @param string $value
-	 * @return string
-	 * @access protected
-	 * @throws \BigFish\PaymentGateway\Exception
-	 */
-	protected function encodeValue($value)
-	{
-		if (
-			PaymentGateway::getConfig()->useApi != PaymentGateway::API_SOAP &&
-			PaymentGateway::getConfig()->useApi != PaymentGateway::API_REST
-		) {
-			if (preg_match("/\s+/", $value)) {
-				$value = urlencode($value);
-			}
-		}
-		return $value;
 	}
 
 	/**
@@ -65,16 +44,42 @@ abstract class RequestAbstract
 	 *
 	 * @return void
 	 * @access public
-	 * @throws \BigFish\PaymentGateway\Exception
 	 */
 	public function encodeValues()
 	{
 		foreach (get_object_vars($this) as $key => $value) {
 			if (is_scalar($value)) {
 				$value = trim($value);
-				$this->{$key} = $this->encodeValue($value);
+				$this->{$key} = $value;
 			}
 		}
 	}
 
+	/**
+	 * URL safe encode (base64)
+	 * 
+	 * @param string $string
+	 * @return string
+	 * @access protected
+	 */
+	protected function urlSafeEncode($string)
+	{
+		$data = str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
+		return $data;
+	}
+
+	/**
+	 * Uppercase object properties
+	 * 
+	 * @return void 
+	 * @access public
+	 */
+	public function ucfirstProps()
+	{
+		foreach (get_object_vars($this) as $key => $value) {
+			unset($this->{$key});
+
+			$this->{ucfirst($key)} = $value;
+		}
+	}
 }

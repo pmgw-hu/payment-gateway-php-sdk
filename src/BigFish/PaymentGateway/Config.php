@@ -17,7 +17,6 @@ use BigFish\PaymentGateway;
  * @property string $apiKey API key
  * @property boolean $testMode Use testing environment (default: true)
  * @property string $outCharset Output character set
- * @property string $useApi API type (SOAP or REST)
  * @property string $encryptPublicKey Public key used for encryption
  * @property string $moduleName Module name
  * @property string $moduleVersion Module version
@@ -59,17 +58,6 @@ class Config
 	 * @access protected
 	 */
 	protected $outCharset = 'UTF-8';
-
-	/**
-	 * Possible values:
-	 * - "SOAP": RPC SOAP API
-	 * - "REST": HTTP REST API
-	 * 
-	 * @var string
-	 * @access protected
-	 * @see PaymentGateway
-	 */
-	protected $useApi = PaymentGateway::API_REST;
 
 	/**
 	 * It is used to encrypt sensitive data.
