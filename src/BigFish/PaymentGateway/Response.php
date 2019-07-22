@@ -49,10 +49,6 @@ class Response
 	protected function setObject($object)
 	{
 		foreach (get_object_vars($object) as $name => $value) {
-			if (empty($value)) {
-				continue;
-			}
-
 			if (is_string($value) && is_object(json_decode($value))) {
 				$this->{$name} = new Response($value);
 			} else {
