@@ -43,6 +43,7 @@ class Info extends InfoAbstract
 	public function getData()
 	{
 		$finalData = array();
+
 		foreach ($this->data as $pathString => $value) {
 			$pathArray = explode('/', $pathString);
 			$temp = &$finalData;
@@ -54,7 +55,7 @@ class Info extends InfoAbstract
 			unset($temp);
 		}
 
-		return $finalData[$this->getStructurePath()];
+		return isset($finalData[$this->getStructurePath()]) ? $finalData[$this->getStructurePath()] : array();
 	}
 
 	/**
