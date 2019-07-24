@@ -40,9 +40,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 			),
 			array(
 					true, 'testMode', 'isTestMode'
-			),
-			array(
-					Config::TRANSPORT_TYPE_REST_API, 'apiType', 'getApiType'
 			)
 		);
 	}
@@ -104,50 +101,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 		$config = $this->getConfig();
 		$config->testMode = $value;
 		$this->assertEquals($excepted, $config->isTestMode());
-	}
-
-
-	/**
-	 * @test
-	 */
-	public function useApi_REST()
-	{
-		$this->assertEquals(Config::TRANSPORT_TYPE_REST_API, $this->getConfig()->getApiType());
-	}
-
-	/**
-	 * @param string $excepted
-	 * @param mixed $value
-	 */
-	protected function assertUseApi(string $excepted, $value)
-	{
-		$config = $this->getConfig();
-		$config->apiType = $value;
-		$this->assertEquals($excepted, $config->getApiType());
-	}
-
-	/**
-	 * @test
-	 */
-	public function useApi_type_rest()
-	{
-		$this->assertUseApi(Config::TRANSPORT_TYPE_REST_API, Config::TRANSPORT_TYPE_REST_API);
-	}
-
-	/**
-	 * @test
-	 */
-	public function useApi_setNonBooleanValue_null()
-	{
-		$this->assertUseApi(false, null);
-	}
-
-	/**
-	 * @test
-	 */
-	public function useApi_setNonBooleanValue_emptyString()
-	{
-		$this->assertUseApi(false, '');
 	}
 
 	/**

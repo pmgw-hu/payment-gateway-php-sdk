@@ -69,7 +69,7 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function orderId_maxSizeCheck()
+	public function orderId_maxLengthCheck()
 	{
 		// max: 255
 		$this->getRequest()->setOrderId(str_repeat('A', 256));
@@ -79,7 +79,7 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function userId_maxSizeCheck()
+	public function userId_maxLengthCheck()
 	{
 		// max: 255
 		$this->getRequest()->setUserId(str_repeat('A', 256));
@@ -89,7 +89,7 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function currency_maxSizeCheck()
+	public function currency_maxLengthCheck()
 	{
 		// max: 4
 		$this->getRequest()->setCurrency(str_repeat('A', 4));

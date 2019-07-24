@@ -15,7 +15,7 @@ use BigFish\PaymentGateway\Request\RedirectLocationInterface;
 use BigFish\PaymentGateway\Request\RequestInterface;
 use BigFish\PaymentGateway\Transport\Response\Response;
 use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
-use BigFish\PaymentGateway\Transport\RestTransport;
+use BigFish\PaymentGateway\Transport\SystemTransport;
 
 /**
  * Class PaymentGateway
@@ -90,6 +90,20 @@ class PaymentGateway
 	const REQUEST_SETTLEMENT = 'Settlement';
 
 	/**
+	 * Info block structures paths
+	 *
+	 */
+	const PATH_INFO = 'Info';
+	const PATH_INFO_CUSTOMER_GENERAL = 'Info/Customer/General';
+	const PATH_INFO_CUSTOMER_STORE_SPECIFIC = 'Info/Customer/StoreSpecific';
+	const PATH_INFO_CUSTOMER_BROWSER = 'Info/Customer/Browser';
+	const PATH_INFO_ORDER_GENERAL = 'Info/Order/General';
+	const PATH_INFO_ORDER_SHIPPING_DATA = 'Info/Order/ShippingData';
+	const PATH_INFO_ORDER_BILLING_DATA = 'Info/Order/BillingData';
+	const PATH_INFO_ORDER_PRODUCT_ITEMS = 'Info/Order/ProductItems';
+	const PATH_INFO_ORDER_RECURRING_PAYMENT = 'Info/Order/RecurringPayment';
+
+	/**
 	 * @var Config
 	 */
 	private $config;
@@ -122,18 +136,12 @@ class PaymentGateway
 	}
 
 	/**
-	 * @return RestTransport
+	 * @return SystemTransport
 	 * @throws PaymentGatewayException
 	 */
 	protected function getTransport()
 	{
-		switch ($this->config->getApiType()) {
-			case Config::TRANSPORT_TYPE_REST_API:
-				return new RestTransport($this->config);
-				break;
-			default:
-				throw new PaymentGatewayException('Unknown transport type');
-		}
+		return new SystemTransport($this->config);
 	}
 
 	/**

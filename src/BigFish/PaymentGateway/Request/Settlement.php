@@ -18,7 +18,7 @@ class Settlement extends InitBasicAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'storeName' => 20,
 		'providerName' => 20,
 		'terminalId' => 64,
@@ -38,7 +38,7 @@ class Settlement extends InitBasicAbstract
 			throw new PaymentGatewayException('Invalid limit');
 		}
 
-		$this->saveData($limit, 'limit');
+		$this->setData($limit, 'limit');
 		return $this;
 	}
 
@@ -49,7 +49,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setOffset(int $offset): Settlement
 	{
-		$this->saveData($offset, 'offset');
+		$this->setData($offset, 'offset');
 		return $this;
 	}
 
@@ -79,7 +79,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setTransferNotice(string $transferNotice): Settlement
 	{
-		$this->saveData($transferNotice, 'transferNotice');
+		$this->setData($transferNotice, 'transferNotice');
 		return $this;
 	}
 
@@ -89,7 +89,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setSettlementDate(string $date): Settlement
 	{
-		$this->saveData($date, 'settlementDate');
+		$this->setData($date, 'settlementDate');
 		return $this;
 	}
 
@@ -99,7 +99,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setTerminalId(string $terminalId): Settlement
 	{
-		$this->saveData($terminalId, 'terminalId');
+		$this->setData($terminalId, 'terminalId');
 		return $this;
 	}
 
@@ -114,7 +114,7 @@ class Settlement extends InitBasicAbstract
 		if (!$currency) {
 			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;
 		}
-		$this->saveData($currency, 'transactionCurrency');
+		$this->setData($currency, 'transactionCurrency');
 		return $this;
 	}
 

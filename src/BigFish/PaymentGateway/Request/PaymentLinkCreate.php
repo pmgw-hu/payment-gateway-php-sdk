@@ -25,7 +25,7 @@ class PaymentLinkCreate extends InitAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'orderId' => 255,
 		'userId' => 255,
 		'currency' => 3,
@@ -47,7 +47,7 @@ class PaymentLinkCreate extends InitAbstract
 			throw new PaymentGatewayException('Invalid notification email');
 		}
 
-		$this->saveData($notificationEmail, 'notificationEmail');
+		$this->setData($notificationEmail, 'notificationEmail');
 		return $this;
 	}
 
@@ -67,7 +67,7 @@ class PaymentLinkCreate extends InitAbstract
 	 */
 	public function setExpirationTime(string $expirationTime = '')
 	{
-		$this->saveData($expirationTime, 'expirationTime');
+		$this->setData($expirationTime, 'expirationTime');
 		return $this;
 	}
 
@@ -82,7 +82,7 @@ class PaymentLinkCreate extends InitAbstract
 			throw new PaymentGatewayException('Invalid notification url');
 		}
 
-		$this->saveData($notificationUrl, 'notificationUrl');
+		$this->setData($notificationUrl, 'notificationUrl');
 		return $this;
 	}
 
@@ -95,7 +95,7 @@ class PaymentLinkCreate extends InitAbstract
 		if (!$language) {
 			$language = PaymentGateway\Config::DEFAULT_LANG;
 		}
-		$this->saveData($language, 'language');
+		$this->setData($language, 'language');
 		return $this;
 	}
 

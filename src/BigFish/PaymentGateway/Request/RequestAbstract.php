@@ -2,73 +2,23 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway\Exception\PaymentGatewayException;
+use BigFish\PaymentGateway\Common\BaseAbstract;
 
-abstract class RequestAbstract implements RequestInterface
+abstract class RequestAbstract extends BaseAbstract implements RequestInterface
 {
 	/**
-	 * @var array
+	 * @return string
 	 */
-	protected $data = array();
-
-	/**
-	 * @return array
-	 */
-	public function getData(): array
+	public function getMethod(): string
 	{
-		return $this->data;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getUcFirstData(): array
-	{
-		$data = array();
-		foreach ($this->getData() as $key => $item) {
-			$data[ucfirst($key)] = $item;
-		}
-		return $data;
-	}
-
-	/**
-	 * @param string $value
-	 * @param string $fieldName
-	 * @throws PaymentGatewayException
-	 */
-	protected function saveData(string $value, string $fieldName)
-	{
-		if ($maxSize = $this->getFieldMaxSize($fieldName)) {
-			$this->checkFieldSize($maxSize, $fieldName, $value);
-		}
-
-		$this->data[$fieldName] = $value;
-	}
-
-	/**
-	 * @param int $maxLength
-	 * @param string $fieldName
-	 * @param string $value
-	 * @throws PaymentGatewayException
-	 */
-	protected function checkFieldSize(int $maxLength, string $fieldName, string $value)
-	{
-		if (\mb_strlen($value) > $maxLength) {
-			throw new PaymentGatewayException(
-				sprintf(
-					'%s is longer than permitted. Max value is: %i',
-					$fieldName,
-					$maxLength
-				)
-			);
-		}
+		return '';
 	}
 
 	/**
 	 * @param string $fieldName
 	 * @return null|int
 	 */
-	protected function getFieldMaxSize(string $fieldName)
+	protected function getFieldMaxLength(string $fieldName)
 	{
 		return null;
 	}

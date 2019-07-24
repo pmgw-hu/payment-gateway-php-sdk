@@ -9,7 +9,7 @@ abstract class InitBasicAbstract extends RequestAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'providerName' => 20,
 		'storeName' => 20
 	);
@@ -31,7 +31,7 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 */
 	public function setProviderName(string $providerName)
 	{
-		$this->saveData($providerName, 'providerName');
+		$this->setData($providerName, 'providerName');
 		return $this;
 	}
 
@@ -39,12 +39,12 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 * @param string $fieldName
 	 * @return null|int
 	 */
-	protected function getFieldMaxSize(string $fieldName)
+	protected function getFieldMaxLength(string $fieldName)
 	{
-		if (isset($this->maxSize[$fieldName])) {
-			return $this->maxSize[$fieldName];
+		if (isset($this->maxLength[$fieldName])) {
+			return $this->maxLength[$fieldName];
 		}
-		return parent::getFieldMaxSize($fieldName);
+		return parent::getFieldMaxLength($fieldName);
 	}
 
 	/**
@@ -56,7 +56,7 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 */
 	public function setModuleName(string $moduleName): RequestInterface
 	{
-		$this->saveData($moduleName, 'moduleName');
+		$this->setData($moduleName, 'moduleName');
 		return $this;
 	}
 
@@ -69,7 +69,7 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 */
 	public function setModuleVersion(string $moduleVersion): RequestInterface
 	{
-		$this->saveData($moduleVersion, 'moduleVersion');
+		$this->setData($moduleVersion, 'moduleVersion');
 		return $this;
 	}
 
@@ -79,7 +79,7 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 */
 	public function setStoreName(string $storeName)
 	{
-		$this->saveData($storeName, 'storeName');
+		$this->setData($storeName, 'storeName');
 		return $this;
 	}
 }

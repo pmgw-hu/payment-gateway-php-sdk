@@ -27,18 +27,14 @@ abstract class TransportAbstract implements TransportInterface
 	/**
 	 * Get user agent string
 	 *
+	 * @param $method string
 	 * @return string
 	 * @access private
 	 * @static
 	 */
-	protected function getUserAgent()
+	protected function getUserAgent(string $method): string
 	{
-		return sprintf(
-			'BIG FISH Payment Gateway %s Client (php7) v%s - %s',
-			$this->getClientType(),
-			PaymentGateway::VERSION,
-			$this->getHttpHost()
-		);
+		return sprintf('%s | %s | %s | %s', $method, $this->getHttpHost(), 'PHP', phpversion());
 	}
 
 	/**

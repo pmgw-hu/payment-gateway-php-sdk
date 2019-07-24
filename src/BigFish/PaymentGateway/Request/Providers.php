@@ -9,7 +9,7 @@ class Providers extends RequestAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'storeName' => 20
 	);
 

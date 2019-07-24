@@ -2,20 +2,12 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-interface RequestInterface
-{
-	/**
-	 * @return array
-	 */
-	public function getData(): array;
+use BigFish\PaymentGateway\Common\BaseInterface;
 
+interface RequestInterface extends BaseInterface
+{
 	/**
 	 * @return string
 	 */
 	public function getMethod(): string;
-
-	/**
-	 * @return array
-	 */
-	public function getUcFirstData(): array;
 }

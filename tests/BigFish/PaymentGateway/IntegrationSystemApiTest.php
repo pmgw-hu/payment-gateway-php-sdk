@@ -1,12 +1,11 @@
 <?php
 
-
 namespace BigFish\Tests\PaymentGateway;
 
 
 use BigFish\PaymentGateway;
 
-class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
+class IntegrationSystemApiTest extends IntegrationAbstract
 {
 	/**
 	 * @test
@@ -51,36 +50,6 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 		$result = $paymentGateWay->send($init);
 		$this->assertNotEmpty($result->TransactionId, 'No transaction id. Error: ' . $result->ResultMessage);
 		return $result->TransactionId;
-	}
-
-	public function getMock($originalClassName, $methods = [], array $arguments = [], $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $cloneArguments = false, $callOriginalMethods = false, $proxyTarget = null)
-	{
-		$builder = $this->getMockBuilder($originalClassName);
-
-		if (is_array($methods)) {
-			$builder->setMethods($methods);
-		}
-
-		if (is_array($arguments)) {
-			$builder->setConstructorArgs($arguments);
-		}
-
-		$callOriginalConstructor ? $builder->enableOriginalConstructor() : $builder->disableOriginalConstructor();
-		$callOriginalClone ? $builder->enableOriginalClone() : $builder->disableOriginalClone();
-		$callAutoload ? $builder->enableAutoload() : $builder->disableAutoload();
-		$cloneArguments ? $builder->enableOriginalClone() : $builder->disableOriginalClone();
-		$callOriginalMethods ? $builder->enableProxyingToOriginalMethods() : $builder->disableProxyingToOriginalMethods();
-
-		if ($mockClassName) {
-			$builder->setMockClassName($mockClassName);
-		}
-
-		if ($proxyTarget) {
-			$builder->setProxyTarget($proxyTarget);
-		}
-
-		$mockObject = $builder->getMock();
-		return $mockObject;
 	}
 
 	/**
@@ -257,7 +226,27 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 
 		$result = $paymentGateWay->send($createPaylink);
 
-		$this->assertNotEmpty($result->PaymentLinkName, 'No transaction id. Error: ' . $result->ResultMessage);
+		$this->assertNotEmpty($result->PaymentLinkName, 'No paymentLink name. Error: ' . $result->ResultMessage);
+		return $result;
+	}
+
+	/**
+	 * @test
+	 * @return PaymentGateway\Transport\Response\ResponseInterface
+	 */
+	public function initPaylink_missingParameter()
+	{
+		$paymentGateWay = $this->getPaymentGateway();
+		$createPaylink = new PaymentGateway\Request\PaymentLinkCreate();
+		$createPaylink->setAmount(99)
+			->setCurrency()
+			->setProviderName(PaymentGateway::PROVIDER_OTPAY)
+			->setNotificationUrl('http://integration.test.bigfish.hu')
+			->setAutoCommit();
+
+		$result = $paymentGateWay->send($createPaylink);
+
+		$this->assertNotEquals('SUCCESSFUL', $result->ResultCode);
 		return $result;
 	}
 
@@ -324,37 +313,6 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @param PaymentGateway\Request\RequestInterface $requestInterface
-	 */
-	protected function assertApiResponse(PaymentGateway\Request\RequestInterface $requestInterface)
-	{
-		$paymentGateWay = $this->getPaymentGateway();
-		$response = $paymentGateWay->send($requestInterface);
-		$this->assertNotEmpty($response->getData());
-	}
-
-	/**
-	 * @return PaymentGateway\Config
-	 */
-	protected function getConfig() :PaymentGateway\Config
-	{
-		$config = new PaymentGateway\Config();
-		$config->testMode = true;
-		$config->apiType = PaymentGateway\Config::TRANSPORT_TYPE_REST_API;
-		return $config;
-	}
-
-	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject|\BigFish\PaymentGateway
-	 */
-	protected function getPaymentGateway()
-	{
-		$config = $this->getConfig();
-		$paymentGateWay = $this->getMock('\BigFish\PaymentGateway', array('terminate'), array($config));
-		return $paymentGateWay;
-	}
-
-	/**
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
@@ -385,18 +343,5 @@ class IntegrationRestApiTest extends \PHPUnit_Framework_TestCase
 		$this->assertNotEquals($testString, $response->ResultMessage);
 
 		$this->assertEquals(iconv("UTF-8", PaymentGateway\Config::CHARSET_LATIN1, $testString), $response->ResultMessage);
-	}
-
-	/**
-	 * @return PaymentGateway\Request\Init
-	 * @throws PaymentGateway\Exception\PaymentGatewayException
-	 */
-	protected function getConvertOutPutInitRequest()
-	{
-		$init = new PaymentGateway\Request\Init();
-		$init->setAmount(150)
-				->setProviderName('invalid_Rovider')
-				->setResponseUrl('http://integration.test.bigfish.hu');
-		return $init;
 	}
 }

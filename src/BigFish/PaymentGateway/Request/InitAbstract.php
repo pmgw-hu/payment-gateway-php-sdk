@@ -3,6 +3,7 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Data\Info;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 abstract class InitAbstract extends InitBasicAbstract
@@ -10,7 +11,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxSize = array(
+	protected $maxLength = array(
 		'storeName' => 20,
 		'orderId' => 255,
 		'userId' => 255,
@@ -69,7 +70,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	 */
 	public function setOrderId(string $orderId)
 	{
-		$this->saveData($orderId, 'orderId');
+		$this->setData($orderId, 'orderId');
 		return $this;
 	}
 
@@ -81,7 +82,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	 */
 	public function setUserId(string $userId)
 	{
-		$this->saveData($userId, 'userId');
+		$this->setData($userId, 'userId');
 		return $this;
 	}
 
@@ -91,12 +92,43 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
 	 * @return static
 	 */
-	public function setCurrency(string $currency = '')
+	public function setCurrency(string $currency = ''): InitAbstract
 	{
 		if (!$currency) {
 			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;
 		}
-		$this->saveData($currency, 'currency');
+		$this->setData($currency, 'currency');
 		return $this;
+	}
+
+	/**
+	 * @param PaymentGateway\Data\Info $infoObject
+	 * @return InitAbstract
+	 */
+	public function setInfoObject(Info $infoObject): InitAbstract
+	{
+		return $this->setInfo($infoObject->getData());
+	}
+
+	/**
+	 * @param array $info
+	 * @return $this
+	 */
+	public function setInfo(array $info = array()): InitAbstract
+	{
+		$this->data['info'] = $this->urlSafeEncode(json_encode($info));
+
+		return $this;
+	}
+
+	/**
+	 * URL safe encode (base64)
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	protected function urlSafeEncode(string $string): string
+	{
+		return str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
 	}
 }

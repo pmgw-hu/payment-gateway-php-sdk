@@ -79,7 +79,7 @@ class InitTest extends InitRPTest
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function providerName_maxSizeCheck()
+	public function providerName_maxLengthCheck()
 	{
 		// max: 20
 		$this->getRequest()->setProviderName(str_repeat('A', 21));
@@ -89,7 +89,7 @@ class InitTest extends InitRPTest
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function storeName_maxSizeCheck()
+	public function storeName_maxLengthCheck()
 	{
 		// max: 20
 		$this->getRequest()->setStoreName(str_repeat('A', 21));
@@ -163,7 +163,7 @@ class InitTest extends InitRPTest
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function language_maxSizeCheck()
+	public function language_maxLengthCheck()
 	{
 		// 2
 		$this->getRequest()->setLanguage(str_repeat('A', 3));
@@ -268,7 +268,7 @@ class InitTest extends InitRPTest
 
 		$data = $init->getData();
 		$this->assertArrayHasKey('extra', $data);
-		$this->assertNotEmpty($data['extra']    );
+		$this->assertNotEmpty($data['extra']);
 	}
 
 	/**
@@ -366,7 +366,7 @@ class InitTest extends InitRPTest
 
 	/**
 	 * @test
-	 * @depends providerName_maxSizeCheck
+	 * @depends providerName_maxLengthCheck
 	 *
 	 * should not throw an exception
 	 */

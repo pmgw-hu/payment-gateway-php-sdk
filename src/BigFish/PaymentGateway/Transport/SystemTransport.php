@@ -8,14 +8,14 @@ use BigFish\PaymentGateway\Request\RequestInterface;
 use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 use BigFish\PaymentGateway\Transport\Response\Response;
 
-class RestTransport extends TransportAbstract
+class SystemTransport extends TransportAbstract
 {
 	/**
 	 * @return string
 	 */
 	function getClientType(): string
 	{
-		return 'Rest';
+		return 'System';
 	}
 
 	/**
@@ -29,7 +29,7 @@ class RestTransport extends TransportAbstract
 			throw new PaymentGatewayException('cURL PHP module is not loaded');
 		}
 
-		$url = $this->config->getUrl() . '/api/rest/';
+		$url = $this->config->getUrl() . '/api/payment/';
 
 		$this->prepareRequest($request);
 
@@ -54,7 +54,7 @@ class RestTransport extends TransportAbstract
 
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
-		curl_setopt($curl, CURLOPT_USERAGENT, $this->getUserAgent());
+		curl_setopt($curl, CURLOPT_USERAGENT, $this->getUserAgent($request->getMethod()));
 
 		$httpResponse = curl_exec($curl);
 
