@@ -12,7 +12,7 @@ class Invoice extends RequestAbstract
 	 */
 	public function __construct(string $transactionId, array $invoiceData)
 	{
-		$this->data['transactionId'] = $transactionId;
+		$this->setData($transactionId, 'transactionId');
 		$this->data['invoiceData'] = $invoiceData;
 	}
 

@@ -12,8 +12,8 @@ class Close extends RequestAbstract
 	 */
 	public function __construct(string $transactionId, bool $approve = true)
 	{
-		$this->data['transactionId'] = $transactionId;
-		$this->data['approved'] = $approve;
+		$this->setData($transactionId, 'transactionId');
+		$this->setData($approve, 'approved');
 	}
 
 	/**

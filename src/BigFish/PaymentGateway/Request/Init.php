@@ -33,7 +33,7 @@ class Init extends InitAbstract
 		'otpCardPocketId' => 2,
 		'otpCvc' => 3,
 		'mkbSzepCvv' => 3
-    ];
+	];
 
 	/**
 	 * Valid OneClickPayment providers
@@ -75,8 +75,7 @@ class Init extends InitAbstract
 			throw new PaymentGatewayException('Invalid notification url');
 		}
 
-		$this->setData($notificationUrl, 'notificationUrl');
-		return $this;
+		return $this->setData($notificationUrl, 'notificationUrl');
 	}
 
 	/**
@@ -88,8 +87,7 @@ class Init extends InitAbstract
 		if (!$language) {
 			$language = PaymentGateway\Config::DEFAULT_LANG;
 		}
-		$this->setData($language, 'language');
-		return $this;
+		return $this->setData($language, 'language');
 	}
 
 	/**
@@ -98,8 +96,7 @@ class Init extends InitAbstract
 	 */
 	public function setMppPhoneNumber(string $mppPhoneNumber)
 	{
-		$this->setData($mppPhoneNumber, 'mppPhoneNumber');
-		return $this;
+		return $this->setData($mppPhoneNumber, 'mppPhoneNumber');
 	}
 
 	/**
@@ -108,9 +105,7 @@ class Init extends InitAbstract
 	 */
 	public function setOtpCardNumber(string $otpCardNumber)
 	{
-		$this->data['otpCardNumber'] = $otpCardNumber;
-		$this->setData($otpCardNumber, 'otpCardNumber');
-		return $this;
+		return $this->setData($otpCardNumber, 'otpCardNumber');
 	}
 
 	/**
@@ -119,8 +114,7 @@ class Init extends InitAbstract
 	 */
 	public function setOtpExpiration(string $otpExpiration)
 	{
-		$this->setData($otpExpiration, 'otpExpiration');
-		return $this;
+		return $this->setData($otpExpiration, 'otpExpiration');
 	}
 
 	/**
@@ -129,8 +123,7 @@ class Init extends InitAbstract
 	 */
 	public function setOtpCvc(string $otpCvc)
 	{
-		$this->setData($otpCvc, 'otpCvc');
-		return $this;
+		return $this->setData($otpCvc, 'otpCvc');
 	}
 
 	/**
@@ -139,8 +132,7 @@ class Init extends InitAbstract
 	 */
 	public function setOtpCardPocketId(string $otpCardPocketId)
 	{
-		$this->setData($otpCardPocketId, 'otpCardPocketId');
-		return $this;
+		return $this->setData($otpCardPocketId, 'otpCardPocketId');
 	}
 
 	/**
@@ -149,8 +141,7 @@ class Init extends InitAbstract
 	 */
 	public function setOtpConsumerRegistrationId(string $otpConsumerRegistrationId)
 	{
-		$this->data['otpConsumerRegistrationId'] = $otpConsumerRegistrationId;
-		return $this;
+		return $this->setData($otpConsumerRegistrationId, 'otpConsumerRegistrationId');
 	}
 
 	/**
@@ -159,8 +150,7 @@ class Init extends InitAbstract
 	 */
 	public function setMkbSzepCafeteriaId(string $mkbSzepCafeteriaId)
 	{
-		$this->data['mkbSzepCafeteriaId'] = $mkbSzepCafeteriaId;
-		return $this;
+		return $this->setData($mkbSzepCafeteriaId, 'mkbSzepCafeteriaId');
 	}
 
 	/**
@@ -169,8 +159,7 @@ class Init extends InitAbstract
 	 */
 	public function setMkbSzepCardNumber(string $mkbSzepCardNumber)
 	{
-		$this->data['mkbSzepCardNumber'] = $mkbSzepCardNumber;
-		return $this;
+		return $this->setData($mkbSzepCardNumber, 'mkbSzepCardNumber');
 	}
 
 	/**
@@ -179,17 +168,12 @@ class Init extends InitAbstract
 	 */
 	public function setMkbSzepCvv(string $mkbSzepCvv)
 	{
-		$this->setData($mkbSzepCvv, 'mkbSzepCvv');
-		return $this;
+		return $this->setData($mkbSzepCvv, 'mkbSzepCvv');
 	}
 
-	/**
-	 * @return Init
-	 */
-	public function setOneClickPayment()
+	public function setOneClickPayment(): self
 	{
-		$this->data['oneClickPayment'] = true;
-		return $this;
+		return $this->setData(true, 'oneClickPayment');
 	}
 
 	/**
@@ -197,8 +181,7 @@ class Init extends InitAbstract
 	 */
 	public function setOneClickForcedRegistration()
 	{
-		$this->data['oneClickForcedRegistration'] = true;
-		return $this;
+		return $this->setData(true, 'oneClickForcedRegistration');
 	}
 
 	/**
@@ -207,15 +190,14 @@ class Init extends InitAbstract
 	 */
 	public function setOneClickReferenceId(string $oneClickReferenceId)
 	{
-		$this->data['oneClickReferenceId']= $oneClickReferenceId;
-		return $this;
+		return $this->setData($oneClickReferenceId, 'oneClickReferenceId');
 	}
 
 	/**
 	 * @param bool $value
 	 * @return Init
 	 */
-	public function setAutoCommit(bool $value = true): Init
+	public function setAutoCommit(bool $value = true): self
 	{
 		$this->data['autoCommit'] = $value;
 		return $this;
@@ -272,7 +254,7 @@ class Init extends InitAbstract
 						'otpCardNumber' => $this->data['otpCardNumber'],
 						'otpExpiration' => $this->data['otpExpiration'],
 						'otpCvc' => $this->data['otpCvc']
-                ];
+				];
 			}
 		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
 			if (
@@ -283,7 +265,7 @@ class Init extends InitAbstract
 				$encryptData = [
 					'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
 					'mkbSzepCvv' => $this->data['mkbSzepCvv']
-                ];
+				];
 			}
 		} elseif (!empty($extra)) {
 			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));

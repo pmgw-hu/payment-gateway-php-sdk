@@ -4,7 +4,7 @@ namespace BigFish\Tests\PaymentGateway;
 
 use BigFish\PaymentGateway\Config;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends \PHPUnit\Framework\TestCase
 {
 	/**
 	 * @test

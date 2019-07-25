@@ -12,8 +12,8 @@ class Refund extends RequestAbstract
 	 */
 	public function __construct(string $transactionId, float $amount)
 	{
-		$this->data['transactionId'] = $transactionId;
-		$this->data['amount'] = $amount;
+		$this->setData($transactionId, 'transactionId');
+		$this->setData($amount, 'amount');
 	}
 
 	/**

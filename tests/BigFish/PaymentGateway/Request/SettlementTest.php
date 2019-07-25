@@ -6,7 +6,7 @@ namespace BigFish\Tests\PaymentGateway\Request;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\Settlement;
 
-class SettlementTest extends \PHPUnit_Framework_TestCase
+class SettlementTest extends \PHPUnit\Framework\TestCase
 {
 
 	/**

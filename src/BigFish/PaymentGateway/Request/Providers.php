@@ -19,8 +19,7 @@ class Providers extends RequestAbstract
 	 */
 	public function setStoreName(string $storeName)
 	{
-		$this->data['storeName'] = $storeName;
-		return $this;
+		return $this->setData($storeName, 'storeName');
 	}
 
 	/**

@@ -12,7 +12,7 @@ class PaymentLinkDetails extends RequestAbstract
 	 */
 	public function __construct(string $paymentLinkName, bool $getInfoData = false)
 	{
-		$this->data['paymentLinkName'] = $paymentLinkName;
+		$this->setData($paymentLinkName, 'paymentLinkName');
 		$this->data['getInfoData'] = $getInfoData;
 	}
 

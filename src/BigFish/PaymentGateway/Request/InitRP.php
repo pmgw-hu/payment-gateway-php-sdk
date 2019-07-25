@@ -14,8 +14,7 @@ class InitRP extends InitAbstract
 	 */
 	public function setReferenceTransactionId(string $referenceTransactionId)
 	{
-		$this->data['referenceTransactionId'] = $referenceTransactionId;
-		return $this;
+		return $this->setData($referenceTransactionId, 'referenceTransactionId');
 	}
 
 	/**

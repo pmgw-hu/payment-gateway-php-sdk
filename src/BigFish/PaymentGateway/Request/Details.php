@@ -13,9 +13,9 @@ class Details extends RequestAbstract
 	 */
 	public function __construct(string $transactionId, bool $getRelatedTransactions = true, bool $getInfoData = false)
 	{
-		$this->data['transactionId'] = $transactionId;
-		$this->data['getRelatedTransactions'] = $getRelatedTransactions;
-		$this->data['getInfoData'] = $getInfoData;
+		$this->setData($transactionId, 'transactionId');
+		$this->setData($getInfoData, 'getInfoData');
+		$this->setData($getRelatedTransactions, 'getRelatedTransactions');
 	}
 
 	/**

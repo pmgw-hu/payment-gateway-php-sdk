@@ -20,5 +20,4 @@ interface TransportInterface
 	 * @return ResponseInterface
 	 */
 	public function sendRequest(RequestInterface $request): ResponseInterface;
-
 }

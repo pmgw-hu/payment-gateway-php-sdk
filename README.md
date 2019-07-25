@@ -10,6 +10,7 @@
 
  * PHP 7
  * PHP cURL extension
+ * PHP Mbstring extension
 
 ## Installation
 

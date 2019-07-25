@@ -42,8 +42,7 @@ abstract class InitAbstract extends InitBasicAbstract
 		if (filter_var($responseUrl, FILTER_VALIDATE_URL) === false) {
 			throw new PaymentGatewayException('Invalid response url');
 		}
-		$this->data['responseUrl'] = $responseUrl;
-		return $this;
+		return $this->setData($responseUrl, 'responseUrl');
 	}
 
 	/**
@@ -58,8 +57,7 @@ abstract class InitAbstract extends InitBasicAbstract
 		if ($amount <= 0) {
 			throw new PaymentGatewayException('Only positive numbers allowed.');
 		}
-		$this->data['amount'] = $amount;
-		return $this;
+		return $this->setData($amount, 'amount');
 	}
 
 	/**
@@ -70,8 +68,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	 */
 	public function setOrderId(string $orderId)
 	{
-		$this->setData($orderId, 'orderId');
-		return $this;
+		return $this->setData($orderId, 'orderId');
 	}
 
 	/**
@@ -82,8 +79,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	 */
 	public function setUserId(string $userId)
 	{
-		$this->setData($userId, 'userId');
-		return $this;
+		return $this->setData($userId, 'userId');
 	}
 
 	/**
@@ -92,20 +88,19 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
 	 * @return static
 	 */
-	public function setCurrency(string $currency = ''): InitAbstract
+	public function setCurrency(string $currency = ''): self
 	{
 		if (!$currency) {
 			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;
 		}
-		$this->setData($currency, 'currency');
-		return $this;
+		return $this->setData($currency, 'currency');
 	}
 
 	/**
 	 * @param PaymentGateway\Data\Info $infoObject
 	 * @return InitAbstract
 	 */
-	public function setInfoObject(Info $infoObject): InitAbstract
+	public function setInfoObject(Info $infoObject): self
 	{
 		return $this->setInfo($infoObject->getData());
 	}
@@ -114,11 +109,9 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * @param array $info
 	 * @return $this
 	 */
-	public function setInfo(array $info = []): InitAbstract
+	public function setInfo(array $info = []): self
 	{
-		$this->data['info'] = $this->urlSafeEncode(json_encode($info));
-
-		return $this;
+		return $this->setData($this->urlSafeEncode(json_encode($info)), 'info');
 	}
 
 	/**

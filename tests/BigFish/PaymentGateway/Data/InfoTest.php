@@ -8,7 +8,7 @@ use BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser;
 use BigFish\PaymentGateway\Data\Info\InfoOrderGeneral;
 use BigFish\PaymentGateway\Data\Info\InfoOrderRecurringPayment;
 
-class InfoTest extends \PHPUnit_Framework_TestCase
+class InfoTest extends \PHPUnit\Framework\TestCase
 {
 	/**
 	 * @test

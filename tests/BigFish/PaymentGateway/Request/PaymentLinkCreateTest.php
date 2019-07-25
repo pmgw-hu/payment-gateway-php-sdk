@@ -6,7 +6,7 @@ namespace BigFish\Tests\PaymentGateway\Request;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\PaymentLinkCreate;
 
-class PaymentLinkCreateTest extends \PHPUnit_Framework_TestCase
+class PaymentLinkCreateTest extends \PHPUnit\Framework\TestCase
 {
 
 	/**

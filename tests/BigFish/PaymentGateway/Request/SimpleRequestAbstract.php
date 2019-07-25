@@ -5,7 +5,7 @@ namespace BigFish\Tests\PaymentGateway\Request;
 
 use BigFish\PaymentGateway\Request\RequestInterface;
 
-abstract class SimpleRequestAbstract extends \PHPUnit_Framework_TestCase
+abstract class SimpleRequestAbstract extends \PHPUnit\Framework\TestCase
 {
 
 	abstract protected function getDataWithRequestFunction(\Closure $function);

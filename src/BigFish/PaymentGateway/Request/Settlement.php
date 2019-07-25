@@ -38,8 +38,7 @@ class Settlement extends InitBasicAbstract
 			throw new PaymentGatewayException('Invalid limit');
 		}
 
-		$this->setData($limit, 'limit');
-		return $this;
+		return $this->setData($limit, 'limit');
 	}
 
 	/**
@@ -49,8 +48,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setOffset(int $offset): Settlement
 	{
-		$this->setData($offset, 'offset');
-		return $this;
+		return $this->setData($offset, 'offset');
 	}
 
 	/**
@@ -59,8 +57,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setGetItems(bool $value = true): Settlement
 	{
-		$this->data['getItems'] = $value;
-		return $this;
+		return $this->setData($value, 'getItems');
 	}
 
 	/**
@@ -69,8 +66,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setGetBatches(bool $value = true): Settlement
 	{
-		$this->data['getBatches'] = $value;
-		return $this;
+		return $this->setData($value, 'getBatches');
 	}
 
 	/**
@@ -79,8 +75,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setTransferNotice(string $transferNotice): Settlement
 	{
-		$this->setData($transferNotice, 'transferNotice');
-		return $this;
+		return $this->setData($transferNotice, 'transferNotice');
 	}
 
 	/**
@@ -89,8 +84,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setSettlementDate(string $date): Settlement
 	{
-		$this->setData($date, 'settlementDate');
-		return $this;
+		return $this->setData($date, 'settlementDate');
 	}
 
 	/**
@@ -99,8 +93,7 @@ class Settlement extends InitBasicAbstract
 	 */
 	public function setTerminalId(string $terminalId): Settlement
 	{
-		$this->setData($terminalId, 'terminalId');
-		return $this;
+		return $this->setData($terminalId, 'terminalId');
 	}
 
 	/**
@@ -114,8 +107,7 @@ class Settlement extends InitBasicAbstract
 		if (!$currency) {
 			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;
 		}
-		$this->setData($currency, 'transactionCurrency');
-		return $this;
+		return $this->setData($currency, 'transactionCurrency');
 	}
 
 	/**

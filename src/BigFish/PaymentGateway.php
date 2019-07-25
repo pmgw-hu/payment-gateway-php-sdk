@@ -162,5 +162,4 @@ class PaymentGateway
 	{
 		return $this->config->getUrl() . $redirectLocation->getRedirectUrl();
 	}
-
 }

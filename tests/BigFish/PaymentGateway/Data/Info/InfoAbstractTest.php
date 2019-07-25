@@ -5,7 +5,7 @@ namespace BigFish\Tests\PaymentGateway\Data\Info;
 
 use BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser;
 
-abstract class InfoAbstractTest extends \PHPUnit_Framework_TestCase
+abstract class InfoAbstractTest extends \PHPUnit\Framework\TestCase
 {
 
 	/**

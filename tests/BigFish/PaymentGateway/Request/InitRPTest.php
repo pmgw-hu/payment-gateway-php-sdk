@@ -7,7 +7,7 @@ use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\Init;
 use BigFish\PaymentGateway\Request\InitRP;
 
-class InitRPTest extends \PHPUnit_Framework_TestCase
+class InitRPTest extends \PHPUnit\Framework\TestCase
 {
 
 	/**

@@ -5,7 +5,7 @@ namespace BigFish\Tests\PaymentGateway;
 
 use BigFish\PaymentGateway;
 
-class IntegrationAbstract extends \PHPUnit_Framework_TestCase
+class IntegrationAbstract extends \PHPUnit\Framework\TestCase
 {
 	public function getMock($originalClassName, $methods = [], array $arguments = [], $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $cloneArguments = false, $callOriginalMethods = false, $proxyTarget = null)
 	{

@@ -11,7 +11,7 @@ class OneClickTokenCancel extends RequestAbstract
 	 */
 	public function __construct(string $transactionId)
 	{
-		$this->data['transactionId'] = $transactionId;
+		$this->setData($transactionId, 'transactionId');
 	}
 
 	/**

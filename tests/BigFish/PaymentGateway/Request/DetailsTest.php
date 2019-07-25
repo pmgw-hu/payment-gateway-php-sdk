@@ -10,13 +10,14 @@ class DetailsTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new Details($transactionId, false);
+		return new Details($transactionId, false, true);
 	}
 
 	protected function getDataKeys(): array
 	{
 		$result = parent::getDataKeys();
 		$result['getRelatedTransactions'] = false;
+		$result['getInfoData'] = true;
 		return $result;
 	}
 }

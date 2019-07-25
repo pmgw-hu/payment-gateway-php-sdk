@@ -11,7 +11,7 @@ class PaymentLinkCancel extends InitAbstract
 	 */
 	public function __construct(string $paymentLinkName)
 	{
-		$this->data['paymentLinkName'] = $paymentLinkName;
+		$this->setData($paymentLinkName, 'paymentLinkName');
 	}
 
 	/**
