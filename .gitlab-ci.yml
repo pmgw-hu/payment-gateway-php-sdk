@@ -21,16 +21,14 @@ Copy paste detection:
 #  allow_failure: true
 
 PhpUnit php7:
+  image: php:7.2
   script:
-    - apt-get install -y apt-transport-https lsb-release ca-certificates --fix-missing
-    - wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-    - echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
-    - apt-get update
-    - apt-get install -y --force-yes --fix-missing php7.2 php7.2-mbstring php7.2-bcmath php7.2-curl
+    - apt-get update && apt-get install -y zip unzip php-zip
     - php -v
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
     - cd tests && php ../vendor/phpunit/phpunit/phpunit
+    - phpunit --configuration phpunit_myapp.xml
   stage: build
 
 #UI test:
