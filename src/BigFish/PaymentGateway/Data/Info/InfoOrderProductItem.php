@@ -7,18 +7,27 @@ use BigFish\PaymentGateway;
 
 class InfoOrderProductItem extends InfoAbstract
 {
+
+	const SKU = 'sku';
+	const NAME = 'name';
+	const QUANTITY = 'quantity';
+	const QUANTITY_UNIT = 'quantityUnit';
+	const UNIT_PRICE = 'unitPrice';
+	const IMAGE_URL = 'imageUrl';
+	const DESCRIPTION = 'description';
+
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
-		'sku' => 254,
-		'name' => 254,
-		'quantity' => 10,
-		'quantityUnit' => 16,
-		'unitPrice' => 16,
-		'imageUrl' => 254,
-		'description' => 254,
-	);
+	protected $maxLength = [
+		self::SKU => 254,
+		self::NAME => 254,
+		self::QUANTITY => 10,
+		self::QUANTITY_UNIT => 16,
+		self::UNIT_PRICE => 16,
+		self::IMAGE_URL => 254,
+		self::DESCRIPTION => 254
+	];
 
 	/**
 	 * @return string
@@ -34,8 +43,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setSku(string $sku): InfoOrderProductItem
 	{
-		$this->setData($sku, 'sku');
-		return $this;
+		return $this->setData($sku, self::SKU);
 	}
 
 	/**
@@ -44,8 +52,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setName(string $name): InfoOrderProductItem
 	{
-		$this->setData($name, 'name');
-		return $this;
+		return $this->setData($name, self::NAME);
 	}
 
 	/**
@@ -54,8 +61,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setQuantity($quantity): InfoOrderProductItem
 	{
-		$this->setData($quantity, 'quantity');
-		return $this;
+		return $this->setData($quantity, self::QUANTITY);
 	}
 
 	/**
@@ -64,8 +70,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setQuantityUnit(string $quantityUnit): InfoOrderProductItem
 	{
-		$this->setData($quantityUnit, 'quantityUnit');
-		return $this;
+		return $this->setData($quantityUnit, self::QUANTITY_UNIT);
 	}
 
 	/**
@@ -74,8 +79,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setUnitPrice($unitPrice): InfoOrderProductItem
 	{
-		$this->setData($unitPrice, 'unitPrice');
-		return $this;
+		return $this->setData($unitPrice, self::UNIT_PRICE);
 	}
 
 	/**
@@ -84,8 +88,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setImageUrl(string $imageUrl): InfoOrderProductItem
 	{
-		$this->setData($imageUrl, 'imageUrl');
-		return $this;
+		return $this->setData($imageUrl, self::IMAGE_URL);
 	}
 
 	/**
@@ -94,7 +97,6 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setDescription(string $description): InfoOrderProductItem
 	{
-		$this->setData($description, 'description');
-		return $this;
+		return $this->setData($description, self::DESCRIPTION);
 	}
 }

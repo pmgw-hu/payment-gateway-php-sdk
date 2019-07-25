@@ -18,14 +18,14 @@ class Settlement extends InitBasicAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
+	protected $maxLength = [
 		'storeName' => 20,
 		'providerName' => 20,
 		'terminalId' => 64,
 		'settlementDate' => 10,
 		'transferNotice' => 255,
-		'transactionCurrency' => 3,
-	);
+		'transactionCurrency' => 3
+	];
 
 	/**
 	 * @param int $limit

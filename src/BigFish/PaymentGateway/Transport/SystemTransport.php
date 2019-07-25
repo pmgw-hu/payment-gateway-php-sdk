@@ -39,7 +39,7 @@ class SystemTransport extends TransportAbstract
 		}
 
 		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array($this->getAuthorizationHeader()));
+		curl_setopt($curl, CURLOPT_HTTPHEADER, [$this->getAuthorizationHeader()]);
 		curl_setopt($curl, CURLOPT_REFERER, $this->getHttpHost());
 		curl_setopt($curl, CURLOPT_MAXREDIRS, 4);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -47,10 +47,10 @@ class SystemTransport extends TransportAbstract
 		$this->setTimeout($request, $curl);
 		$this->setSslVerify($curl);
 
-		$postData = array(
+		$postData = [
 			'method' => $request->getMethod(),
 			'json' => $this->prepareData($request),
-		);
+		];
 
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);

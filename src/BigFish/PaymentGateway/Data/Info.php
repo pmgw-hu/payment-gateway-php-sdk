@@ -17,15 +17,13 @@ class Info extends InfoAbstract
 	{
 		if ($infoObject instanceof InfoOrderProductItem) {
 			if (!isset($this->data[$infoObject->getStructurePath()])) {
-				$this->data[$infoObject->getStructurePath()] = array();
+				$this->data[$infoObject->getStructurePath()] = [];
 			}
 			array_push($this->data[$infoObject->getStructurePath()], $infoObject->getUcFirstData());
 			return $this;
 		}
 
-		if ($infoObject instanceof InfoAbstract) {
-			$this->data[$infoObject->getStructurePath()] = $infoObject->getUcFirstData();
-		}
+		$this->data[$infoObject->getStructurePath()] = $infoObject->getUcFirstData();
 
 		return $this;
 	}
@@ -35,7 +33,7 @@ class Info extends InfoAbstract
 	 */
 	public function getData(): array
 	{
-		$finalData = array();
+		$finalData = [];
 		foreach ($this->data as $pathString => $value) {
 			$pathArray = explode('/', $pathString);
 			$temp = &$finalData;
@@ -47,7 +45,7 @@ class Info extends InfoAbstract
 			unset($temp);
 		}
 
-		return isset($finalData[$this->getStructurePath()]) ? $finalData[$this->getStructurePath()] : [];
+		return $finalData[$this->getStructurePath()] ?? [];
 	}
 
 	/**

@@ -25,7 +25,7 @@ class PaymentLinkCreate extends InitAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
+	protected $maxLength = [
 		'orderId' => 255,
 		'userId' => 255,
 		'currency' => 3,
@@ -34,7 +34,7 @@ class PaymentLinkCreate extends InitAbstract
 		'notificationUrl' => 255,
 		'language' => 2,
 		'notificationEmail' => 255,
-	);
+	];
 
 	/**
 	 * @param string $notificationEmail

@@ -10,40 +10,30 @@ abstract class BaseAbstract implements BaseInterface
 	/**
 	 * @var array
 	 */
-	protected $data = array();
+	protected $data = [];
 
-	/**
-	 * @return array
-	 */
 	public function getData(): array
 	{
 		return $this->data;
 	}
 
-	/**
-	 * @return array
-	 */
 	public function getUcFirstData(): array
 	{
-		$data = array();
+		$data = [];
 		foreach ($this->getData() as $key => $item) {
 			$data[ucfirst($key)] = $item;
 		}
 		return $data;
 	}
 
-	/**
-	 * @param string $value
-	 * @param string $fieldName
-	 * @throws PaymentGatewayException
-	 */
-	protected function setData(string $value, string $fieldName)
+	protected function setData(string $value, string $fieldName): self
 	{
 		if ($maxSize = $this->getFieldMaxLength($fieldName)) {
 			$this->checkFieldLength($maxSize, $fieldName, $value);
 		}
 
 		$this->data[$fieldName] = $value;
+		return $this;
 	}
 
 	/**
@@ -71,6 +61,6 @@ abstract class BaseAbstract implements BaseInterface
 	 */
 	protected function getFieldMaxLength(string $fieldName)
 	{
-		return null;
+		return $this->maxLength[$fieldName] ?? null;
 	}
 }

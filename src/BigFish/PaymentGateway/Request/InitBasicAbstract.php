@@ -9,10 +9,10 @@ abstract class InitBasicAbstract extends RequestAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
+	protected $maxLength = [
 		'providerName' => 20,
 		'storeName' => 20
-	);
+	];
 
 	/**
 	 * Set the default values from the constants.
@@ -41,10 +41,7 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 */
 	protected function getFieldMaxLength(string $fieldName)
 	{
-		if (isset($this->maxLength[$fieldName])) {
-			return $this->maxLength[$fieldName];
-		}
-		return parent::getFieldMaxLength($fieldName);
+		return $this->maxLength[$fieldName] ?? parent::getFieldMaxLength($fieldName);
 	}
 
 	/**

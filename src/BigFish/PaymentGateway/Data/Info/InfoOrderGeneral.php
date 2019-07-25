@@ -7,23 +7,36 @@ use BigFish\PaymentGateway;
 
 class InfoOrderGeneral extends InfoAbstract
 {
+	const DELIVERY_EMAIL = 'deliveryEmail';
+	const DELIVERY_TIME_FRAME = 'deliveryTimeFrame';
+	const GIFT_CARD_AMOUNT = 'giftCardAmount';
+	const GIFT_CARD_COUNT = 'giftCardCount';
+	const GIFT_CARD_CURRENCY = 'giftCardCurrency';
+	const PREORDER_DATE = 'preorderDate';
+	const AVAILABILITY = 'availability';
+	const REORDER_ITEMS = 'reorderItems';
+	const SHIPPING_METHOD = 'shippingMethod';
+	const ADDRESS_MATCH_INDICATOR = 'addressMatchIndicator';
+	const DIFFERENT_SHIPPING_NAME = 'differentShippingName';
+	const TRANSACTION_TYPE = 'transactionType';
+
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
-		'deliveryEmail' => 254,
-		'deliveryTimeFrame' => 2,
-		'giftCardAmount' => 15,
-		'giftCardCount' => 2,
-		'giftCardCurrency' => 3,
-		'preorderDate' => 10,
-		'availability' => 2,
-		'reorderItems' => 2,
-		'shippingMethod' => 2,
-		'addressMatchIndicator' => 1,
-		'differentShippingName' => 2,
-		'transactionType' => 2,
-	);
+	protected $maxLength = [
+		self::DELIVERY_EMAIL => 254,
+		self::DELIVERY_TIME_FRAME => 2,
+		self::GIFT_CARD_AMOUNT => 15,
+		self::GIFT_CARD_COUNT => 2,
+		self::GIFT_CARD_CURRENCY => 3,
+		self::PREORDER_DATE => 10,
+		self::AVAILABILITY => 2,
+		self::REORDER_ITEMS => 2,
+		self::SHIPPING_METHOD => 2,
+		self::ADDRESS_MATCH_INDICATOR => 1,
+		self::DIFFERENT_SHIPPING_NAME => 2,
+		self::TRANSACTION_TYPE => 2,
+	];
 
 	/**
 	 * @return string
@@ -39,8 +52,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setDeliveryEmail($deliveryEmail)
 	{
-		$this->setData($deliveryEmail, 'deliveryEmail');
-		return $this;
+		return $this->setData($deliveryEmail, self::DELIVERY_EMAIL);
 	}
 
 	/**
@@ -49,8 +61,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setDeliveryTimeFrame($deliveryTimeFrame)
 	{
-		$this->setData($deliveryTimeFrame, 'deliveryTimeFrame');
-		return $this;
+		return $this->setData($deliveryTimeFrame, self::DELIVERY_TIME_FRAME);
 	}
 
 	/**
@@ -59,8 +70,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setGiftCardAmount($giftCardAmount)
 	{
-		$this->setData($giftCardAmount, 'giftCardAmount');
-		return $this;
+		return $this->setData($giftCardAmount, self::GIFT_CARD_AMOUNT);
 	}
 
 	/**
@@ -69,8 +79,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setGiftCardCount($giftCardCount)
 	{
-		$this->setData($giftCardCount, 'giftCardCount');
-		return $this;
+		return $this->setData($giftCardCount, self::GIFT_CARD_COUNT);
 	}
 
 	/**
@@ -79,8 +88,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setGiftCardCurrency($giftCardCurrency)
 	{
-		$this->setData($giftCardCurrency, 'giftCardCurrency');
-		return $this;
+		return $this->setData($giftCardCurrency, self::GIFT_CARD_CURRENCY);
 	}
 
 	/**
@@ -89,8 +97,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setPreorderDate($preorderDate)
 	{
-		$this->setData($preorderDate, 'preorderDate');
-		return $this;
+		return $this->setData($preorderDate, self::PREORDER_DATE);
 	}
 
 	/**
@@ -99,8 +106,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setAvailability($availability)
 	{
-		$this->setData($availability, 'availability');
-		return $this;
+		return $this->setData($availability, self::AVAILABILITY);
 	}
 
 	/**
@@ -109,8 +115,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setReorderItems($reorderItems)
 	{
-		$this->setData($reorderItems, 'reorderItems');
-		return $this;
+		return $this->setData($reorderItems, self::REORDER_ITEMS);
 	}
 
 	/**
@@ -119,8 +124,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setShippingMethod($shippingMethod)
 	{
-		$this->setData($shippingMethod, 'shippingMethod');
-		return $this;
+		return $this->setData($shippingMethod, self::SHIPPING_METHOD);
 	}
 
 	/**
@@ -129,8 +133,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setAddressMatchIndicator($addressMatchIndicator)
 	{
-		$this->setData($addressMatchIndicator, 'addressMatchIndicator');
-		return $this;
+		return $this->setData($addressMatchIndicator, self::ADDRESS_MATCH_INDICATOR);
 	}
 
 	/**
@@ -139,8 +142,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setDifferentShippingName($differentShippingName)
 	{
-		$this->setData($differentShippingName, 'differentShippingName');
-		return $this;
+		return $this->setData($differentShippingName, self::DIFFERENT_SHIPPING_NAME);
 	}
 
 	/**
@@ -149,7 +151,6 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setTransactionType($transactionType)
 	{
-		$this->setData($transactionType, 'transactionType');
-		return $this;
+		return $this->setData($transactionType, self::TRANSACTION_TYPE);
 	}
 }

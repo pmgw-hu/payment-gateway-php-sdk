@@ -19,7 +19,7 @@ class Init extends InitAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
+	protected $maxLength = [
 		'orderId' => 255,
 		'userId' => 255,
 		'currency' => 3,
@@ -33,14 +33,14 @@ class Init extends InitAbstract
 		'otpCardPocketId' => 2,
 		'otpCvc' => 3,
 		'mkbSzepCvv' => 3
-	);
+    ];
 
 	/**
 	 * Valid OneClickPayment providers
 	 * 
 	 * @var array
 	 */
-	protected static $oneClickProviders = array(
+	protected static $oneClickProviders = [
 		PaymentGateway::PROVIDER_ESCALION,
 		PaymentGateway::PROVIDER_OTP_SIMPLE,
 		PaymentGateway::PROVIDER_SAFERPAY,
@@ -49,7 +49,7 @@ class Init extends InitAbstract
 		PaymentGateway::PROVIDER_BORGUN2,
 		PaymentGateway::PROVIDER_GP,
 		PaymentGateway::PROVIDER_VIRPAY,
-	);
+	];
 
 	/**
 	 * BIG FISH Payment Gateway payment page (MKBSZEP)
@@ -248,10 +248,10 @@ class Init extends InitAbstract
 	 * @return Init
 	 * @throws PaymentGatewayException
 	 */
-	public function setExtra(array $extra = array()): Init
+	public function setExtra(array $extra = []): Init
 	{
 		$providerName = $this->data['providerName'];
-		$encryptData = array();
+		$encryptData = [];
 
 		if (in_array($providerName, self::$oneClickProviders) && isset($this->data['oneClickForcedRegistration'])) {
 			$extra['oneClickForcedRegistration'] = true;
@@ -268,11 +268,11 @@ class Init extends InitAbstract
 					!empty($this->data['otpExpiration']) &&
 					!empty($this->data['otpCvc'])
 			) {
-				$encryptData = array(
+				$encryptData = [
 						'otpCardNumber' => $this->data['otpCardNumber'],
 						'otpExpiration' => $this->data['otpExpiration'],
 						'otpCvc' => $this->data['otpCvc']
-				);
+                ];
 			}
 		} elseif ($providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
 			if (
@@ -280,10 +280,10 @@ class Init extends InitAbstract
 				!empty($this->data['mkbSzepCardNumber']) &&
 				!empty($this->data['mkbSzepCvv'])
 			) {
-				$encryptData = array(
+				$encryptData = [
 					'mkbSzepCardNumber' => $this->data['mkbSzepCardNumber'],
 					'mkbSzepCvv' => $this->data['mkbSzepCvv']
-				);
+                ];
 			}
 		} elseif (!empty($extra)) {
 			$this->data['extra'] = $this->urlSafeEncode(json_encode($extra));
@@ -305,7 +305,7 @@ class Init extends InitAbstract
 	 * @return bool
 	 * @throws PaymentGatewayException
 	 */
-	protected function encryptExtra(array $data = array()): bool
+	protected function encryptExtra(array $data = []): bool
 	{
 		if (!function_exists('openssl_public_encrypt')) {
 			throw new PaymentGatewayException('OpenSSL PHP module is not loaded');

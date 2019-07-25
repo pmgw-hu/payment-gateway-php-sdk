@@ -10,7 +10,7 @@ abstract class InfoAbstract extends BaseAbstract implements InfoInterface
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array();
+	protected $maxLength = [];
 
 	/**
 	 * @return null|string
@@ -18,17 +18,5 @@ abstract class InfoAbstract extends BaseAbstract implements InfoInterface
 	public function getStructurePath(): string
 	{
 		return null;
-	}
-
-	/**
-	 * @param string $fieldName
-	 * @return null|int
-	 */
-	protected function getFieldMaxLength(string $fieldName)
-	{
-		if (isset($this->maxLength[$fieldName])) {
-			return $this->maxLength[$fieldName];
-		}
-		return parent::getFieldMaxLength($fieldName);
 	}
 }

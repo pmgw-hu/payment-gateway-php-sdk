@@ -11,13 +11,13 @@ abstract class InitAbstract extends InitBasicAbstract
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
+	protected $maxLength = [
 		'storeName' => 20,
 		'orderId' => 255,
 		'userId' => 255,
 		'currency' => 3,
 		'providerName' => 20
-	);
+	];
 
 	/**
 	 * Set the default values from the constants.
@@ -114,7 +114,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * @param array $info
 	 * @return $this
 	 */
-	public function setInfo(array $info = array()): InitAbstract
+	public function setInfo(array $info = []): InitAbstract
 	{
 		$this->data['info'] = $this->urlSafeEncode(json_encode($info));
 
@@ -129,6 +129,6 @@ abstract class InitAbstract extends InitBasicAbstract
 	 */
 	protected function urlSafeEncode(string $string): string
 	{
-		return str_replace(array('+', '/', '='), array('-', '_', '.'), base64_encode($string));
+		return str_replace(['+', '/', '='], ['-', '_', '.'], base64_encode($string));
 	}
 }

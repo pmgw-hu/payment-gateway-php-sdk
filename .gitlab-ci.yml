@@ -2,13 +2,13 @@ before_script:
   - pwd
 
 Syntax check php7:
-  script: find . -name \*.php -exec php7 -l "{}" \;
+  script: find . -name \*.php -exec php -l "{}" \;
   stage: build
 
 Copy paste detection:
   script:
     - wget https://phar.phpunit.de/phpcpd.phar
-    - php7 phpcpd.phar ./src/
+    - php phpcpd.phar ./src/
   stage: build
   allow_failure: true
 
@@ -22,10 +22,10 @@ Copy paste detection:
 
 PhpUnit php7:
   script:
-    - php7 -v
+    - php -v
     - curl -sS https://getcomposer.org/installer | php
-    - php7 composer.phar install
-    - cd tests && php7 ../vendor/phpunit/phpunit/phpunit
+    - php composer.phar install
+    - cd tests && php ../vendor/phpunit/phpunit/phpunit
   stage: build
 
 #UI test:

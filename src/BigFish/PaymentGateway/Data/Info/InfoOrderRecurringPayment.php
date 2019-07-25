@@ -7,13 +7,15 @@ use BigFish\PaymentGateway;
 
 class InfoOrderRecurringPayment extends InfoAbstract
 {
+	const EXPIRE_DATE = 'expireDate';
+	const FREQUENCY = 'frequency';
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
-		'expireDate' => 10,
-		'frequency' => 4,
-	);
+	protected $maxLength = [
+		self::EXPIRE_DATE => 10,
+		self::FREQUENCY => 4
+	];
 
 	/**
 	 * @return string
@@ -29,8 +31,7 @@ class InfoOrderRecurringPayment extends InfoAbstract
 	 */
 	public function setExpireDate(string $expireDate): InfoOrderRecurringPayment
 	{
-		$this->setData($expireDate, 'expireDate');
-		return $this;
+		return $this->setData($expireDate, self::EXPIRE_DATE);
 	}
 
 	/**
@@ -39,7 +40,6 @@ class InfoOrderRecurringPayment extends InfoAbstract
 	 */
 	public function setFrequency(string $frequency): InfoOrderRecurringPayment
 	{
-		$this->setData($frequency, 'frequency');
-		return $this;
+		return $this->setData($frequency, self::FREQUENCY);
 	}
 }

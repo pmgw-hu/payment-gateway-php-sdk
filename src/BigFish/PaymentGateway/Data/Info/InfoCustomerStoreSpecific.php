@@ -7,29 +7,50 @@ use BigFish\PaymentGateway;
 
 class InfoCustomerStoreSpecific extends InfoAbstract
 {
+	const UPDATE_DATE = 'updateDate';
+	const UPDATE_DATE_INDICATOR = 'updateDateIndicator';
+	const CREATION_DATE = 'creationDate';
+	const CREATION_DATE_INDICATOR = 'creationDateIndicator';
+	const PASSWORD_CHANGE_DATE = 'passwordChangeDate';
+	const PASSWORD_CHANGE_DATE_INDICATOR = 'passwordChangeDateIndicator';
+	const AUTHENTICATION_TIMESTAMP = 'authenticationTimestamp';
+	const AUTHENTICATION_METHOD = 'authenticationMethod';
+	const CHALLENGE_INDICATOR = 'challengeIndicator';
+	const SHIPPING_ADDRESS_FIRST_USE = 'shippingAddressFirstUse';
+	const SHIPPING_ADDRESS_FIRST_USE_INDICATOR = 'shippingAddressFirstUseIndicator';
+	const CARD_TRANSACTIONS_LAST_DAY = 'cardTransactionsLastDay';
+	const CARD_CREATION_DATE = 'cardCreationDate';
+	const CARD_CREATION_DATE_INDICATOR = 'cardCreationDateIndicator';
+	const TRANSACTION_LAST_DAY = 'transactionsLastDay';
+	const TRANSACTION_LAST_YEAR = 'transactionsLastYear';
+	const PURCHASES_LAST_SIX_MONTHS = 'purchasesLastSixMonths';
+	const SUSPICIOUS_ACTIVITY = 'suspiciousActivity';
+
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
-		'updateDate' => 10,
-		'updateDateIndicator' => 2,
-		'creationDate' => 10,
-		'creationDateIndicator' => 2,
-		'passwordChangeDate' => 10,
-		'passwordChangeDateIndicator' => 2,
-		'authenticationTimestamp' => 19,
-		'authenticationMethod' => 2,
-		'challengeIndicator' => 2,
-		'shippingAddressFirstUse' => 10,
-		'shippingAddressFirstUseIndicator' => 2,
-		'cardTransactionsLastDay' => 3,
-		'cardCreationDate' => 10,
-		'cardCreationDateIndicator' => 2,
-		'transactionsLastDay' => 3,
-		'transactionsLastYear' => 3,
-		'purchasesLastSixMonths' => 4,
-		'suspiciousActivity' => 2,
-	);
+	protected $maxLength = [
+		self::UPDATE_DATE => 10,
+		self::UPDATE_DATE_INDICATOR => 2,
+		self::CREATION_DATE => 10,
+		self::CREATION_DATE_INDICATOR => 2,
+		self::PASSWORD_CHANGE_DATE => 10,
+		self::PASSWORD_CHANGE_DATE_INDICATOR => 2,
+		self::AUTHENTICATION_TIMESTAMP => 19,
+		self::AUTHENTICATION_METHOD => 2,
+		self::CHALLENGE_INDICATOR => 2,
+		self::SHIPPING_ADDRESS_FIRST_USE => 10,
+		self::SHIPPING_ADDRESS_FIRST_USE_INDICATOR => 2,
+		self::CARD_TRANSACTIONS_LAST_DAY => 3,
+		self::CARD_CREATION_DATE => 10,
+		self::CARD_CREATION_DATE_INDICATOR => 2,
+		self::TRANSACTION_LAST_DAY => 3,
+		self::TRANSACTION_LAST_YEAR => 3,
+		self::PURCHASES_LAST_SIX_MONTHS => 4,
+		self::SUSPICIOUS_ACTIVITY => 2
+	];
+
+
 
 	/**
 	 * @return string
@@ -45,8 +66,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setUpdateDate(string $updateDate): InfoCustomerStoreSpecific
 	{
-		$this->setData($updateDate, 'updateDate');
-		return $this;
+		return $this->setData($updateDate, self::UPDATE_DATE);
 	}
 
 	/**
@@ -55,8 +75,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setUpdateDateIndicator(string $updateDateIndicator): InfoCustomerStoreSpecific
 	{
-		$this->setData($updateDateIndicator, 'updateDateIndicator');
-		return $this;
+		return $this->setData($updateDateIndicator, self::UPDATE_DATE_INDICATOR);
 	}
 
 	/**
@@ -65,8 +84,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCreationDate(string $creationDate): InfoCustomerStoreSpecific
 	{
-		$this->setData($creationDate, 'creationDate');
-		return $this;
+		return $this->setData($creationDate, self::CREATION_DATE);
 	}
 
 	/**
@@ -75,8 +93,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCreationDateIndicator(string $creationDateIndicator): InfoCustomerStoreSpecific
 	{
-		$this->setData($creationDateIndicator, 'creationDateIndicator');
-		return $this;
+		return $this->setData($creationDateIndicator, self::CREATION_DATE_INDICATOR);
 	}
 
 	/**
@@ -85,8 +102,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setPasswordChangeDate(string $passwordChangeDate): InfoCustomerStoreSpecific
 	{
-		$this->setData($passwordChangeDate, 'passwordChangeDate');
-		return $this;
+		return $this->setData($passwordChangeDate, self::PASSWORD_CHANGE_DATE);
 	}
 
 	/**
@@ -95,8 +111,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setPasswordChangeDateIndicator(string $passwordChangeDateIndicator): InfoCustomerStoreSpecific
 	{
-		$this->setData($passwordChangeDateIndicator, 'passwordChangeDateIndicator');
-		return $this;
+		return $this->setData($passwordChangeDateIndicator, self::PASSWORD_CHANGE_DATE_INDICATOR);
 	}
 
 	/**
@@ -105,8 +120,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setAuthenticationTimestamp(string $authenticationTimestamp): InfoCustomerStoreSpecific
 	{
-		$this->setData($authenticationTimestamp, 'authenticationTimestamp');
-		return $this;
+		return $this->setData($authenticationTimestamp, self::AUTHENTICATION_TIMESTAMP);
 	}
 
 	/**
@@ -115,8 +129,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setAuthenticationMethod(string $authenticationMethod): InfoCustomerStoreSpecific
 	{
-		$this->setData($authenticationMethod, 'authenticationMethod');
-		return $this;
+		return $this->setData($authenticationMethod, self::AUTHENTICATION_METHOD);
 	}
 
 	/**
@@ -125,8 +138,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setChallengeIndicator(string $challengeIndicator): InfoCustomerStoreSpecific
 	{
-		$this->setData($challengeIndicator, 'challengeIndicator');
-		return $this;
+		return $this->setData($challengeIndicator, self::CHALLENGE_INDICATOR);
 	}
 
 	/**
@@ -135,8 +147,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setShippingAddressFirstUse(string $shippingAddressFirstUse): InfoCustomerStoreSpecific
 	{
-		$this->setData($shippingAddressFirstUse, 'shippingAddressFirstUse');
-		return $this;
+		return $this->setData($shippingAddressFirstUse, self::SHIPPING_ADDRESS_FIRST_USE);
 	}
 
 	/**
@@ -145,8 +156,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setShippingAddressFirstUseIndicator(string $shippingAddressFirstUseIndicator): InfoCustomerStoreSpecific
 	{
-		$this->setData($shippingAddressFirstUseIndicator, 'shippingAddressFirstUseIndicator');
-		return $this;
+		return $this->setData($shippingAddressFirstUseIndicator, self::SHIPPING_ADDRESS_FIRST_USE_INDICATOR);
 	}
 
 	/**
@@ -155,8 +165,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCardTransactionsLastDay(string $cardTransactionsLastDay): InfoCustomerStoreSpecific
 	{
-		$this->setData($cardTransactionsLastDay, 'cardTransactionsLastDay');
-		return $this;
+		return $this->setData($cardTransactionsLastDay, self::CARD_TRANSACTIONS_LAST_DAY);
 	}
 
 	/**
@@ -165,8 +174,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCardCreationDate(string $cardCreationDate): InfoCustomerStoreSpecific
 	{
-		$this->setData($cardCreationDate, 'cardCreationDate');
-		return $this;
+		return $this->setData($cardCreationDate, self::CARD_CREATION_DATE);
 	}
 
 	/**
@@ -175,8 +183,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCardCreationDateIndicator(string $cardCreationDateIndicator): InfoCustomerStoreSpecific
 	{
-		$this->setData($cardCreationDateIndicator, 'cardCreationDateIndicator');
-		return $this;
+		return $this->setData($cardCreationDateIndicator, self::CARD_CREATION_DATE_INDICATOR);
 	}
 
 	/**
@@ -185,8 +192,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setTransactionsLastDay(string $transactionsLastDay): InfoCustomerStoreSpecific
 	{
-		$this->setData($transactionsLastDay, 'transactionsLastDay');
-		return $this;
+		return $this->setData($transactionsLastDay, self::TRANSACTION_LAST_DAY);
 	}
 
 	/**
@@ -195,8 +201,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setTransactionsLastYear(string $transactionsLastYear): InfoCustomerStoreSpecific
 	{
-		$this->setData($transactionsLastYear, 'transactionsLastYear');
-		return $this;
+		return $this->setData($transactionsLastYear, self::TRANSACTION_LAST_YEAR);
 	}
 
 	/**
@@ -205,8 +210,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setPurchasesLastSixMonths(string $purchasesLastSixMonths): InfoCustomerStoreSpecific
 	{
-		$this->setData($purchasesLastSixMonths, 'purchasesLastSixMonths');
-		return $this;
+		return $this->setData($purchasesLastSixMonths, self::PURCHASES_LAST_SIX_MONTHS);
 	}
 
 	/**
@@ -215,7 +219,6 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setSuspiciousActivity(string $suspiciousActivity): InfoCustomerStoreSpecific
 	{
-		$this->setData($suspiciousActivity, 'suspiciousActivity');
-		return $this;
+		return $this->setData($suspiciousActivity, self::SUSPICIOUS_ACTIVITY);
 	}
 }

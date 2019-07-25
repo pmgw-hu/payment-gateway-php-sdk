@@ -7,21 +7,32 @@ use BigFish\PaymentGateway;
 
 class InfoCustomerGeneral extends InfoAbstract
 {
+	const FIRST_NAME = 'firstName';
+	const LAST_NAME = 'lastName';
+	const EMAIL = 'email';
+	const IP = 'ip';
+	const HOME_PHONE_CC = 'homePhoneCc';
+	const HOME_PHONE = 'homePhone';
+	const MOBILE_PHONE_CC = 'mobilePhoneCc';
+	const MOBILE_PHONE = 'mobilePhone';
+	const WORK_PHONE_CC = 'workPhoneCc';
+	const WORK_PHONE = 'workPhone';
+
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
-		'firstName' => 45,
-		'lastName' => 45,
-		'email' => 254,
-		'ip' => 45,
-		'homePhoneCc' => 3,
-		'homePhone' => 18,
-		'mobilePhoneCc' => 3,
-		'mobilePhone' => 18,
-		'workPhoneCc' => 3,
-		'workPhone' => 18
-	);
+	protected $maxLength = [
+		self::FIRST_NAME => 45,
+		self::LAST_NAME => 45,
+		self::EMAIL => 254,
+		self::IP => 45,
+		self::HOME_PHONE_CC => 3,
+		self::HOME_PHONE => 18,
+		self::MOBILE_PHONE_CC => 3,
+		self::MOBILE_PHONE => 18,
+		self::WORK_PHONE_CC => 3,
+		self::WORK_PHONE => 18
+	];
 
 	/**
 	 * @return string
@@ -35,99 +46,89 @@ class InfoCustomerGeneral extends InfoAbstract
 	 * @param string $firstName
 	 * @return InfoCustomerGeneral
 	 */
-	public function setFirstName(string $firstName): InfoCustomerGeneral
+	public function setFirstName(string $firstName): self
 	{
-		$this->setData($firstName, 'firstName');
-		return $this;
+		return $this->setData($firstName, 'firstName');
 	}
 
 	/**
 	 * @param string $lastName
 	 * @return InfoCustomerGeneral
 	 */
-	public function setLastName(string $lastName): InfoCustomerGeneral
+	public function setLastName(string $lastName): self
 	{
-		$this->setData($lastName, 'lastName');
-		return $this;
+		return $this->setData($lastName, 'lastName');
 	}
 
 	/**
 	 * @param string $email
 	 * @return InfoCustomerGeneral
 	 */
-	public function setEmail(string $email): InfoCustomerGeneral
+	public function setEmail(string $email): self
 	{
-		$this->setData($email, 'email');
-		return $this;
+		return $this->setData($email, 'email');
 	}
 
 	/**
 	 * @param string $ip
 	 * @return InfoCustomerGeneral
 	 */
-	public function setIp(string $ip): InfoCustomerGeneral
+	public function setIp(string $ip): self
 	{
-		$this->setData($ip, 'ip');
-		return $this;
+		return $this->setData($ip, 'ip');
 	}
 
 	/**
 	 * @param string $homePhoneCc
 	 * @return InfoCustomerGeneral
 	 */
-	public function setHomePhoneCc(string $homePhoneCc): InfoCustomerGeneral
+	public function setHomePhoneCc(string $homePhoneCc): self
 	{
-		$this->setData($homePhoneCc, 'homePhoneCc');
-		return $this;
+		return $this->setData($homePhoneCc, 'homePhoneCc');
 	}
 
 	/**
 	 * @param string $homePhone
 	 * @return InfoCustomerGeneral
 	 */
-	public function setHomePhone(string $homePhone): InfoCustomerGeneral
+	public function setHomePhone(string $homePhone): self
 	{
-		$this->setData($homePhone, 'homePhone');
-		return $this;
+		return $this->setData($homePhone, 'homePhone');
 	}
 
 	/**
 	 * @param string $mobilePhoneCc
 	 * @return InfoCustomerGeneral
 	 */
-	public function setMobilePhoneCc(string $mobilePhoneCc): InfoCustomerGeneral
+	public function setMobilePhoneCc(string $mobilePhoneCc): self
 	{
-		$this->setData($mobilePhoneCc, 'mobilePhoneCc');
-		return $this;
+		return $this->setData($mobilePhoneCc, 'mobilePhoneCc');
 	}
 
 	/**
 	 * @param string $mobilePhone
 	 * @return InfoCustomerGeneral
 	 */
-	public function setMobilePhone(string $mobilePhone): InfoCustomerGeneral
+	public function setMobilePhone(string $mobilePhone): self
 	{
-		$this->setData($mobilePhone, 'mobilePhone');
-		return $this;
+		return $this->setData($mobilePhone, 'mobilePhone');
 	}
 
 	/**
 	 * @param string $workPhoneCc
 	 * @return InfoCustomerGeneral
 	 */
-	public function setWorkPhoneCc(string $workPhoneCc): InfoCustomerGeneral
+	public function setWorkPhoneCc(string $workPhoneCc): self
 	{
-		$this->setData($workPhoneCc, 'workPhoneCc');
-		return $this;
+		return $this->setData($workPhoneCc, 'workPhoneCc');
 	}
 
 	/**
 	 * @param string $workPhone
 	 * @return InfoCustomerGeneral
 	 */
-	public function setWorkPhone(string $workPhone): InfoCustomerGeneral
+	public function setWorkPhone(string $workPhone): self
 	{
-		$this->setData($workPhone, 'workPhone');
-		return $this;
+		return $this->setData($workPhone, 'workPhone');
 	}
 }

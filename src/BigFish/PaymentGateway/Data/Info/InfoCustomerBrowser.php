@@ -7,116 +7,78 @@ use BigFish\PaymentGateway;
 
 class InfoCustomerBrowser extends InfoAbstract
 {
+	const ACCEPT_HEADER = 'acceptHeader';
+	const JAVA_ENABLED = 'javaEnabled';
+	const LANGUAGE = 'language';
+	const COLOR_DEPTH = 'colorDepth';
+	const SCREEN_HEIGHT = 'screenHeight';
+	const SCREEN_WIDTH = 'screenWidth';
+	const TIME_ZONE = 'timeZone';
+	const USER_AGENT = 'userAgent';
+	const WINDOWS_SIZE = 'windowSize';
+
 	/**
 	 * @var array
 	 */
-	protected $maxLength = array(
-		'acceptHeader' => 2048,
-		'javaEnabled' => 1,
-		'language' => 8,
-		'colorDepth' => 2,
-		'screenHeight' => 6,
-		'screenWidth' => 6,
-		'timeZone' => 5,
-		'userAgent' => 2048,
-		'windowSize' => 2
-	);
+	protected $maxLength = [
+		self::ACCEPT_HEADER => 2048,
+		self::JAVA_ENABLED => 1,
+		self::LANGUAGE => 8,
+		self::COLOR_DEPTH => 2,
+		self::SCREEN_HEIGHT => 6,
+		self::SCREEN_WIDTH => 6,
+		self::TIME_ZONE => 5,
+		self::USER_AGENT => 2048,
+		self::WINDOWS_SIZE => 2
+	];
 
-	/**
-	 * @return string
-	 */
 	public function getStructurePath(): string
 	{
 		return PaymentGateway::PATH_INFO_CUSTOMER_BROWSER;
 	}
 
-	/**
-	 * @param string $acceptHeader
-	 * @return InfoCustomerBrowser
-	 */
-	public function setAcceptHeader(string $acceptHeader): InfoCustomerBrowser
+	public function setAcceptHeader(string $acceptHeader): self
 	{
-		$this->setData($acceptHeader, 'acceptHeader');
-		return $this;
+		return $this->setData($acceptHeader, self::ACCEPT_HEADER);
 	}
 
-	/**
-	 * @param string $javaEnabled
-	 * @return InfoCustomerBrowser
-	 */
-	public function setJavaEnabled(string $javaEnabled): InfoCustomerBrowser
+	public function setJavaEnabled(string $javaEnabled): self
 	{
-		$this->setData($javaEnabled, 'javaEnabled');
-		return $this;
+		return $this->setData($javaEnabled, self::JAVA_ENABLED);
 	}
 
-	/**
-	 * @param string $language
-	 * @return InfoCustomerBrowser
-	 */
-	public function setLanguage(string $language): InfoCustomerBrowser
+	public function setLanguage(string $language): self
 	{
-		$this->setData($language, 'language');
-		return $this;
+		return $this->setData($language, self::LANGUAGE);
 	}
 
-	/**
-	 * @param string $colorDepth
-	 * @return InfoCustomerBrowser
-	 */
-	public function setColorDepth(string $colorDepth): InfoCustomerBrowser
+	public function setColorDepth(string $colorDepth): self
 	{
-		$this->setData($colorDepth, 'colorDepth');
-		return $this;
+		return $this->setData($colorDepth, self::COLOR_DEPTH);
 	}
 
-	/**
-	 * @param string $screenHeight
-	 * @return InfoCustomerBrowser
-	 */
-	public function setScreenHeight(string $screenHeight): InfoCustomerBrowser
+	public function setScreenHeight(string $screenHeight): self
 	{
-		$this->setData($screenHeight, 'screenHeight');
-		return $this;
+		return $this->setData($screenHeight, self::SCREEN_HEIGHT);
 	}
 
-	/**
-	 * @param string $screenWidth
-	 * @return InfoCustomerBrowser
-	 */
-	public function setScreenWidth(string $screenWidth): InfoCustomerBrowser
+	public function setScreenWidth(string $screenWidth): self
 	{
-		$this->setData($screenWidth, 'screenWidth');
-		return $this;
+		return $this->setData($screenWidth, self::SCREEN_WIDTH);
 	}
 
-	/**
-	 * @param string $timeZone
-	 * @return InfoCustomerBrowser
-	 */
-	public function setTimeZone(string $timeZone): InfoCustomerBrowser
+	public function setTimeZone(string $timeZone): self
 	{
-		$this->setData($timeZone, 'timeZone');
-		return $this;
+		return $this->setData($timeZone, self::TIME_ZONE);
 	}
 
-	/**
-	 * @param string $userAgent
-	 * @return InfoCustomerBrowser
-	 */
-	public function setUserAgent(string $userAgent): InfoCustomerBrowser
+	public function setUserAgent(string $userAgent): self
 	{
-		$this->setData($userAgent, 'userAgent');
-		return $this;
+		return $this->setData($userAgent, self::USER_AGENT);
 	}
 
-	/**
-	 * @param string $windowSize
-	 * @return InfoCustomerBrowser
-	 */
-	public function setWindowSize(string $windowSize): InfoCustomerBrowser
+	public function setWindowSize(string $windowSize): self
 	{
-		$this->setData($windowSize, 'windowSize');
-		return $this;
+		return $this->setData($windowSize, self::WINDOWS_SIZE);
 	}
 }
