@@ -22,6 +22,7 @@ Copy paste detection:
 
 PhpUnit php7:
   script:
+    - apt-get update && apt-get install -y --force-yes php apache2 git php-mbstring php-bcmath
     - php -v
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
