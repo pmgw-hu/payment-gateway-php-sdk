@@ -15,19 +15,6 @@ use BigFish\PaymentGateway;
 class InfoOrderProductItem extends InfoAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = array(
-		'sku' => 254,
-		'name' => 254,
-		'quantity' => 10,
-		'quantityUnit' => 16,
-		'unitPrice' => 16,
-		'imageUrl' => 254,
-		'description' => 254,
-	);
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath()
@@ -41,8 +28,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setSku($sku)
 	{
-		$this->setData($sku, 'sku');
-		return $this;
+		return $this->setData($sku, 'sku');
 	}
 
 	/**
@@ -51,8 +37,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setName($name)
 	{
-		$this->setData($name, 'name');
-		return $this;
+		return $this->setData($name, 'name');
 	}
 
 	/**
@@ -61,8 +46,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setQuantity($quantity)
 	{
-		$this->setData($quantity, 'quantity');
-		return $this;
+		return $this->setData($quantity, 'quantity');
 	}
 
 	/**
@@ -71,8 +55,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setQuantityUnit($quantityUnit)
 	{
-		$this->setData($quantityUnit, 'quantityUnit');
-		return $this;
+		return $this->setData($quantityUnit, 'quantityUnit');
 	}
 
 	/**
@@ -81,8 +64,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setUnitPrice($unitPrice)
 	{
-		$this->setData($unitPrice, 'unitPrice');
-		return $this;
+		return $this->setData($unitPrice, 'unitPrice');
 	}
 
 	/**
@@ -91,8 +73,7 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setImageUrl($imageUrl)
 	{
-		$this->setData($imageUrl, 'imageUrl');
-		return $this;
+		return $this->setData($imageUrl, 'imageUrl');
 	}
 
 	/**
@@ -101,7 +82,6 @@ class InfoOrderProductItem extends InfoAbstract
 	 */
 	public function setDescription($description)
 	{
-		$this->setData($description, 'description');
-		return $this;
+		return $this->setData($description, 'description');
 	}
 }

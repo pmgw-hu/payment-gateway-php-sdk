@@ -15,24 +15,6 @@ use BigFish\PaymentGateway;
 class InfoOrderGeneral extends InfoAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = array(
-		'deliveryEmail' => 254,
-		'deliveryTimeFrame' => 2,
-		'giftCardAmount' => 15,
-		'giftCardCount' => 2,
-		'giftCardCurrency' => 3,
-		'preorderDate' => 10,
-		'availability' => 2,
-		'reorderItems' => 2,
-		'shippingMethod' => 2,
-		'addressMatchIndicator' => 1,
-		'differentShippingName' => 2,
-		'transactionType' => 2,
-	);
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath()
@@ -46,8 +28,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setDeliveryEmail($deliveryEmail)
 	{
-		$this->setData($deliveryEmail, 'deliveryEmail');
-		return $this;
+		return $this->setData($deliveryEmail, 'deliveryEmail');
 	}
 
 	/**
@@ -56,8 +37,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setDeliveryTimeFrame($deliveryTimeFrame)
 	{
-		$this->setData($deliveryTimeFrame, 'deliveryTimeFrame');
-		return $this;
+		return $this->setData($deliveryTimeFrame, 'deliveryTimeFrame');
 	}
 
 	/**
@@ -66,8 +46,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setGiftCardAmount($giftCardAmount)
 	{
-		$this->setData($giftCardAmount, 'giftCardAmount');
-		return $this;
+		return $this->setData($giftCardAmount, 'giftCardAmount');
 	}
 
 	/**
@@ -76,8 +55,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setGiftCardCount($giftCardCount)
 	{
-		$this->setData($giftCardCount, 'giftCardCount');
-		return $this;
+		return $this->setData($giftCardCount, 'giftCardCount');
 	}
 
 	/**
@@ -86,8 +64,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setGiftCardCurrency($giftCardCurrency)
 	{
-		$this->setData($giftCardCurrency, 'giftCardCurrency');
-		return $this;
+		return $this->setData($giftCardCurrency, 'giftCardCurrency');
 	}
 
 	/**
@@ -96,8 +73,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setPreorderDate($preorderDate)
 	{
-		$this->setData($preorderDate, 'preorderDate');
-		return $this;
+		return $this->setData($preorderDate, 'preorderDate');
 	}
 
 	/**
@@ -106,8 +82,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setAvailability($availability)
 	{
-		$this->setData($availability, 'availability');
-		return $this;
+		return $this->setData($availability, 'availability');
 	}
 
 	/**
@@ -116,8 +91,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setReorderItems($reorderItems)
 	{
-		$this->setData($reorderItems, 'reorderItems');
-		return $this;
+		return $this->setData($reorderItems, 'reorderItems');
 	}
 
 	/**
@@ -126,8 +100,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setShippingMethod($shippingMethod)
 	{
-		$this->setData($shippingMethod, 'shippingMethod');
-		return $this;
+		return $this->setData($shippingMethod, 'shippingMethod');
 	}
 
 	/**
@@ -136,8 +109,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setAddressMatchIndicator($addressMatchIndicator)
 	{
-		$this->setData($addressMatchIndicator, 'addressMatchIndicator');
-		return $this;
+		return $this->setData($addressMatchIndicator, 'addressMatchIndicator');
 	}
 
 	/**
@@ -146,8 +118,7 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setDifferentShippingName($differentShippingName)
 	{
-		$this->setData($differentShippingName, 'differentShippingName');
-		return $this;
+		return $this->setData($differentShippingName, 'differentShippingName');
 	}
 
 	/**
@@ -156,7 +127,6 @@ class InfoOrderGeneral extends InfoAbstract
 	 */
 	public function setTransactionType($transactionType)
 	{
-		$this->setData($transactionType, 'transactionType');
-		return $this;
+		return $this->setData($transactionType, 'transactionType');
 	}
 }

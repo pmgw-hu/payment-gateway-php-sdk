@@ -15,30 +15,6 @@ use BigFish\PaymentGateway;
 class InfoCustomerStoreSpecific extends InfoAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = array(
-		'updateDate' => 10,
-		'updateDateIndicator' => 2,
-		'creationDate' => 10,
-		'creationDateIndicator' => 2,
-		'passwordChangeDate' => 10,
-		'passwordChangeDateIndicator' => 2,
-		'authenticationTimestamp' => 19,
-		'authenticationMethod' => 2,
-		'challengeIndicator' => 2,
-		'shippingAddressFirstUse' => 10,
-		'shippingAddressFirstUseIndicator' => 2,
-		'cardTransactionsLastDay' => 3,
-		'cardCreationDate' => 10,
-		'cardCreationDateIndicator' => 2,
-		'transactionsLastDay' => 3,
-		'transactionsLastYear' => 3,
-		'purchasesLastSixMonths' => 4,
-		'suspiciousActivity' => 2,
-	);
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath()
@@ -52,8 +28,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setUpdateDate($updateDate)
 	{
-		$this->setData($updateDate, 'updateDate');
-		return $this;
+		return $this->setData($updateDate, 'updateDate');
 	}
 
 	/**
@@ -62,8 +37,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setUpdateDateIndicator($updateDateIndicator)
 	{
-		$this->setData($updateDateIndicator, 'updateDateIndicator');
-		return $this;
+		return $this->setData($updateDateIndicator, 'updateDateIndicator');
 	}
 
 	/**
@@ -72,8 +46,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCreationDate($creationDate)
 	{
-		$this->setData($creationDate, 'creationDate');
-		return $this;
+		return $this->setData($creationDate, 'creationDate');
 	}
 
 	/**
@@ -82,8 +55,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCreationDateIndicator($creationDateIndicator)
 	{
-		$this->setData($creationDateIndicator, 'creationDateIndicator');
-		return $this;
+		return $this->setData($creationDateIndicator, 'creationDateIndicator');
 	}
 
 	/**
@@ -92,8 +64,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setPasswordChangeDate($passwordChangeDate)
 	{
-		$this->setData($passwordChangeDate, 'passwordChangeDate');
-		return $this;
+		return $this->setData($passwordChangeDate, 'passwordChangeDate');
 	}
 
 	/**
@@ -102,8 +73,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setPasswordChangeDateIndicator($passwordChangeDateIndicator)
 	{
-		$this->setData($passwordChangeDateIndicator, 'passwordChangeDateIndicator');
-		return $this;
+		return $this->setData($passwordChangeDateIndicator, 'passwordChangeDateIndicator');
 	}
 
 	/**
@@ -112,8 +82,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setAuthenticationTimestamp($authenticationTimestamp)
 	{
-		$this->setData($authenticationTimestamp, 'authenticationTimestamp');
-		return $this;
+		return $this->setData($authenticationTimestamp, 'authenticationTimestamp');
 	}
 
 	/**
@@ -122,8 +91,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setAuthenticationMethod($authenticationMethod)
 	{
-		$this->setData($authenticationMethod, 'authenticationMethod');
-		return $this;
+		return $this->setData($authenticationMethod, 'authenticationMethod');
 	}
 
 	/**
@@ -132,8 +100,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setChallengeIndicator($challengeIndicator)
 	{
-		$this->setData($challengeIndicator, 'challengeIndicator');
-		return $this;
+		return $this->setData($challengeIndicator, 'challengeIndicator');
 	}
 
 	/**
@@ -142,8 +109,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setShippingAddressFirstUse($shippingAddressFirstUse)
 	{
-		$this->setData($shippingAddressFirstUse, 'shippingAddressFirstUse');
-		return $this;
+		return $this->setData($shippingAddressFirstUse, 'shippingAddressFirstUse');
 	}
 
 	/**
@@ -152,8 +118,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setShippingAddressFirstUseIndicator($shippingAddressFirstUseIndicator)
 	{
-		$this->setData($shippingAddressFirstUseIndicator, 'shippingAddressFirstUseIndicator');
-		return $this;
+		return $this->setData($shippingAddressFirstUseIndicator, 'shippingAddressFirstUseIndicator');
 	}
 
 	/**
@@ -162,8 +127,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCardTransactionsLastDay($cardTransactionsLastDay)
 	{
-		$this->setData($cardTransactionsLastDay, 'cardTransactionsLastDay');
-		return $this;
+		return $this->setData($cardTransactionsLastDay, 'cardTransactionsLastDay');
 	}
 
 	/**
@@ -172,8 +136,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCardCreationDate($cardCreationDate)
 	{
-		$this->setData($cardCreationDate, 'cardCreationDate');
-		return $this;
+		return $this->setData($cardCreationDate, 'cardCreationDate');
 	}
 
 	/**
@@ -182,8 +145,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setCardCreationDateIndicator($cardCreationDateIndicator)
 	{
-		$this->setData($cardCreationDateIndicator, 'cardCreationDateIndicator');
-		return $this;
+		return $this->setData($cardCreationDateIndicator, 'cardCreationDateIndicator');
 	}
 
 	/**
@@ -192,8 +154,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setTransactionsLastDay($transactionsLastDay)
 	{
-		$this->setData($transactionsLastDay, 'transactionsLastDay');
-		return $this;
+		return $this->setData($transactionsLastDay, 'transactionsLastDay');
 	}
 
 	/**
@@ -202,8 +163,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setTransactionsLastYear($transactionsLastYear)
 	{
-		$this->setData($transactionsLastYear, 'transactionsLastYear');
-		return $this;
+		return $this->setData($transactionsLastYear, 'transactionsLastYear');
 	}
 
 	/**
@@ -212,8 +172,7 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setPurchasesLastSixMonths($purchasesLastSixMonths)
 	{
-		$this->setData($purchasesLastSixMonths, 'purchasesLastSixMonths');
-		return $this;
+		return $this->setData($purchasesLastSixMonths, 'purchasesLastSixMonths');
 	}
 
 	/**
@@ -222,7 +181,6 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	 */
 	public function setSuspiciousActivity($suspiciousActivity)
 	{
-		$this->setData($suspiciousActivity, 'suspiciousActivity');
-		return $this;
+		return $this->setData($suspiciousActivity, 'suspiciousActivity');
 	}
 }
