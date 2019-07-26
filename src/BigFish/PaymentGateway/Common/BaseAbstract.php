@@ -12,6 +12,11 @@ abstract class BaseAbstract implements BaseInterface
 	 */
 	protected $data = [];
 
+    /**
+     * @var array
+     */
+	protected $maxLength = [];
+
 	public function getData(): array
 	{
 		return $this->data;
@@ -26,7 +31,12 @@ abstract class BaseAbstract implements BaseInterface
 		return $data;
 	}
 
-	protected function setData(string $value, string $fieldName): self
+    /**
+     * @param mixed $value
+     * @param string $fieldName
+     * @return $this
+     */
+    protected function setData($value, string $fieldName): self
 	{
 		if ($maxSize = $this->getFieldMaxLength($fieldName)) {
 			$this->checkFieldLength($maxSize, $fieldName, $value);
@@ -39,10 +49,10 @@ abstract class BaseAbstract implements BaseInterface
 	/**
 	 * @param int $maxLength
 	 * @param string $fieldName
-	 * @param string $value
+	 * @param mixed $value
 	 * @throws PaymentGatewayException
 	 */
-	protected function checkFieldLength(int $maxLength, string $fieldName, string $value)
+	protected function checkFieldLength(int $maxLength, string $fieldName, $value)
 	{
 		if (\mb_strlen($value) > $maxLength) {
 			throw new PaymentGatewayException(

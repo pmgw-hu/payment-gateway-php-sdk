@@ -160,7 +160,7 @@ $response = $paymentGateway->send(
 ```php
 $infoObject = new \BigFish\PaymentGateway\Data\Info();
  
-$infoShipping = new \BigFish\PaymentGateway\Data\Info\InfoOrderShippingData();
+$infoShipping = new \BigFish\PaymentGateway\Data\Info\Order\InfoOrderShippingData();
 $infoShipping->setFirstName("John")
     ->setLastName("Doe")
     ->setEmail("test@testmail.com")
@@ -170,7 +170,7 @@ $infoShipping->setFirstName("John")
 
 $infoObject->setObject($infoShipping); //add $infoShipping to $infoObject
  
-$infoOrderProductItem = new \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem();
+$infoOrderProductItem = new \BigFish\PaymentGateway\Data\Info\Order\InfoOrderProductItem();
 $infoOrderProductItem->setSku("PMG055005")
     ->setName("Product11")
     ->setQuantity("10")
@@ -181,7 +181,7 @@ $infoOrderProductItem->setSku("PMG055005")
 
 $infoObject->setData($infoOrderProductItem); //add $infoShipping to $infoObject
  
-$infoOrderProductItem = new \BigFish\PaymentGateway\Data\Info\InfoOrderProductItem();
+$infoOrderProductItem = new \BigFish\PaymentGateway\Data\Info\Order\InfoOrderProductItem();
 $infoOrderProductItem->setSku("PMG055008")
     ->setName("Product12")
     ->setQuantity("10")

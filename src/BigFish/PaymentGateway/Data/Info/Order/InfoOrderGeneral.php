@@ -1,9 +1,10 @@
 <?php
 
-namespace BigFish\PaymentGateway\Data\Info;
+namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Data\Info\InfoAbstract;
 
 class InfoOrderGeneral extends InfoAbstract
 {
@@ -46,110 +47,62 @@ class InfoOrderGeneral extends InfoAbstract
 		return PaymentGateway::PATH_INFO_ORDER_GENERAL;
 	}
 
-	/**
-	 * @param string $deliveryEmail
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setDeliveryEmail($deliveryEmail)
+	public function setDeliveryEmail($deliveryEmail): self
 	{
 		return $this->setData($deliveryEmail, self::DELIVERY_EMAIL);
 	}
 
-	/**
-	 * @param string $deliveryTimeFrame
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setDeliveryTimeFrame($deliveryTimeFrame)
+	public function setDeliveryTimeFrame(string $deliveryTimeFrame): self
 	{
 		return $this->setData($deliveryTimeFrame, self::DELIVERY_TIME_FRAME);
 	}
 
-	/**
-	 * @param string $giftCardAmount
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setGiftCardAmount($giftCardAmount)
+	public function setGiftCardAmount(int $giftCardAmount): self
 	{
 		return $this->setData($giftCardAmount, self::GIFT_CARD_AMOUNT);
 	}
 
-	/**
-	 * @param string $giftCardCount
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setGiftCardCount($giftCardCount)
+	public function setGiftCardCount(int $giftCardCount): self
 	{
 		return $this->setData($giftCardCount, self::GIFT_CARD_COUNT);
 	}
 
-	/**
-	 * @param string $giftCardCurrency
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setGiftCardCurrency($giftCardCurrency)
+	public function setGiftCardCurrency(string $giftCardCurrency): self
 	{
 		return $this->setData($giftCardCurrency, self::GIFT_CARD_CURRENCY);
 	}
 
-	/**
-	 * @param string $preorderDate
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setPreorderDate($preorderDate)
+	public function setPreorderDate(string $preorderDate): self
 	{
 		return $this->setData($preorderDate, self::PREORDER_DATE);
 	}
 
-	/**
-	 * @param string $availability
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setAvailability($availability)
+	public function setAvailability(string $availability): self
 	{
 		return $this->setData($availability, self::AVAILABILITY);
 	}
 
-	/**
-	 * @param string $reorderItems
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setReorderItems($reorderItems)
+	public function setReorderItems(string $reorderItems): self
 	{
 		return $this->setData($reorderItems, self::REORDER_ITEMS);
 	}
 
-	/**
-	 * @param string $shippingMethod
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setShippingMethod($shippingMethod)
+	public function setShippingMethod(string $shippingMethod): self
 	{
 		return $this->setData($shippingMethod, self::SHIPPING_METHOD);
 	}
 
-	/**
-	 * @param string $addressMatchIndicator
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setAddressMatchIndicator($addressMatchIndicator)
+	public function setAddressMatchIndicator(string $addressMatchIndicator): self
 	{
 		return $this->setData($addressMatchIndicator, self::ADDRESS_MATCH_INDICATOR);
 	}
 
-	/**
-	 * @param string $differentShippingName
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setDifferentShippingName($differentShippingName)
+	public function setDifferentShippingName(string $differentShippingName): self
 	{
 		return $this->setData($differentShippingName, self::DIFFERENT_SHIPPING_NAME);
 	}
 
-	/**
-	 * @param string $transactionType
-	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderGeneral
-	 */
-	public function setTransactionType($transactionType)
+	public function setTransactionType(string $transactionType): self
 	{
 		return $this->setData($transactionType, self::TRANSACTION_TYPE);
 	}

@@ -29,10 +29,10 @@ class Settlement extends InitBasicAbstract
 
 	/**
 	 * @param int $limit
-	 * @return Settlement
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setLimit(int $limit = 250): Settlement
+	public function setLimit(int $limit = 250): self
 	{
 		if ($limit > Settlement::MAX_LIMIT) {
 			throw new PaymentGatewayException('Invalid limit');
@@ -43,55 +43,55 @@ class Settlement extends InitBasicAbstract
 
 	/**
 	 * @param int $offset
-	 * @return Settlement
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setOffset(int $offset): Settlement
+	public function setOffset(int $offset): self
 	{
 		return $this->setData($offset, 'offset');
 	}
 
 	/**
 	 * @param bool $value
-	 * @return Settlement
+	 * @return $this
 	 */
-	public function setGetItems(bool $value = true): Settlement
+	public function setGetItems(bool $value = true): self
 	{
 		return $this->setData($value, 'getItems');
 	}
 
 	/**
 	 * @param bool $value
-	 * @return Settlement
+	 * @return $this
 	 */
-	public function setGetBatches(bool $value = true): Settlement
+	public function setGetBatches(bool $value = true): self
 	{
 		return $this->setData($value, 'getBatches');
 	}
 
 	/**
 	 * @param string $transferNotice
-	 * @return Settlement
+	 * @return $this
 	 */
-	public function setTransferNotice(string $transferNotice): Settlement
+	public function setTransferNotice(string $transferNotice): self
 	{
 		return $this->setData($transferNotice, 'transferNotice');
 	}
 
 	/**
 	 * @param string $date
-	 * @return Settlement
+	 * @return $this
 	 */
-	public function setSettlementDate(string $date): Settlement
+	public function setSettlementDate(string $date): self
 	{
 		return $this->setData($date, 'settlementDate');
 	}
 
 	/**
 	 * @param string $terminalId
-	 * @return Settlement
+	 * @return $this
 	 */
-	public function setTerminalId(string $terminalId): Settlement
+	public function setTerminalId(string $terminalId): self
 	{
 		return $this->setData($terminalId, 'terminalId');
 	}
@@ -100,9 +100,9 @@ class Settlement extends InitBasicAbstract
 	 * Set settlement transaction currency
 	 *
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return static
+	 * @return $this
 	 */
-	public function setTransactionCurrency(string $currency = '')
+	public function setTransactionCurrency(string $currency = ''): self
 	{
 		if (!$currency) {
 			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;

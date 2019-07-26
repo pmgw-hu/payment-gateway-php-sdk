@@ -3,7 +3,7 @@
 namespace BigFish\Tests\PaymentGateway\Data\Info;
 
 
-use BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser;
+use BigFish\PaymentGateway\Data\Info\Customer\InfoCustomerBrowser;
 
 class InfoCustomerBrowserTest extends InfoAbstractTest
 {

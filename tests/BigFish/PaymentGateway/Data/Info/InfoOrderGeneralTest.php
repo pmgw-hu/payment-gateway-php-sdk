@@ -3,7 +3,7 @@
 namespace BigFish\Tests\PaymentGateway\Data\Info;
 
 
-use BigFish\PaymentGateway\Data\Info\InfoOrderGeneral;
+use BigFish\PaymentGateway\Data\Info\Order\InfoOrderGeneral;
 
 class InfoOrderGeneralTest extends InfoAbstractTest
 {
@@ -15,8 +15,8 @@ class InfoOrderGeneralTest extends InfoAbstractTest
 		return array(
 			array('test@testdomain.com', 'setDeliveryEmail'),
 			array('04', 'setDeliveryTimeFrame'),
-			array('100', 'setGiftCardAmount'),
-			array('3', 'setGiftCardCount'),
+			array(100, 'setGiftCardAmount'),
+			array(3, 'setGiftCardCount'),
 			array('HUF', 'setGiftCardCurrency'),
 			array('2019-09-05', 'setPreorderDate'),
 			array('01', 'setAvailability'),
@@ -55,7 +55,7 @@ class InfoOrderGeneralTest extends InfoAbstractTest
 	public function giftCardAmount_maxLengthCheck()
 	{
 		// max: 15
-		$this->getObject()->setGiftCardAmount(str_repeat('A', 16));
+		$this->getObject()->setGiftCardAmount(str_repeat(2, 16));
 	}
 
 	/**
@@ -65,7 +65,7 @@ class InfoOrderGeneralTest extends InfoAbstractTest
 	public function giftCardCount_maxLengthCheck()
 	{
 		// max: 2
-		$this->getObject()->setGiftCardCount(str_repeat('A', 3));
+		$this->getObject()->setGiftCardCount(str_repeat(2, 3));
 	}
 
 	/**

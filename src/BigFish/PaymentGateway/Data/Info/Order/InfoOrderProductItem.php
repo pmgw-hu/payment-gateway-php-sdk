@@ -1,9 +1,10 @@
 <?php
 
-namespace BigFish\PaymentGateway\Data\Info;
+namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Data\Info\InfoAbstract;
 
 class InfoOrderProductItem extends InfoAbstract
 {
@@ -29,73 +30,42 @@ class InfoOrderProductItem extends InfoAbstract
 		self::DESCRIPTION => 254
 	];
 
-	/**
-	 * @return string
-	 */
 	public function getStructurePath(): string
 	{
 		return PaymentGateway::PATH_INFO_ORDER_PRODUCT_ITEMS;
 	}
 
-	/**
-	 * @param string $sku
-	 * @return InfoOrderProductItem
-	 */
-	public function setSku(string $sku): InfoOrderProductItem
+	public function setSku(string $sku): self
 	{
 		return $this->setData($sku, self::SKU);
 	}
 
-	/**
-	 * @param string $name
-	 * @return InfoOrderProductItem
-	 */
-	public function setName(string $name): InfoOrderProductItem
+	public function setName(string $name): self
 	{
 		return $this->setData($name, self::NAME);
 	}
 
-	/**
-	 * @param  $quantity
-	 * @return InfoOrderProductItem
-	 */
-	public function setQuantity($quantity): InfoOrderProductItem
+	public function setQuantity(int $quantity): self
 	{
 		return $this->setData($quantity, self::QUANTITY);
 	}
 
-	/**
-	 * @param string $quantityUnit
-	 * @return InfoOrderProductItem
-	 */
-	public function setQuantityUnit(string $quantityUnit): InfoOrderProductItem
+	public function setQuantityUnit(string $quantityUnit): self
 	{
 		return $this->setData($quantityUnit, self::QUANTITY_UNIT);
 	}
 
-	/**
-	 * @param mixed $unitPrice
-	 * @return InfoOrderProductItem
-	 */
-	public function setUnitPrice($unitPrice): InfoOrderProductItem
+	public function setUnitPrice($unitPrice): self
 	{
 		return $this->setData($unitPrice, self::UNIT_PRICE);
 	}
 
-	/**
-	 * @param string $imageUrl
-	 * @return InfoOrderProductItem
-	 */
-	public function setImageUrl(string $imageUrl): InfoOrderProductItem
+	public function setImageUrl(string $imageUrl): self
 	{
 		return $this->setData($imageUrl, self::IMAGE_URL);
 	}
 
-	/**
-	 * @param string $description
-	 * @return InfoOrderProductItem
-	 */
-	public function setDescription(string $description): InfoOrderProductItem
+	public function setDescription(string $description): self
 	{
 		return $this->setData($description, self::DESCRIPTION);
 	}

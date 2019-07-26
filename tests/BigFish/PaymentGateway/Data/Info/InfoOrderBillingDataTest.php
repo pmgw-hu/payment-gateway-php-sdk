@@ -3,7 +3,7 @@
 namespace BigFish\Tests\PaymentGateway\Data\Info;
 
 
-use BigFish\PaymentGateway\Data\Info\InfoOrderBillingData;
+use BigFish\PaymentGateway\Data\Info\Order\InfoOrderBillingData;
 
 class InfoOrderBillingDataTest extends InfoOrderShippingDataTest
 {

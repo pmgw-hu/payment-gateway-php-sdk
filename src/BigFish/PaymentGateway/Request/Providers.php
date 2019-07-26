@@ -15,9 +15,9 @@ class Providers extends RequestAbstract
 
 	/**
 	 * @param string $storeName
-	 * @return Providers
+	 * @return $this
 	 */
-	public function setStoreName(string $storeName)
+	public function setStoreName(string $storeName): self
 	{
 		return $this->setData($storeName, 'storeName');
 	}

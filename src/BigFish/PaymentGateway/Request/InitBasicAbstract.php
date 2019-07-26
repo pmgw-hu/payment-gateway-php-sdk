@@ -27,9 +27,9 @@ abstract class InitBasicAbstract extends RequestAbstract
 
 	/**
 	 * @param string $providerName
-	 * @return static
+	 * @return $this
 	 */
-	public function setProviderName(string $providerName)
+	public function setProviderName(string $providerName): self
 	{
 		return $this->setData($providerName, 'providerName');
 	}
@@ -47,10 +47,10 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 * Save module name under the 'moduleName' key of the $data array.
 	 *
 	 * @param string $moduleName
-	 * @return RequestInterface
+	 * @return $this
 	 * @access public
 	 */
-	public function setModuleName(string $moduleName): RequestInterface
+	public function setModuleName(string $moduleName): self
 	{
 		return $this->setData($moduleName, 'moduleName');
 	}
@@ -59,10 +59,10 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 * Save module version under the 'moduleVersion' key of the $data array.
 	 *
 	 * @param string $moduleVersion
-	 * @return RequestInterface
+	 * @return $this
 	 * @access public
 	 */
-	public function setModuleVersion(string $moduleVersion): RequestInterface
+	public function setModuleVersion(string $moduleVersion): self
 	{
 		return $this->setData($moduleVersion, 'moduleVersion');
 	}
@@ -71,7 +71,7 @@ abstract class InitBasicAbstract extends RequestAbstract
 	 * @param string $storeName
 	 * @return $this
 	 */
-	public function setStoreName(string $storeName)
+	public function setStoreName(string $storeName): self
 	{
 		return $this->setData($storeName, 'storeName');
 	}

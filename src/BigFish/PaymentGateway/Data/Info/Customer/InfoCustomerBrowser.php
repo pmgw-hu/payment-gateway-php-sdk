@@ -1,9 +1,10 @@
 <?php
 
-namespace BigFish\PaymentGateway\Data\Info;
+namespace BigFish\PaymentGateway\Data\Info\Customer;
 
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Data\Info\InfoAbstract;
 
 class InfoCustomerBrowser extends InfoAbstract
 {

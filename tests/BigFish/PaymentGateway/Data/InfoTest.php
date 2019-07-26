@@ -4,9 +4,9 @@ namespace BigFish\Tests\PaymentGateway\Data;
 
 
 use BigFish\PaymentGateway\Data\Info;
-use BigFish\PaymentGateway\Data\Info\InfoCustomerBrowser;
-use BigFish\PaymentGateway\Data\Info\InfoOrderGeneral;
-use BigFish\PaymentGateway\Data\Info\InfoOrderRecurringPayment;
+use BigFish\PaymentGateway\Data\Info\Customer\InfoCustomerBrowser;
+use BigFish\PaymentGateway\Data\Info\Order\InfoOrderGeneral;
+use BigFish\PaymentGateway\Data\Info\Order\InfoOrderRecurringPayment;
 
 class InfoTest extends \PHPUnit\Framework\TestCase
 {

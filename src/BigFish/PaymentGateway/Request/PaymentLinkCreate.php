@@ -38,10 +38,10 @@ class PaymentLinkCreate extends InitAbstract
 
 	/**
 	 * @param string $notificationEmail
-	 * @return PaymentLinkCreate
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setNotificationEmail(string $notificationEmail = '')
+	public function setNotificationEmail(string $notificationEmail = ''): self
 	{
 		if (filter_var($notificationEmail, FILTER_VALIDATE_EMAIL) === false) {
 			throw new PaymentGatewayException('Invalid notification email');
@@ -52,28 +52,28 @@ class PaymentLinkCreate extends InitAbstract
 
 	/**
 	 * @param bool $value
-	 * @return PaymentLinkCreate
+	 * @return $this
 	 */
-	public function setEmailNotificationOnlySuccess(bool $value = true)
+	public function setEmailNotificationOnlySuccess(bool $value = true): self
 	{
 		return $this->setData($value, 'emailNotificationOnlySuccess');
 	}
 
 	/**
 	 * @param string $expirationTime
-	 * @return PaymentLinkCreate
+	 * @return $this
 	 */
-	public function setExpirationTime(string $expirationTime = '')
+	public function setExpirationTime(string $expirationTime = ''): self
 	{
 		return $this->setData($expirationTime, 'expirationTime');
 	}
 
 	/**
 	 * @param string $notificationUrl
-	 * @return PaymentLinkCreate
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setNotificationUrl(string $notificationUrl)
+	public function setNotificationUrl(string $notificationUrl): self
 	{
 		if (filter_var($notificationUrl, FILTER_VALIDATE_URL) === false) {
 			throw new PaymentGatewayException('Invalid notification url');
@@ -84,9 +84,9 @@ class PaymentLinkCreate extends InitAbstract
 
 	/**
 	 * @param string $language
-	 * @return PaymentLinkCreate
+	 * @return $this
 	 */
-	public function setLanguage(string $language = '')
+	public function setLanguage(string $language = ''): self
 	{
 		if (!$language) {
 			$language = PaymentGateway\Config::DEFAULT_LANG;
@@ -97,12 +97,11 @@ class PaymentLinkCreate extends InitAbstract
 
 	/**
 	 * @param bool $value
-	 * @return PaymentLinkCreate
+	 * @return $this
 	 */
-	public function setAutoCommit(bool $value = true)
+	public function setAutoCommit(bool $value = true): self
 	{
-		$this->data['autoCommit'] = $value;
-		return $this;
+        return $this->setData($value, 'autoCommit');
 	}
 
 	/**

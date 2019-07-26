@@ -3,7 +3,7 @@
 namespace BigFish\Tests\PaymentGateway\Data\Info;
 
 
-use BigFish\PaymentGateway\Data\Info\InfoCustomerStoreSpecific;
+use BigFish\PaymentGateway\Data\Info\Customer\InfoCustomerStoreSpecific;
 
 class InfoCustomerStoreSpecificTest extends InfoAbstractTest
 {
@@ -24,12 +24,12 @@ class InfoCustomerStoreSpecificTest extends InfoAbstractTest
 			array('01', 'setChallengeIndicator'),
 			array('2016-05-05', 'setShippingAddressFirstUse'),
 			array('04', 'setShippingAddressFirstUseIndicator'),
-			array('5', 'setCardTransactionsLastDay'),
+			array(5, 'setCardTransactionsLastDay'),
 			array('2018-08-05', 'setCardCreationDate'),
 			array('05', 'setCardCreationDateIndicator'),
-			array('2', 'setTransactionsLastDay'),
-			array('95', 'setTransactionsLastYear'),
-			array('6', 'setPurchasesLastSixMonths'),
+			array(2, 'setTransactionsLastDay'),
+			array(95, 'setTransactionsLastYear'),
+			array(6, 'setPurchasesLastSixMonths'),
 			array('01', 'setSuspiciousActivity')
 		);
 	}
@@ -151,7 +151,7 @@ class InfoCustomerStoreSpecificTest extends InfoAbstractTest
 	public function cardTransactionsLastDay_maxLengthCheck()
 	{
 		// max: 3
-		$this->getObject()->setCardTransactionsLastDay(str_repeat('A', 4));
+		$this->getObject()->setCardTransactionsLastDay(str_repeat(1, 4));
 	}
 
 	/**
@@ -181,7 +181,7 @@ class InfoCustomerStoreSpecificTest extends InfoAbstractTest
 	public function transactionsLastDay_maxLengthCheck()
 	{
 		// max: 3
-		$this->getObject()->setTransactionsLastDay(str_repeat('A', 4));
+		$this->getObject()->setTransactionsLastDay(str_repeat(2, 4));
 	}
 
 	/**
@@ -191,7 +191,7 @@ class InfoCustomerStoreSpecificTest extends InfoAbstractTest
 	public function transactionsLastYear_maxLengthCheck()
 	{
 		// max: 3
-		$this->getObject()->setTransactionsLastYear(str_repeat('A', 4));
+		$this->getObject()->setTransactionsLastYear(str_repeat(2, 4));
 	}
 
 	/**
@@ -201,7 +201,7 @@ class InfoCustomerStoreSpecificTest extends InfoAbstractTest
 	public function purchasesLastSixMonths_maxLengthCheck()
 	{
 		// max: 4
-		$this->getObject()->setPurchasesLastSixMonths(str_repeat('A', 5));
+		$this->getObject()->setPurchasesLastSixMonths(str_repeat(2, 5));
 	}
 
 	/**

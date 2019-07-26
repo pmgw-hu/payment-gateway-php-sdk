@@ -77,34 +77,6 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	 * @depends init
 	 * @runInSeparateProcess
 	 */
-	public function finalize()
-	{
-		$init = new PaymentGateway\Request\Init();
-		$init->setAmount(50)
-				->setProviderName(PaymentGateway::PROVIDER_OTPAY)
-				->setResponseUrl('http://integration.test.bigfish.hu');
-
-		$paymentGateWay = $this->getPaymentGateway();
-		$result = $paymentGateWay->send($init);
-		$transactionId = $result->TransactionId;
-
-		$paymentGateWay = $this->getPaymentGateway();
-		$paymentGateWay
-				->expects($this->atLeastOnce())
-				->method('terminate');
-
-		$request = new PaymentGateway\Request\Finalize($transactionId, '50');
-		$paymentGateWay->send($request);
-
-		$data = file_get_contents($paymentGateWay->getRedirectUrl($request));
-		$this->assertNotEmpty($data);
-	}
-
-	/**
-	 * @test
-	 * @depends init
-	 * @runInSeparateProcess
-	 */
 	public function result()
 	{
 		$this->assertApiResponse(
@@ -302,7 +274,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 		$settlement->setStoreName('sdk_test')
 			->setProviderName(PaymentGateway::PROVIDER_OTP_SIMPLE)
 			->setTerminalId('P000401')
-			->setSettlementDate('2019-03-15')
+			->setSettlementDate('2019-03-25')
 			->setTransactionCurrency('HUF')
 			->setLimit(100);
 

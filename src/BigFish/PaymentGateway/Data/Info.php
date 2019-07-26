@@ -5,15 +5,11 @@ namespace BigFish\PaymentGateway\Data;
 
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Data\Info\InfoAbstract;
-use BigFish\PaymentGateway\Data\Info\InfoOrderProductItem;
+use BigFish\PaymentGateway\Data\Info\Order\InfoOrderProductItem;
 
 class Info extends InfoAbstract
 {
-	/**
-	 * @param InfoAbstract $infoObject
-	 * @return Info
-	 */
-	public function setObject(InfoAbstract $infoObject): Info
+	public function setObject(InfoAbstract $infoObject): self
 	{
 		if ($infoObject instanceof InfoOrderProductItem) {
 			if (!isset($this->data[$infoObject->getStructurePath()])) {
@@ -48,9 +44,6 @@ class Info extends InfoAbstract
 		return $finalData[$this->getStructurePath()] ?? [];
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getStructurePath(): string
 	{
 		return PaymentGateway::PATH_INFO;

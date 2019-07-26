@@ -71,19 +71,12 @@ class SystemTransport extends TransportAbstract
 		return $response;
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getAuthorizationHeader()
+	protected function getAuthorizationHeader(): string
 	{
 		return 'Authorization: Basic ' . base64_encode($this->config->getStoreName() . ':' . $this->config->getApiKey());
 	}
 
-	/**
-	 * @param RequestInterface $requestInterface
-	 * @return string
-	 */
-	protected function prepareData(RequestInterface $requestInterface)
+	protected function prepareData(RequestInterface $requestInterface): string
 	{
 		return json_encode($requestInterface->getUcFirstData());
 	}

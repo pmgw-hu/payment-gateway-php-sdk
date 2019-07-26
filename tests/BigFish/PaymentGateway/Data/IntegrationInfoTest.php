@@ -203,7 +203,7 @@ class IntegrationInfoTest extends IntegrationAbstract
 	public function getSimpleInfoObject()
 	{
 		$info = new PaymentGateway\Data\Info();
-		$browser = new PaymentGateway\Data\Info\InfoCustomerBrowser();
+		$browser = new PaymentGateway\Data\Info\Customer\InfoCustomerBrowser();
 		$browser->setUserAgent('test');
 		$browser->setScreenWidth('500');
 		$browser->setAcceptHeader('header');
@@ -215,10 +215,10 @@ class IntegrationInfoTest extends IntegrationAbstract
 	{
 		$info = $this->getSimpleInfoObject();
 
-		$recurring = new PaymentGateway\Data\Info\InfoOrderRecurringPayment();
+		$recurring = new PaymentGateway\Data\Info\Order\InfoOrderRecurringPayment();
 		$recurring->setFrequency('12');
 
-		$orderGeneral = new PaymentGateway\Data\Info\InfoOrderGeneral();
+		$orderGeneral = new PaymentGateway\Data\Info\Order\InfoOrderGeneral();
 		$orderGeneral->setGiftCardCount('12');
 		$orderGeneral->setReorderItems('02');
 		$orderGeneral->setTransactionType('01');

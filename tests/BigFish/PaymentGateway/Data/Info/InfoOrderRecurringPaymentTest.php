@@ -3,7 +3,7 @@
 namespace BigFish\Tests\PaymentGateway\Data\Info;
 
 
-use BigFish\PaymentGateway\Data\Info\InfoOrderRecurringPayment;
+use BigFish\PaymentGateway\Data\Info\Order\InfoOrderRecurringPayment;
 
 class InfoOrderRecurringPaymentTest extends InfoAbstractTest
 {

@@ -3,7 +3,7 @@
 namespace BigFish\Tests\PaymentGateway\Data\Info;
 
 
-use BigFish\PaymentGateway\Data\Info\InfoOrderProductItem;
+use BigFish\PaymentGateway\Data\Info\Order\InfoOrderProductItem;
 
 class InfoOrderProductItemTest extends InfoAbstractTest
 {
@@ -50,7 +50,7 @@ class InfoOrderProductItemTest extends InfoAbstractTest
 	public function quantity_maxLengthCheck()
 	{
 		// max: 10
-		$this->getObject()->setQuantity(str_repeat('A', 11));
+		$this->getObject()->setQuantity(str_repeat(2, 11));
 	}
 
 	/**

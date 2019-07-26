@@ -34,10 +34,10 @@ abstract class InitAbstract extends InitBasicAbstract
 	 *
 	 * @param string $responseUrl Response URL
 	 * (e.g. http://www.yourdomain.com/response.php, http://www.yourdomain.com/response.php?someparam=somevalue etc.)
-	 * @return static
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setResponseUrl(string $responseUrl)
+	public function setResponseUrl(string $responseUrl): self
 	{
 		if (filter_var($responseUrl, FILTER_VALIDATE_URL) === false) {
 			throw new PaymentGatewayException('Invalid response url');
@@ -49,10 +49,10 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * Set payment transaction amount
 	 *
 	 * @param float $amount Transaction amount
-	 * @return static
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setAmount(float $amount)
+	public function setAmount(float $amount): self
 	{
 		if ($amount <= 0) {
 			throw new PaymentGatewayException('Only positive numbers allowed.');
@@ -64,9 +64,9 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * Set the identifier of the order in your system
 	 *
 	 * @param mixed $orderId Order identifier
-	 * @return static
+	 * @return $this
 	 */
-	public function setOrderId(string $orderId)
+	public function setOrderId(string $orderId): self
 	{
 		return $this->setData($orderId, 'orderId');
 	}
@@ -75,9 +75,9 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * Set the identifier of the user in your system
 	 *
 	 * @param mixed $userId User identifier
-	 * @return static
+	 * @return $this
 	 */
-	public function setUserId(string $userId)
+	public function setUserId(string $userId): self
 	{
 		return $this->setData($userId, 'userId');
 	}
@@ -86,7 +86,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * Set payment transaction currency
 	 *
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return static
+	 * @return $this
 	 */
 	public function setCurrency(string $currency = ''): self
 	{
