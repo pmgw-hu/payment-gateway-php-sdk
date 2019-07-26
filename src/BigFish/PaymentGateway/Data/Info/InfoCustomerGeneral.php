@@ -15,22 +15,6 @@ use BigFish\PaymentGateway;
 class InfoCustomerGeneral extends InfoAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = array(
-		'firstName' => 45,
-		'lastName' => 45,
-		'email' => 254,
-		'ip' => 45,
-		'homePhoneCc' => 3,
-		'homePhone' => 18,
-		'mobilePhoneCc' => 3,
-		'mobilePhone' => 18,
-		'workPhoneCc' => 3,
-		'workPhone' => 18
-	);
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath()
@@ -44,8 +28,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setFirstName($firstName)
 	{
-		$this->setData($firstName, 'firstName');
-		return $this;
+		return $this->setData($firstName, 'firstName');
 	}
 
 	/**
@@ -54,8 +37,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setLastName($lastName)
 	{
-		$this->setData($lastName, 'lastName');
-		return $this;
+		return $this->setData($lastName, 'lastName');
 	}
 
 	/**
@@ -64,8 +46,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setEmail($email)
 	{
-		$this->setData($email, 'email');
-		return $this;
+		return $this->setData($email, 'email');
 	}
 
 	/**
@@ -74,8 +55,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setIp($ip)
 	{
-		$this->setData($ip, 'ip');
-		return $this;
+		return $this->setData($ip, 'ip');
 	}
 
 	/**
@@ -84,8 +64,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setHomePhoneCc($homePhoneCc)
 	{
-		$this->setData($homePhoneCc, 'homePhoneCc');
-		return $this;
+		return $this->setData($homePhoneCc, 'homePhoneCc');
 	}
 
 	/**
@@ -94,8 +73,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setHomePhone($homePhone)
 	{
-		$this->setData($homePhone, 'homePhone');
-		return $this;
+		return $this->setData($homePhone, 'homePhone');
 	}
 
 	/**
@@ -104,8 +82,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setMobilePhoneCc($mobilePhoneCc)
 	{
-		$this->setData($mobilePhoneCc, 'mobilePhoneCc');
-		return $this;
+		return $this->setData($mobilePhoneCc, 'mobilePhoneCc');
 	}
 
 	/**
@@ -114,8 +91,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setMobilePhone($mobilePhone)
 	{
-		$this->setData($mobilePhone, 'mobilePhone');
-		return $this;
+		return $this->setData($mobilePhone, 'mobilePhone');
 	}
 
 	/**
@@ -124,8 +100,7 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setWorkPhoneCc($workPhoneCc)
 	{
-		$this->setData($workPhoneCc, 'workPhoneCc');
-		return $this;
+		return $this->setData($workPhoneCc, 'workPhoneCc');
 	}
 
 	/**
@@ -134,7 +109,6 @@ class InfoCustomerGeneral extends InfoAbstract
 	 */
 	public function setWorkPhone($workPhone)
 	{
-		$this->setData($workPhone, 'workPhone');
-		return $this;
+		return $this->setData($workPhone, 'workPhone');
 	}
 }

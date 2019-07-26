@@ -15,21 +15,6 @@ use BigFish\PaymentGateway;
 class InfoCustomerBrowser extends InfoAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = array(
-		'acceptHeader' => 2048,
-		'javaEnabled' => 1,
-		'language' => 8,
-		'colorDepth' => 2,
-		'screenHeight' => 6,
-		'screenWidth' => 6,
-		'timeZone' => 5,
-		'userAgent' => 2048,
-		'windowSize' => 2
-	);
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath()
@@ -43,8 +28,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setAcceptHeader($acceptHeader)
 	{
-		$this->setData($acceptHeader, 'acceptHeader');
-		return $this;
+		return $this->setData($acceptHeader, 'acceptHeader');
 	}
 
 	/**
@@ -53,8 +37,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setJavaEnabled($javaEnabled)
 	{
-		$this->setData($javaEnabled, 'javaEnabled');
-		return $this;
+		return $this->setData($javaEnabled, 'javaEnabled');
 	}
 
 	/**
@@ -63,8 +46,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setLanguage($language)
 	{
-		$this->setData($language, 'language');
-		return $this;
+		return $this->setData($language, 'language');
 	}
 
 	/**
@@ -73,8 +55,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setColorDepth($colorDepth)
 	{
-		$this->setData($colorDepth, 'colorDepth');
-		return $this;
+		return $this->setData($colorDepth, 'colorDepth');
 	}
 
 	/**
@@ -83,8 +64,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setScreenHeight($screenHeight)
 	{
-		$this->setData($screenHeight, 'screenHeight');
-		return $this;
+		return $this->setData($screenHeight, 'screenHeight');
 	}
 
 	/**
@@ -93,8 +73,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setScreenWidth($screenWidth)
 	{
-		$this->setData($screenWidth, 'screenWidth');
-		return $this;
+		return $this->setData($screenWidth, 'screenWidth');
 	}
 
 	/**
@@ -103,8 +82,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setTimeZone($timeZone)
 	{
-		$this->setData($timeZone, 'timeZone');
-		return $this;
+		return $this->setData($timeZone, 'timeZone');
 	}
 
 	/**
@@ -113,8 +91,7 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setUserAgent($userAgent)
 	{
-		$this->setData($userAgent, 'userAgent');
-		return $this;
+		return $this->setData($userAgent, 'userAgent');
 	}
 
 	/**
@@ -123,7 +100,6 @@ class InfoCustomerBrowser extends InfoAbstract
 	 */
 	public function setWindowSize($value)
 	{
-		$this->setData($value, 'windowSize');
-		return $this;
+		return $this->setData($value, 'windowSize');
 	}
 }
