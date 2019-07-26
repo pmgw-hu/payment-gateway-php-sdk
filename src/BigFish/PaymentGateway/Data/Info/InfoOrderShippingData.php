@@ -15,26 +15,6 @@ use BigFish\PaymentGateway;
 class InfoOrderShippingData extends InfoAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = array(
-		'firstName' => 45,
-		'lastName' => 45,
-		'email' => 254,
-		'phoneCc' => 3,
-		'phone' => 18,
-		'city' => 50,
-		'country' => 50,
-		'countryCode1' => 3,
-		'countryCode2' => 2,
-		'countryCode3' => 6,
-		'line1' => 50,
-		'line2' => 50,
-		'line3' => 50,
-		'postalCode' => 16
-	);
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath()
@@ -48,8 +28,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setFirstName($firstName)
 	{
-		$this->setData($firstName, 'firstName');
-		return $this;
+		return $this->setData($firstName, 'firstName');
 	}
 
 	/**
@@ -58,8 +37,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setLastName($lastName)
 	{
-		$this->setData($lastName, 'lastName');
-		return $this;
+		return $this->setData($lastName, 'lastName');
 	}
 
 	/**
@@ -68,8 +46,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setEmail($email)
 	{
-		$this->setData($email, 'email');
-		return $this;
+		return $this->setData($email, 'email');
 	}
 
 	/**
@@ -78,8 +55,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setPhoneCc($phoneCc)
 	{
-		$this->setData($phoneCc, 'phoneCc');
-		return $this;
+		return $this->setData($phoneCc, 'phoneCc');
 	}
 
 	/**
@@ -88,8 +64,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setPhone($phone)
 	{
-		$this->setData($phone, 'phone');
-		return $this;
+		return $this->setData($phone, 'phone');
 	}
 
 	/**
@@ -98,8 +73,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setCity($city)
 	{
-		$this->setData($city, 'city');
-		return $this;
+		return $this->setData($city, 'city');
 	}
 
 	/**
@@ -108,8 +82,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setCountry($country)
 	{
-		$this->setData($country, 'country');
-		return $this;
+		return $this->setData($country, 'country');
 	}
 
 	/**
@@ -118,8 +91,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setCountryCode1($countryCode1)
 	{
-		$this->setData($countryCode1, 'countryCode1');
-		return $this;
+		return $this->setData($countryCode1, 'countryCode1');
 	}
 
 	/**
@@ -128,8 +100,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setCountryCode2($countryCode2)
 	{
-		$this->setData($countryCode2, 'countryCode2');
-		return $this;
+		return $this->setData($countryCode2, 'countryCode2');
 	}
 
 	/**
@@ -138,8 +109,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setCountryCode3($countryCode3)
 	{
-		$this->setData($countryCode3, 'countryCode3');
-		return $this;
+		return $this->setData($countryCode3, 'countryCode3');
 	}
 
 	/**
@@ -148,8 +118,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setLine1($line1)
 	{
-		$this->setData($line1, 'line1');
-		return $this;
+		return $this->setData($line1, 'line1');
 	}
 
 	/**
@@ -158,8 +127,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setLine2($line2)
 	{
-		$this->setData($line2, 'line2');
-		return $this;
+		return $this->setData($line2, 'line2');
 	}
 
 	/**
@@ -168,8 +136,7 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setLine3($line3)
 	{
-		$this->setData($line3, 'line3');
-		return $this;
+		return $this->setData($line3, 'line3');
 	}
 
 	/**
@@ -178,7 +145,6 @@ class InfoOrderShippingData extends InfoAbstract
 	 */
 	public function setPostalCode($postalCode)
 	{
-		$this->setData($postalCode, 'postalCode');
-		return $this;
+		return $this->setData($postalCode, 'postalCode');
 	}
 }

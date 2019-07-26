@@ -15,14 +15,6 @@ use BigFish\PaymentGateway;
 class InfoOrderRecurringPayment extends InfoAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = array(
-		'expireDate' => 10,
-		'frequency' => 4,
-	);
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath()
@@ -36,8 +28,7 @@ class InfoOrderRecurringPayment extends InfoAbstract
 	 */
 	public function setExpireDate($expireDate)
 	{
-		$this->setData($expireDate, 'expireDate');
-		return $this;
+		return $this->setData($expireDate, 'expireDate');
 	}
 
 	/**
@@ -46,7 +37,6 @@ class InfoOrderRecurringPayment extends InfoAbstract
 	 */
 	public function setFrequency($frequency)
 	{
-		$this->setData($frequency, 'frequency');
-		return $this;
+		return $this->setData($frequency, 'frequency');
 	}
 }

@@ -55,45 +55,12 @@ abstract class InfoAbstract implements InfoInterface
 	/**
 	 * @param string $value
 	 * @param string $fieldName
+	 * @return $this
 	 * @throws Exception
 	 */
 	protected function setData($value, $fieldName)
 	{
-		if ($maxLength = $this->getFieldMaxLength($fieldName)) {
-			$this->checkFieldLength($maxLength, $fieldName, $value);
-		}
 		$this->data[$fieldName] = $value;
-	}
-
-	/**
-	 * @param int $maxLength
-	 * @param string $fieldName
-	 * @param string $value
-	 * @throws Exception
-	 */
-	protected function checkFieldLength($maxLength, $fieldName, $value)
-	{
-		if (\mb_strlen($value) > $maxLength) {
-			throw new Exception(
-				sprintf(
-					'%s is longer than permitted. Max value is: %d',
-					$fieldName,
-					$maxLength
-				)
-			);
-		}
-	}
-
-	/**
-	 * @param string $fieldName
-	 * @return null|int
-	 */
-	protected function getFieldMaxLength($fieldName)
-	{
-		if (isset($this->maxLength[$fieldName])) {
-			return $this->maxLength[$fieldName];
-		}
-
-		return null;
+		return $this;
 	}
 }
