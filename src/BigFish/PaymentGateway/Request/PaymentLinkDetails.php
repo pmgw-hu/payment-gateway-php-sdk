@@ -2,25 +2,22 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
 class PaymentLinkDetails extends RequestAbstract
 {
-	/**
-	 * @param string $paymentLinkName
-	 * @param bool $getInfoData Get info data block (true/false)
-	 */
-	public function __construct(string $paymentLinkName, bool $getInfoData = false)
+	const REQUEST_TYPE = 'PaymentLinkDetails';
+
+	public function setPaymentLinkName(string $paymentLinkName)
 	{
-		$this->setData($paymentLinkName, 'paymentLinkName');
-		$this->setData($getInfoData, 'getInfoData');
+		return $this->setData($paymentLinkName, 'paymentLinkName');
 	}
 
 	/**
-	 * @return string
+	 * @param bool $getInfoData Get info data block (true/false)
+	 * @return $this
 	 */
-	public function getMethod(): string
+	public function setGetInfoData(bool $getInfoData)
 	{
-		return PaymentGateway::REQUEST_PAYMENT_LINK_DETAILS;
+		return $this->setData($getInfoData, 'getInfoData');
 	}
 }

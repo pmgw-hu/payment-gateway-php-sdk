@@ -9,6 +9,8 @@ use BigFish\PaymentGateway\Data\Info\Order\InfoOrderProductItem;
 
 class Info extends InfoAbstract
 {
+	const PATH = 'Info';
+
 	public function setObject(InfoAbstract $infoObject): self
 	{
 		if ($infoObject instanceof InfoOrderProductItem) {
@@ -46,6 +48,6 @@ class Info extends InfoAbstract
 
 	public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO;
+		return self::PATH;
 	}
 }

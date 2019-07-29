@@ -2,25 +2,17 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
-class Invoice extends RequestAbstract
+class Invoice extends SimpleRequestAbstract
 {
-	/**
-	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param array $invoiceData
-	 */
-	public function __construct(string $transactionId, array $invoiceData)
-	{
-		$this->setData($transactionId, 'transactionId');
-		$this->setData($invoiceData, 'invoiceData');
-	}
+	const REQUEST_TYPE = 'Invoice';
 
 	/**
-	 * @return string
+	 * @param array $invoiceData
+	 * @return $this
 	 */
-	public function getMethod(): string
+	public function setInvoiceData(array $invoiceData)
 	{
-		return PaymentGateway::REQUEST_INVOICE;
+		return $this->setData($invoiceData, 'invoiceData');
 	}
 }

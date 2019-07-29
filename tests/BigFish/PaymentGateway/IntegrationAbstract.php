@@ -7,7 +7,7 @@ use BigFish\PaymentGateway;
 
 class IntegrationAbstract extends \PHPUnit\Framework\TestCase
 {
-	public function getMock($originalClassName, $methods = [], array $arguments = [], $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $cloneArguments = false, $callOriginalMethods = false, $proxyTarget = null)
+	protected function getMock($originalClassName, $methods = [], array $arguments = [], $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $cloneArguments = false, $callOriginalMethods = false, $proxyTarget = null)
 	{
 		$builder = $this->getMockBuilder($originalClassName);
 
@@ -37,10 +37,10 @@ class IntegrationAbstract extends \PHPUnit\Framework\TestCase
 		return $mockObject;
 	}
 
-    /**
-     * @param PaymentGateway\Request\RequestInterface $requestInterface
-     * @return PaymentGateway\Transport\Response\ResponseInterface
-     */
+	/**
+	 * @param PaymentGateway\Request\RequestInterface $requestInterface
+	 * @return PaymentGateway\Transport\Response\ResponseInterface
+	 */
 	protected function assertApiResponse(PaymentGateway\Request\RequestInterface $requestInterface)
 	{
 		$paymentGateWay = $this->getPaymentGateway();

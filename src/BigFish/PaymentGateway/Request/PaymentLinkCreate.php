@@ -7,6 +7,7 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class PaymentLinkCreate extends InitAbstract
 {
+	const REQUEST_TYPE = 'PaymentLinkCreate';
 
 	public function __construct()
 	{
@@ -23,25 +24,11 @@ class PaymentLinkCreate extends InitAbstract
 	public $extra;
 
 	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		'orderId' => 255,
-		'userId' => 255,
-		'currency' => 3,
-		'providerName' => 20,
-		'storeName' => 20,
-		'notificationUrl' => 255,
-		'language' => 2,
-		'notificationEmail' => 255,
-	];
-
-	/**
 	 * @param string $notificationEmail
 	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setNotificationEmail(string $notificationEmail = ''): self
+	public function setNotificationEmail(string $notificationEmail): self
 	{
 		if (filter_var($notificationEmail, FILTER_VALIDATE_EMAIL) === false) {
 			throw new PaymentGatewayException('Invalid notification email');
@@ -54,7 +41,7 @@ class PaymentLinkCreate extends InitAbstract
 	 * @param bool $value
 	 * @return $this
 	 */
-	public function setEmailNotificationOnlySuccess(bool $value = true): self
+	public function setEmailNotificationOnlySuccess(bool $value): self
 	{
 		return $this->setData($value, 'emailNotificationOnlySuccess');
 	}
@@ -63,7 +50,7 @@ class PaymentLinkCreate extends InitAbstract
 	 * @param string $expirationTime
 	 * @return $this
 	 */
-	public function setExpirationTime(string $expirationTime = ''): self
+	public function setExpirationTime(string $expirationTime): self
 	{
 		return $this->setData($expirationTime, 'expirationTime');
 	}
@@ -86,29 +73,17 @@ class PaymentLinkCreate extends InitAbstract
 	 * @param string $language
 	 * @return $this
 	 */
-	public function setLanguage(string $language = ''): self
+	public function setLanguage(string $language = null): self
 	{
-		if (!$language) {
-			$language = PaymentGateway\Config::DEFAULT_LANG;
-		}
-
-		return $this->setData($language, 'language');
+		return $this->setData($language ?? PaymentGateway\Config::DEFAULT_LANG, 'language');
 	}
 
 	/**
 	 * @param bool $value
 	 * @return $this
 	 */
-	public function setAutoCommit(bool $value = true): self
+	public function setAutoCommit(bool $value = null): self
 	{
-        return $this->setData($value, 'autoCommit');
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
-	{
-		return PaymentGateway::REQUEST_PAYMENT_LINK_CREATE;
+		return $this->setData($value ?? true, 'autoCommit');
 	}
 }

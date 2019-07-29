@@ -7,7 +7,6 @@ use BigFish\PaymentGateway\Data\Info\Order\InfoOrderBillingData;
 
 class InfoOrderBillingDataTest extends InfoOrderShippingDataTest
 {
-
 	/**
 	 * @return InfoOrderBillingData
 	 */

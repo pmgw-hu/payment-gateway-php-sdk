@@ -53,7 +53,7 @@ class IntegrationInfoTest extends IntegrationAbstract
 		$this->validateTransaction($result);
 
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\Details($result->TransactionId)
+			(new PaymentGateway\Request\Details())->setTransactionId($result->TransactionId)
 		);
 
 		$this->assertEmpty($response->InfoData, 'InfoData not empty');
@@ -105,13 +105,19 @@ class IntegrationInfoTest extends IntegrationAbstract
 	public function validateOneInfoDetails(ResponseInterface $result)
 	{
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\Details($result->TransactionId, false, true)
+			(new PaymentGateway\Request\Details())
+				->setTransactionId($result->TransactionId)
+				->setGetRelatedTransactions(false)
+				->setGetInfoData(true)
 		);
 		$this->assertNotEmpty($response->InfoData, 'InfoData empty');
 		$this->assertArraySubset($this->getSimpleInfoObject()->getData(), $response->InfoData);
 
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\Details($result->TransactionId, false, false)
+			(new PaymentGateway\Request\Details())
+				->setTransactionId($result->TransactionId)
+				->setGetRelatedTransactions(false)
+				->setGetInfoData(false)
 		);
 		$this->assertEmpty($response->InfoData, 'InfoData not empty');
 	}
@@ -119,13 +125,19 @@ class IntegrationInfoTest extends IntegrationAbstract
 	public function validateMoreInfoDetails(ResponseInterface $result)
 	{
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\Details($result->TransactionId, false, true)
+			(new PaymentGateway\Request\Details())
+				->setTransactionId($result->TransactionId)
+				->setGetRelatedTransactions(false)
+				->setGetInfoData(true)
 		);
 		$this->assertNotEmpty($response->InfoData, 'InfoData empty');
 		$this->assertArraySubset($this->getMultipleInfoObject()->getData(), $response->InfoData);
 
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\Details($result->TransactionId, false, false)
+			(new PaymentGateway\Request\Details())
+				->setTransactionId($result->TransactionId)
+				->setGetRelatedTransactions(false)
+				->setGetInfoData(false)
 		);
 		$this->assertEmpty($response->InfoData, 'InfoData not empty');
 	}
@@ -133,13 +145,17 @@ class IntegrationInfoTest extends IntegrationAbstract
 	public function validatePaymentLinkOneInfoDetails(ResponseInterface $result)
 	{
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\PaymentLinkDetails($result->PaymentLinkName, true)
+			(new PaymentGateway\Request\PaymentLinkDetails())
+				->setPaymentLinkName($result->PaymentLinkName)
+				->setGetInfoData(true)
 		);
 		$this->assertNotEmpty($response->InfoData, 'InfoData empty');
 		$this->assertArraySubset($this->getSimpleInfoObject()->getData(), $response->InfoData);
 
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\PaymentLinkDetails($result->PaymentLinkName, false)
+			(new PaymentGateway\Request\PaymentLinkDetails())
+				->setPaymentLinkName($result->PaymentLinkName)
+				->setGetInfoData(false)
 		);
 		$this->assertEmpty($response->InfoData, 'InfoData not empty');
 	}
@@ -147,13 +163,17 @@ class IntegrationInfoTest extends IntegrationAbstract
 	public function validatePaymentLinkMoreInfoDetails(ResponseInterface $result)
 	{
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\PaymentLinkDetails($result->PaymentLinkName, true)
+			(new PaymentGateway\Request\PaymentLinkDetails())
+				->setPaymentLinkName($result->PaymentLinkName)
+				->setGetInfoData(true)
 		);
 		$this->assertNotEmpty($response->InfoData, 'InfoData empty');
 		$this->assertArraySubset($this->getMultipleInfoObject()->getData(), $response->InfoData);
 
 		$response = $this->assertApiResponse(
-			new PaymentGateway\Request\PaymentLinkDetails($result->PaymentLinkName, false)
+			(new PaymentGateway\Request\PaymentLinkDetails())
+				->setPaymentLinkName($result->PaymentLinkName)
+				->setGetInfoData(false)
 		);
 		$this->assertEmpty($response->InfoData, 'InfoData not empty');
 	}
@@ -167,7 +187,7 @@ class IntegrationInfoTest extends IntegrationAbstract
 
 		if ($result->TransactionId) {
 			$paymentGateWay = $this->getPaymentGateway();
-			$request = new PaymentGateway\Request\Start($result->TransactionId);
+			$request = (new PaymentGateway\Request\Start())->setTransactionId($result->TransactionId);
 			$url = $paymentGateWay->getRedirectUrl($request);
 		}
 

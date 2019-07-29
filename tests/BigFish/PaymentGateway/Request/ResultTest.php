@@ -10,6 +10,6 @@ class ResultTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new Result($transactionId);
+		return (new Result())->setTransactionId($transactionId);
 	}
 }

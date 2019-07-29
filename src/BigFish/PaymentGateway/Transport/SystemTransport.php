@@ -3,19 +3,80 @@
 namespace BigFish\PaymentGateway\Transport;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Config;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
+use BigFish\PaymentGateway\Request\Close;
+use BigFish\PaymentGateway\Request\Refund;
 use BigFish\PaymentGateway\Request\RequestInterface;
 use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 use BigFish\PaymentGateway\Transport\Response\Response;
 
-class SystemTransport extends TransportAbstract
+class SystemTransport
 {
+	/**
+	 * @var Config
+	 */
+	protected $config;
+
+	/**
+	 * TransportInterface constructor.
+	 * @param Config $config
+	 */
+	public function __construct(Config $config)
+	{
+		$this->config = $config;
+	}
+
+	/**
+	 * Get user agent string
+	 *
+	 * @param $method string
+	 * @return string
+	 * @access private
+	 * @static
+	 */
+	protected function getUserAgent(string $method): string
+	{
+		return sprintf('%s | %s | %s | %s', $method, $this->getHttpHost(), 'PHP', phpversion());
+	}
+
 	/**
 	 * @return string
 	 */
-	function getClientType(): string
+	protected function getHttpHost(): string
 	{
-		return 'System';
+		return $_SERVER['HTTP_HOST'];
+	}
+
+	/**
+	 * @param RequestInterface $request
+	 */
+	protected function prepareRequest(RequestInterface $request)
+	{
+		if (
+			$request instanceof PaymentGateway\Request\InitAbstract ||
+			$request instanceof PaymentGateway\Request\Providers ||
+			$request instanceof PaymentGateway\Request\OneClickOptions ||
+			$request instanceof PaymentGateway\Request\OneClickTokenCancelAll
+		) {
+			$request->setStoreName($this->config->getStoreName());
+		}
+
+		if ($request instanceof PaymentGateway\Request\Init) {
+			$request->setEncryptKey($this->config->getEncryptPublicKey());
+			$request->setExtra();
+		}
+	}
+
+	/**
+	 * @param ResponseInterface $response
+	 */
+	protected function convertOutResponse(ResponseInterface $response)
+	{
+		$charset = $this->config->getOutCharset();
+		if ($charset != Config::CHARSET_UTF8) {
+			$response->convert($charset);
+		}
 	}
 
 	/**
@@ -88,8 +149,8 @@ class SystemTransport extends TransportAbstract
 	protected function setTimeout(RequestInterface $requestInterface, $curl)
 	{
 		if (
-			$requestInterface->getMethod() == PaymentGateway::REQUEST_CLOSE ||
-			$requestInterface->getMethod() == PaymentGateway::REQUEST_REFUND
+			$requestInterface->getMethod() == Close::REQUEST_TYPE ||
+			$requestInterface->getMethod() == Refund::REQUEST_TYPE
 		) {
 			// OTPay close and refund (extra timeout)
 			curl_setopt($curl, CURLOPT_TIMEOUT, 600);

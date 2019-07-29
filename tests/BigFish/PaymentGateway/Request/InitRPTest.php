@@ -60,45 +60,6 @@ class InitRPTest extends \PHPUnit\Framework\TestCase
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function amount_positiveNumberCheck()
-	{
-		$this->getRequest()->setAmount(-1);
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function orderId_maxLengthCheck()
-	{
-		// max: 255
-		$this->getRequest()->setOrderId(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function userId_maxLengthCheck()
-	{
-		// max: 255
-		$this->getRequest()->setUserId(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function currency_maxLengthCheck()
-	{
-		// max: 4
-		$this->getRequest()->setCurrency(str_repeat('A', 4));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
 	public function setResponseUrl_invalidUrl()
 	{
 		$request = $this->getRequest();

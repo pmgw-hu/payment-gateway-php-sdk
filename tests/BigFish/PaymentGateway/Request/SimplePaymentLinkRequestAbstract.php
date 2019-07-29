@@ -32,7 +32,7 @@ abstract class SimplePaymentLinkRequestAbstract extends SimpleRequestAbstract
     protected function getDataWithRequestFunction(\Closure $function)
     {
         $dataKeys = $this->getDataKeys();
-        $transactionId = isset($dataKeys[self::PAYMENT_LINK_NAME]) ? $dataKeys[self::PAYMENT_LINK_NAME] : 0;
+		$transactionId = $dataKeys[self::PAYMENT_LINK_NAME] ?? 0;
         $req = $this->getRequest($transactionId);
         $this->assertNotEmpty($req->getData());
         foreach ($dataKeys as $dataKey => $value) {

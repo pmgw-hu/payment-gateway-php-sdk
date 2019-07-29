@@ -67,29 +67,6 @@ class PaymentGateway
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 
 	/**
-	 * API request type constants
-	 */
-	const REQUEST_INIT = 'Init';
-	const REQUEST_START = 'Start';
-	const REQUEST_RESULT = 'Result';
-	const REQUEST_CLOSE = 'Close';
-	const REQUEST_DETAILS = 'Details';
-	const REQUEST_LOG = 'Log';
-	const REQUEST_REFUND = 'Refund';
-	const REQUEST_INIT_RP = 'InitRP';
-	const REQUEST_START_RP = 'StartRP';
-	const REQUEST_FINALIZE = 'Finalize';
-	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
-	const REQUEST_ONE_CLICK_TOKEN_CANCEL = 'OneClickTokenCancel';
-	const REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL = 'OneClickTokenCancelAll';
-	const REQUEST_INVOICE = 'Invoice';
-	const REQUEST_PROVIDERS = 'Providers';
-	const REQUEST_PAYMENT_LINK_CREATE = 'PaymentLinkCreate';
-	const REQUEST_PAYMENT_LINK_CANCEL = 'PaymentLinkCancel';
-	const REQUEST_PAYMENT_LINK_DETAILS = 'PaymentLinkDetails';
-	const REQUEST_SETTLEMENT = 'Settlement';
-
-	/**
 	 * Info block structures paths
 	 *
 	 */

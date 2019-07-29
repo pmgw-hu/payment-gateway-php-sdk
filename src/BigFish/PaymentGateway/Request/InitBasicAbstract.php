@@ -7,14 +7,6 @@ use BigFish\PaymentGateway;
 abstract class InitBasicAbstract extends RequestAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		'providerName' => 20,
-		'storeName' => 20
-	];
-
-	/**
 	 * Set the default values from the constants.
 	 *
 	 * InitAbstract constructor.
@@ -32,15 +24,6 @@ abstract class InitBasicAbstract extends RequestAbstract
 	public function setProviderName(string $providerName): self
 	{
 		return $this->setData($providerName, 'providerName');
-	}
-
-	/**
-	 * @param string $fieldName
-	 * @return null|int
-	 */
-	protected function getFieldMaxLength(string $fieldName)
-	{
-		return $this->maxLength[$fieldName] ?? parent::getFieldMaxLength($fieldName);
 	}
 
 	/**

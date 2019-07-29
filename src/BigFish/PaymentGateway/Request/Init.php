@@ -8,6 +8,8 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class Init extends InitAbstract
 {
+	const REQUEST_TYPE = 'Init';
+
 	/**
 	 * Extra data
 	 * 
@@ -15,25 +17,6 @@ class Init extends InitAbstract
 	 * @access public
 	 */
 	public $extra;
-
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		'orderId' => 255,
-		'userId' => 255,
-		'currency' => 3,
-		'providerName' => 20,
-		'storeName' => 20,
-		'notificationUrl' => 255,
-		'language' => 2,
-		'mppPhoneNumber' => 32,
-		'otpCardNumber' => 16,
-		'otpExpiration' => 4,
-		'otpCardPocketId' => 2,
-		'otpCvc' => 3,
-		'mkbSzepCvv' => 3
-	];
 
 	/**
 	 * Valid OneClickPayment providers
@@ -82,12 +65,9 @@ class Init extends InitAbstract
 	 * @param string $language
 	 * @return $this
 	 */
-	public function setLanguage(string $language = ''): self
+	public function setLanguage(string $language = null): self
 	{
-		if (!$language) {
-			$language = PaymentGateway\Config::DEFAULT_LANG;
-		}
-		return $this->setData($language, 'language');
+		return $this->setData($language ?? PaymentGateway\Config::DEFAULT_LANG, 'language');
 	}
 
 	/**
@@ -197,10 +177,9 @@ class Init extends InitAbstract
 	 * @param bool $value
 	 * @return $this
 	 */
-	public function setAutoCommit(bool $value = true): self
+	public function setAutoCommit(bool $value = null): self
 	{
-		$this->data['autoCommit'] = $value;
-		return $this;
+		return $this->setData($value ?? true, 'autoCommit');
 	}
 
 	/**
@@ -211,18 +190,10 @@ class Init extends InitAbstract
 	 * @return $this
 	 * @access public
 	 */
-	public function setGatewayPaymentPage(bool $gatewayPaymentPage = false): self
+	public function setGatewayPaymentPage(bool $gatewayPaymentPage): self
 	{
 		$this->gatewayPaymentPage = $gatewayPaymentPage;
 		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
-	{
-		return PaymentGateway::REQUEST_INIT;
 	}
 
 	/**

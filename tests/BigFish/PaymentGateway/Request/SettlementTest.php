@@ -59,66 +59,6 @@ class SettlementTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function terminalId_maxLengthCheck()
-	{
-		// max: 64
-		$this->getRequest()->setTerminalId(str_repeat('A', 65));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function settlementDate_maxLengthCheck()
-	{
-		// max: 10
-		$this->getRequest()->setSettlementDate(str_repeat('A', 11));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function currency_maxLengthCheck()
-	{
-		// max: 4
-		$this->getRequest()->setTransactionCurrency(str_repeat('A', 4));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function transferNotice_maxLengthCheck()
-	{
-		// max: 255
-		$this->getRequest()->setTransferNotice(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function limit_maxLengthCheck()
-	{
-		// max: 1000
-		$this->getRequest()->setLimit(1001);
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function storeName_maxLengthCheck()
-	{
-		// max: 20
-		$this->getRequest()->setStoreName(str_repeat('A', 21));
-	}
-
-	/**
 	 * @return Settlement
 	 */
 	protected function getRequest()

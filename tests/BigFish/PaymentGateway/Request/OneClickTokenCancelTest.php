@@ -11,6 +11,6 @@ class OneClickTokenCancelTest extends SimpleTransactionRequestAbstract
 
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new OneClickTokenCancel($transactionId);
+		return (new OneClickTokenCancel())->setTransactionId($transactionId);
 	}
 }

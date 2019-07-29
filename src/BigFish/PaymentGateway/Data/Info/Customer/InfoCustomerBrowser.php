@@ -3,11 +3,12 @@
 namespace BigFish\PaymentGateway\Data\Info\Customer;
 
 
-use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoCustomer;
 
-class InfoCustomerBrowser extends InfoAbstract
+class InfoCustomerBrowser extends InfoCustomer
 {
+	const PATH = 'Browser';
+
 	const ACCEPT_HEADER = 'acceptHeader';
 	const JAVA_ENABLED = 'javaEnabled';
 	const LANGUAGE = 'language';
@@ -18,24 +19,9 @@ class InfoCustomerBrowser extends InfoAbstract
 	const USER_AGENT = 'userAgent';
 	const WINDOWS_SIZE = 'windowSize';
 
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		self::ACCEPT_HEADER => 2048,
-		self::JAVA_ENABLED => 1,
-		self::LANGUAGE => 8,
-		self::COLOR_DEPTH => 2,
-		self::SCREEN_HEIGHT => 6,
-		self::SCREEN_WIDTH => 6,
-		self::TIME_ZONE => 5,
-		self::USER_AGENT => 2048,
-		self::WINDOWS_SIZE => 2
-	];
-
 	public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO_CUSTOMER_BROWSER;
+		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
 	}
 
 	public function setAcceptHeader(string $acceptHeader): self

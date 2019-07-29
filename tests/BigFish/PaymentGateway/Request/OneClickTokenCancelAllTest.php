@@ -12,7 +12,7 @@ class OneClickTokenCancelAllTest extends SimpleTransactionRequestAbstract
 
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new OneClickTokenCancelAll(PaymentGateway::PROVIDER_OTPAY, 14741);
+		return (new OneClickTokenCancelAll())->setProviderName(PaymentGateway::PROVIDER_OTPAY)->setUserId('14741');
 	}
 
 	protected function getDataKeys(): array

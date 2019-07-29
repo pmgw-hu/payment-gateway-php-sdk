@@ -3,25 +3,18 @@
 namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
-use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoOrder;
 
-class InfoOrderRecurringPayment extends InfoAbstract
+class InfoOrderRecurringPayment extends InfoOrder
 {
+	const PATH = 'RecurringPayment';
+
 	const EXPIRE_DATE = 'expireDate';
 	const FREQUENCY = 'frequency';
 
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		self::EXPIRE_DATE => 10,
-		self::FREQUENCY => 4
-	];
-
 	public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO_ORDER_RECURRING_PAYMENT;
+		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
 	}
 
 	public function setExpireDate(string $expireDate): self

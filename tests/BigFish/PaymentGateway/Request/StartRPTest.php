@@ -10,6 +10,6 @@ class StartRPTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new StartRP($transactionId);
+		return (new StartRP())->setTransactionId($transactionId);
 	}
 }

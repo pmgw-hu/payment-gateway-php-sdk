@@ -9,7 +9,7 @@ class RefundTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new Refund($transactionId, 1000);
+		return (new Refund())->setTransactionId($transactionId)->setAmount(1000);
 	}
 
 	protected function getDataKeys(): array

@@ -9,7 +9,7 @@ class FinalizeTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new Finalize($transactionId, 1000);
+		return (new Finalize())->setTransactionId($transactionId)->setAmount(1000);
 	}
 
 	protected function getDataKeys():array

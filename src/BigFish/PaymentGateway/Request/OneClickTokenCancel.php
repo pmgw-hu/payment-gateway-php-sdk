@@ -2,23 +2,9 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
-class OneClickTokenCancel extends RequestAbstract
+class OneClickTokenCancel extends SimpleRequestAbstract
 {
-	/**
-	 * @param string $transactionId
-	 */
-	public function __construct(string $transactionId)
-	{
-		$this->setData($transactionId, 'transactionId');
-	}
+	const REQUEST_TYPE = 'OneClickTokenCancel';
 
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
-	{
-		return PaymentGateway::REQUEST_ONE_CLICK_TOKEN_CANCEL;
-	}
 }

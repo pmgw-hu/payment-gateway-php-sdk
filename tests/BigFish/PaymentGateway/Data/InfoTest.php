@@ -59,8 +59,8 @@ class InfoTest extends \PHPUnit\Framework\TestCase
 		$orderGeneral->setTransactionType('01');
 
 		$info->setObject($browser);
-		$info->setObject($recurring);
 		$info->setObject($orderGeneral);
+		$info->setObject($recurring);
 
 		$this->assertArraySubset(
 			[

@@ -18,26 +18,6 @@ class InfoOrderRecurringPaymentTest extends InfoAbstractTest
 		);
 	}
 
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function expireDate_maxLengthCheck()
-	{
-		// max: 10
-		$this->getObject()->setExpireDate(str_repeat('A', 11));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function frequency_maxLengthCheck()
-	{
-		// max: 4
-		$this->getObject()->setFrequency(str_repeat('A', 5));
-	}
-
 	protected function getObject(): InfoOrderRecurringPayment
 	{
 		return new InfoOrderRecurringPayment();

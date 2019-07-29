@@ -10,6 +10,6 @@ class StartTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new Start($transactionId);
+		return (new Start())->setTransactionId($transactionId);
 	}
 }

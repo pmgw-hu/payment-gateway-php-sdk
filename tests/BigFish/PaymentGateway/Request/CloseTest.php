@@ -10,7 +10,7 @@ class CloseTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
-		return new Close($transactionId, false);
+		return (new Close())->setTransactionId($transactionId)->setApprove(false);
 	}
 
 	protected function getDataKeys(): array

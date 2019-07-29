@@ -3,11 +3,12 @@
 namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
-use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoOrder;
 
-class InfoOrderGeneral extends InfoAbstract
+class InfoOrderGeneral extends InfoOrder
 {
+	const PATH = 'General';
+
 	const DELIVERY_EMAIL = 'deliveryEmail';
 	const DELIVERY_TIME_FRAME = 'deliveryTimeFrame';
 	const GIFT_CARD_AMOUNT = 'giftCardAmount';
@@ -22,29 +23,11 @@ class InfoOrderGeneral extends InfoAbstract
 	const TRANSACTION_TYPE = 'transactionType';
 
 	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		self::DELIVERY_EMAIL => 254,
-		self::DELIVERY_TIME_FRAME => 2,
-		self::GIFT_CARD_AMOUNT => 15,
-		self::GIFT_CARD_COUNT => 2,
-		self::GIFT_CARD_CURRENCY => 3,
-		self::PREORDER_DATE => 10,
-		self::AVAILABILITY => 2,
-		self::REORDER_ITEMS => 2,
-		self::SHIPPING_METHOD => 2,
-		self::ADDRESS_MATCH_INDICATOR => 1,
-		self::DIFFERENT_SHIPPING_NAME => 2,
-		self::TRANSACTION_TYPE => 2,
-	];
-
-	/**
 	 * @return string
 	 */
 	public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO_ORDER_GENERAL;
+		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
 	}
 
 	public function setDeliveryEmail($deliveryEmail): self

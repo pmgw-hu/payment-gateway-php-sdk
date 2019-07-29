@@ -11,7 +11,7 @@ class PaymentLinkDetailsTest extends SimplePaymentLinkRequestAbstract
 
 	protected function getRequest(string $paymentLinkName): RequestInterface
 	{
-		return new PaymentLinkDetails($paymentLinkName, true);
+		return (new PaymentLinkDetails())->setPaymentLinkName($paymentLinkName)->setGetInfoData(true);
 	}
 
 	protected function getDataKeys():array

@@ -79,94 +79,10 @@ class InitTest extends InitRPTest
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function providerName_maxLengthCheck()
-	{
-		// max: 20
-		$this->getRequest()->setProviderName(str_repeat('A', 21));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function storeName_maxLengthCheck()
-	{
-		// max: 20
-		$this->getRequest()->setStoreName(str_repeat('A', 21));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setNotificationUrl_invalidUrl()
-	{
-		$this->getRequest()->setNotificationUrl(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
 	public function setNotificationUrl_sizeCheck()
 	{
 		$request = $this->getRequest();
 		$request->setNotificationUrl('invalidUrl');
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setMppPhoneNumber_sizeCheck()
-	{
-		$this->getRequest()->setMppPhoneNumber(str_repeat('A', 33));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setOtpCardNumber_sizeCheck()
-	{
-		$this->getRequest()->setOtpCardNumber(str_repeat('A', 17));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setOtpExpiration_sizeCheck()
-	{
-		$this->getRequest()->setOtpExpiration(str_repeat('A', 5));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setOtpCvc_sizeCheck()
-	{
-		$this->getRequest()->setOtpCvc(str_repeat('A', 4));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setOtpCardPocketId_sizeCheck()
-	{
-		$this->getRequest()->setOtpCardPocketId(str_repeat('A', 3));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function language_maxLengthCheck()
-	{
-		// 2
-		$this->getRequest()->setLanguage(str_repeat('A', 3));
 	}
 
 	/**
@@ -189,15 +105,6 @@ class InitTest extends InitRPTest
 		$init->setCurrency();
 		$data = $init->getData();
 		$this->assertEquals(PaymentGateway\Config::DEFAULT_CURRENCY, $data['currency']);
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function setMkbSzepCvv_sizeCheck()
-	{
-		$this->getRequest()->setMkbSzepCvv(str_repeat('A', 4));
 	}
 
 	/**
@@ -282,7 +189,7 @@ class InitTest extends InitRPTest
 		$init->setEncryptKey($config->getEncryptPublicKey());
 		$init->setOneClickPayment();
 		$init->setOneClickReferenceId('testData');
-        $init->setOneClickForcedRegistration();
+		$init->setOneClickForcedRegistration();
 		$init->setExtra();
 
 		$data = $init->getData();
@@ -291,23 +198,23 @@ class InitTest extends InitRPTest
 		$this->assertArrayNotHasKey('oneClickForcedRegistration', $data);
 	}
 
-    /**
-     * @test
-     */
-    public function setExtra_OneClickProvider()
-    {
-        $init = $this->getRequest();
-        $init->setProviderName(PaymentGateway::PROVIDER_BORGUN2);
-        $init->setOneClickPayment();
-        $init->setOneClickReferenceId('testData');
-        $init->setOneClickForcedRegistration();
-        $init->setExtra();
+	/**
+	 * @test
+	 */
+	public function setExtra_OneClickProvider()
+	{
+		$init = $this->getRequest();
+		$init->setProviderName(PaymentGateway::PROVIDER_BORGUN2);
+		$init->setOneClickPayment();
+		$init->setOneClickReferenceId('testData');
+		$init->setOneClickForcedRegistration();
+		$init->setExtra();
 
-        $data = $init->getData();
-        $this->assertArrayHasKey('oneClickPayment', $data);
-        $this->assertArrayHasKey('oneClickReferenceId', $data);
-        $this->assertArrayNotHasKey('oneClickForcedRegistration', $data);
-    }
+		$data = $init->getData();
+		$this->assertArrayHasKey('oneClickPayment', $data);
+		$this->assertArrayHasKey('oneClickReferenceId', $data);
+		$this->assertArrayNotHasKey('oneClickForcedRegistration', $data);
+	}
 
 	/**
 	 * @test
@@ -362,18 +269,6 @@ class InitTest extends InitRPTest
 	protected function getRequest()
 	{
 		return new Init();
-	}
-
-	/**
-	 * @test
-	 * @depends providerName_maxLengthCheck
-	 *
-	 * should not throw an exception
-	 */
-	public function lengthCheck_mbCheck_shouldNotThrowException()
-	{
-		// max: 20
-		$this->getRequest()->setProviderName(str_repeat('¥', 11));
 	}
 
 	public function testInitDefaultData()

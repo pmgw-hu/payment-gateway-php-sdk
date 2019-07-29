@@ -3,11 +3,12 @@
 namespace BigFish\PaymentGateway\Data\Info\Customer;
 
 
-use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoCustomer;
 
-class InfoCustomerGeneral extends InfoAbstract
+class InfoCustomerGeneral extends InfoCustomer
 {
+	const PATH = 'General';
+
 	const FIRST_NAME = 'firstName';
 	const LAST_NAME = 'lastName';
 	const EMAIL = 'email';
@@ -19,74 +20,58 @@ class InfoCustomerGeneral extends InfoAbstract
 	const WORK_PHONE_CC = 'workPhoneCc';
 	const WORK_PHONE = 'workPhone';
 
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		self::FIRST_NAME => 45,
-		self::LAST_NAME => 45,
-		self::EMAIL => 254,
-		self::IP => 45,
-		self::HOME_PHONE_CC => 3,
-		self::HOME_PHONE => 18,
-		self::MOBILE_PHONE_CC => 3,
-		self::MOBILE_PHONE => 18,
-		self::WORK_PHONE_CC => 3,
-		self::WORK_PHONE => 18
-	];
-
 	public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO_CUSTOMER_GENERAL;
+		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
 	}
 
 	public function setFirstName(string $firstName): self
 	{
-		return $this->setData($firstName, 'firstName');
+		return $this->setData($firstName, self::FIRST_NAME);
 	}
 
 	public function setLastName(string $lastName): self
 	{
-		return $this->setData($lastName, 'lastName');
+		return $this->setData($lastName, self::LAST_NAME);
 	}
 
 	public function setEmail(string $email): self
 	{
-		return $this->setData($email, 'email');
+		return $this->setData($email, self::EMAIL);
 	}
 
 	public function setIp(string $ip): self
 	{
-		return $this->setData($ip, 'ip');
+		return $this->setData($ip, self::IP);
 	}
 
 	public function setHomePhoneCc(string $homePhoneCc): self
 	{
-		return $this->setData($homePhoneCc, 'homePhoneCc');
+		return $this->setData($homePhoneCc, self::HOME_PHONE_CC);
 	}
 
 	public function setHomePhone(string $homePhone): self
 	{
-		return $this->setData($homePhone, 'homePhone');
+		return $this->setData($homePhone, self::HOME_PHONE);
 	}
 
 	public function setMobilePhoneCc(string $mobilePhoneCc): self
 	{
-		return $this->setData($mobilePhoneCc, 'mobilePhoneCc');
+		return $this->setData($mobilePhoneCc, self::MOBILE_PHONE_CC);
 	}
 
 	public function setMobilePhone(string $mobilePhone): self
 	{
-		return $this->setData($mobilePhone, 'mobilePhone');
+		return $this->setData($mobilePhone, self::MOBILE_PHONE);
 	}
 
 	public function setWorkPhoneCc(string $workPhoneCc): self
 	{
-		return $this->setData($workPhoneCc, 'workPhoneCc');
+		return $this->setData($workPhoneCc, self::WORK_PHONE_CC);
 	}
 
 	public function setWorkPhone(string $workPhone): self
 	{
-		return $this->setData($workPhone, 'workPhone');
+		return $this->setData($workPhone, self::WORK_PHONE);
 	}
 }

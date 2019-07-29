@@ -3,11 +3,11 @@
 namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
-use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoOrder;
 
-class InfoOrderProductItem extends InfoAbstract
+class InfoOrderProductItem extends InfoOrder
 {
+	const PATH = 'ProductItems';
 
 	const SKU = 'sku';
 	const NAME = 'name';
@@ -17,22 +17,9 @@ class InfoOrderProductItem extends InfoAbstract
 	const IMAGE_URL = 'imageUrl';
 	const DESCRIPTION = 'description';
 
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		self::SKU => 254,
-		self::NAME => 254,
-		self::QUANTITY => 10,
-		self::QUANTITY_UNIT => 16,
-		self::UNIT_PRICE => 16,
-		self::IMAGE_URL => 254,
-		self::DESCRIPTION => 254
-	];
-
 	public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO_ORDER_PRODUCT_ITEMS;
+		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
 	}
 
 	public function setSku(string $sku): self

@@ -12,26 +12,13 @@ Copy paste detection:
   stage: build
   allow_failure: true
 
-# disables due to phpmd issues
-#PHP mess detection:
-#  script:
-#    - wget -c http://static.phpmd.org/php/latest/phpmd.phar
-#    - php7 phpmd.phar ./src/ text cleancode codesize
-#  stage: build
-#  allow_failure: true
-
 PhpUnit php7:
   image: php:7.2
   script:
-    - apt-get update && apt-get install -y zip unzip php-zip
+    - apt-get update && apt-get install -y php-zip
     - php -v
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
     - cd tests && php ../vendor/phpunit/phpunit/phpunit
-    - phpunit --configuration phpunit_myapp.xml
   stage: build
 
-#UI test:
-#  script:
-#    - docker build -t php7 .
-#    - docker run -d -it -p 8080:80 php7

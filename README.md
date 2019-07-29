@@ -23,6 +23,9 @@ BIG FISH Payment Gateway is available at packagist.org, so you can use composer 
     }
 }
 ```
+## Technical documentation
+
+https://docs.paymentgateway.hu/
 
 ## Source code
 
@@ -51,6 +54,7 @@ $init->setProviderName(\BigFish\PaymentGateway::PROVIDER_CIB) // the chosen paym
     ->setAmount(1234)
     ->setCurrency('HUF')
     ->setOrderId('ORD-1234') // your custom order id
+    ->setUserId('USER-1234') // your custom user id
     ->setLanguage('HU');
 
 $response = $paymentGateway->send($init);
@@ -64,7 +68,7 @@ if (!$response->ResultCode == "SUCCESSFUL" || !$response->TransactionId) {
 }
 
 $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\Start($response->TransactionId)
+        (new \BigFish\PaymentGateway\Request\Start())->setTransactionId($response->TransactionId)
     );
 ```
 
@@ -72,7 +76,7 @@ $paymentGateway->send(
 
 ```php
 $result = $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\Result($_GET['transactionId'])
+        (new \BigFish\PaymentGateway\Request\Result())->setTransactionId($_GET['transactionId'])
     );
 ```
 
@@ -80,7 +84,7 @@ $result = $paymentGateway->send(
 
 ```php
 $response = $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\Close($transActionId)
+        (new \BigFish\PaymentGateway\Request\Close())->setTransactionId($transActionId)
     );
 ```
 
@@ -89,7 +93,9 @@ $response = $paymentGateway->send(
 
 ```php
 $response = $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\Refund($transActionId, 100)
+        (new \BigFish\PaymentGateway\Request\Refund())
+            ->setTransactionId($transActionId)
+            ->setAmount(100)
     );
 ```
 
@@ -98,7 +104,7 @@ $response = $paymentGateway->send(
 
 ```php
 $response = $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\OneClickTokenCancel($transActionId)
+        (new \BigFish\PaymentGateway\Request\OneClickTokenCancel())->setTransactionId($transActionId)
     );
 ```
 
@@ -106,7 +112,9 @@ $response = $paymentGateway->send(
 
 ```php
 $response = $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\OneClickTokenCancelAll($transActionId)
+        (new \BigFish\PaymentGateway\Request\OneClickTokenCancelAll())
+            ->setProviderName(\BigFish\PaymentGateway::PROVIDER_BORGUN2)
+            ->setUserId('userId')
     );
 ```
 ### Init Recurring Payment - InitRP
@@ -141,7 +149,7 @@ $response = $paymentGateway->send($paymentLink);
 
 ```php
 $response = $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\PaymentLinkCancel($paymentLinkName)
+        (new \BigFish\PaymentGateway\Request\PaymentLinkCancel())->setPaymentLinkName($paymentLinkName)
     );
 ```
 
@@ -149,7 +157,7 @@ $response = $paymentGateway->send(
 
 ```php
 $response = $paymentGateway->send(
-        new \BigFish\PaymentGateway\Request\PaymentLinkDetails($paymentLinkName)
+        (new \BigFish\PaymentGateway\Request\PaymentLinkDetails())->setPaymentLinkName($paymentLinkName)
     );
 ```
 

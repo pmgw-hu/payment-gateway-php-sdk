@@ -2,34 +2,17 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
 class OneClickTokenCancelAll extends InitBasicAbstract
 {
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		'providerName' => 20,
-		'storeName' => 20,
-		'userId' => 255
-	];
+	const REQUEST_TYPE = 'OneClickTokenCancelAll';
 
 	/**
-	 * @param string $providerName
-	 * @param string $userID
+	 * @param string $userId
+	 * @return $this
 	 */
-	public function __construct(string $providerName, string $userID)
+	public function setUserId(string $userId): self
 	{
-		$this->setProviderName($providerName);
-		$this->setData($userID, 'userId');
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
-	{
-		return PaymentGateway::REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL;
+		return $this->setData($userId, 'userId');
 	}
 }

@@ -3,11 +3,12 @@
 namespace BigFish\PaymentGateway\Data\Info\Customer;
 
 
-use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Data\Info\InfoAbstract;
 
 class InfoCustomerStoreSpecific extends InfoAbstract
 {
+	const PATH = 'StoreSpecific';
+
 	const UPDATE_DATE = 'updateDate';
 	const UPDATE_DATE_INDICATOR = 'updateDateIndicator';
 	const CREATION_DATE = 'creationDate';
@@ -27,33 +28,9 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	const PURCHASES_LAST_SIX_MONTHS = 'purchasesLastSixMonths';
 	const SUSPICIOUS_ACTIVITY = 'suspiciousActivity';
 
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		self::UPDATE_DATE => 10,
-		self::UPDATE_DATE_INDICATOR => 2,
-		self::CREATION_DATE => 10,
-		self::CREATION_DATE_INDICATOR => 2,
-		self::PASSWORD_CHANGE_DATE => 10,
-		self::PASSWORD_CHANGE_DATE_INDICATOR => 2,
-		self::AUTHENTICATION_TIMESTAMP => 19,
-		self::AUTHENTICATION_METHOD => 2,
-		self::CHALLENGE_INDICATOR => 2,
-		self::SHIPPING_ADDRESS_FIRST_USE => 10,
-		self::SHIPPING_ADDRESS_FIRST_USE_INDICATOR => 2,
-		self::CARD_TRANSACTIONS_LAST_DAY => 3,
-		self::CARD_CREATION_DATE => 10,
-		self::CARD_CREATION_DATE_INDICATOR => 2,
-		self::TRANSACTION_LAST_DAY => 3,
-		self::TRANSACTION_LAST_YEAR => 3,
-		self::PURCHASES_LAST_SIX_MONTHS => 4,
-		self::SUSPICIOUS_ACTIVITY => 2
-	];
-
     public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO_CUSTOMER_STORE_SPECIFIC;
+		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
 	}
 
 	public function setUpdateDate(string $updateDate): self

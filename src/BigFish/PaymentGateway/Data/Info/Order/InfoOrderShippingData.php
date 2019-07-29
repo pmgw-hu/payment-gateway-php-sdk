@@ -3,11 +3,12 @@
 namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
-use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoOrder;
 
-class InfoOrderShippingData extends InfoAbstract
+class InfoOrderShippingData extends InfoOrder
 {
+	const PATH = 'ShippingData';
+
 	const FIRST_NAME = 'firstName';
 	const LAST_NAME = 'lastName';
 	const EMAIL = 'email';
@@ -23,29 +24,9 @@ class InfoOrderShippingData extends InfoAbstract
 	const LINE_3 = 'line3';
 	const POSTAL_CODE = 'postalCode';
 
-	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		self::FIRST_NAME => 45,
-		self::LAST_NAME => 45,
-		self::EMAIL => 254,
-		self::PHONE_CC => 3,
-		self::PHONE => 18,
-		self::CITY => 50,
-		self::COUNTRY => 50,
-		self::COUNTRY_CODE_1 => 3,
-		self::COUNTRY_CODE_2 => 2,
-		self::COUNTRY_CODE_3 => 6,
-		self::LINE_1 => 50,
-		self::LINE_2 => 50,
-		self::LINE_3 => 50,
-		self::POSTAL_CODE => 16
-	];
-
 	public function getStructurePath(): string
 	{
-		return PaymentGateway::PATH_INFO_ORDER_SHIPPING_DATA;
+		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
 	}
 
 	public function setFirstName(string $firstName): self

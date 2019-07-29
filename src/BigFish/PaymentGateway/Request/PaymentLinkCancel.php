@@ -2,23 +2,13 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
-class PaymentLinkCancel extends InitAbstract
+class PaymentLinkCancel extends RequestAbstract
 {
-	/**
-	 * @param string $paymentLinkName
-	 */
-	public function __construct(string $paymentLinkName)
-	{
-		$this->setData($paymentLinkName, 'paymentLinkName');
-	}
+	const REQUEST_TYPE = 'PaymentLinkCancel';
 
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
+	public function setPaymentLinkName(string $paymentLinkName)
 	{
-		return PaymentGateway::REQUEST_PAYMENT_LINK_CANCEL;
+		return $this->setData($paymentLinkName, 'paymentLinkName');
 	}
 }

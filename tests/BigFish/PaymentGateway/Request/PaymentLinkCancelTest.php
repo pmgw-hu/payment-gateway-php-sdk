@@ -11,7 +11,7 @@ class PaymentLinkCancelTest extends SimplePaymentLinkRequestAbstract
 
 	protected function getRequest(string $paymentLinkName): RequestInterface
 	{
-		return new PaymentLinkCancel($paymentLinkName);
+		return (new PaymentLinkCancel())->setPaymentLinkName($paymentLinkName);
 	}
 
 	protected function getDataKeys():array

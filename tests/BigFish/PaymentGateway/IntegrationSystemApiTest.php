@@ -65,7 +65,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 				->expects($this->atLeastOnce())
 				->method('terminate');
 
-		$request = new PaymentGateway\Request\Start($transactionId);
+		$request = (new PaymentGateway\Request\Start())->setTransactionId($transactionId);
 		$paymentGateWay->send($request);
 
 		$data = file_get_contents($paymentGateWay->getRedirectUrl($request));
@@ -80,7 +80,8 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function result()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\Result($this->init())
+			(new PaymentGateway\Request\Result())
+				->setTransactionId($this->init())
 		);
 	}
 
@@ -92,7 +93,9 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function close_approved()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\Close($this->init(), true)
+			(new PaymentGateway\Request\Close())
+				->setTransactionId($this->init())
+				->setApprove(true)
 		);
 	}
 
@@ -104,7 +107,9 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function close_notApproved()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\Details($this->init(), false)
+			(new PaymentGateway\Request\Details())
+				->setTransactionId($this->init())
+				->setGetRelatedTransactions(false)
 		);
 	}
 
@@ -116,9 +121,9 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function invoice()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\Invoice($this->init(), array(
-				'name' => 'test'
-			))
+			(new PaymentGateway\Request\Invoice())
+			->setTransactionId($this->init())
+			->setInvoiceData(['name' => 'test'])
 		);
 	}
 
@@ -130,7 +135,8 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function log()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\Log($this->init())
+			(new PaymentGateway\Request\Log())
+				->setTransactionId($this->init())
 		);
 	}
 
@@ -142,7 +148,9 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function OneClickOptions()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\OneClickOptions(PaymentGateway::PROVIDER_OTP_SIMPLE, 'BF-TEST-USER-REG')
+			(new PaymentGateway\Request\OneClickOptions())
+				->setProviderName(PaymentGateway::PROVIDER_OTP_SIMPLE)
+				->setUserId('BF-TEST-USER-REG')
 		);
 	}
 
@@ -165,7 +173,9 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function refund()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\Refund($this->init(), 1000)
+			(new PaymentGateway\Request\Refund())
+				->setTransactionId($this->init())
+				->setAmount(1000)
 		);
 	}
 
@@ -177,7 +187,9 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function oneClickTokenCancelAll()
 	{
 		$this->assertApiResponse(
-			new PaymentGateway\Request\OneClickTokenCancelAll(PaymentGateway::PROVIDER_BORGUN2, 'sdk_test')
+			(new PaymentGateway\Request\OneClickTokenCancelAll())
+				->setProviderName(PaymentGateway::PROVIDER_BORGUN2)
+				->setUserId('sdk_test')
 		);
 	}
 
@@ -244,7 +256,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	{
 		$paylinkResult = $this->initPaylink();
 		$paymentGateWay = $this->getPaymentGateway();
-		$createPaylink = new PaymentGateway\Request\PaymentLinkCancel($paylinkResult->PaymentLinkName);
+		$createPaylink = (new PaymentGateway\Request\PaymentLinkCancel())->setPaymentLinkName($paylinkResult->PaymentLinkName);
 		$result = $paymentGateWay->send($createPaylink);
 
 		$this->assertNotEmpty($result->PaymentLinkName, sprintf('Error: %s %s', $result->ResultCode, $result->ResultMessage));
@@ -259,7 +271,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	{
 		$paymentlink = $this->initPaylink()->PaymentLinkName;
 		$this->assertApiResponse(
-			new PaymentGateway\Request\PaymentLinkDetails($paymentlink)
+			(new PaymentGateway\Request\PaymentLinkDetails())->setPaymentLinkName($paymentlink)
 		);
 	}
 

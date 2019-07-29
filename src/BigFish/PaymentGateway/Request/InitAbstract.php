@@ -9,17 +9,6 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 abstract class InitAbstract extends InitBasicAbstract
 {
 	/**
-	 * @var array
-	 */
-	protected $maxLength = [
-		'storeName' => 20,
-		'orderId' => 255,
-		'userId' => 255,
-		'currency' => 3,
-		'providerName' => 20
-	];
-
-	/**
 	 * Set the default values from the constants.
 	 *
 	 * InitAbstract constructor.
@@ -88,12 +77,9 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
 	 * @return $this
 	 */
-	public function setCurrency(string $currency = ''): self
+	public function setCurrency(string $currency = null): self
 	{
-		if (!$currency) {
-			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;
-		}
-		return $this->setData($currency, 'currency');
+		return $this->setData($currency ?? PaymentGateway\Config::DEFAULT_CURRENCY, 'currency');
 	}
 
 	/**

@@ -32,7 +32,7 @@ abstract class SimpleTransactionRequestAbstract extends SimpleRequestAbstract
 	protected function getDataWithRequestFunction(\Closure $function)
 	{
 		$dataKeys = $this->getDataKeys();
-		$transactionId = isset($dataKeys[self::TRANSACTION_ID]) ? $dataKeys[self::TRANSACTION_ID] : 0;
+		$transactionId = $dataKeys[self::TRANSACTION_ID] ?? 0;
 		$req = $this->getRequest($transactionId);
 		$this->assertNotEmpty($req->getData());
 		foreach ($dataKeys as $dataKey => $value) {
