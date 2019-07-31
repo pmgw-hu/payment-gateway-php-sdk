@@ -73,12 +73,12 @@ abstract class InitAbstract extends InitBaseAbstract
 	}
 
 	/**
-	 * @param PaymentGateway\Data\Info $infoObject
+	 * @param PaymentGateway\Data\Info $info
 	 * @return InitAbstract
 	 */
-	public function setInfoObject(Info $infoObject): self
+	public function setInfo(Info $info): self
 	{
-		return $this->setData($this->urlSafeEncode(json_encode($infoObject->getData())), 'info');
+		return $this->setData($this->urlSafeEncode(json_encode($info->getData())), 'info');
 	}
 
 	/**
