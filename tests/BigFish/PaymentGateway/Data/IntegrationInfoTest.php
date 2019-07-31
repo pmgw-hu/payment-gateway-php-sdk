@@ -65,7 +65,7 @@ class IntegrationInfoTest extends IntegrationAbstract
 		$init = $this->getInit();
 		$info = $this->getSimpleInfoObject();
 
-		return $init->setInfoObject($info);
+		return $init->setInfo($info);
 	}
 
 	public function getInitTransactionWithMoreInfoData()
@@ -73,7 +73,7 @@ class IntegrationInfoTest extends IntegrationAbstract
 		$init = $this->getInit();
 		$info = $this->getMultipleInfoObject();
 
-		return $init->setInfoObject($info);
+		return $init->setInfo($info);
 	}
 
 	public function getInitPaymentLinkWithOneInfoData()
@@ -81,7 +81,7 @@ class IntegrationInfoTest extends IntegrationAbstract
 		$init = $this->getPaymentLinkInit();
 		$info = $this->getSimpleInfoObject();
 
-		return $init->setInfoObject($info);
+		return $init->setInfo($info);
 	}
 
 	public function getInitPaymentLinkWithMoreInfoData()
@@ -89,7 +89,7 @@ class IntegrationInfoTest extends IntegrationAbstract
 		$init = $this->getPaymentLinkInit();
 		$info = $this->getMultipleInfoObject();
 
-		return $init->setInfoObject($info);
+		return $init->setInfo($info);
 	}
 
 	public function validateTransaction(ResponseInterface $result)

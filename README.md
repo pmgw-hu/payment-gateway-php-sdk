@@ -207,7 +207,7 @@ $infoObject->setData($infoOrderProductItem); //add $infoShipping to $infoObject
 
 ```php
 ...
-    $init->setInfoObject($infoObject);
+    $init->setInfo($infoObject);
 ...
 ```
 
@@ -215,7 +215,7 @@ $infoObject->setData($infoOrderProductItem); //add $infoShipping to $infoObject
 
 ```php
 ...
-    $initRP->setInfoObject($infoObject);
+    $initRP->setInfo($infoObject);
 ...
 ```
 
@@ -223,6 +223,6 @@ $infoObject->setData($infoOrderProductItem); //add $infoShipping to $infoObject
 
 ```php
 ...
-    $paymentLink->setInfoObject($infoObject);
+    $paymentLink->setInfo($infoObject);
 ...
 ```
