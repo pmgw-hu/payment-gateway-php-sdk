@@ -13,7 +13,7 @@ Copy paste detection:
   allow_failure: true
 
 PhpUnit php7:
-  image: php:7.2
+  image: docker.big.hu/test/php:7.2
   script:
     - apt-get update && apt-get install -y php-zip
     - php -v
