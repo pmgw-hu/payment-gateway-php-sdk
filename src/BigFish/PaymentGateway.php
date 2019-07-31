@@ -38,6 +38,7 @@ class PaymentGateway
 	 */
 	const PROVIDER_ABAQOOS = 'ABAQOOS';
 	const PROVIDER_BARION2 = 'Barion2';
+	const PROVIDER_BBARUHITEL = 'BBAruhitel';
 	const PROVIDER_BORGUN = 'Borgun';
 	const PROVIDER_BORGUN2 = 'Borgun2';
 	const PROVIDER_CIB = 'CIB';
@@ -59,26 +60,13 @@ class PaymentGateway
 	const PROVIDER_PAYSAFECARD = 'PSC';
 	const PROVIDER_PAYSAFECASH = 'Paysafecash';
 	const PROVIDER_PAYU2 = 'PayU2';
+	const PROVIDER_PAYUREST = 'PayURest';
 	const PROVIDER_SAFERPAY = 'Saferpay';
 	const PROVIDER_SMS = 'SMS';
 	const PROVIDER_SOFORT = 'Sofort';
 	const PROVIDER_UNICREDIT = 'UniCredit';
 	const PROVIDER_VIRPAY = 'Virpay';
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
-
-	/**
-	 * Info block structures paths
-	 *
-	 */
-	const PATH_INFO = 'Info';
-	const PATH_INFO_CUSTOMER_GENERAL = 'Info/Customer/General';
-	const PATH_INFO_CUSTOMER_STORE_SPECIFIC = 'Info/Customer/StoreSpecific';
-	const PATH_INFO_CUSTOMER_BROWSER = 'Info/Customer/Browser';
-	const PATH_INFO_ORDER_GENERAL = 'Info/Order/General';
-	const PATH_INFO_ORDER_SHIPPING_DATA = 'Info/Order/ShippingData';
-	const PATH_INFO_ORDER_BILLING_DATA = 'Info/Order/BillingData';
-	const PATH_INFO_ORDER_PRODUCT_ITEMS = 'Info/Order/ProductItems';
-	const PATH_INFO_ORDER_RECURRING_PAYMENT = 'Info/Order/RecurringPayment';
 
 	/**
 	 * @var Config

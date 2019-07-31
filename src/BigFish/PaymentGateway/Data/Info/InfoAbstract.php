@@ -10,8 +10,5 @@ abstract class InfoAbstract extends BaseAbstract implements InfoInterface
 	/**
 	 * @return null|string
 	 */
-	public function getStructurePath(): string
-	{
-		return null;
-	}
+	abstract public function getStructurePath(): string;
 }

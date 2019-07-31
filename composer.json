@@ -15,7 +15,8 @@
 		"email": "paymentgateway@bigfish.hu"
 	},
 	"require": {
-		"ext-mbstring": "*",
+		"ext-json": "*",
+		"ext-openssl": "*",
 		"ext-curl": "*",
 		"php": ">=7.2"
 	},

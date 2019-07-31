@@ -8,18 +8,6 @@ use BigFish\PaymentGateway\Request\PaymentLinkCreate;
 
 class PaymentLinkCreateTest extends \PHPUnit\Framework\TestCase
 {
-
-	/**
-	 * @test
-	 */
-	public function setCurrency_defaultHUF()
-	{
-		$init = $this->getRequest();
-		$init->setCurrency();
-		$data = $init->getData();
-		$this->assertEquals('HUF', $data['currency']);
-	}
-
 	/**
 	 * @test
 	 * @dataProvider dataProviderFor_parameterTest

@@ -57,7 +57,8 @@ class SystemTransport
 			$request instanceof PaymentGateway\Request\InitAbstract ||
 			$request instanceof PaymentGateway\Request\Providers ||
 			$request instanceof PaymentGateway\Request\OneClickOptions ||
-			$request instanceof PaymentGateway\Request\OneClickTokenCancelAll
+			$request instanceof PaymentGateway\Request\OneClickTokenCancelAll ||
+			$request instanceof PaymentGateway\Request\Settlement
 		) {
 			$request->setStoreName($this->config->getStoreName());
 		}

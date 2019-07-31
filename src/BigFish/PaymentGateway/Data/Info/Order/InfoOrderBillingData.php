@@ -3,12 +3,11 @@
 namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
+use BigFish\PaymentGateway\Data\Info\StructurePathTrait;
+
 class InfoOrderBillingData extends InfoOrderShippingData
 {
-	const PATH = 'BillingData';
+	use StructurePathTrait;
 
-	public function getStructurePath(): string
-	{
-		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
-	}
+	const PATH = 'BillingData';
 }

@@ -4,9 +4,12 @@ namespace BigFish\PaymentGateway\Data\Info\Customer;
 
 
 use BigFish\PaymentGateway\Data\Info\InfoCustomer;
+use BigFish\PaymentGateway\Data\Info\StructurePathTrait;
 
 class InfoCustomerBrowser extends InfoCustomer
 {
+	use StructurePathTrait;
+
 	const PATH = 'Browser';
 
 	const ACCEPT_HEADER = 'acceptHeader';
@@ -18,11 +21,6 @@ class InfoCustomerBrowser extends InfoCustomer
 	const TIME_ZONE = 'timeZone';
 	const USER_AGENT = 'userAgent';
 	const WINDOWS_SIZE = 'windowSize';
-
-	public function getStructurePath(): string
-	{
-		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
-	}
 
 	public function setAcceptHeader(string $acceptHeader): self
 	{

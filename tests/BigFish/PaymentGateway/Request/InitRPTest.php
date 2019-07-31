@@ -16,7 +16,7 @@ class InitRPTest extends \PHPUnit\Framework\TestCase
 	public function setCurrency_defaultHUF()
 	{
 		$init = $this->getRequest();
-		$init->setCurrency();
+		$init->setCurrency('HUF');
 		$data = $init->getData();
 		$this->assertEquals('HUF', $data['currency']);
 	}

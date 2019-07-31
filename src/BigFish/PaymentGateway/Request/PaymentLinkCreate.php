@@ -73,9 +73,9 @@ class PaymentLinkCreate extends InitAbstract
 	 * @param string $language
 	 * @return $this
 	 */
-	public function setLanguage(string $language = null): self
+	public function setLanguage(string $language): self
 	{
-		return $this->setData($language ?? PaymentGateway\Config::DEFAULT_LANG, 'language');
+		return $this->setData($language, 'language');
 	}
 
 	/**

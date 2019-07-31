@@ -4,9 +4,12 @@ namespace BigFish\PaymentGateway\Data\Info\Customer;
 
 
 use BigFish\PaymentGateway\Data\Info\InfoCustomer;
+use BigFish\PaymentGateway\Data\Info\StructurePathTrait;
 
 class InfoCustomerGeneral extends InfoCustomer
 {
+	use StructurePathTrait;
+
 	const PATH = 'General';
 
 	const FIRST_NAME = 'firstName';
@@ -19,11 +22,6 @@ class InfoCustomerGeneral extends InfoCustomer
 	const MOBILE_PHONE = 'mobilePhone';
 	const WORK_PHONE_CC = 'workPhoneCc';
 	const WORK_PHONE = 'workPhone';
-
-	public function getStructurePath(): string
-	{
-		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
-	}
 
 	public function setFirstName(string $firstName): self
 	{

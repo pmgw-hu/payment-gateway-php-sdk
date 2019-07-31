@@ -3,10 +3,13 @@
 namespace BigFish\PaymentGateway\Data\Info\Customer;
 
 
-use BigFish\PaymentGateway\Data\Info\InfoAbstract;
+use BigFish\PaymentGateway\Data\Info\InfoCustomer;
+use BigFish\PaymentGateway\Data\Info\StructurePathTrait;
 
-class InfoCustomerStoreSpecific extends InfoAbstract
+class InfoCustomerStoreSpecific extends InfoCustomer
 {
+	use StructurePathTrait;
+
 	const PATH = 'StoreSpecific';
 
 	const UPDATE_DATE = 'updateDate';
@@ -27,11 +30,6 @@ class InfoCustomerStoreSpecific extends InfoAbstract
 	const TRANSACTION_LAST_YEAR = 'transactionsLastYear';
 	const PURCHASES_LAST_SIX_MONTHS = 'purchasesLastSixMonths';
 	const SUSPICIOUS_ACTIVITY = 'suspiciousActivity';
-
-    public function getStructurePath(): string
-	{
-		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
-	}
 
 	public function setUpdateDate(string $updateDate): self
 	{

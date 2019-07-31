@@ -3,7 +3,6 @@
 namespace BigFish\PaymentGateway\Data;
 
 
-use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Data\Info\InfoAbstract;
 use BigFish\PaymentGateway\Data\Info\Order\InfoOrderProductItem;
 

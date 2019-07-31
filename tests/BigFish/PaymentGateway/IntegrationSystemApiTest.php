@@ -17,7 +17,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 		$paymentGateWay = $this->getPaymentGateway();
 		$init = new PaymentGateway\Request\Init();
 		$init->setAmount(10)
-			->setCurrency()
+			->setCurrency('HUF')
 			->setProviderName(PaymentGateway::PROVIDER_OTPAY)
 			->setResponseUrl('http://integration.test.bigfish.hu')
 			->setAutoCommit();
@@ -39,7 +39,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 		$init->setAmount(99)
 			->setUserId(123)
 			->setOrderId(123)
-			->setCurrency()
+			->setCurrency('HUF')
 			->setOneClickPayment()
 			->setOneClickForcedRegistration()
 			->setProviderName(PaymentGateway::PROVIDER_BORGUN2)
@@ -202,7 +202,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 		$paymentGateWay = $this->getPaymentGateway();
 		$createPaylink = new PaymentGateway\Request\PaymentLinkCreate();
 		$createPaylink->setAmount(99)
-			->setCurrency()
+			->setCurrency('HUF')
 			->setProviderName(PaymentGateway::PROVIDER_OTPAY)
 			->setNotificationUrl('http://integration.test.bigfish.hu')
 			->setNotificationEmail('test@test.com')
@@ -223,7 +223,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 		$paymentGateWay = $this->getPaymentGateway();
 		$createPaylink = new PaymentGateway\Request\PaymentLinkCreate();
 		$createPaylink->setAmount(99)
-			->setCurrency()
+			->setCurrency('HUF')
 			->setProviderName(PaymentGateway::PROVIDER_OTPAY)
 			->setNotificationUrl('http://integration.test.bigfish.hu')
 			->setAutoCommit();

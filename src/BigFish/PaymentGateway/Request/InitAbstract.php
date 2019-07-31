@@ -9,16 +9,6 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 abstract class InitAbstract extends InitBasicAbstract
 {
 	/**
-	 * Set the default values from the constants.
-	 *
-	 * InitAbstract constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	/**
 	 * Set the URL where Users will be sent back after payment
 	 *
 	 * @param string $responseUrl Response URL
@@ -77,9 +67,9 @@ abstract class InitAbstract extends InitBasicAbstract
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
 	 * @return $this
 	 */
-	public function setCurrency(string $currency = null): self
+	public function setCurrency(string $currency): self
 	{
-		return $this->setData($currency ?? PaymentGateway\Config::DEFAULT_CURRENCY, 'currency');
+		return $this->setData($currency, 'currency');
 	}
 
 	/**

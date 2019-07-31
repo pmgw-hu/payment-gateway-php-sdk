@@ -5,14 +5,11 @@ namespace BigFish\PaymentGateway\Data\Info;
 
 use BigFish\PaymentGateway\Data\Info;
 
-abstract class InfoCustomer extends Info
+class InfoCustomer extends Info
 {
-	const PATH = 'Customer';
+	use StructurePathTrait;
 
-	public function getStructurePath(): string
-	{
-		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
-	}
+	const PATH = 'Customer';
 
 	public function getData(): array
 	{

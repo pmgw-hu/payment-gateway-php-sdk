@@ -4,9 +4,12 @@ namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
 use BigFish\PaymentGateway\Data\Info\InfoOrder;
+use BigFish\PaymentGateway\Data\Info\StructurePathTrait;
 
 class InfoOrderGeneral extends InfoOrder
 {
+	use StructurePathTrait;
+
 	const PATH = 'General';
 
 	const DELIVERY_EMAIL = 'deliveryEmail';
@@ -21,14 +24,6 @@ class InfoOrderGeneral extends InfoOrder
 	const ADDRESS_MATCH_INDICATOR = 'addressMatchIndicator';
 	const DIFFERENT_SHIPPING_NAME = 'differentShippingName';
 	const TRANSACTION_TYPE = 'transactionType';
-
-	/**
-	 * @return string
-	 */
-	public function getStructurePath(): string
-	{
-		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
-	}
 
 	public function setDeliveryEmail($deliveryEmail): self
 	{

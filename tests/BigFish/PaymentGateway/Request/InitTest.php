@@ -88,28 +88,6 @@ class InitTest extends InitRPTest
 	/**
 	 * @test
 	 */
-	public function setLanguage_defaultLANG()
-	{
-		$init = $this->getRequest();
-		$init->setLanguage();
-		$data = $init->getData();
-		$this->assertEquals(PaymentGateway\Config::DEFAULT_LANG, $data['language']);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setLanguage_defaultCurrency()
-	{
-		$init = $this->getRequest();
-		$init->setCurrency();
-		$data = $init->getData();
-		$this->assertEquals(PaymentGateway\Config::DEFAULT_CURRENCY, $data['currency']);
-	}
-
-	/**
-	 * @test
-	 */
 	public function setExtra_OTPConsumerConsumerReg()
 	{
 		$init = $this->getRequest();

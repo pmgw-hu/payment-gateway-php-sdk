@@ -15,7 +15,7 @@ class SettlementTest extends \PHPUnit\Framework\TestCase
 	public function setCurrency_defaultHUF()
 	{
 		$init = $this->getRequest();
-		$init->setTransactionCurrency();
+		$init->setTransactionCurrency('HUF');
 		$data = $init->getData();
 		$this->assertEquals('HUF', $data['transactionCurrency']);
 	}

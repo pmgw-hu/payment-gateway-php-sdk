@@ -10,7 +10,8 @@
 
  * PHP 7
  * PHP cURL extension
- * PHP Mbstring extension
+ * PHP OpenSSL extension
+ * PHP JSON extension
 
 ## Installation
 

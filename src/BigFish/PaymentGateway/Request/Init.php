@@ -30,6 +30,7 @@ class Init extends InitAbstract
 		PaymentGateway::PROVIDER_PAYPAL,
 		PaymentGateway::PROVIDER_BARION2,
 		PaymentGateway::PROVIDER_BORGUN2,
+		PaymentGateway::PROVIDER_PAYUREST,
 		PaymentGateway::PROVIDER_GP,
 		PaymentGateway::PROVIDER_VIRPAY,
 	];
@@ -65,9 +66,9 @@ class Init extends InitAbstract
 	 * @param string $language
 	 * @return $this
 	 */
-	public function setLanguage(string $language = null): self
+	public function setLanguage(string $language): self
 	{
-		return $this->setData($language ?? PaymentGateway\Config::DEFAULT_LANG, 'language');
+		return $this->setData($language, 'language');
 	}
 
 	/**

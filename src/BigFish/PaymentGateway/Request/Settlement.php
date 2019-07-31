@@ -8,12 +8,10 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 class Settlement extends InitBasicAbstract
 {
 	const REQUEST_TYPE = 'Settlement';
-	const MAX_LIMIT = 1000;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->setGetItems(true);
 	}
 
 	/**
@@ -21,12 +19,8 @@ class Settlement extends InitBasicAbstract
 	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setLimit(int $limit = 250): self
+	public function setLimit(int $limit): self
 	{
-		if ($limit > Settlement::MAX_LIMIT) {
-			throw new PaymentGatewayException('Invalid limit');
-		}
-
 		return $this->setData($limit, 'limit');
 	}
 
@@ -44,7 +38,7 @@ class Settlement extends InitBasicAbstract
 	 * @param bool $value
 	 * @return $this
 	 */
-	public function setGetItems(bool $value = true): self
+	public function setGetItems(bool $value): self
 	{
 		return $this->setData($value, 'getItems');
 	}
@@ -53,7 +47,7 @@ class Settlement extends InitBasicAbstract
 	 * @param bool $value
 	 * @return $this
 	 */
-	public function setGetBatches(bool $value = true): self
+	public function setGetBatches(bool $value): self
 	{
 		return $this->setData($value, 'getBatches');
 	}
@@ -91,8 +85,8 @@ class Settlement extends InitBasicAbstract
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
 	 * @return $this
 	 */
-	public function setTransactionCurrency(string $currency = null): self
+	public function setTransactionCurrency(string $currency): self
 	{
-		return $this->setData($currency ?? PaymentGateway\Config::DEFAULT_CURRENCY, 'transactionCurrency');
+		return $this->setData($currency, 'transactionCurrency');
 	}
 }

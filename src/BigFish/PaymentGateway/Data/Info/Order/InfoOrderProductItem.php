@@ -4,9 +4,12 @@ namespace BigFish\PaymentGateway\Data\Info\Order;
 
 
 use BigFish\PaymentGateway\Data\Info\InfoOrder;
+use BigFish\PaymentGateway\Data\Info\StructurePathTrait;
 
 class InfoOrderProductItem extends InfoOrder
 {
+	use StructurePathTrait;
+
 	const PATH = 'ProductItems';
 
 	const SKU = 'sku';
@@ -16,11 +19,6 @@ class InfoOrderProductItem extends InfoOrder
 	const UNIT_PRICE = 'unitPrice';
 	const IMAGE_URL = 'imageUrl';
 	const DESCRIPTION = 'description';
-
-	public function getStructurePath(): string
-	{
-		return sprintf('%s/%s', parent::getStructurePath(), self::PATH);
-	}
 
 	public function setSku(string $sku): self
 	{
