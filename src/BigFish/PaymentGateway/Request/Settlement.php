@@ -2,17 +2,11 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-class Settlement extends InitBasicAbstract
+class Settlement extends InitBaseAbstract
 {
 	const REQUEST_TYPE = 'Settlement';
-
-	public function __construct()
-	{
-		parent::__construct();
-	}
 
 	/**
 	 * @param int $limit

@@ -6,7 +6,7 @@ use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Data\Info;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-abstract class InitAbstract extends InitBasicAbstract
+abstract class InitAbstract extends InitBaseAbstract
 {
 	/**
 	 * Set the URL where Users will be sent back after payment
@@ -78,16 +78,7 @@ abstract class InitAbstract extends InitBasicAbstract
 	 */
 	public function setInfoObject(Info $infoObject): self
 	{
-		return $this->setInfo($infoObject->getData());
-	}
-
-	/**
-	 * @param array $info
-	 * @return $this
-	 */
-	public function setInfo(array $info = []): self
-	{
-		return $this->setData($this->urlSafeEncode(json_encode($info)), 'info');
+		return $this->setData($this->urlSafeEncode(json_encode($infoObject->getData())), 'info');
 	}
 
 	/**

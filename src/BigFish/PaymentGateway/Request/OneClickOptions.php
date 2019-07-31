@@ -3,7 +3,7 @@
 namespace BigFish\PaymentGateway\Request;
 
 
-class OneClickOptions extends InitBasicAbstract
+class OneClickOptions extends InitBaseAbstract
 {
 	const REQUEST_TYPE = 'OneClickOptions';
 

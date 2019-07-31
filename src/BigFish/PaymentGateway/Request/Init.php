@@ -3,7 +3,6 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
-use BigFish\PaymentGateway\Data\Info;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class Init extends InitAbstract
@@ -178,9 +177,9 @@ class Init extends InitAbstract
 	 * @param bool $value
 	 * @return $this
 	 */
-	public function setAutoCommit(bool $value = null): self
+	public function setAutoCommit(bool $value = true): self
 	{
-		return $this->setData($value ?? true, 'autoCommit');
+		return $this->setData($value, 'autoCommit');
 	}
 
 	/**

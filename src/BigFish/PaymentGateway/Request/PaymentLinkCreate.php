@@ -2,7 +2,6 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class PaymentLinkCreate extends InitAbstract
@@ -82,8 +81,8 @@ class PaymentLinkCreate extends InitAbstract
 	 * @param bool $value
 	 * @return $this
 	 */
-	public function setAutoCommit(bool $value = null): self
+	public function setAutoCommit(bool $value = true): self
 	{
-		return $this->setData($value ?? true, 'autoCommit');
+		return $this->setData($value, 'autoCommit');
 	}
 }

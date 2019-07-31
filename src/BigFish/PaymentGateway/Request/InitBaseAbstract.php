@@ -4,7 +4,7 @@ namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
 
-abstract class InitBasicAbstract extends RequestAbstract
+abstract class InitBaseAbstract extends RequestAbstract
 {
 	/**
 	 * Set the default values from the constants.

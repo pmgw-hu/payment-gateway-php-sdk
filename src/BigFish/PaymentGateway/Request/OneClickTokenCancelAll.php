@@ -3,7 +3,7 @@
 namespace BigFish\PaymentGateway\Request;
 
 
-class OneClickTokenCancelAll extends InitBasicAbstract
+class OneClickTokenCancelAll extends InitBaseAbstract
 {
 	const REQUEST_TYPE = 'OneClickTokenCancelAll';
 
