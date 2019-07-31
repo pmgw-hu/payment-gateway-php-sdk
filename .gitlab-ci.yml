@@ -15,7 +15,7 @@ Copy paste detection:
 PhpUnit php7:
   image: docker.big.hu/test/php:7.2
   script:
-    - apt-get update && apt-get install -y php-zip
+    - apt-get update && apt-get install -y php-zip curl
     - php -v
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
