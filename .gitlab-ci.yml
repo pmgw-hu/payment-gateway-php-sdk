@@ -6,6 +6,7 @@ Syntax check php7:
   stage: build
 
 Copy paste detection:
+  image: docker.big.hu/test/php:7.2
   script:
     - wget https://phar.phpunit.de/phpcpd.phar
     - php phpcpd.phar ./src/
@@ -22,3 +23,12 @@ PhpUnit php7:
     - cd tests && php ../vendor/phpunit/phpunit/phpunit
   stage: build
 
+PhpUnit php7.3:
+  image: docker.big.hu/test/php:7.3
+  script:
+    - apt-get update && apt-get install -y php-zip curl
+    - php -v
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - cd tests && php ../vendor/phpunit/phpunit/phpunit
+  stage: build
