@@ -1,6 +1,6 @@
 # BIG FISH Payment Gateway - PHP7 SDK
 
-[![build status](http://ci.bigfish.hu/projects/62/status.png?ref=php7)](http://ci.bigfish.hu/projects/62/status.png?ref=php7)
+[![build status](http://ci.bigfish.hu/projects/62/status.png?ref=php7-testing)](http://ci.bigfish.hu/projects/62/status.png?ref=php7-testing)
 
 ## Version
 
@@ -20,7 +20,7 @@ BIG FISH Payment Gateway is available at packagist.org, so you can use composer 
 ```yml
 {
     "require": {
-        "bigfish/paymentgateway": "dev-php7"
+        "bigfish/paymentgateway": "dev-php7-testing"
     }
 }
 ```
