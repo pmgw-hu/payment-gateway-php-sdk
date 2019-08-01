@@ -2,6 +2,7 @@ before_script:
   - pwd
 
 Syntax check php7:
+  image: php:7.2
   script: find . -name \*.php -exec php -l "{}" \;
   stage: build
 
