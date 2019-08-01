@@ -6,17 +6,19 @@ Syntax check php7:
   stage: build
 
 Copy paste detection:
-  image: docker.big.hu/test/php:7.2
+  image: php:7.2
   script:
+    - apt-get update && apt-get install -y wget
     - wget https://phar.phpunit.de/phpcpd.phar
     - php phpcpd.phar ./src/
   stage: build
   allow_failure: true
 
-PhpUnit php7:
-  image: docker.big.hu/test/php:7.2
+PhpUnit php7.2:
+  image: php:7.2
   script:
-    - apt-get update && apt-get install -y php-zip curl
+    - apt-get update && apt-get install -y git
+    - docker-php-ext-configure zip --with-libzip && docker-php-ext-install zip
     - php -v
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
@@ -24,9 +26,10 @@ PhpUnit php7:
   stage: build
 
 PhpUnit php7.3:
-  image: docker.big.hu/test/php:7.3
+  image: php:7.3
   script:
-    - apt-get update && apt-get install -y php-zip curl
+    - apt-get update && apt-get install -y git
+    - docker-php-ext-configure zip --with-libzip && docker-php-ext-install zip
     - php -v
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
