@@ -238,11 +238,22 @@ class IntegrationInfoTest extends IntegrationAbstract
 		$recurring = new PaymentGateway\Data\Info\Order\InfoOrderRecurringPayment();
 		$recurring->setFrequency('12');
 
+		$shipping = new PaymentGateway\Data\Info\Order\InfoOrderShippingData();
+		$shipping->setFirstName('First Name');
+		$shipping->setLastName('Last Name');
+		$shipping->setLine2('Line2');
+
+		$billing = new PaymentGateway\Data\Info\Order\InfoOrderBillingData();
+		$billing->setFirstName('First Name');
+		$billing->setLastName('Last Name');
+		$billing->setLine1('Line1');
+		$billing->setEmail('test@email.com');
+
 		$orderGeneral = new PaymentGateway\Data\Info\Order\InfoOrderGeneral();
 		$orderGeneral->setGiftCardCount('12');
 		$orderGeneral->setReorderItems('02');
 		$orderGeneral->setTransactionType('01');
 
-		return $info->setObject($orderGeneral)->setObject($recurring);
+		return $info->setObject($orderGeneral)->setObject($recurring)->setObject($shipping)->setObject($billing);
 	}
 }
