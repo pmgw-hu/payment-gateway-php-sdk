@@ -69,6 +69,23 @@ class PaymentGateway
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 
 	/**
+	 * Valid OneClickPayment providers
+	 *
+	 * @var array
+	 */
+	public static $oneClickProviders = [
+		PaymentGateway::PROVIDER_ESCALION,
+		PaymentGateway::PROVIDER_OTP_SIMPLE,
+		PaymentGateway::PROVIDER_SAFERPAY,
+		PaymentGateway::PROVIDER_PAYPAL,
+		PaymentGateway::PROVIDER_BARION2,
+		PaymentGateway::PROVIDER_BORGUN2,
+		PaymentGateway::PROVIDER_PAYUREST,
+		PaymentGateway::PROVIDER_GP,
+		PaymentGateway::PROVIDER_VIRPAY,
+	];
+
+	/**
 	 * @var Config
 	 */
 	private $config;

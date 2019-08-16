@@ -6,6 +6,8 @@ use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
 class PaymentLinkCreate extends InitAbstract
 {
+	use ExtraTrait, SzepCardTrait;
+
 	const REQUEST_TYPE = 'PaymentLinkCreate';
 
 	public function __construct()
@@ -13,14 +15,6 @@ class PaymentLinkCreate extends InitAbstract
 		parent::__construct();
 		$this->setEmailNotificationOnlySuccess(false);
 	}
-
-	/**
-	 * Extra data
-	 *
-	 * @var string
-	 * @access public
-	 */
-	public $extra;
 
 	/**
 	 * @param string $notificationEmail
