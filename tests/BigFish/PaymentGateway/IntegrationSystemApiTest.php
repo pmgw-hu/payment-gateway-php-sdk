@@ -218,6 +218,32 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	 * @test
 	 * @return PaymentGateway\Transport\Response\ResponseInterface
 	 */
+	public function initPaylinkWithExtra()
+	{
+		$paymentGateWay = $this->getPaymentGateway();
+		$createPaylink = new PaymentGateway\Request\PaymentLinkCreate();
+		$createPaylink->setAmount(99)
+			->setCurrency('HUF')
+			->setProviderName(PaymentGateway::PROVIDER_BBARUHITEL)
+			->setNotificationUrl('http://integration.test.bigfish.hu')
+			->setNotificationEmail('test@test.com')
+			->setExtra($this->getPaymentLinkExtraData());
+
+		$result = $paymentGateWay->send($createPaylink);
+
+		$this->assertNotEmpty($result->PaymentLinkName, 'No paymentLink name. Error: ' . $result->ResultMessage);
+		return $result;
+	}
+
+	protected function getPaymentLinkExtraData(): array
+	{
+		return ['firstName' => 'John', 'lastName' => 'Doe', 'testMode' => true];
+	}
+
+	/**
+	 * @test
+	 * @return PaymentGateway\Transport\Response\ResponseInterface
+	 */
 	public function initPaylink_missingParameter()
 	{
 		$paymentGateWay = $this->getPaymentGateway();
@@ -270,9 +296,26 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 	public function detailsPaymentLink()
 	{
 		$paymentlink = $this->initPaylink()->PaymentLinkName;
-		$this->assertApiResponse(
+		$details = $this->assertApiResponse(
 			(new PaymentGateway\Request\PaymentLinkDetails())->setPaymentLinkName($paymentlink)
-		);
+		)->getData();
+		$this->assertEmpty($details['CommonData']['Extra'], sprintf('Error: %s %s PaymentLinkName: %s', $details['ResultCode'], $details['ResultMessage'], $paymentlink));
+	}
+
+	/**
+	 * @test
+	 * @depends initPaylinkWithExtra
+	 * @runInSeparateProcess
+	 */
+	public function detailsPaymentLinkWithExtra()
+	{
+		$paymentlink = $this->initPaylinkWithExtra()->PaymentLinkName;
+		$details = $this->assertApiResponse(
+			(new PaymentGateway\Request\PaymentLinkDetails())->setPaymentLinkName($paymentlink)
+		)->getData();
+
+		$this->assertNotEmpty($details['CommonData']['Extra'], sprintf('Error: %s %s PaymentLinkName: %s', $details['ResultCode'], $details['ResultMessage'], $paymentlink));
+		$this->assertArraySubset($this->getPaymentLinkExtraData(), json_decode($details['CommonData']['Extra'], true));
 	}
 
 	/**

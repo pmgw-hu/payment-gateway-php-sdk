@@ -86,6 +86,83 @@ class PaymentLinkCreateTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
+	 * @test
+	 */
+	public function setExtra_MKB_SZEP()
+	{
+		$init = $this->getRequest();
+		$init->setProviderName(PaymentGateway::PROVIDER_MKB_SZEP);
+		$init->setMkbSzepCardNumber('123456');
+		$init->setMkbSzepCvv('112');
+		$config = new PaymentGateway\Config();
+		$init->setEncryptKey($config->getEncryptPublicKey());
+		$init->setExtra();
+
+		$data = $init->getData();
+		$this->assertArrayHasKey('extra', $data);
+		$this->assertNotEmpty($data['extra']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setExtra_extra()
+	{
+		$init = $this->getRequest();
+		$init->setProviderName(PaymentGateway::PROVIDER_ABAQOOS);
+		$config = new PaymentGateway\Config();
+		$init->setEncryptKey($config->getEncryptPublicKey());
+		$init->setExtra(array('test' => 'foo'));
+
+		$data = $init->getData();
+		$this->assertArrayHasKey('extra', $data);
+		$this->assertNotEmpty($data['extra']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setExtra_testUnSets()
+	{
+		$init = $this->getRequest();
+		$init->setProviderName(PaymentGateway::PROVIDER_UNICREDIT);
+		$config = new PaymentGateway\Config();
+		$init->setEncryptKey($config->getEncryptPublicKey());
+		$init->setMkbSzepCardNumber('23123');
+		$init->setMkbSzepCvv('evc');
+		$init->setExtra();
+
+		$data = $init->getData();
+
+		$this->assertArrayNotHasKey('otpCardNumber', $data);
+		$this->assertArrayNotHasKey('otpExpiration', $data);
+		$this->assertArrayNotHasKey('otpCvc', $data);
+		$this->assertArrayNotHasKey('otpConsumerRegistrationId', $data);
+		$this->assertArrayNotHasKey('mkbSzepCardNumber', $data);
+		$this->assertArrayNotHasKey('mkbSzepCvv', $data);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setExtra_notToUnset()
+	{
+		$init = $this->getRequest();
+		$init->setProviderName(PaymentGateway::PROVIDER_UNICREDIT);
+		$config = new PaymentGateway\Config();
+		$init->setEncryptKey($config->getEncryptPublicKey());
+		$init->setExtra();
+
+		$data = $init->getData();
+		$this->assertArrayNotHasKey('otpCardNumber', $data);
+		$this->assertArrayNotHasKey('otpExpiration', $data);
+		$this->assertArrayNotHasKey('otpCvc', $data);
+		$this->assertArrayNotHasKey('otpConsumerRegistrationId', $data);
+		$this->assertArrayNotHasKey('mkbSzepCardNumber', $data);
+		$this->assertArrayNotHasKey('mkbSzepCvv', $data);
+	}
+
+	/**
 	 * @return PaymentLinkCreate
 	 */
 	protected function getRequest()
