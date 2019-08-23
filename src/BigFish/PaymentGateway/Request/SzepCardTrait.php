@@ -24,30 +24,12 @@ trait SzepCardTrait
 	}
 
 	/**
-	 * @param string $otpCardNumber
+	 * @param string $mkbSzepCafeteriaId
 	 * @return $this
 	 */
-	public function setOtpCardNumber(string $otpCardNumber): self
+	public function setMkbSzepCafeteriaId(string $mkbSzepCafeteriaId): self
 	{
-		return $this->setData($otpCardNumber, 'otpCardNumber');
-	}
-
-	/**
-	 * @param string $otpExpiration
-	 * @return $this
-	 */
-	public function setOtpExpiration(string $otpExpiration): self
-	{
-		return $this->setData($otpExpiration, 'otpExpiration');
-	}
-
-	/**
-	 * @param string $otpCvc
-	 * @return $this
-	 */
-	public function setOtpCvc(string $otpCvc): self
-	{
-		return $this->setData($otpCvc, 'otpCvc');
+		return $this->setData($mkbSzepCafeteriaId, 'mkbSzepCafeteriaId');
 	}
 
 	/**
@@ -57,23 +39,5 @@ trait SzepCardTrait
 	public function setOtpCardPocketId(string $otpCardPocketId): self
 	{
 		return $this->setData($otpCardPocketId, 'otpCardPocketId');
-	}
-
-	/**
-	 * @param string $otpConsumerRegistrationId
-	 * @return $this
-	 */
-	public function setOtpConsumerRegistrationId(string $otpConsumerRegistrationId): self
-	{
-		return $this->setData($otpConsumerRegistrationId, 'otpConsumerRegistrationId');
-	}
-
-	/**
-	 * @param string $mkbSzepCafeteriaId
-	 * @return $this
-	 */
-	public function setMkbSzepCafeteriaId(string $mkbSzepCafeteriaId): self
-	{
-		return $this->setData($mkbSzepCafeteriaId, 'mkbSzepCafeteriaId');
 	}
 }

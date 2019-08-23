@@ -237,7 +237,7 @@ class IntegrationSystemApiTest extends IntegrationAbstract
 
 	protected function getPaymentLinkExtraData(): array
 	{
-		return ['firstName' => 'Jhone', 'lastName' => 'Doe', 'testMode' => true];
+		return ['firstName' => 'John', 'lastName' => 'Doe', 'testMode' => true];
 	}
 
 	/**
