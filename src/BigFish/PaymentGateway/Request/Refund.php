@@ -2,25 +2,13 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
-class Refund extends RequestAbstract
+class Refund extends SimpleRequestAbstract
 {
-	/**
-	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param float $amount
-	 */
-	public function __construct(string $transactionId, float $amount)
-	{
-		$this->data['transactionId'] = $transactionId;
-		$this->data['amount'] = $amount;
-	}
+	const REQUEST_TYPE = 'Refund';
 
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
+	public function setAmount(float $amount)
 	{
-		return PaymentGateway::REQUEST_REFUND;
+		return $this->setData($amount, 'amount');
 	}
 }

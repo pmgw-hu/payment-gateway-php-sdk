@@ -2,25 +2,17 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
 class Providers extends RequestAbstract
 {
-	/**
-	 * @param string $storeName
-	 * @return Providers
-	 */
-	public function setStoreName(string $storeName)
-	{
-		$this->data['storeName'] = $storeName;
-		return $this;
-	}
+	const REQUEST_TYPE = 'Providers';
 
 	/**
-	 * @return string
+	 * @param string $storeName
+	 * @return $this
 	 */
-	public function getMethod(): string
+	public function setStoreName(string $storeName): self
 	{
-		return PaymentGateway::REQUEST_PROVIDERS;
+		return $this->setData($storeName, 'storeName');
 	}
 }

@@ -2,15 +2,26 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
 class Details extends SimpleRequestAbstract
 {
+	const REQUEST_TYPE = 'Details';
+
 	/**
-	 * @return string
+	 * @param bool $getInfoData Get info data block (true/false)
+	 * @return $this
 	 */
-	public function getMethod(): string
+	public function setGetInfoData(bool $getInfoData): self
 	{
-		return PaymentGateway::REQUEST_DETAILS;
+		return $this->setData($getInfoData, 'getInfoData');
+	}
+
+	/**
+	 * @param bool $getRelatedTransactions Get related transactions (true/false)
+	 * @return $this
+	 */
+	public function setGetRelatedTransactions(bool $getRelatedTransactions): self
+	{
+		return $this->setData($getRelatedTransactions, 'getRelatedTransactions');
 	}
 }

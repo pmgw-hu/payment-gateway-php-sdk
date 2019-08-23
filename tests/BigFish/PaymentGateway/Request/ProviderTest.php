@@ -7,7 +7,7 @@ use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\Providers;
 use BigFish\PaymentGateway\Request\RequestInterface;
 
-class ProviderTest extends SimpleRequestAbstract
+class ProviderTest extends SimpleTransactionRequestAbstract
 {
 	protected function getRequest(string $transactionId): RequestInterface
 	{
@@ -22,6 +22,4 @@ class ProviderTest extends SimpleRequestAbstract
 			'storeName' => PaymentGateway::PROVIDER_OTPAY
 		);
 	}
-
-
 }

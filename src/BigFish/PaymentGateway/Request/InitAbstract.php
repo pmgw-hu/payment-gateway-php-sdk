@@ -3,149 +3,92 @@
 namespace BigFish\PaymentGateway\Request;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Data\Info;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
 
-abstract class InitAbstract extends RequestAbstract
+abstract class InitAbstract extends InitBaseAbstract
 {
-	/**
-	 * @var array
-	 */
-	protected $maxSize = array(
-		'orderId' => 255,
-		'userId' => 255,
-		'currency' => 3,
-		'providerName' => 20
-	);
-
-	/**
-	 * Set the default values from the constants.
-	 *
-	 * InitAbstract constructor.
-     */
-	public function __construct()
-	{
-		$this->setModuleName(PaymentGateway::NAME);
-		$this->setModuleVersion(PaymentGateway::VERSION);
-	}
-
 	/**
 	 * Set the URL where Users will be sent back after payment
 	 *
 	 * @param string $responseUrl Response URL
 	 * (e.g. http://www.yourdomain.com/response.php, http://www.yourdomain.com/response.php?someparam=somevalue etc.)
-	 * @return static
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setResponseUrl(string $responseUrl)
+	public function setResponseUrl(string $responseUrl): self
 	{
 		if (filter_var($responseUrl, FILTER_VALIDATE_URL) === false) {
 			throw new PaymentGatewayException('Invalid response url');
 		}
-		$this->data['responseUrl'] = $responseUrl;
-		return $this;
+		return $this->setData($responseUrl, 'responseUrl');
 	}
 
 	/**
 	 * Set payment transaction amount
 	 *
 	 * @param float $amount Transaction amount
-	 * @return static
+	 * @return $this
 	 * @throws PaymentGatewayException
 	 */
-	public function setAmount(float $amount)
+	public function setAmount(float $amount): self
 	{
 		if ($amount <= 0) {
 			throw new PaymentGatewayException('Only positive numbers allowed.');
 		}
-		$this->data['amount'] = $amount;
-		return $this;
+		return $this->setData($amount, 'amount');
 	}
 
 	/**
 	 * Set the identifier of the order in your system
 	 *
 	 * @param mixed $orderId Order identifier
-	 * @return static
+	 * @return $this
 	 */
-	public function setOrderId(string $orderId)
+	public function setOrderId(string $orderId): self
 	{
-		$this->saveData($orderId, 'orderId');
-		return $this;
+		return $this->setData($orderId, 'orderId');
 	}
 
 	/**
 	 * Set the identifier of the user in your system
 	 *
 	 * @param mixed $userId User identifier
-	 * @return static
+	 * @return $this
 	 */
-	public function setUserId(string $userId)
+	public function setUserId(string $userId): self
 	{
-		$this->saveData($userId, 'userId');
-		return $this;
+		return $this->setData($userId, 'userId');
 	}
 
 	/**
 	 * Set payment transaction currency
 	 *
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return static
+	 * @return $this
 	 */
-	public function setCurrency(string $currency = '')
+	public function setCurrency(string $currency): self
 	{
-		if (!$currency) {
-			$currency = PaymentGateway\Config::DEFAULT_CURRENCY;
-		}
-		$this->saveData($currency, 'currency');
-		return $this;
+		return $this->setData($currency, 'currency');
 	}
 
 	/**
-	 * @param string $providerName
-	 * @return static
+	 * @param PaymentGateway\Data\Info $info
+	 * @return InitAbstract
 	 */
-	public function setProviderName(string $providerName)
+	public function setInfo(Info $info): self
 	{
-		$this->saveData($providerName, 'providerName');
-		return $this;
+		return $this->setData($this->urlSafeEncode(json_encode($info->getData())), 'info');
 	}
 
 	/**
-	 * @param string $fieldName
-	 * @return null|int
-	 */
-	protected function getFieldMaxSize(string $fieldName)
-	{
-		if (isset($this->maxSize[$fieldName])) {
-			return $this->maxSize[$fieldName];
-		}
-		return parent::getFieldMaxSize($fieldName);
-	}
-
-	/**
-	 * Save module name under the 'moduleName' key of the $data array.
+	 * URL safe encode (base64)
 	 *
-	 * @param string $moduleName
-	 * @return RequestInterface
-	 * @access public
+	 * @param string $string
+	 * @return string
 	 */
-	public function setModuleName(string $moduleName): RequestInterface
+	protected function urlSafeEncode(string $string): string
 	{
-		$this->saveData($moduleName, 'moduleName');
-		return $this;
+		return str_replace(['+', '/', '='], ['-', '_', '.'], base64_encode($string));
 	}
-
-	/**
-	 * Save module version under the 'moduleVersion' key of the $data array.
-	 *
-	 * @param string $moduleVersion
-	 * @return RequestInterface
-	 * @access public
-	 */
-	public function setModuleVersion(string $moduleVersion): RequestInterface
-	{
-		$this->saveData($moduleVersion, 'moduleVersion');
-		return $this;
-	}
-
 }

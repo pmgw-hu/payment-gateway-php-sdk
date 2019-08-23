@@ -5,7 +5,7 @@ namespace BigFish\Tests\PaymentGateway\Transport\Response;
 
 use BigFish\PaymentGateway\Transport\Response\Response;
 
-class ResponseTest extends \PHPUnit_Framework_TestCase
+class ResponseTest extends \PHPUnit\Framework\TestCase
 {
 	/**
 	 * @test

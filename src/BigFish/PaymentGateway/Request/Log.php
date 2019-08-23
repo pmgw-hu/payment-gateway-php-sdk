@@ -2,15 +2,9 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
 class Log extends SimpleRequestAbstract
 {
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
-	{
-		return PaymentGateway::REQUEST_LOG;
-	}
+	const REQUEST_TYPE = 'Log';
+
 }

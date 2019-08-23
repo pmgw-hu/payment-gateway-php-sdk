@@ -7,7 +7,7 @@ use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Request\Init;
 use BigFish\PaymentGateway\Request\InitRP;
 
-class InitRPTest extends \PHPUnit_Framework_TestCase
+class InitRPTest extends \PHPUnit\Framework\TestCase
 {
 
 	/**
@@ -16,7 +16,7 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	public function setCurrency_defaultHUF()
 	{
 		$init = $this->getRequest();
-		$init->setCurrency();
+		$init->setCurrency('HUF');
 		$data = $init->getData();
 		$this->assertEquals('HUF', $data['currency']);
 	}
@@ -60,45 +60,6 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	 * @test
 	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
 	 */
-	public function amount_positiveNumberCheck()
-	{
-		$this->getRequest()->setAmount(-1);
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function orderId_maxSizeCheck()
-	{
-		// max: 255
-		$this->getRequest()->setOrderId(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function userId_maxSizeCheck()
-	{
-		// max: 255
-		$this->getRequest()->setUserId(str_repeat('A', 256));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
-	public function currency_maxSizeCheck()
-	{
-		// max: 4
-		$this->getRequest()->setCurrency(str_repeat('A', 4));
-	}
-
-	/**
-	 * @test
-	 * @expectedException \BigFish\PaymentGateway\Exception\PaymentGatewayException
-	 */
 	public function setResponseUrl_invalidUrl()
 	{
 		$request = $this->getRequest();
@@ -116,7 +77,7 @@ class InitRPTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @return Init
+	 * @return InitRP
 	 */
 	protected function getRequest()
 	{

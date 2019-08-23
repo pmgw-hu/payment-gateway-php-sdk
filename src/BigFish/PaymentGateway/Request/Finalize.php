@@ -2,26 +2,18 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
-class Finalize extends RequestAbstract implements RedirectLocationInterface
+class Finalize extends SimpleRequestAbstract implements RedirectLocationInterface
 {
-	/**
-	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param float $amount
-	 */
-	public function __construct(string $transactionId, float $amount)
-	{
-		$this->data['transactionId'] = $transactionId;
-		$this->data['amount'] = $amount;
-	}
+	const REQUEST_TYPE = 'Finalize';
 
 	/**
-	 * @return string
+	 * @param float $amount
+	 * @return $this
 	 */
-	public function getMethod(): string
+	public function setAmount(float $amount)
 	{
-		return PaymentGateway::REQUEST_FINALIZE;
+		return $this->setData($amount, 'amount');
 	}
 
 	/**

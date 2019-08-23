@@ -2,36 +2,22 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
 
-class OneClickOptions extends RequestAbstract
+class OneClickOptions extends InitBaseAbstract
 {
-	/**
-	 * @param string $providerName
-	 * @param string $userID
+	const REQUEST_TYPE = 'OneClickOptions';
 
-	 */
-	public function __construct(string $providerName, string $userID)
+	public function __construct()
 	{
-		$this->data['providerName'] = $providerName;
-		$this->data['userId'] = $userID;
+		parent::__construct();
 	}
 
 	/**
-	 * @param string $storeName
-	 * @return OneClickOptions
+	 * @param string $userId
+	 * @return $this
 	 */
-	public function setStoreName(string $storeName)
+	public function setUserId(string $userId): self
 	{
-		$this->data['storeName'] = $storeName;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getMethod(): string
-	{
-		return PaymentGateway::REQUEST_ONE_CLICK_OPTIONS;
+		return $this->setData($userId, 'userId');
 	}
 }

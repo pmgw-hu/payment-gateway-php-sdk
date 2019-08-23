@@ -13,7 +13,6 @@ use BigFish\PaymentGateway;
  * @property string $apiKey
  * @property string $encryptPublicKey
  * @property bool $testMode
- * @property string $apiType
  */
 class Config
 {
@@ -32,12 +31,12 @@ class Config
 	/**
 	 * Production service URL
 	 */
-	const API_URL_PRODUCTION = 'https://www.paymentgateway.hu';
+	const API_URL_PRODUCTION = 'https://system.paymentgateway.hu';
 
 	/**
 	 * Test service URL
 	 */
-	const API_URL_TESTING = 'https://test.paymentgateway.hu';
+	const API_URL_TESTING = 'https://system-test.paymentgateway.hu';
 
 	/**
 	 * Default public key used for encryption
@@ -55,12 +54,6 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	const CHARSET_UTF8 = 'UTF-8';
 	const CHARSET_LATIN1 = 'iso-8859-1';
 	const CHARSET_LATIN2 = 'iso-8859-2';
-
-	/**
-	 * Transport type
-	 */
-	const TRANSPORT_TYPE_REST_API = 'rest';
-	const TRANSPORT_TYPE_SOAP_API = 'soap';
 
 	/**
 	 * Default lang
@@ -87,11 +80,6 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 * @var string
 	 */
 	protected $apiKey = self::SDK_TEST_API_KEY;
-
-	/**
-	 * @var string
-	 */
-	protected $apiType = self::TRANSPORT_TYPE_REST_API;
 
 	/**
 	 * @var string
@@ -141,14 +129,6 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public function getStoreName(): string
 	{
 		return (string) $this->storeName;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getApiType(): string
-	{
-		return (string)$this->apiType;
 	}
 
 	/**

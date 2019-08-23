@@ -3,19 +3,81 @@
 namespace BigFish\PaymentGateway\Transport;
 
 use BigFish\PaymentGateway;
+use BigFish\PaymentGateway\Config;
 use BigFish\PaymentGateway\Exception\PaymentGatewayException;
+use BigFish\PaymentGateway\Request\Close;
+use BigFish\PaymentGateway\Request\Refund;
 use BigFish\PaymentGateway\Request\RequestInterface;
 use BigFish\PaymentGateway\Transport\Response\ResponseInterface;
 use BigFish\PaymentGateway\Transport\Response\Response;
 
-class RestTransport extends TransportAbstract
+class SystemTransport
 {
+	/**
+	 * @var Config
+	 */
+	protected $config;
+
+	/**
+	 * TransportInterface constructor.
+	 * @param Config $config
+	 */
+	public function __construct(Config $config)
+	{
+		$this->config = $config;
+	}
+
+	/**
+	 * Get user agent string
+	 *
+	 * @param $method string
+	 * @return string
+	 * @access private
+	 * @static
+	 */
+	protected function getUserAgent(string $method): string
+	{
+		return sprintf('%s | %s | %s | %s', $method, $this->getHttpHost(), 'PHP', phpversion());
+	}
+
 	/**
 	 * @return string
 	 */
-	function getClientType(): string
+	protected function getHttpHost(): string
 	{
-		return 'Rest';
+		return $_SERVER['HTTP_HOST'];
+	}
+
+	/**
+	 * @param RequestInterface $request
+	 */
+	protected function prepareRequest(RequestInterface $request)
+	{
+		if (
+			$request instanceof PaymentGateway\Request\InitAbstract ||
+			$request instanceof PaymentGateway\Request\Providers ||
+			$request instanceof PaymentGateway\Request\OneClickOptions ||
+			$request instanceof PaymentGateway\Request\OneClickTokenCancelAll ||
+			$request instanceof PaymentGateway\Request\Settlement
+		) {
+			$request->setStoreName($this->config->getStoreName());
+		}
+
+		if ($request instanceof PaymentGateway\Request\Init) {
+			$request->setEncryptKey($this->config->getEncryptPublicKey());
+			$request->setExtra();
+		}
+	}
+
+	/**
+	 * @param ResponseInterface $response
+	 */
+	protected function convertOutResponse(ResponseInterface $response)
+	{
+		$charset = $this->config->getOutCharset();
+		if ($charset != Config::CHARSET_UTF8) {
+			$response->convert($charset);
+		}
 	}
 
 	/**
@@ -29,7 +91,7 @@ class RestTransport extends TransportAbstract
 			throw new PaymentGatewayException('cURL PHP module is not loaded');
 		}
 
-		$url = $this->config->getUrl() . '/api/rest/';
+		$url = $this->config->getUrl() . '/api/payment/';
 
 		$this->prepareRequest($request);
 
@@ -39,7 +101,7 @@ class RestTransport extends TransportAbstract
 		}
 
 		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array($this->getAuthorizationHeader()));
+		curl_setopt($curl, CURLOPT_HTTPHEADER, [$this->getAuthorizationHeader()]);
 		curl_setopt($curl, CURLOPT_REFERER, $this->getHttpHost());
 		curl_setopt($curl, CURLOPT_MAXREDIRS, 4);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -47,14 +109,14 @@ class RestTransport extends TransportAbstract
 		$this->setTimeout($request, $curl);
 		$this->setSslVerify($curl);
 
-		$postData = array(
+		$postData = [
 			'method' => $request->getMethod(),
 			'json' => $this->prepareData($request),
-		);
+		];
 
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
-		curl_setopt($curl, CURLOPT_USERAGENT, $this->getUserAgent());
+		curl_setopt($curl, CURLOPT_USERAGENT, $this->getUserAgent($request->getMethod()));
 
 		$httpResponse = curl_exec($curl);
 
@@ -71,19 +133,12 @@ class RestTransport extends TransportAbstract
 		return $response;
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getAuthorizationHeader()
+	protected function getAuthorizationHeader(): string
 	{
 		return 'Authorization: Basic ' . base64_encode($this->config->getStoreName() . ':' . $this->config->getApiKey());
 	}
 
-	/**
-	 * @param RequestInterface $requestInterface
-	 * @return string
-	 */
-	protected function prepareData(RequestInterface $requestInterface)
+	protected function prepareData(RequestInterface $requestInterface): string
 	{
 		return json_encode($requestInterface->getUcFirstData());
 	}
@@ -95,8 +150,8 @@ class RestTransport extends TransportAbstract
 	protected function setTimeout(RequestInterface $requestInterface, $curl)
 	{
 		if (
-			$requestInterface->getMethod() == PaymentGateway::REQUEST_CLOSE ||
-			$requestInterface->getMethod() == PaymentGateway::REQUEST_REFUND
+			$requestInterface->getMethod() == Close::REQUEST_TYPE ||
+			$requestInterface->getMethod() == Refund::REQUEST_TYPE
 		) {
 			// OTPay close and refund (extra timeout)
 			curl_setopt($curl, CURLOPT_TIMEOUT, 600);

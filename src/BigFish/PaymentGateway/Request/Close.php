@@ -2,25 +2,16 @@
 
 namespace BigFish\PaymentGateway\Request;
 
-use BigFish\PaymentGateway;
-
-class Close extends RequestAbstract
+class Close extends SimpleRequestAbstract
 {
-	/**
-	 * @param string $transactionId Transaction ID received from Payment Gateway
-	 * @param bool $approve
-	 */
-	public function __construct(string $transactionId, bool $approve = true)
-	{
-		$this->data['transactionId'] = $transactionId;
-		$this->data['approved'] = $approve;
-	}
+	const REQUEST_TYPE = 'Close';
 
 	/**
-	 * @return string
+	 * @param bool $approve Approve or decline transaction (true/false)
+	 * @return $this
 	 */
-	public function getMethod(): string
+	public function setApprove(bool $approve)
 	{
-		return PaymentGateway::REQUEST_CLOSE;
+		return $this->setData($approve, 'approved');
 	}
 }
