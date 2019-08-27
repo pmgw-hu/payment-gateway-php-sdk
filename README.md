@@ -1,6 +1,8 @@
 # BIG FISH Payment Gateway - PHP7 SDK
 
-[![build status](http://ci.bigfish.hu/projects/62/status.png?ref=php7-testing)](http://ci.bigfish.hu/projects/62/status.png?ref=php7-testing)
+## Moved
+
+New individual repository: https://github.com/bigfish-hu/payment-gateway-php7-sdk
 
 ## Version
 
