@@ -2,33 +2,37 @@ before_script:
   - pwd
 
 Syntax check php7:
-  script: find . -name \*.php -exec php7 -l "{}" \;
+  image: php:7.2
+  script: find . -name \*.php -exec php -l "{}" \;
   stage: build
 
 Copy paste detection:
+  image: php:7.2
   script:
+    - apt-get update && apt-get install -y wget
     - wget https://phar.phpunit.de/phpcpd.phar
-    - php7 phpcpd.phar ./src/
+    - php phpcpd.phar ./src/
   stage: build
   allow_failure: true
 
-# disables due to phpmd issues
-#PHP mess detection:
-#  script:
-#    - wget -c http://static.phpmd.org/php/latest/phpmd.phar
-#    - php7 phpmd.phar ./src/ text cleancode codesize
-#  stage: build
-#  allow_failure: true
-
-PhpUnit php7:
+PhpUnit php7.2:
+  image: php:7.2
   script:
-    - php7 -v
+    - apt-get update && apt-get install -y git
+    - docker-php-ext-configure zip --with-libzip && docker-php-ext-install zip
+    - php -v
     - curl -sS https://getcomposer.org/installer | php
-    - php7 composer.phar install
-    - cd tests && php7 ../vendor/phpunit/phpunit/phpunit
+    - php composer.phar install
+    - cd tests && php ../vendor/phpunit/phpunit/phpunit
   stage: build
 
-#UI test:
-#  script:
-#    - docker build -t php7 .
-#    - docker run -d -it -p 8080:80 php7
+PhpUnit php7.3:
+  image: php:7.3
+  script:
+    - apt-get update && apt-get install -y git
+    - docker-php-ext-configure zip --with-libzip && docker-php-ext-install zip
+    - php -v
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - cd tests && php ../vendor/phpunit/phpunit/phpunit
+  stage: build
