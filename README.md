@@ -1,11 +1,8 @@
 # BIG FISH Payment Gateway - PHP SDK
 
-[![build status](https://gitlab.big.hu/payment-gateway/sdk-php/badges/master/build.svg)](https://gitlab.big.hu/payment-gateway/sdk-php/commits/master)
-[![build status](https://gitlab.big.hu/payment-gateway/sdk-php/badges/testing/build.svg)](https://gitlab.big.hu/payment-gateway/sdk-php/commits/testing)
-
 ## Version
 
-3.0.0
+3.0.1
 
 ## Requirements
 
