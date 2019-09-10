@@ -14,7 +14,7 @@ use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Data\Info\InfoAbstract;
 use BigFish\PaymentGateway\Data\Info\InfoOrderProductItem;
 
-class Info extends InfoAbstract
+class Info
 {
 	/**
 	 * @param InfoAbstract $infoObject
