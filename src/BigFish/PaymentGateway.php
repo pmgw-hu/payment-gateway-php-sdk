@@ -49,7 +49,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '3.0.1';
+	const VERSION = '3.1.0';
 
 	/**
 	 * API request type constants
@@ -150,6 +150,8 @@ class PaymentGateway
 	const PROVIDER_OTP_SIMPLE = 'OTPSimple';
 
 	const PROVIDER_OTP_SIMPLE_WIRE = 'OTPSimpleWire';
+
+	const PROVIDER_OTPARUHITEL = 'OTPAruhitel';
 
 	const PROVIDER_OTPAY = 'OTPay';
 
