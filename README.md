@@ -2,7 +2,7 @@
 
 ## Version
 
-3.0.1
+3.1.0
 
 ## Requirements
 
@@ -15,7 +15,7 @@ BIG FISH Payment Gateway is available at packagist.org, so you can use composer 
 ```
 {
     "require": {
-        "bigfish/paymentgateway": "3.0.*"
+        "bigfish/paymentgateway": "3.*"
     }
 }
 ```
