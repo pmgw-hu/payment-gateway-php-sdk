@@ -20,7 +20,7 @@ class Response
 	/**
 	 * Construct new response object from JSON encoded object
 	 *
-	 * @param string $json JSON encoded object
+	 * @param string|object $json JSON encoded object
 	 * @throws \BigFish\PaymentGateway\Exception
 	 * @return void
 	 * @access public

@@ -229,7 +229,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	/**
 	 * Configuration
 	 * 
-	 * @var \BigFish\PaymentGateway\Config
+	 * @var \BigFish\PaymentGateway\Config|null
 	 * @access protected
 	 * @static
 	 */
@@ -611,9 +611,11 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 		$ch = curl_init();
 
+/* Always returns resource
 		if (!$ch) {
 			throw new Exception('cURL initialization error');
 		}
+*/
 
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(self::getAuthorizationHeader()));

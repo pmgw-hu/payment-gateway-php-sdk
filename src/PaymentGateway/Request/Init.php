@@ -207,7 +207,7 @@ class Init extends RequestAbstract
 	/**
 	 * Info data
 	 *
-	 * @var Info | null
+	 * @var string|null
 	 * @access public
 	 */
 	public $info;
@@ -271,7 +271,7 @@ class Init extends RequestAbstract
 	/**
 	 * Set module name
 	 *
-	 * @param $moduleName
+	 * @param string $moduleName
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
 	 */
@@ -284,7 +284,7 @@ class Init extends RequestAbstract
 	/**
 	 * Set module version
 	 *
-	 * @param $moduleVersion
+	 * @param string $moduleVersion
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
 	 */
@@ -579,7 +579,7 @@ class Init extends RequestAbstract
 	 */
 	public function setAutoCommit($autoCommit = true)
 	{
-		$this->autoCommit = (($autoCommit === true || $autoCommit == "true") ? "true" : "false");
+		$this->autoCommit = (($autoCommit === true || $autoCommit == "true") ? true : false);
 		return $this;
 	}
 

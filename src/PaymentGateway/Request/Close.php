@@ -43,7 +43,7 @@ class Close extends RequestAbstract
 	public function __construct($transactionId, $approved = true)
 	{
 		$this->transactionId = $transactionId;
-		$this->approved = (($approved === true || $approved == "true") ? "true" : "false");
+		$this->approved = (($approved === true || $approved == "true") ? true : false);
 	}
 
 }

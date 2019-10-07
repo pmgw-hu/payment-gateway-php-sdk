@@ -178,7 +178,7 @@ class Settlement extends RequestAbstract
 	/**
 	 * Set get batches
 	 *
-	 * @param boolean $getBatches Get batches: true or false
+	 * @param boolean|string $getBatches Get batches: true or false
 	 * @return \BigFish\PaymentGateway\Request\Settlement
 	 * @access public
 	 */
@@ -191,7 +191,7 @@ class Settlement extends RequestAbstract
 	/**
 	 * Set get items
 	 *
-	 * @param boolean $getItems Get items: true or false
+	 * @param boolean|string $getItems Get items: true or false
 	 * @return \BigFish\PaymentGateway\Request\Settlement
 	 * @access public
 	 */

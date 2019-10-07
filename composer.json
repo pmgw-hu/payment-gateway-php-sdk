@@ -19,7 +19,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"BigFish\\": "src/BigFish"
+			"BigFish\\": "src"
 		}
 	}
 }

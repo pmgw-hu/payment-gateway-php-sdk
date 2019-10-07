@@ -17,6 +17,11 @@ use BigFish\PaymentGateway\Data\Info\InfoOrderProductItem;
 class Info
 {
 	/**
+	 * @var array
+	 */
+	protected $data = array();
+
+	/**
 	 * @param InfoAbstract $infoObject
 	 * @return Info
 	 */

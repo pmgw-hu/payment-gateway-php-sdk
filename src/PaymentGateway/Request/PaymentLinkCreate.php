@@ -111,7 +111,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Email notification only success
 	 * 
-	 * @var string
+	 * @var bool
 	 * @access public
 	 */
 	public $emailNotificationOnlySuccess = false;
@@ -127,7 +127,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Info data
 	 *
-	 * @var Info | null
+	 * @var string|null
 	 * @access public
 	 */
 	public $info;
@@ -243,13 +243,13 @@ class PaymentLinkCreate extends RequestAbstract
 	 * If true verifies the availability of funds and captures funds in one step.
 	 * If false verifies the availability of funds and reserves them for later capture.
 	 * 
-	 * @param boolean $autoCommit true or false
+	 * @param boolean|true $autoCommit true or false
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
 	 */
 	public function setAutoCommit($autoCommit = true)
 	{
-		$this->autoCommit = (($autoCommit === true || $autoCommit == "true") ? "true" : "false");
+		$this->autoCommit = (($autoCommit === true || $autoCommit == "true") ? true : false);
 		return $this;
 	}
 
@@ -295,7 +295,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Set email notification only success
 	 * 
-	 * @param boolean $emailNotificationOnlySuccess true or false
+	 * @param boolean|string $emailNotificationOnlySuccess true or false
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
 	 */
@@ -349,7 +349,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Set module name
 	 *
-	 * @param $moduleName
+	 * @param string $moduleName
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
 	 */
@@ -362,7 +362,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Set module version
 	 *
-	 * @param $moduleVersion
+	 * @param string $moduleVersion
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
 	 */

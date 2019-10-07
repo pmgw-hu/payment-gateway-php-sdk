@@ -18,7 +18,7 @@ class Autoload
 	/**
 	 * Autoloader instance
 	 * 
-	 * @var \BigFish\PaymentGateway\Autoload
+	 * @var \BigFish\PaymentGateway\Autoload|null
 	 * @access private
 	 * @static
 	 */
@@ -27,7 +27,7 @@ class Autoload
 	/**
 	 * Base path
 	 * 
-	 * @var string
+	 * @var string|null
 	 * @access private
 	 * @static 
 	 */
