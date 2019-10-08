@@ -605,17 +605,13 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 		$request->encodeValues();
 
-		if ($method == self::REQUEST_INIT) {
+		if ($request instanceof InitRequest || $request instanceof PaymentLinkCreateRequest) {
 			$request->setExtra();
 		}
 
 		$request->ucfirstProps();
 
 		$ch = curl_init();
-
-		if (!$ch) {
-			throw new Exception('cURL initialization error');
-		}
 
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(self::getAuthorizationHeader()));
@@ -701,7 +697,15 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	private static function getHttpHost()
 	{
-		return (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : null;
+		if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
+			return $_SERVER['HTTP_HOST'];
+		}
+
+		if (function_exists('php_uname')) {
+			return php_uname('n');
+		}
+
+		return 'localhost';
 	}
 
 }
