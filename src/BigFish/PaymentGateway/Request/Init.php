@@ -271,7 +271,7 @@ class Init extends RequestAbstract
 	/**
 	 * Set module name
 	 *
-	 * @param $moduleName
+	 * @param string $moduleName
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
 	 */
@@ -284,7 +284,7 @@ class Init extends RequestAbstract
 	/**
 	 * Set module version
 	 *
-	 * @param $moduleVersion
+	 * @param string $moduleVersion
 	 * @return \BigFish\PaymentGateway\Request\Init
 	 * @access public
 	 */

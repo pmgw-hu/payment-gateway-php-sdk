@@ -111,7 +111,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Email notification only success
 	 * 
-	 * @var string
+	 * @var bool
 	 * @access public
 	 */
 	public $emailNotificationOnlySuccess = false;
@@ -349,7 +349,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Set module name
 	 *
-	 * @param $moduleName
+	 * @param string $moduleName
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
 	 */
@@ -362,7 +362,7 @@ class PaymentLinkCreate extends RequestAbstract
 	/**
 	 * Set module version
 	 *
-	 * @param $moduleVersion
+	 * @param string $moduleVersion
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
 	 */

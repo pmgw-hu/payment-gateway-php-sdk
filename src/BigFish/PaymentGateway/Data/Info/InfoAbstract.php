@@ -37,7 +37,7 @@ abstract class InfoAbstract implements InfoInterface
 	 */
 	public function getStructurePath()
 	{
-		return null;
+		return '';
 	}
 
 	/**
