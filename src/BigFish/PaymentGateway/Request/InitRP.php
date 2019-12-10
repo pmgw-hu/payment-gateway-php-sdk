@@ -37,6 +37,14 @@ class InitRP extends RequestAbstract
 	public $responseUrl;
 
 	/**
+	 * Notification URL
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $notificationUrl;
+
+	/**
 	 * Amount
 	 * 
 	 * @var float
@@ -163,6 +171,19 @@ class InitRP extends RequestAbstract
 	public function setResponseUrl($responseUrl)
 	{
 		$this->responseUrl = $responseUrl;
+		return $this;
+	}
+
+	/**
+	 * Set Notification URL
+	 *
+	 * @param string $notificationUrl
+	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @access public
+	 */
+	public function setNotificationUrl($notificationUrl)
+	{
+		$this->notificationUrl = trim($notificationUrl);
 		return $this;
 	}
 
