@@ -18,14 +18,21 @@ use BigFish\PaymentGateway;
 class Response
 {
 	/**
+	 * @var array
+	 */
+	public $curlRequestDump = [];
+
+	/**
 	 * Construct new response object from JSON encoded object
 	 *
 	 * @param string $json JSON encoded object
+	 * @param array $curlRequestDump
+	 *
 	 * @throws \BigFish\PaymentGateway\Exception
 	 * @return void
 	 * @access public
 	 */
-	public function __construct($json)
+	public function __construct($json, $curlRequestDump = [])
 	{
 		if (is_object($json)) {
 			$object = $json;
@@ -36,6 +43,8 @@ class Response
 		if (is_object($object)) {
 			$this->setObject($object);
 		}
+
+		$this->curlRequestDump = $curlRequestDump;
 	}
 
 	/**
@@ -78,5 +87,4 @@ class Response
 		
 		$this->{ucfirst($name)} = $value;
 	}
-
 }
