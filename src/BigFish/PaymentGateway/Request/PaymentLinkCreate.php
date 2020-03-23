@@ -45,12 +45,36 @@ class PaymentLinkCreate extends RequestAbstract
 	public $amount;
 
 	/**
+	 * Minimum amount
+	 *
+	 * @var float
+	 * @access public
+	 */
+	public $minimumAmount;
+
+	/**
+	 * Maximum amount
+	 *
+	 * @var float
+	 * @access public
+	 */
+	public $maximumAmount;
+
+	/**
 	 * Currency code
 	 * 
 	 * @var string
 	 * @access public
 	 */
 	public $currency = 'HUF';
+
+	/**
+	 * Multiple transactions
+	 *
+	 * @var boolean
+	 * @access public
+	 */
+	public $multipleTransactions = false;
 
 	/**
 	 * Language code
@@ -117,6 +141,38 @@ class PaymentLinkCreate extends RequestAbstract
 	public $emailNotificationOnlySuccess = false;
 
 	/**
+	 * Information form
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $infoForm;
+
+	/**
+	 * General terms and conditions url
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $gtcUrl;
+
+	/**
+	 * Privacy policy url
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $privacyPolicyUrl;
+
+	/**
+	 * Redirect url
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $redirectUrl;
+
+	/**
 	 * Extra data
 	 * 
 	 * @var string
@@ -176,7 +232,7 @@ class PaymentLinkCreate extends RequestAbstract
 
 	/**
 	 * Set payment transaction amount
-	 * 
+	 *
 	 * @param float $amount Transaction amount
 	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
 	 * @access public
@@ -184,6 +240,23 @@ class PaymentLinkCreate extends RequestAbstract
 	public function setAmount($amount)
 	{
 		$this->amount = $amount;
+		$this->minimumAmount = null;
+		$this->maximumAmount = null;
+		return $this;
+	}
+
+	/**
+	 * Set payment transaction flexible amount
+	 *
+	 * @param float $minimumAmount Transaction minimum amount
+	 * @param float|null $maximumAmount Transaction maximum amount
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 */
+	public function setFlexibleAmount($minimumAmount, $maximumAmount = null)
+	{
+		$this->amount = null;
+		$this->minimumAmount = $minimumAmount;
+		$this->maximumAmount = $maximumAmount;
 		return $this;
 	}
 
@@ -197,6 +270,19 @@ class PaymentLinkCreate extends RequestAbstract
 	public function setCurrency($currency)
 	{
 		$this->currency = $currency;
+		return $this;
+	}
+
+	/**
+	 * Set multiple transactions
+	 *
+	 * @param boolean $multipleTransactions true or false
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setMultipleTransactions($multipleTransactions = true)
+	{
+		$this->multipleTransactions = (($multipleTransactions === true || $multipleTransactions == "true") ? true : false);
 		return $this;
 	}
 
@@ -304,7 +390,59 @@ class PaymentLinkCreate extends RequestAbstract
 		$this->emailNotificationOnlySuccess = (($emailNotificationOnlySuccess === true || $emailNotificationOnlySuccess == "true") ? true : false);
 		return $this;
 	}
-	
+
+	/**
+	 * Set information form
+	 *
+	 * @param string $infoForm
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setInfoForm($infoForm)
+	{
+		$this->infoForm = trim($infoForm);
+		return $this;
+	}
+
+	/**
+	 * Set general terms and conditions url
+	 *
+	 * @param string $gtcUrl
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setGtcUrl($gtcUrl)
+	{
+		$this->gtcUrl = trim($gtcUrl);
+		return $this;
+	}
+
+	/**
+	 * Set privacy policy url
+	 *
+	 * @param string $privacyPolicyUrl
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setPrivacyPolicyUrl($privacyPolicyUrl)
+	{
+		$this->privacyPolicyUrl = trim($privacyPolicyUrl);
+		return $this;
+	}
+
+	/**
+	 * Set redirect url
+	 *
+	 * @param string $redirectUrl
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setRedirectUrl($redirectUrl)
+	{
+		$this->redirectUrl = trim($redirectUrl);
+		return $this;
+	}
+
 	/**
 	 * Set extra data
 	 * 
