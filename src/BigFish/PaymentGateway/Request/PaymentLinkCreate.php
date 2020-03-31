@@ -141,6 +141,38 @@ class PaymentLinkCreate extends RequestAbstract
 	public $emailNotificationOnlySuccess = false;
 
 	/**
+	 * Information form
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $infoForm;
+
+	/**
+	 * General terms and conditions url
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $gtcUrl;
+
+	/**
+	 * Privacy policy url
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $privacyPolicyUrl;
+
+	/**
+	 * Redirect url
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $redirectUrl;
+
+	/**
 	 * Extra data
 	 * 
 	 * @var string
@@ -358,7 +390,59 @@ class PaymentLinkCreate extends RequestAbstract
 		$this->emailNotificationOnlySuccess = (($emailNotificationOnlySuccess === true || $emailNotificationOnlySuccess == "true") ? true : false);
 		return $this;
 	}
-	
+
+	/**
+	 * Set information form
+	 *
+	 * @param string $infoForm
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setInfoForm($infoForm)
+	{
+		$this->infoForm = trim($infoForm);
+		return $this;
+	}
+
+	/**
+	 * Set general terms and conditions url
+	 *
+	 * @param string $gtcUrl
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setGtcUrl($gtcUrl)
+	{
+		$this->gtcUrl = trim($gtcUrl);
+		return $this;
+	}
+
+	/**
+	 * Set privacy policy url
+	 *
+	 * @param string $privacyPolicyUrl
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setPrivacyPolicyUrl($privacyPolicyUrl)
+	{
+		$this->privacyPolicyUrl = trim($privacyPolicyUrl);
+		return $this;
+	}
+
+	/**
+	 * Set redirect url
+	 *
+	 * @param string $redirectUrl
+	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @access public
+	 */
+	public function setRedirectUrl($redirectUrl)
+	{
+		$this->redirectUrl = trim($redirectUrl);
+		return $this;
+	}
+
 	/**
 	 * Set extra data
 	 * 
