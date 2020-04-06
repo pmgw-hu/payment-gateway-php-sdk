@@ -20,6 +20,12 @@ use BigFish\PaymentGateway\Data\Info;
  */
 class PaymentLinkCreate extends RequestAbstract
 {
+	const INFO_FORM_PRODUCT = 'product';
+
+	const INFO_FORM_SERVICE = 'service';
+
+	const INFO_FORM_DONATION = 'donation';
+
 	/**
 	 * Store name
 	 * 
