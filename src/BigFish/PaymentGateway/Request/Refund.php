@@ -33,6 +33,14 @@ class Refund extends RequestAbstract
 	public $amount;
 
 	/**
+	 * Extra data
+	 * 
+	 * @var string
+	 * @access public
+	 */
+	public $extra;
+
+	/**
 	 * Construct new Refund request instance
 	 * 
 	 * @param string $transactionId Transaction ID received from Payment Gateway
@@ -46,4 +54,19 @@ class Refund extends RequestAbstract
 		$this->amount = (float)$amount;
 	}
 
+	/**
+	 * Set extra data
+	 * 
+	 * @param array $extra Extra information
+	 * @return \BigFish\PaymentGateway\Request\Refund
+	 * @access public
+	 */
+	public function setExtra(array $extra = array())
+	{
+		if (!empty($extra)) {
+			$this->extra = $this->urlSafeEncode(json_encode($extra));
+		}
+
+		return $this;
+	}
 }

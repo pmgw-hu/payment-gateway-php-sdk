@@ -177,6 +177,8 @@ class PaymentGateway
 
 	const PROVIDER_VIRPAY = 'Virpay';
 
+	const PROVIDER_WIRECARD = 'Wirecard';
+
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 
 	/**
