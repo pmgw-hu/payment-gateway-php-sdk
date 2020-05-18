@@ -224,6 +224,7 @@ class Init extends RequestAbstract
 		PaymentGateway::PROVIDER_OTP_SIMPLE,
 		PaymentGateway::PROVIDER_SAFERPAY,
 		PaymentGateway::PROVIDER_PAYPAL,
+		PaymentGateway::PROVIDER_PAYPALREST,
 		PaymentGateway::PROVIDER_BARION2,
 		PaymentGateway::PROVIDER_BORGUN2,
 		PaymentGateway::PROVIDER_GP,
