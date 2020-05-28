@@ -153,14 +153,6 @@ class PaymentLinkCreate extends RequestAbstract
 	public $infoForm;
 
 	/**
-	 * General terms and conditions url
-	 *
-	 * @var string
-	 * @access public
-	 */
-	public $gtcUrl;
-
-	/**
 	 * Privacy policy url
 	 *
 	 * @var string
@@ -405,19 +397,6 @@ class PaymentLinkCreate extends RequestAbstract
 	public function setInfoForm($infoForm)
 	{
 		$this->infoForm = trim($infoForm);
-		return $this;
-	}
-
-	/**
-	 * Set general terms and conditions url
-	 *
-	 * @param string $gtcUrl
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
-	 * @access public
-	 */
-	public function setGtcUrl($gtcUrl)
-	{
-		$this->gtcUrl = trim($gtcUrl);
 		return $this;
 	}
 
