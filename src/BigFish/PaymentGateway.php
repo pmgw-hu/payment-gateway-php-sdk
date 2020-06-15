@@ -159,6 +159,8 @@ class PaymentGateway
 
 	const PROVIDER_PAYPAL = 'PayPal';
 
+	const PROVIDER_PAYPALREST = 'PayPalRest';
+
 	const PROVIDER_PAYSAFECARD = 'PSC';
 
 	const PROVIDER_PAYSAFECASH = 'Paysafecash';
