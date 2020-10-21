@@ -38,7 +38,7 @@ class Close extends RequestAbstract
 	 * @var float
 	 * @access public
 	 */
-	public $approvedAmount = 0;
+	public $approvedAmount;
 
 	/**
 	 * Construct new Close request instance
@@ -63,7 +63,7 @@ class Close extends RequestAbstract
 	 */
 	public function setApprovedAmount($approvedAmount)
 	{
-		$this->approvedAmount = $approvedAmount;
+		$this->approvedAmount = (float)$approvedAmount;
 		return $this;
 	}
 }
