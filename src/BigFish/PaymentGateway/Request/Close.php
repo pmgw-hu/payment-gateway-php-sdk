@@ -33,6 +33,14 @@ class Close extends RequestAbstract
 	public $approved;
 
 	/**
+	 * Approved amount
+	 *
+	 * @var float
+	 * @access public
+	 */
+	public $approvedAmount;
+
+	/**
 	 * Construct new Close request instance
 	 * 
 	 * @param string $transactionId Transaction ID received from Payment Gateway
@@ -46,4 +54,16 @@ class Close extends RequestAbstract
 		$this->approved = (($approved === true || $approved == "true") ? "true" : "false");
 	}
 
+	/**
+	 * Set approved amount
+	 *
+	 * @param float $approvedAmount
+	 * @return \BigFish\PaymentGateway\Request\Close
+	 * @access public
+	 */
+	public function setApprovedAmount($approvedAmount)
+	{
+		$this->approvedAmount = (float)$approvedAmount;
+		return $this;
+	}
 }
