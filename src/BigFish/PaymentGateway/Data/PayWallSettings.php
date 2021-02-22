@@ -8,7 +8,7 @@
  */
 namespace BigFish\PaymentGateway\Data;
 
-class PayWallSettings
+class PayWallSettings extends PayWallAbstract
 {
 	/**
 	 * Success page hosted by Payment Gateway
@@ -64,21 +64,4 @@ class PayWallSettings
 	 * @access public
 	 */
 	public $oneClickEnabled;
-
-	/**
-	 * @return array
-	 * @access public
-	 */
-	public function getData()
-	{
-		$data = array();
-
-		foreach (array_keys(get_object_vars($this)) as $var) {
-			if ($this->{$var} === null) {
-				continue;
-			}
-			$data[ucfirst($var)] = $this->{$var};
-		}
-		return $data;
-	}
 }

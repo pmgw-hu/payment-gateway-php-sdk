@@ -11,6 +11,7 @@ namespace BigFish\PaymentGateway\Request;
 use BigFish\PaymentGateway;
 use BigFish\PaymentGateway\Data\Info;
 use BigFish\PaymentGateway\Data\PayWallSettings;
+use BigFish\PaymentGateway\Data\PayWallStoreSettings;
 use BigFish\PaymentGateway\Exception;
 
 /**
@@ -108,6 +109,14 @@ class PayWallPaymentInit extends RequestAbstract
 	 * @access public
 	 */
 	public $settings;
+
+    /**
+     * PayWall store settings
+     *
+     * @var string
+     * @access public
+     */
+    public $storeSettings;
 
 	/**
 	 * Extra data
@@ -326,6 +335,32 @@ class PayWallPaymentInit extends RequestAbstract
 		return $this;
 	}
 
+    /**
+	 * @param array $storeSettings
+	 * @return \BigFish\PaymentGateway\Request\PayWallPaymentInit
+	 * @access public
+	 */
+	public function setStoreSettings(array $storeSettings = array())
+	{
+		$this->storeSettings = $this->urlSafeEncode(json_encode($storeSettings));
+		return $this;
+	}
+
+	/**
+	 * @param Info $storeSettingsObject
+	 * @return \BigFish\PaymentGateway\Request\PayWallPaymentInit
+	 * @access public
+	 * @throws Exception
+	 */
+	public function setStoreSettingsObject($storeSettingsObject)
+	{
+		if (!$storeSettingsObject instanceof PayWallStoreSettings) {
+			throw new Exception('Invalid PayWall store settings parameter');
+		}
+
+		$this->setSettings($storeSettingsObject->getData());
+		return $this;
+	}
 
 	/**
 	 * Set extra data
