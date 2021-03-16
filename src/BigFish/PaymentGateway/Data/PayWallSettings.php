@@ -58,10 +58,25 @@ class PayWallSettings extends PayWallAbstract
 	public $fallbackPaymentProviders;
 
 	/**
+	 * Custom payment provider name (eg: [CIB => [card => 'Custom Payment options name']])
+	 * @var array
+	 * @access public
+	 */
+	public $customPaymentOptionName;
+
+	/**
 	 * Enable one click payment on payment page
 	 *
 	 * @var bool
 	 * @access public
 	 */
 	public $oneClickEnabled;
+
+	/**
+	 * Enable User preferred sorting on payment page by last success payment
+	 *
+	 * @var bool
+	 * @access public
+	 */
+	public $userPreferredSortingEnabled;
 }
