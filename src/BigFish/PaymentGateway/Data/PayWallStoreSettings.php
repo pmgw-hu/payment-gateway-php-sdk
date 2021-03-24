@@ -41,4 +41,39 @@ class PayWallStoreSettings extends PayWallAbstract
 	 * @access public
 	 */
 	public $email;
+
+	/**
+	 * URL of General Terms and Condition on PayWall frontend
+	 *
+	 * @var string
+	 */
+	public $generalTermsAndConditionsUrl;
+
+	/**
+	 * Displayed checkbox for General Terms and Conditions on PayWall frontend
+	 *
+	 * @var bool
+	 */
+	public $generalTermsAndConditionsCheckboxEnabled;
+
+	/**
+	 * URL of Privacy Policy on PayWall frontend
+	 *
+	 * @var string
+	 */
+	public $privacyPolicyUrl;
+
+	/**
+	 * Displayed checkbox for Privacy Policy on PayWall frontend
+	 *
+	 * @var bool
+	 */
+	public $privacyPolicyCheckboxEnabled;
+
+	/**
+	 * Displayed checkbox for Implicitly Accept Notification on PayWall frontend
+	 *
+	 * @var bool
+	 */
+	public $implicitlyAcceptNoticeEnabled;
 }
