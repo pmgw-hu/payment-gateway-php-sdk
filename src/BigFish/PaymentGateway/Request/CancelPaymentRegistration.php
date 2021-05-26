@@ -14,6 +14,25 @@ namespace BigFish\PaymentGateway\Request;
  * @package PaymentGateway
  * @subpackage Request
  */
-class CancelPaymentRegistration extends OneClickTokenCancel
+class CancelPaymentRegistration extends RequestAbstract
 {
+	/**
+	 * Transaction ID
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $transactionId;
+
+	/**
+	 * Construct new Cancel Payment Registration request instance
+	 *
+	 * @param string $transactionId Transaction ID received from Payment Gateway
+	 * @return void
+	 * @access public
+	 */
+	public function __construct($transactionId)
+	{
+		$this->transactionId = $transactionId;
+	}
 }
