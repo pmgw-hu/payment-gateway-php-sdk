@@ -39,4 +39,13 @@ class InfoOrderRecurringPayment extends InfoAbstract
 	{
 		return $this->setData($frequency, 'frequency');
 	}
+
+	/**
+	 * @param string $amountIndicator
+	 * @return \BigFish\PaymentGateway\Data\Info\InfoOrderRecurringPayment
+	 */
+	public function setAmountIndicator($amountIndicator)
+	{
+		return $this->setData($amountIndicator, 'amountIndicator');
+	}
 }

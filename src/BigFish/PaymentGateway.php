@@ -22,8 +22,11 @@ use BigFish\PaymentGateway\Request\Finalize as FinalizeRequest;
 use BigFish\PaymentGateway\Request\Details as DetailsRequest;
 use BigFish\PaymentGateway\Request\Log as LogRequest;
 use BigFish\PaymentGateway\Request\OneClickOptions as OneClickOptionsRequest;
+use BigFish\PaymentGateway\Request\GetPaymentRegistrations as GetPaymentRegistrationsRequest;
 use BigFish\PaymentGateway\Request\OneClickTokenCancel as OneClickTokenCancelRequest;
+use BigFish\PaymentGateway\Request\CancelPaymentRegistration as CancelPaymentRegistrationRequest;
 use BigFish\PaymentGateway\Request\OneClickTokenCancelAll as OneClickTokenCancelAllRequest;
+use BigFish\PaymentGateway\Request\CancelAllPaymentRegistrations as CancelAllPaymentRegistrationsRequest;
 use BigFish\PaymentGateway\Request\Invoice as InvoiceRequest;
 use BigFish\PaymentGateway\Request\Providers as ProvidersRequest;
 use BigFish\PaymentGateway\Request\PaymentLinkCreate as PaymentLinkCreateRequest;
@@ -50,7 +53,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '3.7.0';
+	const VERSION = '3.8.0';
 
 	/**
 	 * API request type constants
@@ -78,9 +81,15 @@ class PaymentGateway
 	
 	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
 
+	const REQUEST_GET_PAYMENT_REGISTRATIONS = 'GetPaymentRegistrations';
+
 	const REQUEST_ONE_CLICK_TOKEN_CANCEL = 'OneClickTokenCancel';
 
+	const REQUEST_CANCEL_PAYMENT_REGISTRATION = 'CancelPaymentRegistration';
+
 	const REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL = 'OneClickTokenCancelAll';
+
+	const REQUEST_CANCEL_ALL_PAYMENT_REGISTRATIONS = 'CancelAllPaymentRegistrations';
 
 	const REQUEST_INVOICE = 'Invoice';
 	
@@ -199,6 +208,13 @@ class PaymentGateway
 	const PATH_INFO_ORDER_BILLING_DATA = 'Info/Order/BillingData';
 	const PATH_INFO_ORDER_PRODUCT_ITEMS = 'Info/Order/ProductItems';
 	const PATH_INFO_ORDER_RECURRING_PAYMENT = 'Info/Order/RecurringPayment';
+
+	/**
+	 * Payment registration types
+	 */
+	const PAYMENT_REGISTRATION_TYPE_LEGACY = 'OLD';
+	const PAYMENT_REGISTRATION_TYPE_CUSTOMER_INITIATED = 'CIT';
+	const PAYMENT_REGISTRATION_TYPE_MERCHANT_INITIATED = 'MIT';
 
 	/**
 	 * Default store name
@@ -436,6 +452,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
+	 * Get Payment Registrations
+	 *
+	 * @param \BigFish\PaymentGateway\Request\GetPaymentRegistrations $request
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function getPaymentRegistrations(GetPaymentRegistrationsRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_GET_PAYMENT_REGISTRATIONS, $request);
+	}
+
+	/**
 	 * One Click Token Cancel
 	 *
 	 * @param \BigFish\PaymentGateway\Request\OneClickTokenCancel $request OneClickTokenCancel request object
@@ -450,6 +480,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
+	 * Cancel Payment Registration
+	 *
+	 * @param \BigFish\PaymentGateway\Request\CancelPaymentRegistration $request CancelPaymentRegistration request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function cancelPaymentRegistration(CancelPaymentRegistrationRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_CANCEL_PAYMENT_REGISTRATION, $request);
+	}
+
+	/**
 	 * One Click Token Cancel All
 	 *
 	 * @param \BigFish\PaymentGateway\Request\OneClickTokenCancelAll $request OneClickTokenCancelAll request object
@@ -461,6 +505,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public static function oneClickTokenCancelAll(OneClickTokenCancelAllRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_ONE_CLICK_TOKEN_CANCEL_ALL, $request);
+	}
+
+	/**
+	 * Cancel All Payment Registrations
+	 *
+	 * @param \BigFish\PaymentGateway\Request\CancelAllPaymentRegistrations $request CancelAllPaymentRegistrations request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function cancelAllPaymentRegistrations(CancelAllPaymentRegistrationsRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_CANCEL_ALL_PAYMENT_REGISTRATIONS, $request);
 	}
 
 	/**

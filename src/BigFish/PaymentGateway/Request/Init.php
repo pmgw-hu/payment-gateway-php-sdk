@@ -186,8 +186,32 @@ class Init extends RequestAbstract
 	 * @var string
 	 * @access public
 	 */
-	public $oneClickReferenceId;	
-	
+	public $oneClickReferenceId;
+
+	/**
+	 * Payment registration
+	 *
+	 * @var integer | null
+	 * @access public
+	 */
+	public $paymentRegistration;
+
+	/**
+	 * Payment registration type
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $paymentRegistrationType;
+
+	/**
+	 * Reference transaction ID
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $referenceTransactionId;
+
 	/**
 	 * Auto commit state
 	 * 
@@ -539,7 +563,7 @@ class Init extends RequestAbstract
 	 */
 	public function setOneClickPayment($oneClickPayment = false)
 	{
-		$this->oneClickPayment = (($oneClickPayment === true || $oneClickPayment == "true") ? true : false);
+		$this->oneClickPayment = ($oneClickPayment === true || $oneClickPayment === "true");
 		return $this;
 	}
 
@@ -553,7 +577,7 @@ class Init extends RequestAbstract
 	 */
 	public function setOneClickForcedRegistration($oneClickForcedRegistration = false)
 	{
-		$this->oneClickForcedRegistration = (($oneClickForcedRegistration === true || $oneClickForcedRegistration == "true") ? true : false);
+		$this->oneClickForcedRegistration = ($oneClickForcedRegistration === true || $oneClickForcedRegistration === "true");
 		return $this;
 	}
 
@@ -569,7 +593,46 @@ class Init extends RequestAbstract
 	{
 		$this->oneClickReferenceId = $oneClickReferenceId;
 		return $this;
-	}	
+	}
+
+	/**
+	 * Payment registration or pay by registered device
+	 *
+	 * @param boolean | null $paymentRegistration
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setPaymentRegistration($paymentRegistration = true)
+	{
+		$this->paymentRegistration = is_null($paymentRegistration) ? null : (int)filter_var($paymentRegistration, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+		return $this;
+	}
+
+	/**
+	 * Set payment registration type
+	 *
+	 * @param string $paymentRegistrationType
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setPaymentRegistrationType($paymentRegistrationType)
+	{
+		$this->paymentRegistrationType = $paymentRegistrationType;
+		return $this;
+	}
+
+	/**
+	 * Set reference transaction ID
+	 *
+	 * @param string $referenceTransactionId
+	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @access public
+	 */
+	public function setReferenceTransactionId($referenceTransactionId)
+	{
+		$this->referenceTransactionId = $referenceTransactionId;
+		return $this;
+	}
 	
 	/**
 	 * If true verifies the availability of funds and captures funds in one step.
@@ -679,6 +742,18 @@ class Init extends RequestAbstract
 		
 		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->oneClickReferenceId) && strlen($this->oneClickReferenceId))) {
 			unset($this->oneClickReferenceId);
+		}
+
+		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->paymentRegistration) && !is_null($this->paymentRegistration))) {
+			unset($this->paymentRegistration);
+		}
+
+		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->paymentRegistrationType) && strlen($this->paymentRegistrationType))) {
+			unset($this->paymentRegistrationType);
+		}
+
+		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->referenceTransactionId) && strlen($this->referenceTransactionId))) {
+			unset($this->referenceTransactionId);
 		}
 		
 		unset($this->otpCardNumber);
