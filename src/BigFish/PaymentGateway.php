@@ -34,6 +34,7 @@ use BigFish\PaymentGateway\Request\PaymentLinkCancel as PaymentLinkCancelRequest
 use BigFish\PaymentGateway\Request\PaymentLinkDetails as PaymentLinkDetailsRequest;
 use BigFish\PaymentGateway\Request\Settlement as SettlementRequest;
 use BigFish\PaymentGateway\Request\SettlementRefund as SettlementRefundRequest;
+use BigFish\PaymentGateway\Request\Payout as PayoutRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
@@ -53,7 +54,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '3.8.0';
+	const VERSION = '3.9.0';
 
 	/**
 	 * API request type constants
@@ -104,6 +105,8 @@ class PaymentGateway
 	const REQUEST_SETTLEMENT = 'Settlement';
 
 	const REQUEST_SETTLEMENT_REFUND = 'SettlementRefund';
+
+	const REQUEST_PAYOUT = 'Payout';
 
 	/**
 	 * Result code constants
@@ -215,6 +218,12 @@ class PaymentGateway
 	const PAYMENT_REGISTRATION_TYPE_LEGACY = 'OLD';
 	const PAYMENT_REGISTRATION_TYPE_CUSTOMER_INITIATED = 'CIT';
 	const PAYMENT_REGISTRATION_TYPE_MERCHANT_INITIATED = 'MIT';
+
+	/**
+	 * Payout types
+	 */
+	const PAYOUT_TYPE_FUNDS_DISBURSEMENT = 'B2P';
+	const PAYOUT_TYPE_GAMBLING = 'WIN';
 
 	/**
 	 * Default store name
@@ -631,6 +640,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public static function settlementRefund(SettlementRefundRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_SETTLEMENT_REFUND, $request);
+	}
+
+	/**
+	 * Payout
+	 *
+	 * @param \BigFish\PaymentGateway\Request\Payout $request
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function payout(PayoutRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PAYOUT, $request);
 	}
 
 	/**
