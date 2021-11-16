@@ -261,6 +261,10 @@ class InitRP extends RequestAbstract
 	 */
 	public function setInfo(array $info = array())
 	{
+		if (empty($info)) {
+			return null;
+		}
+
 		$this->info = $this->urlSafeEncode(json_encode($info));
 		return $this;
 	}
