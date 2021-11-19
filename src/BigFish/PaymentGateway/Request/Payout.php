@@ -160,16 +160,15 @@ class Payout extends RequestAbstract
 
 	/**
 	 * @param array $info
-	 * @return Payout|false
+	 * @return Payout
 	 * @access public
 	 */
 	public function setInfo(array $info = array())
 	{
-		if (empty($info)) {
-			return null;
+		if (!empty($info)) {
+			$this->info = $this->urlSafeEncode(json_encode($info));
 		}
 
-		$this->info = $this->urlSafeEncode(json_encode($info));
 		return $this;
 	}
 
