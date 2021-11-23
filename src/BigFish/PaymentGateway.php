@@ -54,7 +54,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '3.9.0';
+	const VERSION = '3.10.0';
 
 	/**
 	 * API request type constants
@@ -323,7 +323,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	 */
 	public static function setDebugCommunication($debugCommunication)
 	{
-		self::$debugCommunication = $debugCommunication;
+		self::$debugCommunication = (bool)$debugCommunication;
 	}
 
 	/**
@@ -785,6 +785,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 		}
 
 		$curlRequestDump = array();
+
 		if (self::isDebugCommunication()) {
 			$curlRequestDump = array(
 				'curl_getinfo' => curl_getinfo($ch),

@@ -26,11 +26,12 @@ class Response
 	 * Construct new response object from JSON encoded object
 	 *
 	 * @param string $json JSON encoded object
-	 * @throws \BigFish\PaymentGateway\Exception
+	 * @param array $curlRequestDump
 	 * @return void
 	 * @access public
+	 *@throws Exception
 	 */
-	public function __construct($json, $curlRequestDump = array())
+	public function __construct($json, array $curlRequestDump = array())
 	{
 		if (is_object($json)) {
 			$object = $json;
@@ -51,7 +52,7 @@ class Response
 	 * @param object $object
 	 * @return void
 	 * @access protected
-	 * @throws \BigFish\PaymentGateway\Exception
+	 * @throws Exception
 	 */
 	protected function setObject($object)
 	{
@@ -71,7 +72,7 @@ class Response
 	 * @param string $value
 	 * @return void
 	 * @access protected
-	 * @throws \BigFish\PaymentGateway\Exception
+	 * @throws Exception
 	 */
 	protected function setValue($name, $value)
 	{
