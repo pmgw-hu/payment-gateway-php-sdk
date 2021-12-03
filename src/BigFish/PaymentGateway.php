@@ -784,10 +784,10 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			throw $e;
 		}
 
-		$curlRequestDump = array();
+		$sdkDebugInfo = array();
 
 		if (self::isDebugCommunication()) {
-			$curlRequestDump = array(
+			$sdkDebugInfo = array(
 				'curl_getinfo' => curl_getinfo($ch),
 				'post_data' => $postData
 			);
@@ -795,7 +795,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 		curl_close($ch);
 
-		return new Response($httpResponse, $curlRequestDump);
+		return new Response($httpResponse, $sdkDebugInfo);
 	}
 
 	/**

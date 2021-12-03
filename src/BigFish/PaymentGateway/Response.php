@@ -38,8 +38,8 @@ class Response
 			$this->setObject($object);
 		}
 
-		if (!empty($sdkDebugInfo)){
-			$this->setValue("sdkDebugInfo", json_encode($sdkDebugInfo));
+		if (empty($sdkDebugInfo)){
+			$this->setValue("sdkDebugInfo", $sdkDebugInfo);
 		}
 	}
 
@@ -66,7 +66,7 @@ class Response
 	 * Set value
 	 *
 	 * @param string $name
-	 * @param string $value
+	 * @param string|array $value
 	 * @return void
 	 * @access protected
 	 * @throws Exception
