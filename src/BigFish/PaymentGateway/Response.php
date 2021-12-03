@@ -38,7 +38,7 @@ class Response
 			$this->setObject($object);
 		}
 
-		if (empty($sdkDebugInfo)){
+		if (!empty($sdkDebugInfo)){
 			$this->setValue("sdkDebugInfo", $sdkDebugInfo);
 		}
 	}
