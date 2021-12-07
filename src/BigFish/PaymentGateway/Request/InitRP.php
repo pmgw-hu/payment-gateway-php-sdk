@@ -125,7 +125,7 @@ class InitRP extends RequestAbstract
 	 * Set module name
 	 *
 	 * @param string $moduleName
-	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setModuleName($moduleName)
@@ -138,7 +138,7 @@ class InitRP extends RequestAbstract
 	 * Set module version
 	 *
 	 * @param string $moduleVersion
-	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setModuleVersion($moduleVersion)
@@ -151,7 +151,7 @@ class InitRP extends RequestAbstract
 	 * Set the reference Payment Gateway transaction ID
 	 * 
 	 * @param string $referenceTransactionId Identifier of the reference transaction ID
-	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setReferenceTransactionId($referenceTransactionId)
@@ -165,7 +165,7 @@ class InitRP extends RequestAbstract
 	 * 
 	 * @param string $responseUrl Response URL
 	 * (e.g. http://www.yourdomain.com/response.php, http://www.yourdomain.com/response.php?someparam=somevalue etc.)
-	 * @return \BigFish\PaymentGateway\Request\InitRP 
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setResponseUrl($responseUrl)
@@ -178,7 +178,7 @@ class InitRP extends RequestAbstract
 	 * Set Notification URL
 	 *
 	 * @param string $notificationUrl
-	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setNotificationUrl($notificationUrl)
@@ -191,7 +191,7 @@ class InitRP extends RequestAbstract
 	 * Set payment transaction amount
 	 * 
 	 * @param float $amount Transaction amount
-	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setAmount($amount)
@@ -204,7 +204,7 @@ class InitRP extends RequestAbstract
 	 * Set the identifier of the order in your system
 	 * 
 	 * @param mixed $orderId Order identifier
-	 * @return \BigFish\PaymentGateway\Request\InitRP 
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setOrderId($orderId)
@@ -217,7 +217,7 @@ class InitRP extends RequestAbstract
 	 * Set the identifier of the user in your system
 	 * 
 	 * @param mixed $userId User identifier
-	 * @return \BigFish\PaymentGateway\Request\InitRP 
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setUserId($userId)
@@ -230,7 +230,7 @@ class InitRP extends RequestAbstract
 	 * Set payment transaction currency
 	 * 
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return \BigFish\PaymentGateway\Request\InitRP 
+	 * @return InitRP
 	 * @access public
 	 */
 	public function setCurrency($currency)
@@ -241,7 +241,7 @@ class InitRP extends RequestAbstract
 
 	/**
 	 * @param Info $infoObject
-	 * @return \BigFish\PaymentGateway\Request\InitRP
+	 * @return InitRP
 	 * @throws Exception
 	 */
 	public function setInfoObject($infoObject)
@@ -256,12 +256,14 @@ class InitRP extends RequestAbstract
 
 	/**
 	 * @param array $info
-	 * @return \BigFish\PaymentGateway\Request\InitRP
-	 * @throws Exception
+	 * @return InitRP
 	 */
 	public function setInfo(array $info = array())
 	{
-		$this->info = $this->urlSafeEncode(json_encode($info));
+		if (!empty($info)) {
+			$this->info = $this->urlSafeEncode(json_encode($info));
+		}
+
 		return $this;
 	}
 }
