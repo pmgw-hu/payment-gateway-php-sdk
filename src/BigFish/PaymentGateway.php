@@ -198,6 +198,8 @@ class PaymentGateway
 
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
 
+	const PROVIDER_VIVAWALLET = 'VivaWallet';
+
 	/**
 	 * Info block structures paths
 	 *
