@@ -184,6 +184,8 @@ class PaymentGateway
 
 	const PROVIDER_PAYUREST = 'PayURest';
 
+	const PROVIDER_RAIFFEISENPAY = 'RaiffeisenPay';
+
 	const PROVIDER_SAFERPAY = 'Saferpay';
 
 	const PROVIDER_SMS = 'SMS';
