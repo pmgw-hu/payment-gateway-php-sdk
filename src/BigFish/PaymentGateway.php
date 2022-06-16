@@ -184,6 +184,8 @@ class PaymentGateway
 
 	const PROVIDER_PAYUREST = 'PayURest';
 
+	const PROVIDER_RAIFFEISENPAY = 'RaiffeisenPay';
+
 	const PROVIDER_SAFERPAY = 'Saferpay';
 
 	const PROVIDER_SMS = 'SMS';
@@ -194,11 +196,11 @@ class PaymentGateway
 
 	const PROVIDER_VIRPAY = 'Virpay';
 
+	const PROVIDER_VIVAWALLET = 'VivaWallet';
+
 	const PROVIDER_WIRECARD = 'Wirecard';
 
 	const PROVIDER_WIRECARD_QPAY = 'QPAY';
-
-	const PROVIDER_VIVAWALLET = 'VivaWallet';
 
 	/**
 	 * Info block structures paths
