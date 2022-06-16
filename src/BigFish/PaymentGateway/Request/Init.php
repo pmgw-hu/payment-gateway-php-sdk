@@ -254,7 +254,7 @@ class Init extends RequestAbstract
 		PaymentGateway::PROVIDER_GP,
 		PaymentGateway::PROVIDER_VIRPAY,
 		PaymentGateway::PROVIDER_PAYUREST,
-		PaymentGateway::PROVIDER_WIRECARD,
+		PaymentGateway::PROVIDER_WIRECARD
 	);
 	
 	/**

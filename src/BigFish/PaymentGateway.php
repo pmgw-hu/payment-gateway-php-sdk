@@ -54,7 +54,7 @@ class PaymentGateway
 	 * SDK Version
 	 * 
 	 */
-	const VERSION = '3.11.0';
+	const VERSION = '3.12.0';
 
 	/**
 	 * API request type constants
@@ -195,6 +195,8 @@ class PaymentGateway
 	const PROVIDER_UNICREDIT = 'UniCredit';
 
 	const PROVIDER_VIRPAY = 'Virpay';
+
+	const PROVIDER_VIVAWALLET = 'VivaWallet';
 
 	const PROVIDER_WIRECARD = 'Wirecard';
 
