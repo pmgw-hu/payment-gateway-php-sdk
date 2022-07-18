@@ -165,7 +165,7 @@ class Init extends RequestAbstract
 	public $mkbSzepCvv;
 	
 	/**
-	 * One-click payment state (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard)
+	 * One-click payment state
 	 * 
 	 * @var boolean
 	 * @access public
@@ -173,7 +173,7 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
-	 * One Click Payment with forced registration (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard)
+	 * One Click Payment with forced registration
 	 *
 	 * @var boolean
 	 * @access public
@@ -181,7 +181,7 @@ class Init extends RequestAbstract
 	public $oneClickForcedRegistration = false;
 
 	/**
-	 * One Click Payment Reference Id (Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard)
+	 * One Click Payment Reference Id
 	 * 
 	 * @var string
 	 * @access public
@@ -556,7 +556,6 @@ class Init extends RequestAbstract
 	
 	/**
 	 * Enable or disable One Click Payment of the user
-	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard provider
 	 *
 	 * @param boolean $oneClickPayment true or false
 	 * @return Init
@@ -570,7 +569,6 @@ class Init extends RequestAbstract
 
 	/**
 	 * Enable or disable One Click Payment with forced registration
-	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard provider
 	 *
 	 * @param boolean $oneClickForcedRegistration true or false
 	 * @return Init
@@ -584,7 +582,6 @@ class Init extends RequestAbstract
 
 	/**
 	 * Set One Click Payment Reference Id
-	 * Works with Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard providers
 	 *
 	 * @param string $oneClickReferenceId
 	 * @return Init
