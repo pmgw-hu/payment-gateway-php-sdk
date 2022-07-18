@@ -54,6 +54,14 @@ class Payout extends RequestAbstract
 	public $orderId;
 
 	/**
+	 * Additional Message
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $additionalMessage;
+
+	/**
 	 * Info data
 	 *
 	 * @var Info | null
@@ -139,6 +147,19 @@ class Payout extends RequestAbstract
 	public function setOrderId($orderId)
 	{
 		$this->orderId = $orderId;
+		return $this;
+	}
+
+	/**
+	 * Additional message that the card acceptor might want to provide
+	 *
+	 * @param mixed $additionalMessage Additional message
+	 * @return Payout
+	 * @access public
+	 */
+	public function setAdditionalMessage($additionalMessage)
+	{
+		$this->additionalMessage = $additionalMessage;
 		return $this;
 	}
 
