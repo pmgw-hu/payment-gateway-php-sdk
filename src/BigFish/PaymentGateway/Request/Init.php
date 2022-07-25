@@ -165,7 +165,7 @@ class Init extends RequestAbstract
 	public $mkbSzepCvv;
 	
 	/**
-	 * One-click payment state (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard)
+	 * One-click payment state
 	 * 
 	 * @var boolean
 	 * @access public
@@ -173,7 +173,7 @@ class Init extends RequestAbstract
 	public $oneClickPayment = false;
 
 	/**
-	 * One Click Payment with forced registration (Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard)
+	 * One Click Payment with forced registration
 	 *
 	 * @var boolean
 	 * @access public
@@ -181,13 +181,37 @@ class Init extends RequestAbstract
 	public $oneClickForcedRegistration = false;
 
 	/**
-	 * One Click Payment Reference Id (Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard)
+	 * One Click Payment Reference Id
 	 * 
 	 * @var string
 	 * @access public
 	 */
-	public $oneClickReferenceId;	
-	
+	public $oneClickReferenceId;
+
+	/**
+	 * Payment registration
+	 *
+	 * @var integer | null
+	 * @access public
+	 */
+	public $paymentRegistration;
+
+	/**
+	 * Payment registration type
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $paymentRegistrationType;
+
+	/**
+	 * Reference transaction ID
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $referenceTransactionId;
+
 	/**
 	 * Auto commit state
 	 * 
@@ -231,6 +255,7 @@ class Init extends RequestAbstract
 		PaymentGateway::PROVIDER_VIRPAY,
 		PaymentGateway::PROVIDER_PAYUREST,
 		PaymentGateway::PROVIDER_WIRECARD,
+		PaymentGateway::PROVIDER_VIVAWALLET
 	);
 	
 	/**
@@ -274,7 +299,7 @@ class Init extends RequestAbstract
 	 * Set module name
 	 *
 	 * @param string $moduleName
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setModuleName($moduleName)
@@ -287,7 +312,7 @@ class Init extends RequestAbstract
 	 * Set module version
 	 *
 	 * @param string $moduleVersion
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setModuleVersion($moduleVersion)
@@ -300,7 +325,7 @@ class Init extends RequestAbstract
 	 * Set the identifier of the selected payment provider
 	 *
 	 * @param string $providerName Identifier of the selected payment provider
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setProviderName($providerName)
@@ -314,7 +339,7 @@ class Init extends RequestAbstract
 	 * 
 	 * @param string $responseUrl Response URL
 	 * (e.g. http://www.yourdomain.com/response.php, http://www.yourdomain.com/response.php?someparam=somevalue etc.)
-	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @return Init
 	 * @access public
 	 */
 	public function setResponseUrl($responseUrl)
@@ -327,7 +352,7 @@ class Init extends RequestAbstract
 	 * Set Notification URL
 	 * 
 	 * @param string $notificationUrl
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setNotificationUrl($notificationUrl)
@@ -340,7 +365,7 @@ class Init extends RequestAbstract
 	 * Set payment transaction amount
 	 * 
 	 * @param float $amount Transaction amount
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setAmount($amount)
@@ -353,7 +378,7 @@ class Init extends RequestAbstract
 	 * Set the identifier of the order in your system
 	 * 
 	 * @param mixed $orderId Order identifier
-	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @return Init
 	 * @access public
 	 */
 	public function setOrderId($orderId)
@@ -366,7 +391,7 @@ class Init extends RequestAbstract
 	 * Set the identifier of the user in your system
 	 * 
 	 * @param mixed $userId User identifier
-	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @return Init
 	 * @access public
 	 */
 	public function setUserId($userId)
@@ -379,7 +404,7 @@ class Init extends RequestAbstract
 	 * Set payment transaction currency
 	 * 
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @return Init
 	 * @access public
 	 */
 	public function setCurrency($currency)
@@ -392,7 +417,7 @@ class Init extends RequestAbstract
 	 * Set the language
 	 * 
 	 * @param string $language Language (e.g. HU, EN, DE etc.)
-	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @return Init
 	 * @access public
 	 */
 	public function setLanguage($language)
@@ -406,7 +431,7 @@ class Init extends RequestAbstract
 	 * Works with MPP, MPP2 and OTPay providers
 	 * 
 	 * @param string $mppPhoneNumber Mobile Payment identifier (e.g. 123456789) or phone number of the user (e.g. 36301234567)
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setMppPhoneNumber($mppPhoneNumber)
@@ -420,7 +445,7 @@ class Init extends RequestAbstract
 	 * Works with OTP2 provider
 	 * 
 	 * @param string $otpCardNumber Card number (e.g. 1111222233334444 or 1111 2222 3333 4444)
-	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @return Init
 	 * @access public
 	 */
 	public function setOtpCardNumber($otpCardNumber)
@@ -434,7 +459,7 @@ class Init extends RequestAbstract
 	 * Works with OTP2 provider
 	 * 
 	 * @param string $otpExpiration Expiration date - mm/yy (e.g. 0512 or 05/12)
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setOtpExpiration($otpExpiration)
@@ -448,7 +473,7 @@ class Init extends RequestAbstract
 	 * Works with OTP2 provider
 	 * 
 	 * @param string $otpCvc Verification code (e.g. 123)
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setOtpCvc($otpCvc)
@@ -463,7 +488,7 @@ class Init extends RequestAbstract
 	 *
 	 * @param string $otpCardPocketId Pocket Id
 	 * (e.g. 03)
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setOtpCardPocketId($otpCardPocketId)
@@ -478,7 +503,7 @@ class Init extends RequestAbstract
 	 *
 	 * @param string $otpConsumerRegistrationId Consumer Registration Id
 	 * (e.g. 03)
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setOtpConsumerRegistrationId($otpConsumerRegistrationId)
@@ -492,7 +517,7 @@ class Init extends RequestAbstract
 	 * Works with MKBSZEP provider
 	 * 
 	 * @param integer $mkbSzepCafeteriaId
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setMkbSzepCafeteriaId($mkbSzepCafeteriaId)
@@ -506,7 +531,7 @@ class Init extends RequestAbstract
 	 * Works with MKBSZEP provider
 	 * 
 	 * @param string $mkbSzepCardNumber Card number (e.g. 1111222233334444 or 1111 2222 3333 4444)
-	 * @return \BigFish\PaymentGateway\Request\Init 
+	 * @return Init
 	 * @access public
 	 */
 	public function setMkbSzepCardNumber($mkbSzepCardNumber)
@@ -520,7 +545,7 @@ class Init extends RequestAbstract
 	 * Works with MKBSZEP provider
 	 * 
 	 * @param string $mkbSzepCvv Verification code (e.g. 123)
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setMkbSzepCvv($mkbSzepCvv)
@@ -531,52 +556,88 @@ class Init extends RequestAbstract
 	
 	/**
 	 * Enable or disable One Click Payment of the user
-	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard provider
 	 *
 	 * @param boolean $oneClickPayment true or false
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setOneClickPayment($oneClickPayment = false)
 	{
-		$this->oneClickPayment = (($oneClickPayment === true || $oneClickPayment == "true") ? true : false);
+		$this->oneClickPayment = ($oneClickPayment === true || $oneClickPayment === "true");
 		return $this;
 	}
 
 	/**
 	 * Enable or disable One Click Payment with forced registration
-	 * Works with Escalion, OTP Simple, Saferpay, PayPal, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard provider
 	 *
 	 * @param boolean $oneClickForcedRegistration true or false
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setOneClickForcedRegistration($oneClickForcedRegistration = false)
 	{
-		$this->oneClickForcedRegistration = (($oneClickForcedRegistration === true || $oneClickForcedRegistration == "true") ? true : false);
+		$this->oneClickForcedRegistration = ($oneClickForcedRegistration === true || $oneClickForcedRegistration === "true");
 		return $this;
 	}
 
 	/**
 	 * Set One Click Payment Reference Id
-	 * Works with Escalion, OTP Simple, Saferpay, Barion2, Borgun2, GP, Virpay, PayU REST, Wirecard providers
 	 *
 	 * @param string $oneClickReferenceId
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setOneClickReferenceId($oneClickReferenceId)
 	{
 		$this->oneClickReferenceId = $oneClickReferenceId;
 		return $this;
-	}	
+	}
+
+	/**
+	 * Payment registration or pay by registered device
+	 *
+	 * @param boolean | null $paymentRegistration
+	 * @return Init
+	 * @access public
+	 */
+	public function setPaymentRegistration($paymentRegistration = true)
+	{
+		$this->paymentRegistration = is_null($paymentRegistration) ? null : (int)filter_var($paymentRegistration, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+		return $this;
+	}
+
+	/**
+	 * Set payment registration type
+	 *
+	 * @param string $paymentRegistrationType
+	 * @return Init
+	 * @access public
+	 */
+	public function setPaymentRegistrationType($paymentRegistrationType)
+	{
+		$this->paymentRegistrationType = $paymentRegistrationType;
+		return $this;
+	}
+
+	/**
+	 * Set reference transaction ID
+	 *
+	 * @param string $referenceTransactionId
+	 * @return Init
+	 * @access public
+	 */
+	public function setReferenceTransactionId($referenceTransactionId)
+	{
+		$this->referenceTransactionId = $referenceTransactionId;
+		return $this;
+	}
 	
 	/**
 	 * If true verifies the availability of funds and captures funds in one step.
 	 * If false verifies the availability of funds and reserves them for later capture.
 	 * 
 	 * @param boolean $autoCommit true or false
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setAutoCommit($autoCommit = true)
@@ -590,7 +651,7 @@ class Init extends RequestAbstract
 	 * Works with MKBSZEP provider
 	 *
 	 * @param boolean $gatewayPaymentPage true or false
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 */
 	public function setGatewayPaymentPage($gatewayPaymentPage = false)
@@ -601,7 +662,7 @@ class Init extends RequestAbstract
 
 	/**
 	 * @param Info $infoObject
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @throws Exception
 	 */
 	public function setInfoObject($infoObject)
@@ -616,12 +677,14 @@ class Init extends RequestAbstract
 
 	/**
 	 * @param array $info
-	 * @return \BigFish\PaymentGateway\Request\Init
-	 * @throws Exception
+	 * @return Init
 	 */
 	public function setInfo(array $info = array())
 	{
-		$this->info = $this->urlSafeEncode(json_encode($info));
+		if (!empty($info)) {
+			$this->info = $this->urlSafeEncode(json_encode($info));
+		}
+
 		return $this;
 	}
 
@@ -629,7 +692,7 @@ class Init extends RequestAbstract
 	 * Set extra data
 	 * 
 	 * @param array $extra Extra information (Except OTP2 provider)
-	 * @return \BigFish\PaymentGateway\Request\Init
+	 * @return Init
 	 * @access public
 	 * @throws Exception
 	 */
@@ -679,6 +742,18 @@ class Init extends RequestAbstract
 		
 		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->oneClickReferenceId) && strlen($this->oneClickReferenceId))) {
 			unset($this->oneClickReferenceId);
+		}
+
+		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->paymentRegistration) && !is_null($this->paymentRegistration))) {
+			unset($this->paymentRegistration);
+		}
+
+		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->paymentRegistrationType) && strlen($this->paymentRegistrationType))) {
+			unset($this->paymentRegistrationType);
+		}
+
+		if (!(in_array($this->providerName, self::$oneClickProviders) && isset($this->referenceTransactionId) && strlen($this->referenceTransactionId))) {
+			unset($this->referenceTransactionId);
 		}
 		
 		unset($this->otpCardNumber);

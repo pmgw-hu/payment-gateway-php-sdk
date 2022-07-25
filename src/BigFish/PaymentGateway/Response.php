@@ -21,11 +21,12 @@ class Response
 	 * Construct new response object from JSON encoded object
 	 *
 	 * @param string $json JSON encoded object
-	 * @throws \BigFish\PaymentGateway\Exception
+	 * @param array $sdkDebugInfo
 	 * @return void
 	 * @access public
+	 * @throws Exception
 	 */
-	public function __construct($json)
+	public function __construct($json, array $sdkDebugInfo = array())
 	{
 		if (is_object($json)) {
 			$object = $json;
@@ -36,6 +37,10 @@ class Response
 		if (is_object($object)) {
 			$this->setObject($object);
 		}
+
+		if (!empty($sdkDebugInfo)){
+			$this->setValue("sdkDebugInfo", $sdkDebugInfo);
+		}
 	}
 
 	/**
@@ -44,7 +49,7 @@ class Response
 	 * @param object $object
 	 * @return void
 	 * @access protected
-	 * @throws \BigFish\PaymentGateway\Exception
+	 * @throws Exception
 	 */
 	protected function setObject($object)
 	{
@@ -61,10 +66,10 @@ class Response
 	 * Set value
 	 *
 	 * @param string $name
-	 * @param string $value
+	 * @param string|array $value
 	 * @return void
 	 * @access protected
-	 * @throws \BigFish\PaymentGateway\Exception
+	 * @throws Exception
 	 */
 	protected function setValue($name, $value)
 	{

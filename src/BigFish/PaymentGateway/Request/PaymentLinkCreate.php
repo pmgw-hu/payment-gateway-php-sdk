@@ -217,7 +217,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set the identifier of the selected payment provider
 	 *
 	 * @param string $providerName Identifier of the selected payment provider
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setProviderName($providerName)
@@ -230,7 +230,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set payment transaction amount
 	 *
 	 * @param float $amount Transaction amount
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setAmount($amount)
@@ -246,7 +246,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 *
 	 * @param float $minimumAmount Transaction minimum amount
 	 * @param float|null $maximumAmount Transaction maximum amount
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 */
 	public function setFlexibleAmount($minimumAmount, $maximumAmount = null)
 	{
@@ -260,7 +260,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set payment transaction currency
 	 * 
 	 * @param string $currency Three-letter ISO currency code (e.g. HUF, USD etc.)
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setCurrency($currency)
@@ -273,7 +273,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set multiple transactions
 	 *
 	 * @param boolean $multipleTransactions true or false
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setMultipleTransactions($multipleTransactions = true)
@@ -286,7 +286,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set the language
 	 * 
 	 * @param string $language Language (e.g. HU, EN, DE etc.)
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate 
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setLanguage($language)
@@ -299,7 +299,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set the identifier of the order in your system
 	 * 
 	 * @param mixed $orderId Order identifier
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate 
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setOrderId($orderId)
@@ -312,7 +312,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set the identifier of the user in your system
 	 * 
 	 * @param mixed $userId User identifier
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate 
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setUserId($userId)
@@ -326,7 +326,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * If false verifies the availability of funds and reserves them for later capture.
 	 * 
 	 * @param boolean $autoCommit true or false
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setAutoCommit($autoCommit = true)
@@ -339,7 +339,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set Expiration Time
 	 * 
 	 * @param string $expirationTime
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setExpirationTime($expirationTime)
@@ -352,7 +352,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set Notification URL
 	 * 
 	 * @param string $notificationUrl
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setNotificationUrl($notificationUrl)
@@ -365,7 +365,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set Notification Email
 	 * 
 	 * @param string $notificationEmail
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setNotificationEmail($notificationEmail)
@@ -378,7 +378,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set email notification only success
 	 * 
 	 * @param boolean $emailNotificationOnlySuccess true or false
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setEmailNotificationOnlySuccess($emailNotificationOnlySuccess = true)
@@ -391,7 +391,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set information form
 	 *
 	 * @param string $infoForm
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setInfoForm($infoForm)
@@ -404,7 +404,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set privacy policy url
 	 *
 	 * @param string $privacyPolicyUrl
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setPrivacyPolicyUrl($privacyPolicyUrl)
@@ -417,7 +417,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set redirect url
 	 *
 	 * @param string $redirectUrl
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setRedirectUrl($redirectUrl)
@@ -430,7 +430,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set extra data
 	 * 
 	 * @param array $extra Extra information
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setExtra(array $extra = array())
@@ -444,7 +444,7 @@ class PaymentLinkCreate extends RequestAbstract
 
 	/**
 	 * @param Info $infoObject
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @throws Exception
 	 */
 	public function setInfoObject($infoObject)
@@ -459,19 +459,21 @@ class PaymentLinkCreate extends RequestAbstract
 
 	/**
 	 * @param array $info
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
-	 * @throws Exception
+	 * @return PaymentLinkCreate
 	 */
 	public function setInfo(array $info = array())
 	{
-		$this->info = $this->urlSafeEncode(json_encode($info));
+		if (!empty($info)) {
+			$this->info = $this->urlSafeEncode(json_encode($info));
+		}
+
 		return $this;
 	}
 	/**
 	 * Set module name
 	 *
 	 * @param string $moduleName
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setModuleName($moduleName)
@@ -484,7 +486,7 @@ class PaymentLinkCreate extends RequestAbstract
 	 * Set module version
 	 *
 	 * @param string $moduleVersion
-	 * @return \BigFish\PaymentGateway\Request\PaymentLinkCreate
+	 * @return PaymentLinkCreate
 	 * @access public
 	 */
 	public function setModuleVersion($moduleVersion)
