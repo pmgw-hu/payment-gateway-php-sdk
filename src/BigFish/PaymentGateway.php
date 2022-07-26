@@ -2,7 +2,7 @@
 /**
  * BIG FISH Payment Gateway (https://www.paymentgateway.hu)
  * PHP SDK
- * 
+ *
  * @link https://github.com/bigfish-hu/payment-gateway-php-sdk.git
  * @copyright (c) 2015, BIG FISH Internet-technology Ltd. (http://bigfish.hu)
  */
@@ -35,11 +35,13 @@ use BigFish\PaymentGateway\Request\PaymentLinkDetails as PaymentLinkDetailsReque
 use BigFish\PaymentGateway\Request\Settlement as SettlementRequest;
 use BigFish\PaymentGateway\Request\SettlementRefund as SettlementRefundRequest;
 use BigFish\PaymentGateway\Request\Payout as PayoutRequest;
+use BigFish\PaymentGateway\Request\PayWallPaymentInit as PayWallPaymentInitRequest;
+use BigFish\PaymentGateway\Request\PayWallPaymentUpdate as PayWallPaymentUpdateRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
  * BIG FISH Payment Gateway main class (client)
- * 
+ *
  * @package PaymentGateway
  */
 class PaymentGateway
@@ -52,13 +54,13 @@ class PaymentGateway
 
 	/**
 	 * SDK Version
-	 * 
+	 *
 	 */
-	const VERSION = '3.13.0';
+	const VERSION = '3.14.0';
 
 	/**
 	 * API request type constants
-	 * 
+	 *
 	 */
 	const REQUEST_INIT = 'Init';
 
@@ -67,7 +69,7 @@ class PaymentGateway
 	const REQUEST_RESULT = 'Result';
 
 	const REQUEST_CLOSE = 'Close';
-	
+
 	const REQUEST_DETAILS = 'Details';
 
 	const REQUEST_LOG = 'Log';
@@ -77,9 +79,9 @@ class PaymentGateway
 	const REQUEST_INIT_RP = 'InitRP';
 
 	const REQUEST_START_RP = 'StartRP';
-	
+
 	const REQUEST_FINALIZE = 'Finalize';
-	
+
 	const REQUEST_ONE_CLICK_OPTIONS = 'OneClickOptions';
 
 	const REQUEST_GET_PAYMENT_REGISTRATIONS = 'GetPaymentRegistrations';
@@ -93,7 +95,7 @@ class PaymentGateway
 	const REQUEST_CANCEL_ALL_PAYMENT_REGISTRATIONS = 'CancelAllPaymentRegistrations';
 
 	const REQUEST_INVOICE = 'Invoice';
-	
+
 	const REQUEST_PROVIDERS = 'Providers';
 
 	const REQUEST_PAYMENT_LINK_CREATE = 'PaymentLinkCreate';
@@ -108,20 +110,24 @@ class PaymentGateway
 
 	const REQUEST_PAYOUT = 'Payout';
 
+	const REQUEST_PAYWALL_PAYMENT_INIT = 'PayWallPaymentInit';
+
+	const REQUEST_PAYWALL_PAYMENT_UPDATE = 'PayWallPaymentUpdate';
+
 	/**
 	 * Result code constants
-	 * 
+	 *
 	 */
 	const RESULT_CODE_SUCCESS = 'SUCCESSFUL';
-	
+
 	const RESULT_CODE_ERROR = 'ERROR';
-	
+
 	const RESULT_CODE_PENDING = 'PENDING';
-	
+
 	const RESULT_CODE_USER_CANCEL = 'CANCELED';
-	
+
 	const RESULT_CODE_TIMEOUT = 'TIMEOUT';
-	
+
 	const RESULT_CODE_OPEN = 'OPEN';
 
 	/**
@@ -155,7 +161,7 @@ class PaymentGateway
 	const PROVIDER_KHB_SZEP = 'KHBSZEP';
 
 	const PROVIDER_MKB_SZEP = 'MKBSZEP';
-	
+
 	const PROVIDER_OTP = 'OTP';
 
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
@@ -231,19 +237,19 @@ class PaymentGateway
 
 	/**
 	 * Default store name
-	 * 
+	 *
 	 */
 	const SDK_TEST_STORE_NAME = 'sdk_test';
 
 	/**
 	 * Default API key
-	 * 
+	 *
 	 */
 	const SDK_TEST_API_KEY = '86af3-80e4f-f8228-9498f-910ad';
 
 	/**
 	 * Default public key used for encryption
-	 * 
+	 *
 	 */
 	const SDK_TEST_ENCRYPT_PUBLIC_KEY = '-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCpRN6hb8pQaDen9Qjt18P2FqSc
@@ -254,19 +260,19 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Production service URL
-	 * 
+	 *
 	 */
 	const GATEWAY_URL_PRODUCTION = 'https://system.paymentgateway.hu';
 
 	/**
 	 * Test service URL
-	 * 
+	 *
 	 */
 	const GATEWAY_URL_TEST = 'https://system-test.paymentgateway.hu';
 
 	/**
 	 * Configuration
-	 * 
+	 *
 	 * @var \BigFish\PaymentGateway\Config
 	 * @access protected
 	 * @static
@@ -281,7 +287,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Set configuration
-	 * 
+	 *
 	 * @param \BigFish\PaymentGateway\Config $config
 	 * @return boolean
 	 * @access public
@@ -300,7 +306,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Get configuration
-	 * 
+	 *
 	 * @return \BigFish\PaymentGateway\Config
 	 * @access public
 	 * @static
@@ -697,6 +703,34 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	}
 
 	/**
+	 * Initialize PayWall payment
+	 *
+	 * @param \BigFish\PaymentGateway\Request\PayWallPaymentInit $request PayWall payment init request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function payWallPaymentInit(PayWallPaymentInitRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PAYWALL_PAYMENT_INIT, $request);
+	}
+
+	/**
+	 * Update PayWall payment
+	 *
+	 * @param \BigFish\PaymentGateway\Request\PayWallPaymentUpdate $request PayWall payment update request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function payWallPaymentUpdate(PayWallPaymentUpdateRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PAYWALL_PAYMENT_UPDATE, $request);
+	}
+
+	/**
 	 * Get service URL
 	 *
 	 * @return string
@@ -715,7 +749,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Send request
-	 * 
+	 *
 	 * @param string $method
 	 * @param \BigFish\PaymentGateway\Request\RequestAbstract $request
 	 * @return \BigFish\PaymentGateway\Response
@@ -747,7 +781,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 		if ($method == self::REQUEST_CLOSE || $method == self::REQUEST_REFUND) {
 			/**
 			 * OTPay close and refund (extra timeout)
-			 * 
+			 *
 			 */
 			curl_setopt($ch, CURLOPT_TIMEOUT, 600);
 		} else {
@@ -831,7 +865,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 	/**
 	 * Get HTTP host
-	 * 
+	 *
 	 * @return string
 	 * @access private
 	 * @static
