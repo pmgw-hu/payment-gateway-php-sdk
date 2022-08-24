@@ -1,7 +1,7 @@
 Syntax Check PHP 5.6:
   image: php:5.6-cli
   script:
-    - find . -type f -name "*.php" -print0 | xargs -0L1 /usr/bin/php -l
+    - find . -type f -name "*.php" -print0 | xargs -0L1 php -l
   stage: test
   tags:
     - docker
@@ -9,7 +9,7 @@ Syntax Check PHP 5.6:
 Syntax Check PHP 7.4:
   image: php:7.4-cli
   script:
-    - find . -type f -name "*.php" -print0 | xargs -0L1 /usr/bin/php -l
+    - find . -type f -name "*.php" -print0 | xargs -0L1 php -l
   stage: test
   tags:
     - docker
@@ -17,7 +17,7 @@ Syntax Check PHP 7.4:
 Syntax Check PHP 8.0:
   image: php:8.0-cli
   script:
-    - find . -type f -name "*.php" -print0 | xargs -0L1 /usr/bin/php -l
+    - find . -type f -name "*.php" -print0 | xargs -0L1 php -l
   stage: test
   tags:
     - docker
@@ -25,7 +25,7 @@ Syntax Check PHP 8.0:
 Syntax Check PHP 8.1:
   image: php:8.1-cli
   script:
-    - find . -type f -name "*.php" -print0 | xargs -0L1 /usr/bin/php -l
+    - find . -type f -name "*.php" -print0 | xargs -0L1 php -l
   stage: test
   tags:
     - docker
