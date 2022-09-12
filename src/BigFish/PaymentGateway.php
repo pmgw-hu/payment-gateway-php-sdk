@@ -37,6 +37,7 @@ use BigFish\PaymentGateway\Request\SettlementRefund as SettlementRefundRequest;
 use BigFish\PaymentGateway\Request\Payout as PayoutRequest;
 use BigFish\PaymentGateway\Request\PayWallPaymentInit as PayWallPaymentInitRequest;
 use BigFish\PaymentGateway\Request\PayWallPaymentUpdate as PayWallPaymentUpdateRequest;
+use BigFish\PaymentGateway\Request\PayWallPaymentDetails as PayWallPaymentDetailsRequest;
 use BigFish\PaymentGateway\Response;
 
 /**
@@ -56,7 +57,7 @@ class PaymentGateway
 	 * SDK Version
 	 *
 	 */
-	const VERSION = '3.14.1';
+	const VERSION = '3.15.0';
 
 	/**
 	 * API request type constants
@@ -113,6 +114,8 @@ class PaymentGateway
 	const REQUEST_PAYWALL_PAYMENT_INIT = 'PayWallPaymentInit';
 
 	const REQUEST_PAYWALL_PAYMENT_UPDATE = 'PayWallPaymentUpdate';
+
+	const REQUEST_PAYWALL_PAYMENT_DETAILS = 'PayWallPaymentDetails';
 
 	/**
 	 * Result code constants
@@ -728,6 +731,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public static function payWallPaymentUpdate(PayWallPaymentUpdateRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_PAYWALL_PAYMENT_UPDATE, $request);
+	}
+
+	/**
+	 * PayWall payment details
+	 *
+	 * @param \BigFish\PaymentGateway\Request\PayWallPaymentDetails $request PayWall payment details request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function payWallPaymentDetails(PayWallPaymentDetailsRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_PAYWALL_PAYMENT_DETAILS, $request);
 	}
 
 	/**
