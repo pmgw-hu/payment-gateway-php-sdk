@@ -301,7 +301,7 @@ class Init extends RequestAbstract
 		$this->storeName = PaymentGateway::getConfig()->storeName;
 		$this->moduleName = PaymentGateway::getConfig()->moduleName;
 		$this->moduleVersion = PaymentGateway::getConfig()->moduleVersion;
-		$this->gatewyProxy =  PaymentGateway::getConfig()->gatewayProxy;
+		$this->gatewayProxy =  PaymentGateway::getConfig()->gatewayProxy;
 	}
 
 	/**

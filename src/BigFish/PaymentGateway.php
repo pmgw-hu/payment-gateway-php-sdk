@@ -829,7 +829,7 @@ XIm63iVw6gjP2qDnNwIDAQAB
 			curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 		}
 
-		if (self::getConfig()->gatewayProxy != '') {
+		if ($request->gatewayProxy != '') {
 			curl_setopt($ch, CURLOPT_PROXY, self::getConfig()->gatewayProxy);
 		}
 
