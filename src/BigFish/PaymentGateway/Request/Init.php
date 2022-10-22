@@ -283,14 +283,6 @@ class Init extends RequestAbstract
 	public $moduleVersion;
 
 	/**
-	 * Proxy address
-	 *
-	 * @var string
-	 * @access public
-	 */
-	public $gatewayProxy;
-
-	/**
 	 * Construct new Init request instance
 	 * 
 	 * @access public
@@ -301,7 +293,6 @@ class Init extends RequestAbstract
 		$this->storeName = PaymentGateway::getConfig()->storeName;
 		$this->moduleName = PaymentGateway::getConfig()->moduleName;
 		$this->moduleVersion = PaymentGateway::getConfig()->moduleVersion;
-		$this->gatewayProxy =  PaymentGateway::getConfig()->gatewayProxy;
 	}
 
 	/**
