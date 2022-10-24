@@ -21,6 +21,7 @@ use BigFish\PaymentGateway;
  * @property string $moduleName Module name
  * @property string $moduleVersion Module version
  * @property string $gatewayUrlTest Test service URL
+ * @property string $gatewayProxy Proxy address used for the api requests
  * @package PaymentGateway
  */
 class Config
@@ -91,6 +92,13 @@ class Config
 	 * @access protected
 	 */
 	protected $gatewayUrlTest = PaymentGateway::GATEWAY_URL_TEST;
+
+	/**
+	 * Proxy address used for the api requests
+	 * @var string
+	 * @access protected
+	 */
+	protected $gatewayProxy = '';
 
 	/**
 	 * Constructor

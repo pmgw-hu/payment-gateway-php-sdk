@@ -57,7 +57,7 @@ class PaymentGateway
 	 * SDK Version
 	 *
 	 */
-	const VERSION = '3.15.0';
+	const VERSION = '3.16.0';
 
 	/**
 	 * API request type constants
@@ -827,6 +827,10 @@ XIm63iVw6gjP2qDnNwIDAQAB
 
 		if (self::isDebugCommunication()) {
 			curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+		}
+
+		if (self::getConfig()->gatewayProxy != '') {
+			curl_setopt($ch, CURLOPT_PROXY, self::getConfig()->gatewayProxy);
 		}
 
 		$httpResponse = curl_exec($ch);
