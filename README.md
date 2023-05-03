@@ -2,7 +2,7 @@
 
 ## Version
 
-3.17.0
+3.18.0
 
 ## Requirements
 
