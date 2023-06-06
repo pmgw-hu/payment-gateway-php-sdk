@@ -57,7 +57,7 @@ class PaymentGateway
 	 * SDK Version
 	 *
 	 */
-	const VERSION = '3.16.0';
+	const VERSION = '3.17.0';
 
 	/**
 	 * API request type constants
@@ -200,6 +200,8 @@ class PaymentGateway
 	const PROVIDER_SMS = 'SMS';
 
 	const PROVIDER_SOFORT = 'Sofort';
+
+	const PROVIDER_STRIPE = 'Stripe';
 
 	const PROVIDER_UNICREDIT = 'UniCredit';
 
