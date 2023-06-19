@@ -201,6 +201,8 @@ class PaymentGateway
 
 	const PROVIDER_SOFORT = 'Sofort';
 
+	const PROVIDER_STRIPE = 'Stripe';
+
 	const PROVIDER_UNICREDIT = 'UniCredit';
 
 	const PROVIDER_VIRPAY = 'Virpay';
