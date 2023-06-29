@@ -704,33 +704,7 @@ class Init extends RequestAbstract
 			$extra['oneClickForcedRegistration'] = true;
 		}
 
-		if (in_array($this->providerName, array(PaymentGateway::PROVIDER_OTP, PaymentGateway::PROVIDER_OTP_TWO_PARTY)) && !empty($this->otpConsumerRegistrationId)) {
-			$this->encryptExtra(array(
-				'otpConsumerRegistrationId' => $this->otpConsumerRegistrationId
-			));
-		} elseif ($this->providerName == PaymentGateway::PROVIDER_OTP_TWO_PARTY) {
-			if (
-				!empty($this->otpCardNumber) &&
-				!empty($this->otpExpiration) &&
-				!empty($this->otpCvc)
-			) {
-				$this->encryptExtra(array(
-					'otpCardNumber' => $this->otpCardNumber,
-					'otpExpiration' => $this->otpExpiration,
-					'otpCvc' => $this->otpCvc
-				));
-			}
-		} else if ($this->providerName == PaymentGateway::PROVIDER_MKB_SZEP) {
-			if (
-				!empty($this->mkbSzepCardNumber) &&
-				!empty($this->mkbSzepCvv)
-			) {
-				$this->encryptExtra(array(
-					'mkbSzepCardNumber' => $this->mkbSzepCardNumber,
-					'mkbSzepCvv' => $this->mkbSzepCvv
-				));
-			}
-		} else if (!empty($extra)) {
+		if (!empty($extra)) {
 			$this->extra = $this->urlSafeEncode(json_encode($extra));
 		}
 
@@ -776,6 +750,8 @@ class Init extends RequestAbstract
 	 * @return void
 	 * @access public
 	 * @throws Exception
+	 *
+	 * @deprecated deprecated since version 3.18.1
 	 */
 	public function encryptExtra(array $data = array())
 	{
