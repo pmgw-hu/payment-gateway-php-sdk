@@ -69,7 +69,7 @@ class Settlement extends RequestAbstract
 	/**
 	 * Settlement batch ID
 	 *
-	 * @var string
+	 * @var integer
 	 * @access public
 	 */
 	public $settlementBatchId;
@@ -186,13 +186,13 @@ class Settlement extends RequestAbstract
 	/**
 	 * Set settlement batch ID
 	 *
-	 * @param string $settlementBatchId Settlement batch ID
+	 * @param integer $settlementBatchId Settlement batch ID
 	 * @return \BigFish\PaymentGateway\Request\Settlement
 	 * @access public
 	 */
 	public function setSettlementBatchId($settlementBatchId)
 	{
-		$this->settlementBatchId = $settlementBatchId;
+		$this->settlementBatchId = (int)$settlementBatchId;
 		return $this;
 	}
 
