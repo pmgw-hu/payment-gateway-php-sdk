@@ -67,6 +67,14 @@ class Settlement extends RequestAbstract
 	public $transactionCurrency;
 
 	/**
+	 * Settlement batch ID
+	 *
+	 * @var integer
+	 * @access public
+	 */
+	public $settlementBatchId;
+
+	/**
 	 * Get batches
 	 * 
 	 * @var boolean
@@ -172,6 +180,19 @@ class Settlement extends RequestAbstract
 	public function setTransactionCurrency($transactionCurrency)
 	{
 		$this->transactionCurrency = $transactionCurrency;
+		return $this;
+	}
+
+	/**
+	 * Set settlement batch ID
+	 *
+	 * @param integer $settlementBatchId Settlement batch ID
+	 * @return \BigFish\PaymentGateway\Request\Settlement
+	 * @access public
+	 */
+	public function setSettlementBatchId($settlementBatchId)
+	{
+		$this->settlementBatchId = (int)$settlementBatchId;
 		return $this;
 	}
 
