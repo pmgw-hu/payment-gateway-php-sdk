@@ -195,6 +195,8 @@ class PaymentGateway
 
 	const PROVIDER_RAIFFEISENPAY = 'RaiffeisenPay';
 
+	const PROVIDER_RAWMBHSZEP = 'RawMBHSZEP';
+
 	const PROVIDER_RAWOTPSZEP = 'RawOTPSZEP';
 
 	const PROVIDER_SAFERPAY = 'Saferpay';

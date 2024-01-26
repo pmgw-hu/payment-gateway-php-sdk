@@ -258,6 +258,7 @@ class Init extends RequestAbstract
 		PaymentGateway::PROVIDER_VIVAWALLET,
 		PaymentGateway::PROVIDER_KHB,
 		PaymentGateway::PROVIDER_CIB,
+		PaymentGateway::PROVIDER_RAWMBHSZEP,
 		PaymentGateway::PROVIDER_RAWOTPSZEP
 	);
 	
