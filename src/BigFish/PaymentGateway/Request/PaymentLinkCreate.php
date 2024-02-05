@@ -161,6 +161,14 @@ class PaymentLinkCreate extends RequestAbstract
 	public $privacyPolicyUrl;
 
 	/**
+	 * General terms and conditions url
+	 *
+	 * @var string
+	 * @access public
+	 */
+	public $generalTermsAndConditionsUrl;
+
+	/**
 	 * Redirect url
 	 *
 	 * @var string
@@ -410,6 +418,19 @@ class PaymentLinkCreate extends RequestAbstract
 	public function setPrivacyPolicyUrl($privacyPolicyUrl)
 	{
 		$this->privacyPolicyUrl = trim($privacyPolicyUrl);
+		return $this;
+	}
+
+	/**
+	 * Set general terms and conditions url
+	 *
+	 * @param string $privacyPolicyUrl
+	 * @return PaymentLinkCreate
+	 * @access public
+	 */
+	public function setGeneralTermsAndConditionsUrl($generalTermsAndConditionsUrl)
+	{
+		$this->generalTermsAndConditionsUrl = trim($generalTermsAndConditionsUrl);
 		return $this;
 	}
 
