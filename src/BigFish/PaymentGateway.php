@@ -57,7 +57,7 @@ class PaymentGateway
 	 * SDK Version
 	 *
 	 */
-	const VERSION = '3.19.1';
+	const VERSION = '3.20.0';
 
 	/**
 	 * API request type constants
@@ -166,6 +166,8 @@ class PaymentGateway
 	const PROVIDER_MKB_SZEP = 'MKBSZEP';
 
 	const PROVIDER_OTP = 'OTP';
+
+	const PROVIDER_OTP_EP = 'OTPEP';
 
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
 
