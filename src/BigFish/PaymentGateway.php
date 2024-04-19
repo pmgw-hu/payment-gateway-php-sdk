@@ -57,7 +57,7 @@ class PaymentGateway
 	 * SDK Version
 	 *
 	 */
-	const VERSION = '3.19.1';
+	const VERSION = '3.20.0';
 
 	/**
 	 * API request type constants
@@ -194,6 +194,10 @@ class PaymentGateway
 	const PROVIDER_PAYUREST = 'PayURest';
 
 	const PROVIDER_RAIFFEISENPAY = 'RaiffeisenPay';
+
+	const PROVIDER_RAWMBHSZEP = 'RawMBHSZEP';
+
+	const PROVIDER_RAWOTPSZEP = 'RawOTPSZEP';
 
 	const PROVIDER_SAFERPAY = 'Saferpay';
 
