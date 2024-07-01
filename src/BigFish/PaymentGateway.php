@@ -167,6 +167,8 @@ class PaymentGateway
 
 	const PROVIDER_OTP = 'OTP';
 
+	const PROVIDER_OTP_EP = 'OTPEP';
+
 	const PROVIDER_OTP_TWO_PARTY = 'OTP2';
 
 	const PROVIDER_OTP_MULTIPONT = 'OTPMultipont';
