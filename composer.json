@@ -1,18 +1,18 @@
 {
-	"name": "bigfish/paymentgateway",
+	"name": "pmgw/payment-gateway-php-sdk",
 	"description": "BIG FISH Payment Gateway - PHP SDK",
 	"type": "library",
-	"keywords": ["payment", "ecommerce", "webshop"],
+	"keywords": ["payment", "ecommerce", "webshop", "php", "sdk"],
 	"homepage": "https://www.paymentgateway.hu/",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "BIG FISH",
-			"email": "cafe@bigfish.hu"
+			"name": "BIG FISH Payment Services Ltd.",
+			"email": "it@paymentgateway.hu"
 		}
 	],
 	"support": {
-		"email": "paymentgateway@bigfish.hu"
+		"email": "it@paymentgateway.hu"
 	},
 	"require": {
 		"php": "~5.3|~7.0|~8.0"
