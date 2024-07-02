@@ -1,12 +1,12 @@
 > Repository github.com/bigfish-hu/payment-gateway-php-sdk (bigfish/paymentgateway) is abandoned, you should avoid using it.<br>
 ><br>
-> Use https://github.com/pmgw-hu/paymentgateway-php-sdk ([pmgw/paymentgateway-php-sdk](https://packagist.org/packages/pmgw/paymentgateway-php-sdk)) instead.
+> Use https://github.com/pmgw-hu/payment-gateway-php-sdk ([pmgw/payment-gateway-php-sdk](https://packagist.org/packages/pmgw/payment-gateway-php-sdk)) instead.
 
 # BIG FISH Payment Gateway - PHP SDK
 
 ## Version
 
-3.21.0
+3.21.1
 
 ## Requirements
 
