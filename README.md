@@ -6,7 +6,7 @@
 
 ## Version
 
-3.21.1
+4.0.0
 
 ## Requirements
 
@@ -19,11 +19,11 @@ BIG FISH Payment Gateway is available at packagist.org, so you can use composer 
 ```
 {
     "require": {
-        "bigfish/paymentgateway": "dev-testing"
+        "pmgw/payment-gateway-php-sdk": "dev-testing"
     }
 }
 ```
 
 ## Source code
 
-https://github.com/bigfish-hu/payment-gateway-php-sdk/tree/testing
+https://github.com/pmgw-hu/payment-gateway-php-sdk/tree/testing
