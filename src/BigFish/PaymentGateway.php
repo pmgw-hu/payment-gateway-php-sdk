@@ -15,6 +15,7 @@ use BigFish\PaymentGateway\Request\Init as InitRequest;
 use BigFish\PaymentGateway\Request\Start as StartRequest;
 use BigFish\PaymentGateway\Request\Result as ResultRequest;
 use BigFish\PaymentGateway\Request\Close as CloseRequest;
+use BigFish\PaymentGateway\Request\Cancel as CancelRequest;
 use BigFish\PaymentGateway\Request\Refund as RefundRequest;
 use BigFish\PaymentGateway\Request\InitRP as InitRPRequest;
 use BigFish\PaymentGateway\Request\StartRP as StartRPRequest;
@@ -70,6 +71,8 @@ class PaymentGateway
 	const REQUEST_RESULT = 'Result';
 
 	const REQUEST_CLOSE = 'Close';
+
+	const REQUEST_CANCEL = 'Cancel';
 
 	const REQUEST_DETAILS = 'Details';
 
@@ -416,6 +419,20 @@ XIm63iVw6gjP2qDnNwIDAQAB
 	public static function close(CloseRequest $request)
 	{
 		return self::sendRequest(self::REQUEST_CLOSE, $request);
+	}
+
+	/**
+	 * Cancel a previously started transaction
+	 *
+	 * @param \BigFish\PaymentGateway\Request\Cancel $request Cancel request object
+	 * @return \BigFish\PaymentGateway\Response Payment Gateway response object
+	 * @access public
+	 * @static
+	 * @throws \BigFish\PaymentGateway\Exception
+	 */
+	public static function cancel(CancelRequest $request)
+	{
+		return self::sendRequest(self::REQUEST_CANCEL, $request);
 	}
 
 	/**
